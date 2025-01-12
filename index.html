@@ -118,69 +118,6 @@
 			
 		</section><!--/.welcome-hero-->
 		<!--welcome-hero end -->
-<div align="center">
-<style type="text/css">
-  .drweb_scan_button_wrapper,
-  .drweb_file_selection_wrapper {background:url(buttons.png) no-repeat 0 0;}
-  .drweb_scan_button_wrapper {background-position: -61px 0;}
-    .drweb_scan_button_wrapper:hover {background-position: -61px -21px;}
-    .drweb_scan_button_wrapper:active {background-position: -61px -42px;}
-  .drweb_file_selection_wrapper {background-position: 139px 0;}
-    .drweb_file_selection_wrapper:hover {background-position: 139px -21px;}
-    .drweb_file_selection_wrapper:active {background-position: 139px -42px;}
-</style>
-
-<form method="POST" id="drweb_online_scan_form"
-  enctype="multipart/form-data" action="https://online.drweb.com/result/?lng=en" target="drweb_scan_form_popup_window">
-  
-  <table width="474" bgcolor="#939393" border="0" cellpadding="2" cellspacing="0" height="65" style="width:474px; height:65px; background-color:#000; border-collapse:collapse; font-family:Verdana,Geneva,Arial,Helvetica,Sans-serif;">
-    <tr>
-        <td rowspan="2" valign="top" style="width:130px; height:60px;">
-          <a href="http://drweb.com/?lng=en" style="outline:none; text-decoration:none; display:block; position:relative; overflow:hidden; height:60px;">
-            <img src="drweb_logo.png" align="left" width="130" height="60" alt="Dr.WEB" style="width:130px; height:60px;outline:none; border:none; margin:0; color:#fff;"/>
-          </a>
-        </td>
-        <td colspan="2" valign="middle" style="color:#fff; margin:0; width:337px; padding-top:0; padding-bottom:0; height:30px; vertical-align:middle; font-size:13px;"><span id="drweb_check_css" style="display:none;">&nbsp;</span>Check file for viruses</td>
-    </tr>
-    <tr>
-        <td valign="top" style="width:200px; padding-bottom:7px;" id="drweb_url_input_wrapper">
-          <div id="drweb_url_scan" style="float:left; width:125px; border:#9ac461 2px solid; padding:1px 3px 0; overflow:hidden; white-space:nowrap; font-size:11px; line-height:16px; margin:0 3px 0 0; height:16px; background-color:#fff;"></div>
-          <div style="float:left; position:relative; margin-top:-21px; width:200px; height:21px; cursor:pointer; overflow:hidden;" class="drweb_file_selection_wrapper">
-            <img src="empty.gif" align="left" width="0" height="0" style="width:65px; float:right; height:100px; text-align:right; display:block; color:#fff; font-size:10px;" alt="&nbsp;Review"/>
-            <input name="file" id="file_selection_input" type="file" title="Review" onchange="if(document.getElementById('drweb_check_css').offsetWidth == 0) document.getElementById('drweb_url_scan').innerHTML = this.value;" style="height:110%; font-size:10em; position:absolute; z-index:2; top:-5%; right:-1px; margin:0px; padding:0px; opacity:0; filter:alpha(opacity:0); cursor:pointer;"/>
-          </div>
-        </td>
-        <td valign="top" style="padding-bottom:7px; padding-left:7px;">
-          <div style="float:left; width:121px; height:21px; margin:0; position:relative; overflow:hidden;" class="drweb_scan_button_wrapper">
-            <img src="empty.gif" align="left" width="0" height="0" style="width:100%; height:100px; color:#fff; font-size:10px;" alt="&nbsp;Scan"/>
-            <input type="button" onclick="return do_scan_file_01();" style="width:100%; height:21; margin:0; padding:0; position:absolute; z-index:2; left:0; top:0; opacity:0; filter:alpha(opacity:0); cursor:pointer;" value="Scan" title="Scan" />
-          </div>
-        </td>
-    </tr>
-  </table>
-
-</form>
-
-<script language="JavaScript">
-
-  if( navigator.userAgent.match( /Opera Mini/i ) )
-    document.getElementById( 'drweb_url_input_wrapper' ).
-      innerHTML = '<input name="file" id="drweb_file_selection_input" type="file" style="width:100%; height:19px; border:1px solid #fff; background-color:#fff; padding:0; margin:0; -moz-box-sizing:content-box; -webkit-box-sizing:content-box; box-sizing:content-box; font-size:10px; vertical-align:top;">';
-  
-  function do_scan_file_01()
-  {
-    var left = ( screen.width - 640 )/2;
-    var top =  ( screen.height - 400 )/2;
-    window.open( "",
-                 "drweb_scan_form_popup_window",
-                 "width=640"+",height=400,left="+left+",top="+top+",scrollbars=yes,resizable=yes" );
-    document.getElementById( "drweb_online_scan_form" ).submit();
-    return false;
-  }
-</script>
-<h2>Verifique arquivos por vírus </h2>
-</div>
-
 		
 	<!--service start -->
 		<section id="service" class="service">
