@@ -1,3 +1,4 @@
+Este é o repositório gitpages da bithostel TI que utiliza e mantém os direitos do template abaixo.
 -----------------------
 # README
 -----------------------
