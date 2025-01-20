@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulário de Contato</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 60%;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Formulário de Contato</h2>
+        <form id="contactForm" onsubmit="return validateForm()">
+            <label for="name">Nome:</label>
+            <input type="text" id="name" name="name" placeholder="Seu nome completo">
+            <div id="nameError" class="error"></div>
+
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" name="email" placeholder="Seu e-mail">
+            <div id="emailError" class="error"></div>
+
+            <label for="message">Mensagem:</label>
+            <textarea id="message" name="message" rows="4" placeholder="Sua mensagem"></textarea>
+            <div id="messageError" class="error"></div>
+
+            <label for="captcha">Quanto é 5 + 3? (Resposta para verificar que você é humano)</label>
+            <input type="text" id="captcha" name="captcha" placeholder="Sua resposta">
+            <div id="captchaError" class="error"></div>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        function validateForm() {
+            let valid = true;
+
+            // Limpar mensagens de erro
+            document.getElementById("nameError").innerHTML = "";
+            document.getElementById("emailError").innerHTML = "";
+            document.getElementById("messageError").innerHTML = "";
+            document.getElementById("captchaError").innerHTML = "";
+
+            // Verificar o nome
+            let name = document.getElementById("name").value;
+            if (name === "") {
+                document.getElementById("nameError").innerHTML = "O nome é obrigatório.";
+                valid = false;
+            }
+
+            // Verificar o e-mail
+            let email = document.getElementById("email").value;
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            if (email === "") {
+                document.getElementById("emailError").innerHTML = "O e-mail é obrigatório.";
+                valid = false;
+            } else if (!emailPattern.test(email)) {
+                document.getElementById("emailError").innerHTML = "Por favor, insira um e-mail válido.";
+                valid = false;
+            }
+
+            // Verificar a mensagem
+            let message = document.getElementById("message").value;
+            if (message === "") {
+                document.getElementById("messageError").innerHTML = "A mensagem é obrigatória.";
+                valid = false;
+            }
+
+            // Verificar o CAPTCHA
+            let captcha = document.getElementById("captcha").value;
+            if (captcha !== "8") {
+                document.getElementById("captchaError").innerHTML = "Resposta incorreta para o CAPTCHA.";
+                valid = false;
+            }
+
+            return valid;
+        }
+    </script>
+
+</body>
+</html>
