@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bithostel TI - Segurança Digital</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+
+        .header {
+            background-color: #1a365d;
+            color: white;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(26,54,93,0.8), rgba(26,54,93,0.8)),
+                        url('https://example.com/tech-bg.jpg');
+            background-size: cover;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding-top: 60px;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .benefit-card i {
+            font-size: 2rem;
+            color: #1a365d;
+            margin-bottom: 1rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #1a365d;
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 1rem;
+        }
+
+        footer {
+            background: #1a365d;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div class="logo"><img src="logo.png"</img></div>
+            <div class="nav-links">
+                <a href="#firewall">Firewall</a>
+                <a href="#vpn">VPN</a>
+                <a href="#contato">Contato</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Proteção Digital Completa para Sua Empresa</h1>
+            <p>Soluções integradas de Firewall e VPN para segurança máxima</p>
+            <a href="#contato" class="cta-button">Solicitar Demonstração</a>
+        </div>
+    </section>
+
+    <section id="firewall" class="section">
+        <h2>Benefícios do Firewall Bithostel</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Proteção Contra Ameaças</h3>
+                <p>Bloqueio de malware, ransomware e ataques cibernéticos em tempo real</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-filter"></i>
+                <h3>Controle de Acesso</h3>
+                <p>Gestão inteligente de tráfego de rede e políticas de acesso personalizadas</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Otimização de Rede</h3>
+                <p>Monitoramento contínuo e melhoria do desempenho da rede corporativa</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="vpn" class="section">
+        <h2>Vantagens da VPN Bithostel</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <i class="fas fa-lock"></i>
+                <h3>Conexão Segura</h3>
+                <p>Criptografia de nível militar para proteção total de dados</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-globe"></i>
+                <h3>Acesso Global</h3>
+                <p>Conecte-se a recursos corporativos de qualquer lugar do mundo</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-user-secret"></i>
+                <h3>Anonimato Online</h3>
+                <p>Proteção da privacidade e mascaramento de IP</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contato">
+        <h3>Contato bithostel TI</h3>
+        <p>Email: hostmaster@bithostel.com</p>
+        <p>Telefone: (13) 99761-1979</p>
+        <p>Website: <a href="https://bithostel.com.br" style="color: white; margin: 0 0.5rem;">Website</a></p>
+        <div style="margin-top: 1rem;">
+            <a href="#" style="color: white; margin: 0 0.5rem;"><i class="fab fa-linkedin"></i></a>
+            <a href="#" style="color: white; margin: 0 0.5rem;"><i class="fab fa-whatsapp"></i></a>
+        </div>
+    </footer>
+
+    <script>
+        // Menu responsivo
+        const navLinks = document.querySelector('.nav-links');
+        document.querySelector('.logo').addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        });
+    </script>
+</body>
+</html>
