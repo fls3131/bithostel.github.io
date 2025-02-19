@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Soluções integradas de segurança digital com Firewall e VPN para empresas">
     <title>Bithostel TI - Segurança Digital</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        /* Improved CSS with better organization and enhancements */
         * {
             margin: 0;
             padding: 0;
@@ -20,7 +18,6 @@
             background-color: #f4f4f4;
         }
 
-        /* Header improvements */
         .header {
             background-color: #1a365d;
             color: white;
@@ -28,7 +25,6 @@
             position: fixed;
             width: 100%;
             top: 0;
-            z-index: 1000;
         }
 
         .nav-container {
@@ -39,9 +35,9 @@
             margin: 0 auto;
         }
 
-        .logo img {
-            height: 40px;
-            width: auto;
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
         .nav-links {
@@ -52,61 +48,35 @@
         .nav-links a {
             color: white;
             text-decoration: none;
-            transition: opacity 0.3s ease;
         }
 
-        .nav-links a:hover {
-            opacity: 0.8;
-        }
-
-        /* Mobile menu improvements */
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Hero section enhancements */
         .hero {
             background: linear-gradient(rgba(26,54,93,0.8), rgba(26,54,93,0.8)),
-                        url('assets/tech-bg.jpg');
+                        url('https://example.com/tech-bg.jpg');
             background-size: cover;
-            background-position: center;
-            min-height: 80vh;
+            height: 80vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
             color: white;
-            padding: 100px 20px 20px;
+            padding-top: 60px;
         }
 
         .hero-content h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            line-height: 1.2;
         }
 
-        /* Section improvements */
         .section {
             padding: 4rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        .section h2 {
-            text-align: center;
-            margin-bottom: 2rem;
-            color: #1a365d;
-        }
-
-        /* Benefits grid improvements */
         .benefits-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
@@ -115,16 +85,15 @@
             background: white;
             padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease;
-            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
 
-        .benefit-card:hover {
-            transform: translateY(-5px);
+        .benefit-card i {
+            font-size: 2rem;
+            color: #1a365d;
+            margin-bottom: 1rem;
         }
 
-        /* CTA button improvements */
         .cta-button {
             display: inline-block;
             background: #1a365d;
@@ -133,14 +102,8 @@
             text-decoration: none;
             border-radius: 5px;
             margin-top: 1rem;
-            transition: background-color 0.3s ease;
         }
 
-        .cta-button:hover {
-            background-color: #142a4a;
-        }
-
-        /* Footer improvements */
         footer {
             background: #1a365d;
             color: white;
@@ -148,36 +111,9 @@
             text-align: center;
         }
 
-        footer a {
-            color: white;
-            text-decoration: none;
-            transition: opacity 0.3s ease;
-        }
-
-        footer a:hover {
-            opacity: 0.8;
-        }
-
-        /* Responsive design enhancements */
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-
             .nav-links {
                 display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: #1a365d;
-                flex-direction: column;
-                padding: 1rem;
-                text-align: center;
-            }
-
-            .nav-links.active {
-                display: flex;
             }
 
             .hero-content h1 {
@@ -193,12 +129,7 @@
 <body>
     <header class="header">
         <nav class="nav-container">
-            <div class="logo">
-                <img src="assets/logo.png" alt="Bithostel TI Logo">
-            </div>
-            <button class="menu-toggle" aria-label="Abrir menu">
-                <i class="fas fa-bars"></i>
-            </button>
+            <div class="logo"><img src="logo.png"</img></div>
             <div class="nav-links">
                 <a href="#firewall">Firewall</a>
                 <a href="#vpn">VPN</a>
@@ -207,43 +138,72 @@
         </nav>
     </header>
 
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Proteção Digital Completa para Sua Empresa</h1>
-                <p>Soluções integradas de Firewall e VPN para segurança máxima</p>
-                <a href="#contato" class="cta-button">Solicitar Demonstração</a>
-            </div>
-        </section>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Proteção Digital Completa para Sua Empresa</h1>
+            <p>Soluções integradas de Firewall e VPN para segurança máxima</p>
+            <a href="#contato" class="cta-button">Solicitar Demonstração</a>
+        </div>
+    </section>
 
-        <!-- Sections remain the same but with improved semantics -->
-    </main>
+    <section id="firewall" class="section">
+        <h2>Benefícios do Firewall bithostel</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Proteção Contra Ameaças</h3>
+                <p>Bloqueio de malware, ransomware e ataques cibernéticos em tempo real</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-filter"></i>
+                <h3>Controle de Acesso</h3>
+                <p>Gestão inteligente de tráfego de rede e políticas de acesso personalizadas</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Otimização de Rede</h3>
+                <p>Monitoramento contínuo e melhoria do desempenho da rede corporativa</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="vpn" class="section">
+        <h2>Vantagens da VPN bithostel</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <i class="fas fa-lock"></i>
+                <h3>Conexão Segura</h3>
+                <p>Criptografia de nível militar para proteção total de dados</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-globe"></i>
+                <h3>Acesso Global</h3>
+                <p>Conecte-se a recursos corporativos de qualquer lugar do mundo</p>
+            </div>
+            <div class="benefit-card">
+                <i class="fas fa-user-secret"></i>
+                <h3>Anonimato Online</h3>
+                <p>Proteção da privacidade e mascaramento de IP</p>
+            </div>
+        </div>
+    </section>
 
     <footer id="contato">
-        <!-- Improved footer content with semantic markup -->
+        <h3>Contato bithostel TI</h3>
+        <p>Email: hostmaster@bithostel.com</p>
+        <p>Telefone: (13) 99761-1979</p>
+        <p>Website: <a href="https://bithostel.com.br" style="color: white; margin: 0 0.5rem;">https://bithostel.com.br</a></p>
+        <div style="margin-top: 1rem;">
+            <a href="#" style="color: white; margin: 0 0.5rem;"><i class="fab fa-linkedin"></i></a>
+            <a href="#" style="color: white; margin: 0 0.5rem;"><i class="fab fa-whatsapp"></i></a>
+        </div>
     </footer>
 
     <script>
-        // Improved mobile menu functionality
-        const menuToggle = document.querySelector('.menu-toggle');
+        // Menu responsivo
         const navLinks = document.querySelector('.nav-links');
-
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-
-        // Smooth scroll for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+        document.querySelector('.logo').addEventListener('click', () => {
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
         });
     </script>
 </body>
