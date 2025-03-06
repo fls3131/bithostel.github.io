@@ -1,4 +1,4 @@
-"><head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bithostel TI - Segurança Digital - Firewall + VPN</title>
@@ -21,6 +21,7 @@
             position: fixed;
             width: 100%;
             top: 0;
+            z-index: 1000;
         }
         .nav-container {
             display: flex;
@@ -32,6 +33,7 @@
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
+            cursor: pointer;
         }
         .nav-links {
             display: flex;
@@ -40,6 +42,10 @@
         .nav-links a {
             color: white;
             text-decoration: none;
+        }
+        .menu-toggle {
+            display: none; /* hidden by default */
+            cursor: pointer;
         }
         .hero {
             background: linear-gradient(rgba(26,54,93,0.8), rgba(26,54,93,0.8)),
@@ -94,9 +100,24 @@
             padding: 2rem;
             text-align: center;
         }
+
+        /* Responsividade */
         @media (max-width: 768px) {
             .nav-links {
-                display: none;
+                display: none; /* esconder links de navegação em telas pequenas */
+                flex-direction: column; /* empilhar os itens de navegação */
+                position: absolute; /* posicionar fora do fluxo normal */
+                background-color: #1a365d; /* fundo do menu */
+                top: 60px; /* abaixo do menu fixo */
+                width: 100%;
+            }
+            .nav-links a {
+                padding: 1rem; /* espaço entre os itens de navegação */
+            }
+            .menu-toggle {
+                display: block; /* mostrar botão de menu no mobile */
+                color: white;
+                font-size: 1.5rem;
             }
             .hero-content h1 {
                 font-size: 2rem;
@@ -111,35 +132,35 @@
     <header class="header">
         <nav class="nav-container">
             <div class="logo"><img src="logo.png" alt="Bithostel TI"></div>
-            <div class="nav-links">
-				<a target="_blank" href="index.html">Website Principal</a>
+            <div class="menu-toggle" id="menu-toggle">
+                <i class="fas fa-bars"></i> <!-- Ícone do menu -->
+            </div>
+            <div class="nav-links" id="nav-links">
+                <a target="_blank" href="index.html">Website Principal</a>
                 <a href="#firewall">Firewall</a>
                 <a href="#vpn">VPN</a>
                 <a href="#precos">Planos</a>
                 <a target="_blank" href="manual-usuario1.pdf">Manual de Conexão</a>
                 <a href="#contato">Contato</a>
-                
             </div>
         </nav>
     </header>
     <section class="hero">
         <div class="hero-content">
-			<img src="assets/images/openvpn.png" alt="Bithostel TI">
+            <img src="assets/images/openvpn.png" alt="Bithostel TI">
             <h1>Proteção Digital Completa proteja Sua Casa e/ou Empresa</h1>
             <p>Soluções integradas de Firewall e VPN para segurança máxima</p>
             <a href="https://vps01.bithostel.com.br/php.server.status/checkup.php?showtraffic=m" target="_blank" class="cta-button">Status Servidor</a>
             <a href="#precos" class="cta-button">Planos</a>
-            
         </div>
     </section>
-     <section id="download" class="section">
-    <div align="center"></div><h2>Download e configuração com Openvpn Connect</h2><br>
-<a href="https://openvpn.net/client/"><img width="380" height="45"src="assets/images/oss.png" alt="bithostel TI"></a><br><br>
-			<h3>Obtenha junto à bithostel TI seu arquivo de conexão .ovpn, <br> siga o manual de conexão e sinta-se à vontade de entrar <br>em contato com a bithostel TI, para ajuda-lo(a).</h3><br><br>
-			</div>
-			</section>
+    <section id="download" class="section">
+        <h2>Download e configuração com Openvpn Connect</h2><br>
+        <a href="https://openvpn.net/client/"><img width="380" height="45" src="assets/images/oss.png" alt="bithostel TI"></a><br><br>
+        <h3>Obtenha junto à bithostel TI seu arquivo de conexão .ovpn, <br> siga o manual de conexão e sinta-se à vontade de entrar <br> em contato com a bithostel TI, para ajuda-lo(a).</h3><br><br>
+    </section>
     <section id="firewall" class="section">
-		<h2>Benefícios do Firewall bithostel</h2>
+        <h2>Benefícios do Firewall bithostel</h2>
         <div class="benefits-grid">
             <div class="benefit-card">
                 <i class="fas fa-shield-alt"></i>
@@ -164,12 +185,12 @@
             <div class="benefit-card">
                 <i class="fas fa-lock"></i>
                 <h3>Conexão Segura</h3>
-                <p>Criptografia de nível militar para proteção total de dados, bithostel TI é dedicada a fornecer soluções VPN de alto nível para aumentar sua privacidade e segurança online. Nossa tecnologia de ponta garante que seus dados permaneçam seguros e suas atividades online sejam anônimas.</p>
+                <p>Criptografia de nível militar para proteção total de dados.</p>
             </div>
             <div class="benefit-card">
                 <i class="fas fa-globe"></i>
                 <h3>Servidor bithostel TI</h3>
-                <p>Nosso servidor VPN está atualmente operacional e pronto para oferecer conexões seguras aos nossos usuários valiosos. Aproveite o acesso ininterrupto às suas redes privadas.</p>
+                <p>Nosso servidor VPN está atualmente operacional e pronto para oferecer conexões seguras.</p>
             </div>
             <div class="benefit-card">
                 <i class="fas fa-user-secret"></i>
@@ -226,49 +247,49 @@
             </div>
         </div>
     </section>
-            <section id="politicas" class="section">
+    <section id="politicas" class="section">
         <h2>Políticas de USO</h2>
-<p>
-Ao criar políticas de uso para o serviço de OpenVPN da bithostel TI, é importante garantir que elas sejam claras e abrangentes, abordando aspectos de segurança, privacidade e uso adequado. 
-<br><br>
-### Políticas de Uso do OpenVPN - bithostel TI<br>
-<br>
-#### 1. **Propósito e Escopo**<br>
-   - O uso do serviço OpenVPN da bithostel TI é destinado exclusivamente para fins legítimos e autorizados. Qualquer uso não autorizado ou mal-intencionado é estritamente proibido.
-<br><br>
-#### 2. **Autorização de Acesso**<br>
-   - Apenas usuários autorizados terão acesso ao serviço OpenVPN. A criação e o uso de contas deverão ser feitas de acordo com os procedimentos estabelecidos pela bithostel TI.
-<br><br>
-#### 3. **Uso Adequado**<br>
-   - Os usuários devem utilizar o serviço de forma responsável e ética, respeitando todas as leis e regulamentos aplicáveis, bem como as políticas internas da bithostel TI.
-   <br><br>
+        <p>
+        Ao criar políticas de uso para o serviço de OpenVPN da bithostel TI, é importante garantir que elas sejam claras e abrangentes, abordando aspectos de segurança, privacidade e uso adequado. 
+        <br><br>
+        ### Políticas de Uso do OpenVPN - bithostel TI<br>
+        <br>
+        #### 1. **Propósito e Escopo**<br>
+           - O uso do serviço OpenVPN da bithostel TI é destinado exclusivamente para fins legítimos e autorizados. Qualquer uso não autorizado ou mal-intencionado é estritamente proibido.
+        <br><br>
+        #### 2. **Autorização de Acesso**<br>
+           - Apenas usuários autorizados terão acesso ao serviço OpenVPN. A criação e o uso de contas deverão ser feitas de acordo com os procedimentos estabelecidos pela bithostel TI.
+        <br><br>
+        #### 3. **Uso Adequado**<br>
+           - Os usuários devem utilizar o serviço de forma responsável e ética, respeitando todas as leis e regulamentos aplicáveis, bem como as políticas internas da bithostel TI.
+           <br><br>
 
-#### 4. **Segurança e Proteção de Dados**<br>
-   - Os usuários são responsáveis pela proteção de suas credenciais de acesso. É proibido compartilhar informações de login, senhas ou qualquer outra informação sensível relacionada ao serviço.
-   - Qualquer atividade suspeita ou incidente de segurança deve ser relatada imediatamente à equipe de suporte da bithostel TI.
-<br><br>
-#### 5. **Atividades Proibidas**<br>
-   - É proibido utilizar o serviço OpenVPN para:
-     - Realizar atividades ilegais, incluindo, mas não se limitando a, hacking, distribuição de malware, ou qualquer outra atividade que viole as leis.
-     - Acessar, transmitir ou armazenar conteúdo que seja ilegal, ofensivo, ou que infrinja direitos autorais.
-     - Realizar ataques de negação de serviço (DDoS), spamming ou qualquer outra forma de abuso de rede.
-<br><br>
-#### 6. **Privacidade**<br>
-   - A bithostel TI se compromete a proteger a privacidade dos usuários. Os dados de conexão podem ser registrados para fins de segurança e manutenção do serviço, mas não serão compartilhados com terceiros sem o consentimento do usuário, exceto quando exigido por lei.
-<br><br>
-#### 7. **Responsabilidade do Usuário**<br>
-   - Os usuários são responsáveis por quaisquer atividades realizadas sob suas credenciais. É fundamental tomar precauções para garantir que o acesso ao serviço seja realizado de maneira segura.
-<br><br>
-#### 8. **Modificações nas Políticas**<br>
-   - A bithostel TI reserva-se o direito de modificar estas políticas a qualquer momento. Notificações sobre alterações significativas serão comunicadas aos usuários.
-<br><br>
-#### 9. **Consequências pelo Não Cumprimento**<br>
-   - O não cumprimento diretas destas políticas pode resultar em ações disciplinares, incluindo a revogação de acesso ao serviço e possíveis repercussões legais.
-<br><br>
-#### 10. **Contato para Suporte**<br>
-   - Para dúvidas ou esclarecimentos sobre estas políticas ou sobre o uso do OpenVPN, os usuários devem entrar em contato com a equipe de suporte da bithostel TI.
-</p>
-</section>
+        #### 4. **Segurança e Proteção de Dados**<br>
+           - Os usuários são responsáveis pela proteção de suas credenciais de acesso. É proibido compartilhar informações de login, senhas ou qualquer outra informação sensível relacionada ao serviço.
+           - Qualquer atividade suspeita ou incidente de segurança deve ser relatada imediatamente à equipe de suporte da bithostel TI.
+        <br><br>
+        #### 5. **Atividades Proibidas**<br>
+           - É proibido utilizar o serviço OpenVPN para:
+             - Realizar atividades ilegais, incluindo, mas não se limitando a, hacking, distribuição de malware, ou qualquer outra atividade que viole as leis.
+             - Acessar, transmitir ou armazenar conteúdo que seja ilegal, ofensivo, ou que infrinja direitos autorais.
+             - Realizar ataques de negação de serviço (DDoS), spamming ou qualquer outra forma de abuso de rede.
+        <br><br>
+        #### 6. **Privacidade**<br>
+           - A bithostel TI se compromete a proteger a privacidade dos usuários. Os dados de conexão podem ser registrados para fins de segurança e manutenção do serviço, mas não serão compartilhados com terceiros sem o consentimento do usuário, exceto quando exigido por lei.
+        <br><br>
+        #### 7. **Responsabilidade do Usuário**<br>
+           - Os usuários são responsáveis por quaisquer atividades realizadas sob suas credenciais. É fundamental tomar precauções para garantir que o acesso ao serviço seja realizado de maneira segura.
+        <br><br>
+        #### 8. **Modificações nas Políticas**<br>
+           - A bithostel TI reserva-se o direito de modificar estas políticas a qualquer momento. Notificações sobre alterações significativas serão comunicadas aos usuários.
+        <br><br>
+        #### 9. **Consequências pelo Não Cumprimento**<br>
+           - O não cumprimento diretas destas políticas pode resultar em ações disciplinares, incluindo a revogação de acesso ao serviço e possíveis repercussões legais.
+        <br><br>
+        #### 10. **Contato para Suporte**<br>
+           - Para dúvidas ou esclarecimentos sobre estas políticas ou sobre o uso do OpenVPN, os usuários devem entrar em contato com a equipe de suporte da bithostel TI.
+        </p>
+    </section>
     <footer id="contato">
         <h3>Contato bithostel TI</h3>
         <p>Email: hostmaster@bithostel.com</p>
@@ -282,10 +303,16 @@ Ao criar políticas de uso para o serviço de OpenVPN da bithostel TI, é import
     </footer>
     <script>
         // Menu responsivo
-        const navLinks = document.querySelector('.nav-links');
-        document.querySelector('.logo').addEventListener('click', () => {
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        const navLinks = document.getElementById('nav-links');
+        const menuToggle = document.getElementById('menu-toggle');
+
+        menuToggle.addEventListener('click', () => {
+            // Alternar a visibilidade dos links do menu
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+            }
         });
     </script>
 </body>
-</html>
