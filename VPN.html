@@ -158,6 +158,26 @@ alt="Seu IP" title="Seu IP" border="0"></a>
             <a href="#precos" class="cta-button">Planos</a>
         </div>
     </section>
+    	<div id="CounterVisitor">
+</div>
+
+<script>
+var n = localStorage.getItem('on_load_counter');
+
+if (n === null) {
+  n = 0;
+}
+n++;
+
+localStorage.setItem("on_load_counter", n);
+
+nums = n.toString().split('').map(Number);
+document.getElementById('CounterVisitor').innerHTML = '';
+for (var i of nums) {
+  document.getElementById('CounterVisitor').innerHTML += '<span class="counter-item">' + i + '</span>';
+}
+
+</script>
     <section id="download" class="section">
         <h2>Download do Openvpn Connect</h2>
         <img src="assets/images/openvpn.png" alt="Bithostel TI"><br><br>
