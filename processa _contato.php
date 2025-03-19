@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Dados do e-mail
-    $to = "contato@bithostel.com"; // Troque pelo e-mail correto da Bithostel TI
+    $to = "hostmaster@bithostel.com.br"; // Troque pelo e-mail correto da Bithostel TI
     $subject = "Solicitação de Teste Gratuito do OpenVPN";
     $body = "Nome: $nome\nE-mail: $email\nTelefone: $telefone\nMensagem:\n$mensagem";
     $headers = "From: $email";
