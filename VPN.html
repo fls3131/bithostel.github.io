@@ -159,36 +159,35 @@ alt="Seu IP" title="Seu IP" border="0"></a>
             <a href="#precos" class="cta-button">Planos</a>
         </div>
     </section>
-    	<div id="CounterVisitor">
-</div>
+    <div id="CounterVisitor">
+    </div>
 
-<script>
-var n = localStorage.getItem('on_load_counter');
+    <script>
+    var n = localStorage.getItem('on_load_counter');
 
-if (n === null) {
-  n = 0;
-}
-n++;
+    if (n === null) {
+      n = 0;
+    }
+    n++;
 
-localStorage.setItem("on_load_counter", n);
+    localStorage.setItem("on_load_counter", n);
 
-nums = n.toString().split('').map(Number);
-document.getElementById('CounterVisitor').innerHTML = '';
-for (var i of nums) {
-  document.getElementById('CounterVisitor').innerHTML += '<span class="counter-item">' + i + '</span>';
-}
+    nums = n.toString().split('').map(Number);
+    document.getElementById('CounterVisitor').innerHTML = '';
+    for (var i of nums) {
+      document.getElementById('CounterVisitor').innerHTML += '<span class="counter-item">' + i + '</span>';
+    }
 
-</script>
-
+    </script>
 
     <section id="download" class="section">
-   <div align="center">     
-	   <h2>Configure sua conexão em menos de 5 minutos...</h2>
-	   <video autoplay muted playsinline width="320" height="290" src="painel-windows.mp4" type="video/mp4"></video>
-<div align="center">
-<h2>VPN + FIREWALL</h2>
-</div>	   
-	   <p>*Conheça Nossa Solução em Conexões Seguras: OpenVPN*
+        <div align="center">     
+            <h2>Configure sua conexão em menos de 5 minutos...</h2>
+            <video autoplay muted playsinline width="320" height="290" src="painel-windows.mp4" type="video/mp4"></video>
+            <div align="center">
+                <h2>VPN + FIREWALL</h2>
+            </div>	   
+            <p>*Conheça Nossa Solução em Conexões Seguras: OpenVPN*
 Para garantir a segurança e a privacidade dos seus dados na internet, oferecemos a configuração do *OpenVPN*, uma das ferramentas mais confiáveis para criação de redes privadas virtuais (VPN). Com o OpenVPN, você poderá:
 - *Proteger sua conexão*: Navegue com segurança, evitando que seus dados sejam interceptados por terceiros.
 - *Acessar conteúdos restritos*: Desbloqueie sites e serviços disponíveis apenas em determinadas regiões, com um simples clique.
@@ -196,8 +195,18 @@ Para garantir a segurança e a privacidade dos seus dados na internet, oferecemo
 - *Maximizar a proteção da sua rede*: Ideal para empresas que precisam garantir a segurança dos dados sensíveis e a integridade das informações.
 Não perca mais tempo! Entre em contato conosco e descubra como podemos ajudar você a tirar o máximo proveito da tecnologia, incluindo a implementação do OpenVPN. Juntos, vamos facilitar sua vida digital!</p>
     </section>
-     <section id="video" class="section">
-</section>
+
+    <section id="video" class="section">
+    </section>
+
+    <section id="teste-gratuito" class="section" style="background-color: #e0f7fa; padding: 2rem;">
+        <h2 style="text-align: center;">Teste Grátis de 7 Dias!</h2>
+        <p style="text-align: center;">Experimente nossos serviços de Firewall e VPN de forma gratuita por 7 dias. Teste a segurança e a privacidade que oferecemos, sem compromisso!</p>
+        <div style="text-align: center;">
+            <a href="https://vps01.bithostel.com.br/teste.php" class="cta-button">Comece seu Teste Grátis</a>
+        </div>
+    </section>
+
     <section id="firewall" class="section">
         <h2>Benefícios do Firewall bithostel</h2>
         <div class="benefits-grid">
@@ -218,6 +227,7 @@ Não perca mais tempo! Entre em contato conosco e descubra como podemos ajudar v
             </div>
         </div>
     </section>
+
     <section id="vpn" class="section">
         <h2>Vantagens da VPN bithostel</h2>
         <div class="benefits-grid">
@@ -238,6 +248,7 @@ Não perca mais tempo! Entre em contato conosco e descubra como podemos ajudar v
             </div>
         </div>
     </section>
+
     <section id="precos" class="section">
         <h2>Planos e Preços(Firewall + VPN)</h2>
         <div class="benefits-grid">
@@ -286,6 +297,7 @@ Não perca mais tempo! Entre em contato conosco e descubra como podemos ajudar v
             </div>
         </div>
     </section>
+
     <section id="politicas" class="section">
         <h2>Políticas de USO</h2>
         <p>
@@ -337,7 +349,7 @@ Não perca mais tempo! Entre em contato conosco e descubra como podemos ajudar v
         <p>Website: <a href="https://bithostel.com.br" style="color: white; margin: 0 0.5rem;">https://bithostel.com.br</a></p>
         <p>Loja online: <a href="https://bithostel.company.site" style="color: white; margin: 0 0.5rem;">https://bithostel.company.site</a></p>
         <div style="margin-top: 1rem;">
-             &copy; copyright. bithostel TI cnpj - 14.406.585/0001-59 
+             © copyright. bithostel TI cnpj - 14.406.585/0001-59 
         </div>
     </footer>
     <script>
