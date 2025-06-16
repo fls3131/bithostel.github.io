@@ -1,378 +1,381 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Lava & Leva em Casa | Sua Lavanderia no Celular | bithostel TI</title>
-    <meta name="description" content="Descubra o Lava & Leva em Casa, o aplicativo que conecta você a prestadores de serviço de lavanderia domiciliar em Santos, SP. Roupas limpas, tempo livre e renda extra para a comunidade." />
-    <meta name="keywords" content="lavanderia, app de lavanderia, serviço de lavanderia, roupas, Santos SP, economia do lar, renda extra, donas de casa, conveniência, bithostel TI" />
-    <meta name="author" content="bithostel TI" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lava & Leva em Casa | Sua Lavanderia no Celular | bithostel TI</title>
+<meta name="description" content="Descubra o Lava & Leva em Casa, o aplicativo que conecta você a prestadores de serviço de lavanderia domiciliar em Santos, SP. Roupas limpas, tempo livre e renda extra para a comunidade." />
+<meta name="keywords" content="lavanderia, app de lavanderia, serviço de lavanderia, roupas, Santos SP, economia do lar, renda extra, donas de casa, conveniência, bithostel TI" />
+<meta name="author" content="bithostel TI" />
 
-    <link rel="icon" href="logo.png" type="image/png" />
+<link rel="icon" href="logo.png" type="image/png" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
-    <style>
-        /* Estilos CSS básicos para demonstração. Recomenda-se usar um arquivo externo. */
-        body {
-            font-family: 'Poppins', sans-serif;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            line-height: 1.6;
-            background-color: #f4f7f6;
-        }
-        header {
-            background-color: #007bff; /* Azul vibrante */
-            color: white;
-            padding: 20px 0;
-            text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        header img {
-            max-width: 80px;
-            margin-bottom: 10px;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-            font-weight: 700;
-        }
-        header h2 {
-            margin: 5px 0 0;
-            font-size: 1.2em;
-            font-weight: 300;
-            color: #d1e7ff;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0 0;
-        }
-        nav ul li {
-            display: inline;
-            margin: 0 15px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-        nav ul li a:hover {
-            color: #d1e7ff;
-        }
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        section {
-            background-color: white;
-            padding: 40px;
-            margin-bottom: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        section h2 {
-            color: #007bff;
-            font-size: 2em;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        .hero {
-            background-color: #e9f7ff; /* Azul claro */
-            padding: 60px 20px;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 3em;
-            color: #0056b3;
-            margin-bottom: 15px;
-        }
-        .hero p {
-            font-size: 1.3em;
-            color: #555;
-            max-width: 800px;
-            margin: 0 auto 30px;
-        }
-        .cta-buttons a {
-            display: inline-block;
-            background-color: #28a745; /* Verde CTA */
-            color: white;
-            padding: 15px 30px;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            margin: 10px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-        }
-        .cta-buttons a:hover {
-            background-color: #218838;
-            transform: translateY(-3px);
-        }
-        .cta-buttons a:last-child {
-            background-color: #6c757d; /* Cinza */
-        }
-        .cta-buttons a:last-child:hover {
-            background-color: #5a6268;
-        }
-        .how-it-works-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            text-align: center;
-        }
-        .how-it-works-item {
-            flex: 1 1 300px;
-            background-color: #f8f9fa;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        .how-it-works-item h3 {
-            color: #007bff;
-            margin-top: 15px;
-        }
-        .features-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            gap: 20px;
-        }
-        .feature-box {
-            background-color: #f8f9fa;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            flex: 1 1 45%;
-            min-width: 300px;
-        }
-        .feature-box h3 {
-            color: #007bff;
-            margin-bottom: 10px;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        ul li {
-            margin-bottom: 8px;
-            padding-left: 25px;
-            position: relative;
-        }
-        ul li::before {
-            content: '✓';
-            color: #28a745;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-        .ownership {
-            background-color: #e0f2f7;
-            text-align: center;
-            padding: 30px;
-        }
-        .ownership p {
-            font-size: 1.1em;
-            font-weight: 600;
-            color: #0056b3;
-        }
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 20px 0;
-            margin-top: 30px;
-        }
-        footer a {
-            color: #007bff;
-            text-decoration: none;
-            margin: 0 10px;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-
-        /* Responsividade básica */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 2em;
-            }
-            .hero h1 {
-                font-size: 2.5em;
-            }
-            .hero p {
-                font-size: 1.1em;
-            }
-            .how-it-works-item, .feature-box {
-                flex: 1 1 100%;
-            }
-        }
-    </style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+<style>
+/* Estilos CSS básicos para demonstração. Recomenda-se usar um arquivo externo. */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    line-height: 1.6;
+    background-color: #f4f7f6;
+}
+header {
+    background-color: #007bff; /* Azul vibrante */
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+header img {
+    max-width: 80px;
+    margin-bottom: 10px;
+}
+header h1 {
+    margin: 0;
+    font-size: 2.5em;
+    font-weight: 700;
+}
+header h2 {
+    margin: 5px 0 0;
+    font-size: 1.2em;
+    font-weight: 300;
+    color: #d1e7ff;
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0 0;
+}
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+nav ul li a:hover {
+    color: #d1e7ff;
+}
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+section {
+    background-color: white;
+    padding: 40px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+}
+section h2 {
+    color: #007bff;
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.hero {
+    background-color: #e9f7ff; /* Azul claro */
+    padding: 60px 20px;
+    text-align: center;
+}
+.hero h1 {
+    font-size: 3em;
+    color: #0056b3;
+    margin-bottom: 15px;
+}
+.hero p {
+    font-size: 1.3em;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto 30px;
+}
+.cta-buttons a {
+    display: inline-block;
+    background-color: #28a745; /* Verde CTA */
+    color: white;
+    padding: 15px 30px;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 600;
+    margin: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.cta-buttons a:hover {
+    background-color: #218838;
+    transform: translateY(-3px);
+}
+.cta-buttons a:last-child {
+    background-color: #6c757d; /* Cinza */
+}
+.cta-buttons a:last-child:hover {
+    background-color: #5a6268;
+}
+.how-it-works-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    text-align: center;
+}
+.how-it-works-item {
+    flex: 1 1 300px;
+    background-color: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.how-it-works-item h3 {
+    color: #007bff;
+    margin-top: 15px;
+}
+.features-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 20px;
+}
+.feature-box {
+    background-color: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    flex: 1 1 45%;
+    min-width: 300px;
+}
+.feature-box h3 {
+    color: #007bff;
+    margin-bottom: 10px;
+}
+ul {
+    list-style: none;
+    padding: 0;
+}
+ul li {
+    margin-bottom: 8px;
+    padding-left: 25px;
+    position: relative;
+}
+ul li::before {
+    content: '✓';
+    color: #28a745;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.ownership {
+    background-color: #e0f2f7;
+    text-align: center;
+    padding: 30px;
+}
+.ownership p {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #0056b3;
+}
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    margin-top: 30px;
+}
+footer a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 10px;
+}
+footer a:hover {
+    text-decoration: underline;
+}
+/* Responsividade básica */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2em;
+    }
+    .hero h1 {
+        font-size: 2.5em;
+    }
+    .hero p {
+        font-size: 1.1em;
+    }
+    .how-it-works-item, .feature-box {
+        flex: 1 1 100%;
+    }
+}
+</style>
 </head>
 <body>
 
-    <header>
-        <img src="logo.png" alt="Logo Lava & Leva em Casa" />
-        <h1>Lava & Leva em Casa</h1>
-        <h2>A Solução de Lavanderia Conectando Vidas em Santos, SP</h2>
-        <nav>
-            <ul>
-                <li><a href="#sobre">Sobre Nós</a></li>
-                <li><a href="#como-funciona">Como Funciona?</a></li>
-                <li><a href="#recursos">Recursos</a></li>
-                <li><a href="#beneficios">Benefícios</a></li>
-                <li><a href="#visao">Nossa Visão</a></li>
-                <li><a href="#propriedade">Propriedade</a></li>
-            </ul>
-        </nav>
-    </header>
+<header>
+    <img src="logo.png" alt="Logo Lava & Leva em Casa" />
+    <h1>Lava & Leva em Casa</h1>
+    <h2>A Solução de Lavanderia Conectando Vidas em Santos, SP</h2>
+    <nav>
+        <ul>
+            <li><a href="#sobre">Sobre Nós</a></li>
+            <li><a href="#como-funciona">Como Funciona?</a></li>
+            <li><a href="#recursos">Recursos</a></li>
+            <li><a href="#beneficios">Benefícios</a></li>
+            <li><a href="#visao">Nossa Visão</a></li>
+            <li><a href="#propriedade">Propriedade</a></li>
+        </ul>
+    </nav>
+</header>
 
-    <main class="container">
-        <section class="hero">
-            <h1>Roupas Limpas, Tempo Livre, Renda Extra.</h1>
-            <p>Descubra o <strong>Lava & Leva em Casa</strong>: o aplicativo inovador que transforma a forma como você lida com a lavanderia e gera oportunidades de renda em Santos, SP.</p>
-            <div class="cta-buttons">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdk-YOtUBZe8XHqZnExKgrXen2QceqUzENWzu-iQ6CMQSAvkQ/viewform?usp=dialog">Baixe para Clientes</a>
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdk-YOtUBZe8XHqZnExKgrXen2QceqUzENWzu-iQ6CMQSAvkQ/viewform?usp=dialog">Cadastre-se como Prestador</a>
+<main class="container">
+    <section class="hero">
+        <h1>Roupas Limpas, Tempo Livre, Renda Extra.</h1>
+        <p>Descubra o <strong>Lava & Leva em Casa</strong>: o aplicativo inovador que transforma a forma como você lida com a lavanderia e gera oportunidades de renda em Santos, SP.</p>
+        <div class="cta-buttons">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdk-YOtUBZe8XHqZnExKgrXen2QceqUzENWzu-iQ6CMQSAvkQ/viewform?usp=dialog">Baixe para Clientes</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdk-YOtUBZe8XHqZnExKgrXen2QceqUzENWzu-iQ6CMQSAvkQ/viewform?usp=dialog">Cadastre-se como Prestador</a>
+        </div>
+    </section>
+
+    <section id="sobre">
+        <h2>Sobre Nós e Nossa Missão</h2>
+        <p>No dia a dia corrido, tarefas como lavar roupa podem tomar um tempo valioso. É por isso que o Lava & Leva em Casa chegou a Santos (SP) com um propósito claro: simplificar a sua vida enquanto fortalece a economia local.</p>
+        <p>Somos uma plataforma de conexão que une pessoas que precisam de lavagem, secagem e dobragem de roupas a profissionais dedicados – em sua maioria, donas de casa – que oferecem esse serviço com qualidade, profissionalismo e cuidado, diretamente de suas residências.</p>
+        <p>Nosso compromisso:</p>
+        <ul>
+            <li><strong>Para quem usa:</strong> Praticidade e confiança, com roupas limpas e bem cuidadas, entregues no conforto do seu lar.</li>
+            <li><strong>Para quem presta o serviço:</strong> Oportunidade de renda extra, flexível e digna, aproveitando recursos que já possuem (como máquinas de lavar e secar) e suas habilidades domésticas.</li>
+        </ul>
+        <p>No Lava & Leva em Casa, acreditamos que pequenas soluções podem transformar vidas – trazendo facilidade para uns e independência financeira para outros.</p>
+    </section>
+
+    <section id="como-funciona">
+        <h2>Como Funciona?</h2>
+        <div class="how-it-works-grid">
+            <div class="how-it-works-item">
+                <h3>1. O Cliente Solicita</h3>
+                <p>Através do app, o cliente seleciona o tipo de serviço, volume de roupas, e escolhe a data e horário para retirada e entrega em Santos.</p>
             </div>
-        </section>
-
-        <section id="sobre">
-            <h2>Sobre Nós e Nossa Missão</h2>
-            <p>Em um mundo cada vez mais agitado, tarefas rotineiras como lavar roupas consomem um tempo precioso. O <strong>Lava & Leva em Casa</strong> surge em Santos, SP, com a missão de simplificar sua vida e, ao mesmo tempo, impulsionar a economia local.</p>
-            <p>Somos uma plataforma que conecta pessoas que precisam de suas roupas lavadas, secas e dobradas, a indivíduos (principalmente donas de casa) que possuem tempo e recursos em suas próprias residências para oferecer este serviço de forma profissional e com carinho.</p>
-            <p>Nosso objetivo é proporcionar conveniência e qualidade para os usuários e, fundamentalmente, oferecer uma fonte de renda flexível e digna para os prestadores de serviço, aproveitando seus ativos já existentes (máquinas de lavar e secar) e suas habilidades domésticas.</p>
-        </section>
-
-        <section id="como-funciona">
-            <h2>Como Funciona?</h2>
-            <div class="how-it-works-grid">
-                <div class="how-it-works-item">
-                    <h3>1. O Cliente Solicita</h3>
-                    <p>Através do app, o cliente seleciona o tipo de serviço, volume de roupas, e escolhe a data e horário para retirada e entrega em Santos.</p>
-                </div>
-                <div class="how-it-works-item">
-                    <h3>2. O Prestador Aceita</h3>
-                    <p>Donas de casa e outros prestadores cadastrados recebem a solicitação, visualizam os detalhes e aceitam o pedido conforme sua disponibilidade.</p>
-                </div>
-                <div class="how-it-works-item">
-                    <h3>3. Retirada e Lavagem</h3>
-                    <p>O prestador retira as roupas no local agendado, realiza a lavagem, secagem e dobragem com cuidado em sua própria residência.</p>
-                </div>
-                <div class="how-it-works-item">
-                    <h3>4. Entrega e Pagamento</h3>
-                    <p>As roupas são entregues limpas e prontas. O pagamento é realizado de forma segura pelo app, e o prestador recebe sua remuneração.</p>
-                </div>
-                <div class="how-it-works-item">
-                    <h3>5. Avaliação</h3>
-                    <p>Clientes e prestadores avaliam a experiência, garantindo a qualidade e melhoria contínua da comunidade Lava & Leva.</p>
-                </div>
+            <div class="how-it-works-item">
+                <h3>2. O Prestador Aceita</h3>
+                <p>Donas de casa e outros prestadores cadastrados recebem a solicitação, visualizam os detalhes e aceitam o pedido conforme sua disponibilidade.</p>
             </div>
-        </section>
-
-        <section id="recursos">
-            <h2>Principais Recursos do Aplicativo (MVP)</h2>
-            <div class="features-grid">
-                <div class="feature-box">
-                    <h3>Para Clientes</h3>
-                    <ul>
-                        <li>Agendamento flexível de retirada e entrega.</li>
-                        <li>Seleção do tipo de lavagem e preferências.</li>
-                        <li>Pagamento seguro e prático via cartão de crédito/débito.</li>
-                        <li>Rastreamento em tempo real do status do pedido.</li>
-                        <li>Histórico de pedidos e pagamentos.</li>
-                        <li>Sistema de avaliação e feedback do serviço.</li>
-                        <li>Notificações push sobre o status do pedido.</li>
-                    </ul>
-                </div>
-                <div class="feature-box">
-                    <h3>Para Prestadores de Serviço</h3>
-                    <ul>
-                        <li>Gestão intuitiva da agenda e disponibilidade.</li>
-                        <li>Recebimento e aceitação/rejeição de novos pedidos.</li>
-                        <li>Acompanhamento detalhado dos ganhos e repasses.</li>
-                        <li>Ferramentas para atualização do status do pedido.</li>
-                        <li>Sistema de avaliação para clientes.</li>
-                        <li>Suporte e diretrizes de qualidade para o serviço.</li>
-                        <li>Flexibilidade para trabalhar em seus próprios termos.</li>
-                    </ul>
-                </div>
-                <div class="feature-box">
-                    <h3>Painel Administrativo (bithostel TI)</h3>
-                    <ul>
-                        <li>Gestão completa de usuários e prestadores.</li>
-                        <li>Monitoramento e rastreamento de todos os pedidos.</li>
-                        <li>Controle e gerenciamento de pagamentos e repasses.</li>
-                        <li>Ferramentas para resolução de disputas e suporte.</li>
-                        <li>Relatórios e análises de desempenho da plataforma.</li>
-                        <li>Gestão de conteúdo (FAQ, termos de uso).</li>
-                    </ul>
-                </div>
+            <div class="how-it-works-item">
+                <h3>3. Retirada e Lavagem</h3>
+                <p>O prestador retira as roupas no local agendado, realiza a lavagem, secagem e dobragem com cuidado em sua própria residência.</p>
             </div>
-        </section>
-
-        <section id="beneficios">
-            <h2>Benefícios do Lava & Leva em Casa</h2>
-            <div class="features-grid">
-                <div class="feature-box">
-                    <h3>Para Você (Cliente)</h3>
-                    <ul>
-                        <li><strong>Conveniência Inigualável:</strong> Diga adeus à pilha de roupas sujas.</li>
-                        <li><strong>Economia de Tempo:</strong> Dedique seu tempo ao que realmente importa.</li>
-                        <li><strong>Qualidade e Cuidado:</strong> Serviço personalizado com atenção aos detalhes.</li>
-                        <li><strong>Suporte à Economia Local:</strong> Ajude a comunidade de Santos.</li>
-                    </ul>
-                </div>
-                <div class="feature-box">
-                    <h3>Para o Prestador (Dona de Casa)</h3>
-                    <ul>
-                        <li><strong>Renda Flexível:</strong> Ganhe dinheiro usando sua própria máquina de lavar.</li>
-                        <li><strong>Autonomia:</strong> Trabalhe no seu próprio ritmo e horário.</li>
-                        <li><strong>Oportunidade:</strong> Transforme uma tarefa doméstica em um negócio.</li>
-                        <li><strong>Comunidade:</strong> Faça parte de uma rede de empreendedores locais.</li>
-                    </ul>
-                </div>
+            <div class="how-it-works-item">
+                <h3>4. Entrega e Pagamento</h3>
+                <p>As roupas são entregues limpas e prontas. O pagamento é realizado de forma segura pelo app, e o prestador recebe sua remuneração.</p>
             </div>
-        </section>
-
-        <section id="visao">
-            <h2>Nossa Visão e o Futuro</h2>
-            <p>Nossa visão para o <strong>Lava & Leva em Casa</strong> vai além de Santos, SP. Após consolidar nossa operação local e refinar a plataforma, planejamos expandir para outras cidades e regiões, levando conveniência e oportunidades para mais pessoas.</p>
-            <p>Futuras funcionalidades podem incluir serviços de passadoria, lavagem a seco de itens específicos, pacotes de assinatura e integrações ainda mais inteligentes para a gestão do lar.</p>
-            <p>Queremos construir uma comunidade forte, onde a confiança, a qualidade e o apoio mútuo sejam os pilares do nosso crescimento.</p>
-        </section>
-
-        <!-- Seção de Investidores por vir -->
-        <section id="investidores" style="background-color: #f1f1f1; padding: 40px 20px; margin-top: 30px; border-radius: 8px;">
-            <h2 style="text-align: center; color: #007bff;">Investidores e Oportunidades de Parceria</h2>
-            <p style="max-width: 800px; margin: 20px auto; font-size: 1.1em; text-align: center;">
-                Estamos atualmente desenvolvendo oportunidades de investimento e parcerias estratégicas para expandir e aprimorar o Lava & Leva em Casa. Interessados em colaborar e fazer parte do nosso crescimento, por favor, entre em contato conosco.
-            </p>
-            <div style="text-align: center;">
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdk-YOtUBZe8XHqZnExKgrXen2QceqUzENWzu-iQ6CMQSAvkQ/viewform?usp=dialog" style="background-color: #28a745; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: 600; transition: background-color 0.3s ease;">Seja um Investidor</a>
+            <div class="how-it-works-item">
+                <h3>5. Avaliação</h3>
+                <p>Clientes e prestadores avaliam a experiência, garantindo a qualidade e melhoria contínua da comunidade Lava & Leva.</p>
             </div>
-            <p style="max-width: 800px; margin: 20px auto; font-size: 0.9em; text-align: center; color: #555;">
-                * Aviso: Esta funcionalidade ainda está por vir. Em breve, disponibilizaremos mais informações e canais de contato específicos para investidores.
-            </p>
-        </section>
+        </div>
+    </section>
 
-        <!-- Seção de contato para investidores -->
-        <section id="contato-investidores" style="padding: 40px 20px; max-width: 800px; margin: 0 auto;">
-            <h3 style="text-align: center; color: #007bff;">Contato para Investidores</h3>
-            <p style="text-align: center;">Para saber mais sobre oportunidades de investimento, envie um e-mail para <a href="mailto:hostmaster@bithostel.com.br">hostmaster@bithostel.com.br</a> ou preencha nosso <a href="https://docs.google.com/forms/d/e/1FAIpQLSdk-YOtUBZe8XHqZnExKgrXen2QceqUzENWzu-iQ6CMQSAvkQ/viewform?usp=dialog">formulário de contato</a>.</p>
-        </section>
-    </main>
+    <section id="recursos">
+        <h2>Principais Recursos do Aplicativo (MVP)</h2>
+        <div class="features-grid">
+            <div class="feature-box">
+                <h3>Para Clientes</h3>
+                <ul>
+                    <li>Agendamento flexível de retirada e entrega.</li>
+                    <li>Seleção do tipo de lavagem e preferências.</li>
+                    <li>Pagamento seguro e prático via cartão de crédito/débito.</li>
+                    <li>Rastreamento em tempo real do status do pedido.</li>
+                    <li>Histórico de pedidos e pagamentos.</li>
+                    <li>Sistema de avaliação e feedback do serviço.</li>
+                    <li>Notificações push sobre o status do pedido.</li>
+                </ul>
+            </div>
+            <div class="feature-box">
+                <h3>Para Prestadores de Serviço</h3>
+                <ul>
+                    <li>Gestão intuitiva da agenda e disponibilidade.</li>
+                    <li>Recebimento e aceitação/rejeição de novos pedidos.</li>
+                    <li>Acompanhamento detalhado dos ganhos e repasses.</li>
+                    <li>Ferramentas para atualização do status do pedido.</li>
+                    <li>Sistema de avaliação para clientes.</li>
+                    <li>Suporte e diretrizes de qualidade para o serviço.</li>
+                    <li>Flexibilidade para trabalhar em seus próprios termos.</li>
+                </ul>
+            </div>
+            <div class="feature-box">
+                <h3>Painel Administrativo (bithostel TI)</h3>
+                <ul>
+                    <li>Gestão completa de usuários e prestadores.</li>
+                    <li>Monitoramento e rastreamento de todos os pedidos.</li>
+                    <li>Controle e gerenciamento de pagamentos e repasses.</li>
+                    <li>Ferramentas para resolução de disputas e suporte.</li>
+                    <li>Relatórios e análises de desempenho da plataforma.</li>
+                    <li>Gestão de conteúdo (FAQ, termos de uso).</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-    <footer>
-        <p>© 2025 bithostel TI (CNPJ 14.406.585/0001-59). Todos os direitos reservados.</p>
-        <p>
-            <a href="#">Política de Privacidade</a> |
-            <a href="#">Termos de Uso</a> |
-            <a href="#">Contato</a>
+    <section id="beneficios">
+        <h2>Benefícios do Lava & Leva em Casa</h2>
+        <div class="features-grid">
+            <div class="feature-box">
+                <h3>Para Você (Cliente)</h3>
+                <ul>
+                    <li><strong>Conveniência Inigualável:</strong> Diga adeus à pilha de roupas sujas.</li>
+                    <li><strong>Economia de Tempo:</strong> Dedique seu tempo ao que realmente importa.</li>
+                    <li><strong>Qualidade e Cuidado:</strong> Serviço personalizado com atenção aos detalhes.</li>
+                    <li><strong>Suporte à Economia Local:</strong> Ajude a comunidade de Santos.</li>
+                </ul>
+            </div>
+            <div class="feature-box">
+                <h3>Para o Prestador (Dona de Casa)</h3>
+                <ul>
+                    <li><strong>Renda Flexível:</strong> Ganhe dinheiro usando sua própria máquina de lavar.</li>
+                    <li><strong>Autonomia:</strong> Trabalhe no seu próprio ritmo e horário.</li>
+                    <li><strong>Oportunidade:</strong> Transforme uma tarefa doméstica em um negócio.</li>
+                    <li><strong>Comunidade:</strong> Faça parte de uma rede de empreendedores locais.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="visao">
+        <h2>Nossa Visão e o Futuro</h2>
+        <p>Nossa visão para o <strong>Lava & Leva em Casa</strong> vai além de Santos, SP. Após consolidar nossa operação local e refinar a plataforma, planejamos expandir para outras cidades e regiões, levando conveniência e oportunidades para mais pessoas.</p>
+        <p>Futuras funcionalidades podem incluir serviços de passadoria, lavagem a seco de itens específicos, pacotes de assinatura e integrações ainda mais inteligentes para a gestão do lar.</p>
+        <p>Queremos construir uma comunidade forte, onde a confiança, a qualidade e o apoio mútuo sejam os pilares do nosso crescimento.</p>
+    </section>
+
+    <!-- Seção de Investidores por vir -->
+    <section id="investidores" style="background-color: #f1f1f1; padding: 40px 20px; margin-top: 30px; border-radius: 8px;">
+        <h2 style="text-align: center; color: #007bff;">Investidores e Oportunidades de Parceria</h2>
+        <p style="max-width: 800px; margin: 20px auto; font-size: 1.1em; text-align: center;">
+            Estamos atualmente desenvolvendo oportunidades de investimento e parcerias estratégicas para expandir e aprimorar o Lava & Leva em Casa. Interessados em colaborar e fazer parte do nosso crescimento, por favor, entre em contato conosco.
         </p>
-    </footer>
+        <div style="text-align: center;">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSdk-YOtUBZe8XHqZnExKgrXen2QceqUzENWzu-iQ6CMQSAvkQ/viewform?usp=dialog" style="background-color: #28a745; color: white; padding: 15px 30px; text-decoration: none; border-radius: 50px; font-weight: 600; transition: background-color 0.3s ease;">Seja um Investidor</a>
+        </div>
+        <p style="max-width: 800px; margin: 20px auto; font-size: 0.9em; text-align: center; color: #555;">
+            * Aviso: Esta funcionalidade ainda está por vir. Em breve, disponibilizaremos mais informações e canais de contato específicos para investidores.
+        </p>
+    </section>
 
+    <!-- Seção de contato para investidores -->
+    <section id="contato-investidores" style="padding: 40px 20px; max-width: 800px; margin: 0 auto;">
+        <h3 style="text-align: center; color: #007bff;">Contato para Investidores</h3>
+        <p style="text-align: center;">Para saber mais sobre oportunidades de investimento, envie um e-mail para <a href="mailto:hostmaster@bithostel.com.br">hostmaster@bithostel.com.br</a> ou preencha nosso <a href="https://docs.google.com/forms/d/e/1FAIpQLSdk-YOtUBZe8XHqZnExKgrXen2QceqUzENWzu-iQ6CMQSAvkQ/viewform?usp=dialog">formulário de contato</a>.</p>
+    </section>
+</main>
+
+<footer>
+    <p>© 2025 bithostel TI (CNPJ 14.406.585/0001-59). Todos os direitos reservados.</p>
+    <p>
+        <a href="#">Política de Privacidade</a> |
+        <a href="#">Termos de Uso</a> |
+        <a href="#">Contato</a>
+    </p>
+</footer>
 </body>
 </html>
