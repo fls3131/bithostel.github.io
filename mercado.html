@@ -1,476 +1,715 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Relatórios de Pesquisa de Mercado - Lavanderias</title>
-<style>
-  body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    display: flex; /* Default for desktop: nav and main side-by-side */
-    background-color: #f4f4f4;
-  }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Relatórios de Pesquisa de Mercado - Lavanderias</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex; /* Default for desktop: nav and main side-by-side */
+            background-color: #f4f4f4;
+        }
 
-  /* Menu lateral */
-  nav {
-    width: 250px; /* Default width for desktop */
-    background-color: #2c3e50;
-    padding: 20px;
-    box-sizing: border-box;
-    height: 100vh; /* Full viewport height for desktop */
-    position: fixed; /* Fixed position for desktop sidebar */
-    overflow-y: auto; /* Enable scrolling if content exceeds height */
-  }
+        /* Menu lateral */
+        nav {
+            width: 250px; /* Default width for desktop */
+            background-color: #2c3e50;
+            padding: 20px;
+            box-sizing: border-box;
+            height: 100vh; /* Full viewport height for desktop */
+            position: fixed; /* Fixed position for desktop sidebar */
+            overflow-y: auto; /* Enable scrolling if content exceeds height */
+        }
 
-  nav h2 {
-    color: #ecf0f1;
-    font-size: 1.2em;
-    margin-bottom: 1em;
-    text-align: center;
-  }
+        nav h2 {
+            color: #ecf0f1;
+            font-size: 1.2em;
+            margin-bottom: 1em;
+            text-align: center;
+        }
 
-  nav button {
-    display: block;
-    width: 100%;
-    background: none;
-    border: 2px solid #ecf0f1;
-    color: #ecf0f1;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s;
-  }
+        nav button {
+            display: block;
+            width: 100%;
+            background: none;
+            border: 2px solid #ecf0f1;
+            color: #ecf0f1;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
 
-  nav button:hover {
-    background-color: #34495e;
-  }
+        nav button:hover {
+            background-color: #34495e;
+        }
 
-  /* Conteúdo principal */
-  main {
-    margin-left: 250px; /* Space for the fixed sidebar on desktop */
-    padding: 20px;
-    flex: 1; /* Allows main content to grow and fill available space */
-    max-width: calc(100% - 250px); /* Adjust max width for desktop */
-  }
+        /* Conteúdo principal */
+        main {
+            margin-left: 250px; /* Space for the fixed sidebar on desktop */
+            padding: 20px;
+            flex: 1; /* Allows main content to grow and fill available space */
+            max-width: calc(100% - 250px); /* Adjust max width for desktop */
+        }
 
-  section {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 8px;
-    display: none; /* Sections are hidden by default */
-  }
+        section {
+            background-color: #fff;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            display: none; /* Sections are hidden by default */
+        }
 
-  section.active {
-    display: block; /* Active section is displayed */
-  }
+        section.active {
+            display: block; /* Active section is displayed */
+        }
 
-  h1, h2 {
-    color: #2c3e50;
-  }
+        h1, h2 {
+            color: #2c3e50;
+        }
 
-  h2 {
-    margin-top: 0;
-  }
+        h2 {
+            margin-top: 0;
+        }
 
-  h3 {
-    margin-top: 1em;
-  }
+        h3 {
+            margin-top: 1em;
+        }
 
-  ul {
-    margin-top: 0.5em;
-  }
+        ul {
+            margin-top: 0.5em;
+        }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-  }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
 
-  th, td {
-    border: 1px solid #ccc;
-    padding: 8px;
-    text-align: left;
-  }
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: left;
+        }
 
-  th {
-    background-color: #ecf0f1;
-  }
+        th {
+            background-color: #ecf0f1;
+        }
 
-  /* Estilos para botões de detalhes (expandir/colapsar) */
-  .toggle-details {
-    background-color: #2980b9;
-    color: #fff;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 0.5em;
-  }
-  .toggle-details:hover {
-    background-color: #3498db;
-  }
+        /* Estilos para botões de detalhes (expandir/colapsar) */
+        .toggle-details {
+            background-color: #2980b9;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 0.5em;
+        }
+        .toggle-details:hover {
+            background-color: #3498db;
+        }
 
-  /* Conteúdo escondido de detalhes */
-  .details {
-    display: none;
-    margin-top: 10px;
-    padding-left: 10px;
-    border-left: 3px solid #bdc3c7;
-    background-color: #f9f9f9;
-  }
+        /* Conteúdo escondido de detalhes */
+        .details {
+            display: none;
+            margin-top: 10px;
+            padding-left: 10px;
+            border-left: 3px solid #bdc3c7;
+            background-color: #f9f9f9;
+        }
 
-  /* Media Queries for Mobile Devices (screens up to 768px wide) */
-  @media (max-width: 768px) {
-    body {
-      flex-direction: column; /* Stack navigation and main content vertically */
-    }
+        /* Media Queries for Mobile Devices (screens up to 768px wide) */
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column; /* Stack navigation and main content vertically */
+            }
 
-    nav {
-      width: 100%; /* Navigation takes full width */
-      height: auto; /* Height adjusts to content */
-      position: relative; /* No longer fixed, flows with content */
-      padding: 15px; /* Adjusted padding for mobile */
-      margin-bottom: 10px; /* Space between nav and main content */
-      display: flex; /* Use flexbox for nav buttons */
-      flex-wrap: wrap; /* Allow buttons to wrap to the next line */
-      justify-content: center; /* Center buttons horizontally */
-      gap: 5px; /* Space between buttons */
-    }
-
-    nav h2 {
-      width: 100%; /* Ensure title takes full width in the flex container */
-      margin-bottom: 15px; /* More space below title */
-    }
-
-    nav button {
-      width: auto; /* Allow buttons to size based on content */
-      flex-grow: 1; /* Allow buttons to grow and fill available space */
-      max-width: calc(33% - 10px); /* Example: Max 3 buttons per row on wider mobile screens */
-      font-size: 0.85em; /* Slightly smaller font for compactness */
-      padding: 8px; /* Slightly smaller padding */
-      margin-bottom: 0; /* Remove individual button margin-bottom if using gap */
-    }
-
-    main {
-      margin-left: 0; /* Remove left margin from main content */
-      max-width: 100%; /* Main content takes full width */
-      padding: 15px; /* Adjusted padding for mobile */
-    }
-
-    section {
-      padding: 15px; /* Adjusted section padding */
-      margin-bottom: 15px; /* Adjusted section margin */
-    }
-
-    /* Table responsiveness for mobile */
-    table {
-      display: block; /* Make table a block element to allow overflow */
-      overflow-x: auto; /* Enable horizontal scrolling for wide tables */
-      -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-      width: 100%; /* Ensure table tries to take full available width */
-    }
-
-    th, td {
-      white-space: normal; /* Allow text to wrap inside table cells */
-    }
-  }
-
-  /* Media Queries for very narrow screens (e.g., portrait phones) */
-  @media (max-width: 480px) {
-    nav button {
-      max-width: calc(50% - 10px); /* Example: Max 2 buttons per row on very narrow screens */
-    }
-  }
-</style>
+            nav {
+                width: 100%; /* Navigation takes full width */
+                height: auto; /* Height adjusts to content */
+                position: relative; /* No longer fixed, flows with content */
+                padding: 15px; /* Adjusted padding for mobile */
+                margin-bottom: 10px; /* Space between nav and main content */
+                display: flex; /* Use flexbox for nav buttons */
+                flex-wrap: wrap; /* Allow buttons to wrap to the next line */
+                justify-content: center; /* Center buttons horizontally */
+                gap: 5px; /* Space between buttons */
+            }
+            nav h2 {
+                width: 100%; /* Ensure title takes full width in the flex container */
+                margin-bottom: 15px; /* More space below title */
+            }
+            nav button {
+                width: auto; /* Allow buttons to size based on content */
+                flex-grow: 1; /* Allow buttons to grow and fill available space */
+                max-width: calc(33% - 10px); /* Example: Max 3 buttons per row on wider mobile screens */
+                font-size: 0.85em; /* Slightly smaller font for compactness */
+                padding: 8px; /* Slightly smaller padding */
+                margin-bottom: 0; /* Remove individual button margin-bottom if using gap */
+            }
+            main {
+                margin-left: 0; /* Remove left margin from main content */
+                max-width: 100%; /* Main content takes full width */
+                padding: 15px; /* Adjusted padding for mobile */
+            }
+            section {
+                padding: 15px; /* Adjusted section padding */
+                margin-bottom: 15px; /* Adjusted section margin */
+            }
+            /* Table responsiveness for mobile */
+            table {
+                display: block; /* Make table a block element to allow overflow */
+                overflow-x: auto; /* Enable horizontal scrolling for wide tables */
+                -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+                width: 100%; /* Ensure table tries to take full available width */
+            }
+            th, td {
+                white-space: normal; /* Allow text to wrap inside table cells */
+            }
+        }
+        /* Media Queries for very narrow screens (e.g., portrait phones) */
+        @media (max-width: 480px) {
+            nav button {
+                max-width: calc(50% - 10px); /* Example: Max 2 buttons per row on very narrow screens */
+            }
+        }
+    </style>
 </head>
 <body>
 
 <nav>
-  <h2>Navegação</h2>
-  <button data-section="geral">Relatório Geral Brasil</button>
-  <button data-section="santos">Relatório Santos-SP</button>
-  <button data-section="bairros">Relatório por Bairros</button>
+    <h2>Navegação</h2>
+    <button data-section="geral">Relatório Geral Brasil</button>
+    <button data-section="santos">Relatório Santos-SP</button>
+    <button data-section="bairros">Relatório por Bairros</button>
+    <button data-section="investimento">Proposta de Investimento</button>
+    <button data-section="escopo-projeto">Escopo do Projeto</button>
+    <button data-section="diretrizes">Diretrizes de Pesquisa</button>
 </nav>
 
 <main>
-  <h1>Relatórios de Pesquisa de Mercado - Lavanderias</h1>
+    <h1>Relatórios de Pesquisa de Mercado - Lavanderias</h1>
 
-  <section id="geral">
-  <h2>Relatório Geral: Preço de Roupas Lavadas em Lavanderias no Brasil</h2>
-  <div>
-    <h3>1. Introdução</h3>
-    <p>Este relatório apresenta uma análise do mercado de lavanderias no Brasil, com foco nos preços praticados pelos serviços de lavagem de roupas. O objetivo é fornecer insights sobre a variação de preços, fatores que influenciam esses valores e tendências do setor.</p>
-    
-    <h3>2. Objetivo da Pesquisa</h3>
-    <ul>
-      <li>Mapear os preços praticados por lavanderias em diferentes regiões do Brasil.</li>
-      <li>Identificar fatores que influenciam a variação de preços.</li>
-      <li>Compreender o perfil do consumidor e suas expectativas.</li>
-      <li>Analisar a concorrência e oportunidades de mercado.</li>
-    </ul>
+    <section id="geral">
+        <h2>Relatório Geral: Preço de Roupas Lavadas em Lavanderias no Brasil</h2>
+        <div>
+            <h3>1. Introdução</h3>
+            <p>Este relatório apresenta uma análise do mercado de lavanderias no Brasil, com foco nos preços praticados pelos serviços de lavagem de roupas. O objetivo é fornecer insights sobre a variação de preços, fatores que influenciam esses valores e tendências do setor.</p>
+            <h3>2. Objetivo da Pesquisa</h3>
+            <ul>
+                <li>Mapear os preços praticados por lavanderias em diferentes regiões do Brasil.</li>
+                <li>Identificar fatores que influenciam a variação de preços.</li>
+                <li>Compreender o perfil do consumidor e suas expectativas.</li>
+                <li>Analisar a concorrência e oportunidades de mercado.</li>
+            </ul>
 
-    <h3>3. Metodologia</h3>
-    <p>Dados primários e secundários foram coletados por entrevistas, análise de sites, aplicativos, relatórios e publicações especializadas.</p>
+            <h3>3. Metodologia</h3>
+            <p>Dados primários e secundários foram coletados por entrevistas, análise de sites, aplicativos, relatórios e publicações especializadas.</p>
 
-    <h3>4. Resultados</h3>
-    <h4>4.1. Preços Médios por Tipo de Serviço</h4>
-    <table>
-      <thead>
-        <tr>
-          <th>Tipo de Serviço</th>
-          <th>Preço Médio (BRL)</th>
-          <th>Observações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Lavagem de roupas comuns</td>
-          <td>R$ 8,00 - R$ 15,00</td>
-          <td>Por peça ou por kg</td>
-        </tr>
-        <tr>
-          <td>Lavagem de roupas delicadas</td>
-          <td>R$ 12,00 - R$ 25,00</td>
-          <td>Serviços específicos</td>
-        </tr>
-        <tr>
-          <td>Lavagem por quilos</td>
-          <td>R$ 5,00 - R$ 12,00</td>
-          <td>Geralmente, por kg</td>
-        </tr>
-        <tr>
-          <td>Lavagem de roupas de cama</td>
-          <td>R$ 20,00 - R$ 50,00</td>
-          <td>Dependendo do tamanho e material</td>
-        </tr>
-        <tr>
-          <td>Lavagem de roupas de banho</td>
-          <td>R$ 10,00 - R$ 20,00</td>
-          <td>Toalhas e roupões</td>
-        </tr>
-      </tbody>
-    </table>
+            <h3>4. Resultados</h3>
+            <h4>4.1. Preços Médios por Tipo de Serviço</h4>
+            <table>
+                <thead>
+                <tr>
+                    <th>Tipo de Serviço</th>
+                    <th>Preço Médio (BRL)</th>
+                    <th>Observações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Lavagem de roupas comuns</td>
+                    <td>R$ 8,00 - R$ 15,00</td>
+                    <td>Por peça ou por kg</td>
+                </tr>
+                <tr>
+                    <td>Lavagem de roupas delicadas</td>
+                    <td>R$ 12,00 - R$ 25,00</td>
+                    <td>Serviços específicos</td>
+                </tr>
+                <tr>
+                    <td>Lavagem por quilos</td>
+                    <td>R$ 5,00 - R$ 12,00</td>
+                    <td>Geralmente, por kg</td>
+                </tr>
+                <tr>
+                    <td>Lavagem de roupas de cama</td>
+                    <td>R$ 20,00 - R$ 50,00</td>
+                    <td>Dependendo do tamanho e material</td>
+                </tr>
+                <tr>
+                    <td>Lavagem de roupas de banho</td>
+                    <td>R$ 10,00 - R$ 20,00</td>
+                    <td>Toalhas e roupões</td>
+                </tr>
+                </tbody>
+            </table>
 
-    <h4>4.2. Variações Regionais</h4>
-    <ul>
-      <li><strong>Sudeste:</strong> preços mais elevados, especialmente em São Paulo e Rio de Janeiro.</li>
-      <li><strong>Nordeste:</strong> preços moderados, com variações entre cidades maiores e menores.</li>
-      <li><strong>Sul/Sudeste:</strong> maior diversidade de serviços premium, influenciando os preços.</li>
-      <li><strong>Norte e Centro-Oeste:</strong> valores mais acessíveis, devido ao menor custo de vida.</li>
-    </ul>
+            <h4>4.2. Variações Regionais</h4>
+            <ul>
+                <li><strong>Sudeste:</strong> preços mais elevados, especialmente em São Paulo e Rio de Janeiro.</li>
+                <li><strong>Nordeste:</strong> preços moderados, com variações entre cidades maiores e menores.</li>
+                <li><strong>Sul/Sudeste:</strong> maior diversidade de serviços premium, influenciando os preços.</li>
+                <li><strong>Norte e Centro-Oeste:</strong> valores mais acessíveis, devido ao menor custo de vida.</li>
+            </ul>
 
-    <h4>4.3. Fatores que Influenciam os Preços</h4>
-    <ul>
-      <li>Localização da lavanderia</li>
-      <li>Tipo de serviço (simples, delicado, express)</li>
-      <li>Qualidade e diferenciais do serviço</li>
-      <li>Concorrência do mercado local</li>
-    </ul>
+            <h4>4.3. Fatores que Influenciam os Preços</h4>
+            <ul>
+                <li>Localização da lavanderia</li>
+                <li>Tipo de serviço (simples, delicado, express)</li>
+                <li>Qualidade e diferenciais do serviço</li>
+                <li>Concorrência do mercado local</li>
+            </ul>
 
-    <h3>5. Tendências do Mercado</h3>
-    <ul>
-      <li>Crescimento por serviços de lavanderia delivery.</li>
-      <li>Uso de tecnologias e aplicativos para agendamento.</li>
-      <li>Planos mensais e pacotes promocionais.</li>
-      <li>Valorização de serviços ecológicos e sustentáveis.</li>
-    </ul>
+            <h3>5. Tendências do Mercado</h3>
+            <ul>
+                <li>Crescimento por serviços de lavanderia delivery.</li>
+                <li>Uso de tecnologias e aplicativos para agendamento.</li>
+                <li>Planos mensais e pacotes promocionais.</li>
+                <li>Valorização de serviços ecológicos e sustentáveis.</li>
+            </ul>
 
-    <h3>6. Conclusão</h3>
-    <p>O mercado apresenta variação significativa de preços, com oportunidades de crescimento em serviços diferenciados e sustentáveis.</p>
+            <h3>6. Conclusão</h3>
+            <p>O mercado apresenta variação significativa de preços, com oportunidades de crescimento em serviços diferenciados e sustentáveis.</p>
 
-    <h3>7. Recomendações</h3>
-    <ul>
-      <li>Investir em qualidade e sustentabilidade.</li>
-      <li>Utilizar plataformas digitais para captar clientes.</li>
-      <li>Ajustar estratégias conforme o perfil do público.</li>
-    </ul>
-  </div>
-</section>
+            <h3>7. Recomendações</h3>
+            <ul>
+                <li>Investir em qualidade e sustentabilidade.</li>
+                <li>Utilizar plataformas digitais para captar clientes.</li>
+                <li>Ajustar estratégias conforme o perfil do público.</li>
+            </ul>
+        </div>
+    </section>
 
-<section id="santos">
-  <h2>Relatório de Pesquisa de Mercado: Santos-SP</h2>
-  <div>
-    <h3>1. Introdução</h3>
-    <p>Este relatório analisa os preços praticados por lavanderias na região de Santos-SP, uma cidade portuária com potencial no setor de serviços de lavanderia.</p>
+    <section id="santos">
+        <h2>Relatório de Pesquisa de Mercado: Santos-SP</h2>
+        <div>
+            <h3>1. Introdução</h3>
+            <p>Este relatório analisa os preços praticados por lavanderias na região de Santos-SP, uma cidade portuária com potencial no setor de serviços de lavanderia.</p>
 
-    <h3>2. Objetivo da Pesquisa</h3>
-    <ul>
-      <li>Mapear preços por diferentes tipos de serviços.</li>
-      <li>Identificar fatores que impactam os preços.</li>
-      <li>Compreender o perfil do consumidor local.</li>
-      <li>Analisar a concorrência e tendências na região.</li>
-    </ul>
+            <h3>2. Objetivo da Pesquisa</h3>
+            <ul>
+                <li>Mapear preços por diferentes tipos de serviços.</li>
+                <li>Identificar fatores que impactam os preços.</li>
+                <li>Compreender o perfil do consumidor local.</li>
+                <li>Analisar a concorrência e tendências na região.</li>
+            </ul>
 
-    <h3>3. Metodologia</h3>
-    <p>Entrevistas e análise de plataformas digitais na cidade de Santos.</p>
+            <h3>3. Metodologia</h3>
+            <p>Entrevistas e análise de plataformas digitais na cidade de Santos.</p>
 
-    <h3>4. Resultados</h3>
-    <h4>4.1. Preços Médios por Serviço</h4>
-    <table>
-      <thead>
-        <tr>
-          <th>Tipo de Serviço</th>
-          <th>Preço Médio (BRL)</th>
-          <th>Observações</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Roupas comuns</td>
-          <td>R$ 10,00 - R$ 18,00</td>
-          <td>Por peça ou por kg, dependendo da lavanderia</td>
-        </tr>
-        <tr>
-          <td>Roupas delicadas</td>
-          <td>R$ 15,00 - R$ 30,00</td>
-          <td>Serviços com atendimento especial</td>
-        </tr>
-        <tr>
-          <td>Por quilos</td>
-          <td>R$ 6,00 - R$ 13,00</td>
-          <td>Geralmente, por kg</td>
-        </tr>
-        <tr>
-          <td>Roupas de cama</td>
-          <td>R$ 25,00 - R$ 60,00</td>
-          <td>Varia conforme tamanho e material</td>
-        </tr>
-        <tr>
-          <td>Toalhas e banho</td>
-          <td>R$ 12,00 - R$ 25,00</td>
-          <td>Toalhas de banho e roupões</td>
-        </tr>
-      </tbody>
-    </table>
+            <h3>4. Resultados</h3>
+            <h4>4.1. Preços Médios por Serviço</h4>
+            <table>
+                <thead>
+                <tr>
+                    <th>Tipo de Serviço</th>
+                    <th>Preço Médio (BRL)</th>
+                    <th>Observações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Roupas comuns</td>
+                    <td>R$ 10,00 - R$ 18,00</td>
+                    <td>Por peça ou por kg, dependendo da lavanderia</td>
+                </tr>
+                <tr>
+                    <td>Roupas delicadas</td>
+                    <td>R$ 15,00 - R$ 30,00</td>
+                    <td>Serviços com atendimento especial</td>
+                </tr>
+                <tr>
+                    <td>Por quilos</td>
+                    <td>R$ 6,00 - R$ 13,00</td>
+                    <td>Geralmente, por kg</td>
+                </tr>
+                <tr>
+                    <td>Roupas de cama</td>
+                    <td>R$ 25,00 - R$ 60,00</td>
+                    <td>Varia conforme tamanho e material</td>
+                </tr>
+                <tr>
+                    <td>Toalhas e banho</td>
+                    <td>R$ 12,00 - R$ 25,00</td>
+                    <td>Toalhas de banho e roupões</td>
+                </tr>
+                </tbody>
+            </table>
 
-    <h4>4.2. Variações Regionais em Santos</h4>
-    <div class="bairros">
-      <div class="bairro">
-        <h4>Centro e Portuária</h4>
-        <p>Preços mais altos devido à maior demanda por serviços premium e maior poder aquisitivo.</p>
-      </div>
-      <div class="bairro">
-        <h4>Zona Noroeste / bairros periféricos</h4>
-        <p>Preços mais acessíveis, foco em serviços básicos e volume.</p>
-      </div>
-      <div class="bairro">
-        <h4>Próximo ao Porto e áreas comerciais</h4>
-        <p>Maior procura por serviços rápidos e delivery, influenciando preços.</p>
-      </div>
-      <div class="bairro">
-        <h4>São Bento / Vila Mathias</h4>
-        <p>Classe média, preços entre R$ 11,00 - R$ 17,00.</p>
-      </div>
-      <div class="bairro">
-        <h4>Ponta da Praia / Vila Belmiro</h4>
-        <p>Zona periférica, preços mais acessíveis (R$ 8,00 - R$ 13,00).</p>
-      </div>
-    </div>
+            <h4>4.2. Variações Regionais em Santos</h4>
+            <div class="bairros">
+                <div class="bairro">
+                    <h4>Centro e Portuária</h4>
+                    <p>Preços mais altos devido à maior demanda por serviços premium e maior poder aquisitivo.</p>
+                </div>
+                <div class="bairro">
+                    <h4>Zona Noroeste / bairros periféricos</h4>
+                    <p>Preços mais acessíveis, foco em serviços básicos e volume.</p>
+                </div>
+                <div class="bairro">
+                    <h4>Próximo ao Porto e áreas comerciais</h4>
+                    <p>Maior procura por serviços rápidos e delivery, influenciando preços.</p>
+                </div>
+                <div class="bairro">
+                    <h4>São Bento / Vila Mathias</h4>
+                    <p>Classe média, preços entre R$ 11,00 - R$ 17,00.</p>
+                </div>
+                <div class="bairro">
+                    <h4>Ponta da Praia / Vila Belmiro</h4>
+                    <p>Zona periférica, preços mais acessíveis (R$ 8,00 - R$ 13,00).</p>
+                </div>
+            </div>
 
-    <h3>5. Fatores que Influenciam os Preços por Bairro</h3>
-    <ul>
-      <li>Perfil socioeconômico</li>
-      <li>Demanda turística</li>
-      <li>Concorrência</li>
-      <li>Infraestrutura</li>
-    </ul>
+            <h3>5. Fatores que Influenciam os Preços por Bairro</h3>
+            <ul>
+                <li>Perfil socioeconômico</li>
+                <li>Demanda turística</li>
+                <li>Concorrência</li>
+                <li>Infraestrutura</li>
+            </ul>
 
-    <h3>6. Conclusão</h3>
-    <p>Preços variam conforme perfil e demanda de cada bairro, com bairros nobres cobrando tarifas mais altas.</p>
+            <h3>6. Conclusão</h3>
+            <p>Preços variam conforme perfil e demanda de cada bairro, com bairros nobres cobrando tarifas mais altas.</p>
 
-    <h3>7. Recomendações</h3>
-    <ul>
-      <li>Investir em diferenciais de qualidade em bairros nobres.</li>
-      <li>Preços acessíveis em bairros periféricos.</li>
-      <li>Ajustar estratégias de acordo com o perfil do bairro.</li>
-    </ul>
-  </div>
-</section>
+            <h3>7. Recomendações</h3>
+            <ul>
+                <li>Investir em diferenciais de qualidade em bairros nobres.</li>
+                <li>Preços acessíveis em bairros periféricos.</li>
+                <li>Ajustar estratégias de acordo com o perfil do bairro.</li>
+            </ul>
+        </div>
+    </section>
 
-<section id="bairros">
-  <h2>Relatório de Pesquisa por Bairros em Santos-SP</h2>
-  <div>
-    <h3>1. Introdução</h3>
-    <p>Análise dos preços praticados em diferentes bairros de Santos-SP, considerando perfil socioeconômico e demanda de cada área.</p>
+    <section id="bairros">
+        <h2>Relatório de Pesquisa por Bairros em Santos-SP</h2>
+        <div>
+            <h3>1. Introdução</h3>
+            <p>Análise dos preços praticados em diferentes bairros de Santos-SP, considerando perfil socioeconômico e demanda de cada área.</p>
 
-    <h3>2. Objetivo da Pesquisa</h3>
-    <ul>
-      <li>Mapear faixas de preço por bairro.</li>
-      <li>Identificar diferenças entre bairros nobres e periféricos.</li>
-      <li>Entender fatores que influenciam os preços locais.</li>
-    </ul>
+            <h3>2. Objetivo da Pesquisa</h3>
+            <ul>
+                <li>Mapear faixas de preço por bairro.</li>
+                <li>Identificar diferenças entre bairros nobres e periféricos.</li>
+                <li>Entender fatores que influenciam os preços locais.</li>
+            </ul>
 
-    <h3>3. Resultados por Bairro</h3>
-    <div class="bairros">
-      <div class="bairro">
-        <h4>Encruzilhada / Gonzaga</h4>
-        <p>Zona nobre, preços elevados (R$ 15,00 - R$ 20,00 por peça ou kg), serviços diferenciados de luxo.</p>
-      </div>
-      <div class="bairro">
-        <h4>Aparecida / Marapé</h4>
-        <p>Classe média/alta, preços entre R$ 12,00 - R$ 18,00.</p>
-      </div>
-      <div class="bairro">
-        <h4>José Menino / Ponta da Praia</h4>
-        <p>Área com maior fluxo turístico, preços entre R$ 10,00 - R$ 16,00.</p>
-      </div>
-      <div class="bairro">
-        <h4>São Bento / Vila Mathias</h4>
-        <p>Classe média, preços entre R$ 11,00 - R$ 17,00.</p>
-      </div>
-      <div class="bairro">
-        <h4>Ponta da Praia / Vila Belmiro</h4>
-        <p>Zona periférica, preços mais acessíveis (R$ 8,00 - R$ 13,00).</p>
-      </div>
-    </div>
+            <h3>3. Resultados por Bairro</h3>
+            <div class="bairros">
+                <div class="bairro">
+                    <h4>Encruzilhada / Gonzaga</h4>
+                    <p>Zona nobre, preços elevados (R$ 15,00 - R$ 20,00 por peça ou kg), serviços diferenciados de luxo.</p>
+                </div>
+                <div class="bairro">
+                    <h4>Aparecida / Marapé</h4>
+                    <p>Classe média/alta, preços entre R$ 12,00 - R$ 18,00.</p>
+                </div>
+                <div class="bairro">
+                    <h4>José Menino / Ponta da Praia</h4>
+                    <p>Área com maior fluxo turístico, preços entre R$ 10,00 - R$ 16,00.</p>
+                </div>
+                <div class="bairro">
+                    <h4>São Bento / Vila Mathias</h4>
+                    <p>Classe média, preços entre R$ 11,00 - R$ 17,00.</p>
+                </div>
+                <div class="bairro">
+                    <h4>Ponta da Praia / Vila Belmiro</h4>
+                    <p>Zona periférica, preços mais acessíveis (R$ 8,00 - R$ 13,00).</p>
+                </div>
+            </div>
 
-    <h3>4. Fatores que Influenciam os Preços por Bairro</h3>
-    <ul>
-      <li>Perfil socioeconômico</li>
-      <li>Demanda turística</li>
-      <li>Concorrência</li>
-      <li>Infraestrutura</li>
-    </ul>
+            <h3>4. Fatores que Influenciam os Preços por Bairro</h3>
+            <ul>
+                <li>Perfil socioeconômico</li>
+                <li>Demanda turística</li>
+                <li>Concorrência</li>
+                <li>Infraestrutura</li>
+            </ul>
 
-    <h3>5. Conclusão</h3>
-    <p>Preços variam conforme perfil e demanda de cada bairro, com bairros nobres cobrando tarifas mais altas.</p>
+            <h3>5. Conclusão</h3>
+            <p>Preços variam conforme perfil e demanda de cada bairro, com bairros nobres cobrando tarifas mais altas.</p>
 
-    <h3>6. Recomendações</h3>
-    <ul>
-      <li>Investir em diferenciais de qualidade em bairros nobres.</li>
-      <li>Preços acessíveis em bairros periféricos.</li>
-      <li>Ajustar estratégias de acordo com o perfil do bairro.</li>
-    </ul>
-  </div>
-</section>
+            <h3>6. Recomendações</h3>
+            <ul>
+                <li>Investir em diferenciais de qualidade em bairros nobres.</li>
+                <li>Preços acessíveis em bairros periféricos.</li>
+                <li>Ajustar estratégias de acordo com o perfil do bairro.</li>
+            </ul>
+        </div>
+    </section>
 
+    <section id="investimento">
+        <h2>Proposta de Investimento – Lava & Leva em Casa</h2>
+        <div>
+            <!-- Adicionando o logo e um título mais proeminente para Bithostel TI -->
+            <img src="logo.png" alt="Logo da Bithostel TI" style="display: block; margin: 0 auto 15px auto; border-radius: 8px;">
+            <h3 style="text-align: center; color: #2c3e50; font-size: 1.5em; margin-bottom: 0.5em;">Bithostel TI</h3>
+            <p style="text-align: center; margin-bottom: 1em;">CNPJ 14.306.585/0001-59</p>
+
+
+            <h3>Visão Geral</h3>
+            <p>A <strong>Lava & Leva em Casa</strong> é uma plataforma inovadora de conexão que atua em Santos (SP), oferecendo uma solução prática para quem precisa de serviços de lavagem, secagem e dobragem de roupas. Nosso objetivo é simplificar a rotina dos nossos usuários enquanto fortalecemos a economia local, promovendo oportunidades de renda para profissionais domésticos.</p>
+
+            <h3>Nosso Propósito</h3>
+            <ul>
+                <li>Facilitar a vida dos consumidores, entregando roupas limpas e bem cuidadas no conforto de suas residências.</li>
+                <li>Gerar oportunidades de renda extra para profissionais, especialmente donas de casa, que podem utilizar recursos já disponíveis para oferecer um serviço de qualidade, confiável e flexível.</li>
+            </ul>
+
+            <h3>Diferenciais Competitivos</h3>
+            <ul>
+                <li>Modelo de plataforma que conecta diretamente clientes e profissionais, eliminando intermediários e otimizando custos.</li>
+                <li>Atendimento personalizado, com foco na qualidade, cuidado e satisfação do cliente.</li>
+                <li>Incentivo ao empreendedorismo local, promovendo independência financeira para profissionais parceiros.</li>
+                <li>Flexibilidade de horários e serviços, atendendo às necessidades específicas de cada usuário.</li>
+            </ul>
+
+            <h3>Mercado e Potencial de Crescimento</h3>
+            <ul>
+                <li>Santos (SP), uma cidade com forte presença residencial e econômica, oferece um mercado promissor para serviços de conveniência.</li>
+                <li>Crescente demanda por soluções domésticas práticas, impulsionada pelo ritmo acelerado da vida moderna.</li>
+                <li>Potencial de expansão para outras cidades e regiões, com estratégias de marketing digital e parcerias locais.</li>
+            </ul>
+
+            <h3>Proposta de Investimento</h3>
+            <p>Buscamos investidores estratégicos que desejem fazer parte de uma iniciativa com alto impacto social e potencial de crescimento sustentável. Os recursos captados serão utilizados para:</p>
+            <ul>
+                <li>Aperfeiçoamento da plataforma tecnológica (desenvolvimento de app, melhorias na interface e funcionalidades).</li>
+                <li>Ampliação da equipe de marketing e vendas.</li>
+                <li>Expansão geográfica e aquisição de novos usuários e profissionais.</li>
+                <li>Capacitação e suporte aos profissionais parceiros.</li>
+            </ul>
+
+            <h3>Retorno para Investidores</h3>
+            <ul>
+                <li>Participação acionária e potencial de valorização da plataforma.</li>
+                <li>Retorno financeiro através de taxas de serviço, assinaturas ou modelos de comissão.</li>
+                <li>Impacto social positivo, promovendo independência financeira e fortalecimento da economia local.</li>
+            </ul>
+
+            <h3>Nosso Compromisso</h3>
+            <p>Na Lava & Leva em Casa, acreditamos que soluções simples podem transformar vidas. Com seu investimento, podemos ampliar nosso alcance, aprimorar nossos serviços e gerar um impacto positivo duradouro na comunidade de Santos e além.</p>
+
+            <h3>Contato</h3>
+            <p>Fabio Lipel Schmit<br>Proprietário<br>13 99671-1979<br>hostmaster@bithostel.com.br<br><a href="http://bithostel.com.br" target="_blank">http://bithostel.com.br</a></p>
+            <p>---</p>
+            <p>Estamos abertos para discutir detalhes, projeções financeiras e estratégias de crescimento. Junte-se a nós nesta jornada de inovação e impacto social!</p>
+            <p><strong>Lava & Leva em Casa</strong><br>Transformando rotinas, fortalecendo comunidades.</p>
+        </div>
+    </section>
+
+    <section id="escopo-projeto">
+        <h2>Escopo Preliminar do Projeto: App "Lava & Leva em Casa" (Nome Provisório)</h2>
+        <div>
+            <h3>1. Visão Geral do Projeto</h3>
+            <p>Desenvolvimento de uma plataforma (aplicativos móveis para iOS e Android e um painel administrativo web) que conectará usuários domésticos (clientes) a prestadores de serviço autônomos (principalmente donas de casa ou indivíduos com capacidade para lavar e secar roupas em suas residências) para serviços de lavagem, secagem e dobragem de roupas. O objetivo é oferecer conveniência aos clientes e uma fonte de renda flexível aos prestadores, iniciando a operação na cidade de Santos, SP.</p>
+
+            <h3>2. Objetivos do Projeto</h3>
+            <ul>
+                <li><strong>Lançar um Produto Mínimo Viável (MVP):</strong> Disponibilizar os aplicativos para iOS e Android e o painel administrativo com as funcionalidades essenciais em até 6-8 meses.</li>
+                <li><strong>Aquisição de Usuários:</strong> Alcançar 500 usuários ativos e 50 prestadores de serviço qualificados e ativos na cidade de Santos, SP, nos primeiros 3 meses após o lançamento do MVP.</li>
+                <li><strong>Volume de Transações:</strong> Processar um volume mínimo de 200 pedidos de lavanderia por mês no primeiro trimestre após o lançamento.</li>
+                <li><strong>Satisfação do Cliente e Prestador:</strong> Manter uma avaliação média de 4.0 estrelas (ou mais) para os serviços prestados e uma taxa de resolução de conflitos inferior a 5% dos pedidos.</li>
+                <li><strong>Geração de Renda:</strong> Capacitar os prestadores de serviço a gerar uma renda média mensal X (a ser definida com base em pesquisa de mercado) através da plataforma.</li>
+            </ul>
+
+            <h3>3. Escopo (Inclusões)</h3>
+            <h4>3.1. Funcionalidades do Aplicativo para Cliente (Usuário Doméstico)</h4>
+            <ul>
+                <li><strong>Cadastro e Login:</strong> Via e-mail/senha, Google, Facebook.</li>
+                <li><strong>Criação de Perfil:</strong> Nome, endereço(s), telefone.</li>
+                <li><strong>Solicitação de Serviço:</strong>
+                    <ul>
+                        <li>Seleção do tipo de serviço (lavar, secar e dobrar).</li>
+                        <li>Indicação de peso/volume aproximado (ex: cesto padrão P/M/G).</li>
+                        <li>Seleção de preferência (ex: sabão neutro, amaciante específico - lista predefinida).</li>
+                        <li>Escolha de data e janela de horário para retirada e entrega.</li>
+                        <li>Campo para observações adicionais.</li>
+                    </ul>
+                </li>
+                <li><strong>Acompanhamento do Pedido:</strong> Status do pedido (pendente, aceito, em retirada, em lavagem, em entrega, concluído).</li>
+                <li><strong>Pagamento:</strong> Integração com gateway de pagamento (ex: Mercado Pago, Stripe) para cartão de crédito/débito.</li>
+                <li><strong>Histórico de Pedidos:</strong> Visualização de pedidos anteriores.</li>
+                <li><strong>Avaliação e Feedback:</strong> Avaliação do prestador de serviço (estrelas e comentários).</li>
+                <li><strong>Notificações Push:</strong> Atualizações de status do pedido, promoções.</li>
+                <li><strong>Suporte ao Cliente:</strong> Canal de comunicação (chat ou FAQ).</li>
+            </ul>
+
+            <h4>3.2. Funcionalidades do Aplicativo para Prestador de Serviço (Dona de Casa)</h4>
+            <ul>
+                <li><strong>Cadastro e Login:</strong> Via e-mail/senha.</li>
+                <li><strong>Criação de Perfil:</strong> Nome, endereço, comprovante de residência, dados bancários, documentos de identificação (necessário para verificação de segurança).</li>
+                <li><strong>Configuração de Disponibilidade:</strong> Definição de horários e dias da semana para aceitar pedidos.</li>
+                <li><strong>Aceitação/Rejeição de Pedidos:</strong> Visualização de novos pedidos na área de cobertura e opção de aceitar ou rejeitar.</li>
+                <li><strong>Atualização de Status do Pedido:</strong> Botões para indicar etapas (ex: "Coletado", "Em Lavagem", "Pronto para Entrega", "Entregue").</li>
+                <li><strong>Histórico de Ganhos:</strong> Visão detalhada dos valores recebidos e a receber.</li>
+                <li><strong>Avaliação do Cliente:</strong> Avaliação do cliente para o prestador.</li>
+                <li><strong>Suporte ao Cliente:</strong> Canal de comunicação (chat ou FAQ).</li>
+            </ul>
+
+            <h4>3.3. Funcionalidades do Painel Administrativo (Web)</h4>
+            <ul>
+                <li><strong>Gestão de Usuários e Prestadores:</strong> Cadastro, edição, bloqueio/desbloqueio.</li>
+                <li><strong>Gestão de Pedidos:</strong> Acompanhamento de todos os pedidos, histórico, status, detalhes.</li>
+                <li><strong>Gestão de Pagamentos:</strong> Monitoramento de transações, repasses para prestadores, comissões da plataforma.</li>
+                <li><strong>Gestão de Disputas:</strong> Ferramentas para mediar e resolver problemas entre clientes e prestadores (ex: itens perdidos/danificados).</li>
+                <li><strong>Relatórios e Análises:</strong> Dados sobre usuários, pedidos, faturamento, performance de prestadores.</li>
+                <li><strong>Gerenciamento de Conteúdo:</strong> FAQ, termos de uso.</li>
+                <li><strong>Geolocalização:</strong> Visualização de prestadores e pedidos no mapa (Santos, SP).</li>
+            </ul>
+
+            <h4>3.4. Processos Chave Inclusos</h4>
+            <ul>
+                <li><strong>Onboarding de Prestadores:</strong> Processo de verificação de documentos e residência, breve treinamento/diretrizes de qualidade.</li>
+                <li><strong>Modelo de Precificação:</strong> Definição clara da tabela de preços e comissionamento.</li>
+                <li><strong>Logística Inicial:</strong> Retirada e entrega a serem realizadas pelos próprios prestadores de serviço. (A plataforma fará a ponte, mas não fornecerá a frota/equipe de entrega própria nesta fase).</li>
+            </ul>
+
+            <h3>4. Fora do Escopo (Exclusões para o MVP)</h3>
+            <ul>
+                <li><strong>Serviços de Lavanderia Especializada:</strong> Lavagem a seco, couro, tapetes, itens delicados que exijam máquinas ou produtos específicos (foco em roupas do dia a dia).</li>
+                <li><strong>Serviços de Passadoria Exclusivos:</strong> Enquanto o serviço de "dobrar" está incluído, a passadoria de roupa peça a peça pode ser uma funcionalidade futura, não para o MVP.</li>
+                <li><strong>Frota de Entrega Própria da Plataforma:</strong> A logística de retirada e entrega será inicialmente de responsabilidade do prestador.</li>
+                <li><strong>Integração com Sistemas de Fidelidade Complexos:</strong> Programas de pontos ou cupons complexos (apenas promoções simples).</li>
+                <li><strong>Inteligência Artificial/Machine Learning Avançada:</strong> Previsão de demanda, otimização de rotas complexas (será considerado em fases futuras).</li>
+                <li><strong>Expansão para Outras Cidades/Regiões:</strong> O MVP será focado exclusivamente em Santos, SP.</li>
+                <li><strong>Suporte 24/7:</strong> O suporte será em horário comercial.</li>
+                <li><strong>Seguro Abrangente para Danos/Perdas:</strong> A plataforma terá uma política de responsabilidade básica, mas não um seguro abrangente para todos os tipos de danos ou perdas de alto valor (será definido em detalhes na política de uso).</li>
+            </ul>
+
+            <h3>5. Partes Interessadas (Stakeholders)</h3>
+            <ul>
+                <li>Fundadores / Idealizadores do Projeto: Tomadores de decisão e visão estratégica.</li>
+                <li>Equipe de Desenvolvimento: Responsáveis pela construção da plataforma.</li>
+                <li>Prestadores de Serviço: Donas de casa e outros indivíduos que oferecerão o serviço.</li>
+                <li>Usuários Finais / Clientes: Indivíduos e famílias que utilizarão o serviço de lavanderia.</li>
+                <li>Parceiro de Gateway de Pagamento: Empresa responsável pelo processamento financeiro.</li>
+                <li>Consultoria Jurídica/Contábil: Para garantir conformidade legal e fiscal.</li>
+                <li>Potenciais Investidores (futuro): Para expansão.</li>
+            </ul>
+
+            <h3>6. Premissas</h3>
+            <ul>
+                <li>Existe demanda suficiente para serviços de lavanderia sob demanda em Santos, SP.</li>
+                <li>Há um número adequado de indivíduos dispostos e capazes de atuar como prestadores de serviço nesta modalidade.</li>
+                <li>A precificação definida pela plataforma será competitiva e atraente para ambos os lados.</li>
+                <li>A tecnologia de desenvolvimento será estável e escalável para o volume inicial.</li>
+                <li>O ambiente regulatório e legal em Santos e no Brasil permite a operação desse modelo de negócio.</li>
+            </ul>
+
+            <h3>7. Restrições</h3>
+            <ul>
+                <li><strong>Orçamento:</strong> O desenvolvimento do MVP será limitado a um orçamento X (a ser definido), impactando recursos e funcionalidades.</li>
+                <li><strong>Prazo:</strong> Lançamento do MVP em até 6-8 meses a partir do início do desenvolvimento.</li>
+                <li><strong>Recursos Humanos:</strong> Equipe de desenvolvimento e operação inicial limitada.</li>
+                <li><strong>Legislação Local:</strong> Necessidade de adaptação a leis e regulamentos de Santos, SP, e do Brasil.</li>
+            </ul>
+
+            <h3>8. Critérios de Sucesso (Medidas do Sucesso)</h3>
+            <ul>
+                <li><strong>Lançamento:</strong> MVP em ambas as plataformas (iOS e Android) disponível nas lojas de aplicativos até a data alvo.</li>
+                <li><strong>Adesão:</strong> Número de downloads e cadastros de clientes e prestadores (conforme objetivos).</li>
+                <li><strong>Uso:</strong> Volume de pedidos concluídos e pagamentos processados (conforme objetivos).</li>
+                <li><strong>Qualidade:</strong> Média de avaliações dos prestadores de serviço acima de 4 estrelas.</li>
+                <li><strong>Retenção:</strong> Taxa de retenção de clientes e prestadores após 3 meses.</li>
+            </ul>
+
+            <h3>9. Entregáveis Principais</h3>
+            <ul>
+                <li>Documento de Requisitos Detalhados.</li>
+                <li>Protótipos e Wireframes do Aplicativo.</li>
+                <li>Design de Interface do Usuário (UI) e Experiência do Usuário (UX).</li>
+                <li>Aplicativo iOS (MVP) funcional.</li>
+                <li>Aplicativo Android (MVP) funcional.</li>
+                <li>Painel Administrativo Web (MVP) funcional.</li>
+                <li>Documentação Técnica (APIs, Banco de Dados).</li>
+                <li>Estratégia de Marketing e Lançamento Inicial para Santos, SP.</li>
+                <li>Termos de Uso e Política de Privacidade.</li>
+                <li>Material de Onboarding/Treinamento para Prestadores.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="diretrizes">
+        <h2>Diretrizes de Pesquisa de Mercado sobre Lavanderias em São Paulo</h2>
+        <div>
+            <h3>1. Objetivo da Pesquisa</h3>
+            <ul>
+                <li>Entender o perfil do mercado de lavanderias em São Paulo.</li>
+                <li>Identificar os preços praticados pelos concorrentes.</li>
+                <li>Avaliar o público-alvo e suas preferências.</li>
+                <li>Analisar oportunidades e ameaças do setor.</li>
+            </ul>
+
+            <h3>2. Fontes de Dados</h3>
+            <ul>
+                <li><strong>Pesquisa de campo:</strong> visitas às lavanderias, entrevistas com proprietários e clientes.</li>
+                <li><strong>Dados secundários:</strong> relatórios de mercado, associações comerciais, dados do IBGE, pesquisa do Sebrae.</li>
+                <li><strong>Plataformas online:</strong> Google Maps, sites de avaliação (como Reclame AQUI, Google Reviews), sites de lavanderias.</li>
+            </ul>
+
+            <h3>3. Análise de Preços</h3>
+            <ul>
+                <li><strong>Serviços comuns e respectivos preços médios:</strong></li>
+                <li>Lavagem de roupas sociais por kg: R$ 8,00 a R$ 15,00</li>
+                <li>Lavagem de roupas de cama: R$ 25,00 a R$ 50,00 (dependendo do tamanho)</li>
+                <li>Lavagem de roupas delicadas: R$ 12,00 a R$ 25,00</li>
+                <li>Serviços de passar a ferro: R$ 10,00 a R$ 20,00 por peça</li>
+                <li>Serviços de retirada e entrega (delivery): valor adicional de R$ 5,00 a R$ 15,00 por entrega</li>
+            </ul>
+
+            <h3>4. Análise de Concorrentes</h3>
+            <ul>
+                <li>Identifique as principais lavanderias na sua região.</li>
+                <li>Verifique diferenciais como atendimento, qualidade, preço e conveniência.</li>
+                <li>Avalie a presença online e estratégias de marketing.</li>
+            </ul>
+
+            <h3>5. Ferramentas para Elaboração do Relatório</h3>
+            <ul>
+                <li>Excel ou Google Sheets para tabulação de dados.</li>
+                <li>PowerPoint ou Google Slides para apresentação.</li>
+                <li>Ferramentas de análise de mercado como Sebrae Insights, IBGE, e plataformas de pesquisa de mercado.</li>
+            </ul>
+
+            <h3>6. Exemplo de Estrutura de Relatório</h3>
+            <ul>
+                <li>Introdução e objetivo.</li>
+                <li>Perfil do mercado de lavanderias em São Paulo.</li>
+                <li>Análise de preços praticados na região.</li>
+                <li>Perfil dos consumidores.</li>
+                <li>Principais concorrentes.</li>
+                <li>Oportunidades e recomendações.</li>
+            </ul>
+        </div>
+    </section>
 </main>
 
 <script>
-  // Seleciona todos os botões de navegação
-  const buttons = document.querySelectorAll('nav button');
-  const sections = document.querySelectorAll('main section');
+    // Seleciona todos os botões de navegação
+    const buttons = document.querySelectorAll('nav button');
+    const sections = document.querySelectorAll('main section');
 
-  // Adiciona evento de clique a cada botão
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.getAttribute('data-section');
-      // Esconde todas as seções
-      sections.forEach(sec => sec.classList.remove('active'));
-      // Mostra a seção selecionada
-      document.getElementById(target).classList.add('active');
+    // Adiciona evento de clique a cada botão
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const target = btn.getAttribute('data-section');
+            // Esconde todas as seções
+            sections.forEach(sec => sec.classList.remove('active'));
+            // Mostra a seção selecionada
+            document.getElementById(target).classList.add('active');
+        });
     });
-  });
 
-  // Opcional: exibir inicialmente a primeira seção
-  if (sections.length > 0) {
-    sections[0].classList.add('active');
-  }
+    // Opcional: exibir inicialmente a primeira seção
+    if (sections.length > 0) {
+        sections[0].classList.add('active');
+    }
 </script>
 
 </body>
