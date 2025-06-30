@@ -1,961 +1,899 @@
 <!doctype html>
 <html class="no-js" lang="ptbr">
 
-    <head>
-        <!-- meta data -->
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-        <!--font-family-->
-		<link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Rufina:400,700" rel="stylesheet">
 
-		<link href="https://fonts.googleapis.com/css?family=Rufina:400,700" rel="stylesheet">
-        
-        <!-- title of site -->
-        <title>bithostel TI - Serviços de Informática e Tecnologia da Informação </title>
-		<meta name="description" content="Assistência Técnica em informática em Santos - SP." />
-        <!-- For favicon png -->
-		<link rel="shortcut icon" type="image/icon" href="assets/logo/logo.png"/>
-       
-        <!--font-awesome.min.css-->
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <title>bithostel TI - Serviços de Informática e Tecnologia da Informação </title>
+    <meta name="description" content="Assistência Técnica em informática em Santos - SP." />
+    <link rel="shortcut icon" type="image/icon" href="assets/logo/logo.png" />
 
-        <!--linear icon css-->
-		<link rel="stylesheet" href="assets/css/linearicons.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
 
-        <!--flaticon.css-->
-		<link rel="stylesheet" href="assets/css/flaticon.css">
+    <link rel="stylesheet" href="assets/css/linearicons.css">
 
-		<!--animate.css-->
-        <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="assets/css/flaticon.css">
 
-        <!--owl.carousel.css-->
-        <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
-		<link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
-		
-        <!--bootstrap.min.css-->
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-		
-		<!-- bootsnav -->
-		<link rel="stylesheet" href="assets/css/bootsnav.css" >	
-        
-        <!--style.css-->
-        <link rel="stylesheet" href="assets/css/style.css">
-        
-        <!--responsive.css-->
-        <link rel="stylesheet" href="assets/css/responsive.css">
-        
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-		
-        <!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-        <![endif]-->
+    <link rel="stylesheet" href="assets/css/animate.css">
+
+    <link rel="stylesheet" href="assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="assets/css/owl.theme.default.min.css">
+
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="assets/css/bootsnav.css">
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <style>
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            text-align: center;
+            position: relative;
+            max-width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .modal-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 700;
+        }
+
+        .modal-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-button:hover {
+            background-color: #0056b3;
+            color: #fff; /* Ensure text color remains white on hover */
+            text-decoration: none; /* Remove underline on hover */
+        }
+    </style>
 
     </head>
-	
-	<body>
-		<!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
-
-		<!--welcome-hero start -->
-		<section id="home" class="welcome-hero">
-
-			<!-- top-area Start -->
-			<div class="top-area">
-				
-				<div class="header-area">
-					<!-- Start Navigation -->
-				    <nav class="navbar navbar-default bootsnav  navbar-sticky navbar-scrollspy"  data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
-
-				        <div class="container">
-
-				            <!-- Start Header Navigation -->
-				            <div class="navbar-header">
-				                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-				                    <i class="fa fa-bars"></i>
-				                </button>
-				                <a class="navbar-brand" href="index.html"><img src="logo.png"</img><span></span></a>
-
-				            </div><!--/.navbar-header-->
-				            <!-- End Header Navigation -->
-
-				            <!-- Collect the nav links, forms, and other content for toggling -->
-				            <div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
-				                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-				                    <li class=" scroll active"><a href="#home">Início</a></li>
-				                    <li class="scroll"><a href="#service">Infos</a></li>
-				                    <!-- <li class="scroll"><a href="#featured-cars">Em destaque</a></li> -->
-							        <li class="scroll"><a href="#brand">Parceiros</a></li>
-							        <li class="scroll"><a href="#contact">Contato</a></li>
-							        <li ><a target="_blank" href="https://wa.link/hsvbqg">Whatsapp</a></li>
-							         <li ><a target="_blank" href="VPN.html">Segurança Digital</a></li>
-				                    <li ><a target="_blank" href="https://wa.me/c/5513996711979">Catálogo no Whatsapp</a></li>
-				                    
-				                </ul><!--/.nav -->
-				            </div><!-- /.navbar-collapse -->
-				        </div><!--/.container-->
-				    </nav><!--/nav-->
-				    <!-- End Navigation -->
-				</div><!--/.header-area-->
-			    <div class="clearfix"></div>
-
-			</div><!-- /.top-area-->
-			<!-- top-area End -->
-
-			<div class="container">
-				<div class="welcome-hero-txt">
-					<h2>Saudações !</h2>
-					<p>bithostel TI - smart IT</p>
-					
-<<<<<<< HEAD
-					 <button class="welcome-btn" onclick="window.location.href='VPN.html'">Segurança Digital<br>(Firewall + Openvpn)</button> 
-=======
-					 <button class="welcome-btn" onclick="window.location.href='VPN.html'">SEGURANÇA</button> 
->>>>>>> 5874e6110fb994292bfbaec8ae6e962ae2f92bfc
-				<br>
-			<button class="welcome-btn" onclick="window.location.href='https://vps01.bithostel.com.br/bludit/admin'">E N T R A R</button>
-</div>
-
-
-
-			</div>
-
-			
-		</section><!--/.welcome-hero-->
-		<!--welcome-hero end -->
-		
-	<!--service start -->
-		<section id="loja" class="loja">
-	<div align="center">		
-			<script type="text/javascript" src="https://www.free-counters.org/count/hyr3"></script><br>
- <a href='https://www.versicherungen.at/lebensversicherung/'></a> <script type='text/javascript' src='https://whomania.com/ctr?id=a3f3d5bc24ac647a4fa62e24053d4615da19dbfd'></script>
- 
-	<br><h2>Website seguro</h2><img width="256" height="256" src="assets/images/ssl.jpg"</img></div>
-				
-				<div class="service-content">
-						
-				
-				
-</section>
-				<div>
-				</div>
-				<section id="service" class="service">
-					<div class="row">
-					<div align="center"><br><br><h2>Infos</h2></div>
-						<div class="col-md-4 col-sm-6">
-							<div class="single-service-item">
-							
-								<h2><a href="#">Desde 2011</span></a></h2>
-								<p>
-									A bithostel tem vasta experiência e gerencia o provisionamento, implantação, configuração e administração de muitas peças diferentes de hardware e software relacionados à rede e à segurança. Isso inclui firewalls, roteadores, switches, várias ferramentas de monitoramento de rede e VPNs (redes privadas virtuais).Prestamos consultoria em tecnologia de rede e aprimoramento da segurança digital.Com tradição de soluções em tecnologias Open SOURCE, a bithostel existe na “MATRIX” desde 2011, localizada na América do Sul, no Brasil em Santos-SP.
-								</p>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6">
-							<div class="single-service-item">
-								<h2><a target="_blank" href="https://bithostel.company.site">Especialista Linux(MX)</a></h2>
-								<p>
-									Especialistas linux em desktop e servidores Linux, vendemos computadores novos, de qualidade com o MX Linux BR, pré-instalado que é considerado uma das melhores distribuições atuais e tem o linux como um sistema operacional, mais seguro, elegante, leve e totalmente em português.
-								</p>
-							</div>
-						</div>
-						
-<div class="col-md-4 col-sm-6">
-							<div class="single-service-item">
-								<h2><a target="_blank" href="https://bithostel.company.site">Segurança</a></h2>
-								<p>
-Com relação aos seus dados pessoais de endereçamento, pagamento e conteúdo do pedido, você pode estar certo de que não serão utilizados para outros fins que não o de processamento dos pedidos realizados, não sendo portanto divulgados em hipótese alguma.
-Utilizamos o mercado pago como nosso Gateway de pagamento, o que torna mais segura as transações, já que ele administra e toma conta de todos os processos.
-
-Com relação à segurança no tráfego de dados, toda transação que envolver pagamento, seja por cartão de crédito ou não, estará encriptada com a tecnologia SSL (Secure Socket Layer). Isso significa que só nossa empresa terá acesso a estes dados.
-
-</p>
-							</div>
-						</div>
-<section id="politicas" class="section">
-<div class="single-service-item">
-								<h2><a target="_blank" href="https://bithostel.com.br/VPN.html">Política de uso da OPENVPN
-								<p>
-
-   
-        <h2>Políticas de USO</h2>
-<p>
-Ao criar políticas de uso para o serviço de OpenVPN da bithostel TI, é importante garantir que elas sejam claras e abrangentes, abordando aspectos de segurança, privacidade e uso adequado. 
-<br><br>
-### Políticas de Uso do OpenVPN - bithostel TI<br>
-<br>
-#### 1. **Propósito e Escopo**<br>
-   - O uso do serviço OpenVPN da bithostel TI é destinado exclusivamente para fins legítimos e autorizados. Qualquer uso não autorizado ou mal-intencionado é estritamente proibido.
-<br><br>
-#### 2. **Autorização de Acesso**<br>
-   - Apenas usuários autorizados terão acesso ao serviço OpenVPN. A criação e o uso de contas deverão ser feitas de acordo com os procedimentos estabelecidos pela bithostel TI.
-<br><br>
-#### 3. **Uso Adequado**<br>
-   - Os usuários devem utilizar o serviço de forma responsável e ética, respeitando todas as leis e regulamentos aplicáveis, bem como as políticas internas da bithostel TI.
-   <br><br>
-
-#### 4. **Segurança e Proteção de Dados**<br>
-   - Os usuários são responsáveis pela proteção de suas credenciais de acesso. É proibido compartilhar informações de login, senhas ou qualquer outra informação sensível relacionada ao serviço.
-   - Qualquer atividade suspeita ou incidente de segurança deve ser relatada imediatamente à equipe de suporte da bithostel TI.
-<br><br>
-#### 5. **Atividades Proibidas**<br>
-   - É proibido utilizar o serviço OpenVPN para:
-     - Realizar atividades ilegais, incluindo, mas não se limitando a, hacking, distribuição de malware, ou qualquer outra atividade que viole as leis.
-     - Acessar, transmitir ou armazenar conteúdo que seja ilegal, ofensivo, ou que infrinja direitos autorais.
-     - Realizar ataques de negação de serviço (DDoS), spamming ou qualquer outra forma de abuso de rede.
-<br><br>
-#### 6. **Privacidade**<br>
-   - A bithostel TI se compromete a proteger a privacidade dos usuários. Os dados de conexão podem ser registrados para fins de segurança e manutenção do serviço, mas não serão compartilhados com terceiros sem o consentimento do usuário, exceto quando exigido por lei.
-<br><br>
-#### 7. **Responsabilidade do Usuário**<br>
-   - Os usuários são responsáveis por quaisquer atividades realizadas sob suas credenciais. É fundamental tomar precauções para garantir que o acesso ao serviço seja realizado de maneira segura.
-<br><br>
-#### 8. **Modificações nas Políticas**<br>
-   - A bithostel TI reserva-se o direito de modificar estas políticas a qualquer momento. Notificações sobre alterações significativas serão comunicadas aos usuários.
-<br><br>
-#### 9. **Consequências pelo Não Cumprimento**<br>
-   - O não cumprimento diretas destas políticas pode resultar em ações disciplinares, incluindo a revogação de acesso ao serviço e possíveis repercussões legais.
-<br><br>
-#### 10. **Contato para Suporte**<br>
-   - Para dúvidas ou esclarecimentos sobre estas políticas ou sobre o uso do OpenVPN, os usuários devem entrar em contato com a equipe de suporte da bithostel TI.
-</p>
-
-							</div>
-						</div>
-						</section>
-<div class="single-service-item">
-								<h2><a target="_blank" href="https://bithostel.company.site">Política de Privacidade</a></h2>
-								<p>
-
-Introdução
-
-Bem-vindo à BitHostel TI. Nós respeitamos a sua privacidade e estamos comprometidos em proteger seus dados pessoais. Esta política de privacidade informará como lidamos com seus dados pessoais quando você visita nosso site ou utiliza nossos serviços.
-Informações Importantes e Quem Somos
-Finalidade Desta Política de Privacidade
-
-Esta política de privacidade tem como objetivo fornecer informações sobre como a BitHostel TI coleta e processa seus dados pessoais através do uso de nosso site, incluindo quaisquer dados que você possa fornecer através deste site ao se inscrever para nossos serviços ou comprar um produto.
-Controlador
-
-A BitHostel TI é a controladora e responsável pelos seus dados pessoais (coletivamente referida como "BitHostel TI", "nós", "nos" ou "nosso" nesta política de privacidade).
-Os Dados Que Coletamos Sobre Você
-Dados Pessoais
-
-Dados pessoais, ou informações pessoais, significam qualquer informação sobre um indivíduo a partir da qual essa pessoa pode ser identificada. Podemos coletar, usar, armazenar e transferir diferentes tipos de dados pessoais sobre você que agrupamos da seguinte forma:
-
-    Dados de Identidade: inclui nome, sobrenome, nome de usuário ou identificador similar.
-    Dados de Contato: inclui endereço de cobrança, endereço de entrega, endereço de e-mail e números de telefone.
-    Dados Financeiros: inclui detalhes de conta bancária e cartão de pagamento.
-    Dados de Transação: inclui detalhes sobre pagamentos feitos e recebidos por você e outros detalhes de produtos e serviços que você comprou de nós.
-    Dados Técnicos: inclui endereço de protocolo de internet (IP), seus dados de login, tipo e versão do navegador, configuração de fuso horário e localização, tipos e versões de plug-ins do navegador, sistema operacional e plataforma, e outras tecnologias nos dispositivos que você usa para acessar este site.
-    Dados de Uso: inclui informações sobre como você usa nosso site, produtos e serviços.
-    Dados de Marketing e Comunicações: inclui suas preferências em receber marketing de nós e suas preferências de comunicação.
-
-Como Seus Dados Pessoais São Coletados?
-
-Usamos diferentes métodos para coletar dados de e sobre você, incluindo através de:
-
-    Interações diretas: Você pode nos fornecer seus Dados de Identidade, Contato e Financeiros preenchendo formulários ou se correspondendo conosco por correio, telefone, e-mail ou de outra forma.
-    Tecnologias ou interações automatizadas: À medida que você interage com nosso site, podemos coletar automaticamente Dados Técnicos sobre seu equipamento, ações de navegação e padrões. Coletamos esses dados pessoais usando cookies, logs de servidor e outras tecnologias semelhantes.
-    Terceiros ou fontes publicamente disponíveis: Podemos receber dados pessoais sobre você de várias terceiras partes e fontes públicas.
-
-Como Usamos Seus Dados Pessoais
-
-Usaremos seus dados pessoais apenas quando a lei nos permitir. Mais comumente, usaremos seus dados pessoais nas seguintes circunstâncias:
-
-    Onde precisamos executar o contrato que estamos prestes a celebrar ou que celebramos com você.
-    Onde for necessário para nossos interesses legítimos (ou de terceiros) e seus interesses e direitos fundamentais não se sobrepõem a esses interesses.
-    Onde precisamos cumprir uma obrigação legal.
-
-Divulgações de Seus Dados Pessoais
-
-Podemos compartilhar seus dados pessoais com as partes indicadas abaixo para os fins estabelecidos na tabela acima:
-
-    Prestadores de serviços que fornecem serviços de TI e administração de sistemas.
-    Consultores profissionais, incluindo advogados, banqueiros, auditores e seguradoras que prestam serviços de consultoria, bancários, jurídicos, de seguros e de contabilidade.
-    HM Revenue & Customs, reguladores e outras autoridades que exigem relatórios de atividades de processamento em certas circunstâncias.
-    Terceiros a quem podemos escolher vender, transferir ou fundir partes de nosso negócio ou nossos ativos.
-
-Exigimos que todos os terceiros respeitem a segurança de seus dados pessoais e os tratem de acordo com a lei.
-Segurança dos Dados
-
-Implementamos medidas de segurança apropriadas para evitar que seus dados pessoais sejam acidentalmente perdidos, usados ou acessados de maneira não autorizada, alterados ou divulgados.
-Retenção de Dados
-
-Reteremos seus dados pessoais apenas pelo tempo necessário para cumprir os propósitos para os quais os coletamos, incluindo para fins de satisfazer quaisquer requisitos legais, contábeis ou de relatório.
-Seus Direitos Legais
-
-Sob certas circunstâncias, você tem direitos sob as leis de proteção de dados em relação aos seus dados pessoais, incluindo o direito de acessar, corrigir, apagar, restringir, transferir ou se opor ao processamento de seus dados pessoais.
-Detalhes de Contato
-
-Se você tiver alguma dúvida sobre esta política de privacidade ou nossas práticas de privacidade, entre em contato conosco em:
-
-Nome completo da entidade legal: BitHostel TI
-Endereço de e-mail: [Seu Email]
-Endereço postal: [Seu Endereço Postal]
-Número de telefone: [Seu Número de Telefone]
-Alterações a Esta Política de Privacidade
-
-Mantemos nossa política de privacidade sob revisão regular. Esta versão foi atualizada pela última vez em 2025-02-23.
-
-Por favor, verifique regularmente para ver quaisquer atualizações ou alterações em nossa política de privacidade.
-</p>
-							</div>
-						</div>
-
-
-											
-						<div class="col-md-4 col-sm-6">
-							<div class="single-service-item">
-								<h2><a href="#">Outros Serviços</a></h2>
-								<p>
-Servidores Dedicados 
-Servidor
-Virtual
-Data Center
-Virtual
-Colocation
-Gerenciado
-Nuvem
-Privada
-Desenvolvimento de Websites
-Lojas ON-LINE
-								</p>
-							</div>
-						</div>
-						
-						
-												
-
-<div class="col-md-4 col-sm-6">
-							<div class="single-service-item">
-								<h2><a href="#">Nossos computadores</a></h2>
-								<p>
-Temos transparência total em nossos produtos. Todas as características e especificações estão informadas e listadas.</p>
-							</div>
-
-						</div>
-						<div class="col-md-4 col-sm-6">
-							<div class="single-service-item">
-								<h2><a href="#">Método de ENVIO</a></h2>
-								<p>
-						
-						 Envio para todo BRASIL !
-- Método de retirada
-Retirada no local
-Local de retirada
-bithostel TI, Rua Frei Francisco Sampaio, 283 APTO 44, Santos-São Paulo,11035-105, Brasil
-Horário de funcionamento
-9:00-18:00 Seg-Sex
 
-Todos os produtos serão enviados de acordo com a forma escolhida pelo cliente, em até 2 dias úteis da confirmação do pagamento. O prazo para a entrega varia de acordo com a forma de envio escolhida e não é de nossa responsabilidade, ,já que a entrega fica a cargo dos Correios.
+<body>
+    <div id="newProjectOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <a href="#" class="modal-close" id="closeOverlay">&times;</a>
+            <h2 class="modal-title">Conheça nosso novo projeto!</h2>
+            <a href="https://bithostel.com.br/lava.html" class="modal-button" target="_blank">Lava e Leva em Casa</a>
+        </div>
+    </div>
+    <section id="home" class="welcome-hero">
+
+        <div class="top-area">
+
+            <div class="header-area">
+                <nav class="navbar navbar-default bootsnav navbar-sticky navbar-scrollspy" data-minus-value-desktop="70" data-minus-value-mobile="55" data-speed="1000">
+
+                    <div class="container">
+
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <a class="navbar-brand" href="index.html"><img src="logo.png" </img><span></span></a>
+
+                        </div><div class="collapse navbar-collapse menu-ui-design" id="navbar-menu">
+                            <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
+                                <li class=" scroll active"><a href="#home">Início</a></li>
+                                <li class="scroll"><a href="#service">Infos</a></li>
+                                <li class="scroll"><a href="#brand">Parceiros</a></li>
+                                <li class="scroll"><a href="#contact">Contato</a></li>
+                                <li><a target="_blank" href="https://wa.link/hsvbqg">Whatsapp</a></li>
+                                <li><a target="_blank" href="VPN.html">Segurança Digital</a></li>
+                                <li><a target="_blank" href="https://wa.me/c/5513996711979">Catálogo no Whatsapp</a></li>
+
+                            </ul></div></div></nav></div><div class="clearfix"></div>
+
+        </div><div class="container">
+            <div class="welcome-hero-txt">
+                <h2>Saudações !</h2>
+                <p>bithostel TI - smart IT</p>
+
+                <button class="welcome-btn" onclick="window.location.href='VPN.html'">Segurança Digital<br>(Firewall + Openvpn)</button>
+                <br>
+                <button class="welcome-btn" onclick="window.location.href='https://vps01.bithostel.com.br/bludit/admin'">E N T R A R</button>
+            </div>
+
+
+
+        </div>
+
+
+    </section><section id="loja" class="loja">
+        <div align="center">
+            <script type="text/javascript" src="https://www.free-counters.org/count/hyr3"></script><br>
+            <a href='https://www.versicherungen.at/lebensversicherung/'></a>
+            <script type='text/javascript' src='https://whomania.com/ctr?id=a3f3d5bc24ac647a4fa62e24053d4615da19dbfd'></script>
+
+            <br>
+            <h2>Website seguro</h2><img width="256" height="256" src="assets/images/ssl.jpg" </img>
+        </div>
+
+        <div class="service-content">
+
+
+
+    </section>
+    <div>
+    </div>
+    <section id="service" class="service">
+        <div class="row">
+            <div align="center"><br><br>
+                <h2>Infos</h2>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="single-service-item">
+
+                    <h2><a href="#">Desde 2011</span></a></h2>
+                    <p>
+                        A bithostel tem vasta experiência e gerencia o provisionamento, implantação, configuração e administração de muitas peças diferentes de hardware e software relacionados à rede e à segurança. Isso inclui firewalls, roteadores, switches, várias ferramentas de monitoramento de rede e VPNs (redes privadas virtuais).Prestamos consultoria em tecnologia de rede e aprimoramento da segurança digital.Com tradição de soluções em tecnologias Open SOURCE, a bithostel existe na “MATRIX” desde 2011, localizada na América do Sul, no Brasil em Santos-SP.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="single-service-item">
+                    <h2><a target="_blank" href="https://bithostel.company.site">Especialista Linux(MX)</a></h2>
+                    <p>
+                        Especialistas linux em desktop e servidores Linux, vendemos computadores novos, de qualidade com o MX Linux BR, pré-instalado que é considerado uma das melhores distribuições atuais e tem o linux como um sistema operacional, mais seguro, elegante, leve e totalmente em português.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6">
+                <div class="single-service-item">
+                    <h2><a target="_blank" href="https://bithostel.company.site">Segurança</a></h2>
+                    <p>
+                        Com relação aos seus dados pessoais de endereçamento, pagamento e conteúdo do pedido, você pode estar certo de que não serão utilizados para outros fins que não o de processamento dos pedidos realizados, não sendo portanto divulgados em hipótese alguma.
+                        Utilizamos o mercado pago como nosso Gateway de pagamento, o que torna mais segura as transações, já que ele administra e toma conta de todos os processos.
+
+                        Com relação à segurança no tráfego de dados, toda transação que envolver pagamento, seja por cartão de crédito ou não, estará encriptada com a tecnologia SSL (Secure Socket Layer). Isso significa que só nossa empresa terá acesso a estes dados.
+
+                    </p>
+                </div>
+            </div>
+            <section id="politicas" class="section">
+                <div class="single-service-item">
+                    <h2><a target="_blank" href="https://bithostel.com.br/VPN.html">Política de uso da OPENVPN
+                            <p>
+
+
+                        <h2>Políticas de USO</h2>
+                        <p>
+                            Ao criar políticas de uso para o serviço de OpenVPN da bithostel TI, é importante garantir que elas sejam claras e abrangentes, abordando aspectos de segurança, privacidade e uso adequado.
+                            <br><br>
+                            ### Políticas de Uso do OpenVPN - bithostel TI<br>
+                            <br>
+                            #### 1. **Propósito e Escopo**<br>
+                            - O uso do serviço OpenVPN da bithostel TI é destinado exclusivamente para fins legítimos e autorizados. Qualquer uso não autorizado ou mal-intencionado é estritamente proibido.
+                            <br><br>
+                            #### 2. **Autorização de Acesso**<br>
+                            - Apenas usuários autorizados terão acesso ao serviço OpenVPN. A criação e o uso de contas deverão ser feitas de acordo com os procedimentos estabelecidos pela bithostel TI.
+                            <br><br>
+                            #### 3. **Uso Adequado**<br>
+                            - Os usuários devem utilizar o serviço de forma responsável e ética, respeitando todas as leis e regulamentos aplicáveis, bem como as políticas internas da bithostel TI.
+                            <br><br>
+
+                            #### 4. **Segurança e Proteção de Dados**<br>
+                            - Os usuários são responsáveis pela proteção de suas credenciais de acesso. É proibido compartilhar informações de login, senhas ou qualquer outra informação sensível relacionada ao serviço.
+                            - Qualquer atividade suspeita ou incidente de segurança deve ser relatada imediatamente à equipe de suporte da bithostel TI.
+                            <br><br>
+                            #### 5. **Atividades Proibidas**<br>
+                            - É proibido utilizar o serviço OpenVPN para:
+                            - Realizar atividades ilegais, incluindo, mas não se limitando a, hacking, distribuição de malware, ou qualquer outra atividade que viole as leis.
+                            - Acessar, transmitir ou armazenar conteúdo que seja ilegal, ofensivo, ou que infrinja direitos autorais.
+                            - Realizar ataques de negação de serviço (DDoS), spamming ou qualquer outra forma de abuso de rede.
+                            <br><br>
+                            #### 6. **Privacidade**<br>
+                            - A bithostel TI se compromete a proteger a privacidade dos usuários. Os dados de conexão podem ser registrados para fins de segurança e manutenção do serviço, mas não serão compartilhados com terceiros sem o consentimento do usuário, exceto quando exigido por lei.
+                            <br><br>
+                            #### 7. **Responsabilidade do Usuário**<br>
+                            - Os usuários são responsáveis por quaisquer atividades realizadas sob suas credenciais. É fundamental tomar precauções para garantir que o acesso ao serviço seja realizado de maneira segura.
+                            <br><br>
+                            #### 8. **Modificações nas Políticas**<br>
+                            - A bithostel TI reserva-se o direito de modificar estas políticas a qualquer momento. Notificações sobre alterações significativas serão comunicadas aos usuários.
+                            <br><br>
+                            #### 9. **Consequências pelo Não Cumprimento**<br>
+                            - O não cumprimento diretas destas políticas pode resultar em ações disciplinares, incluindo a revogação de acesso ao serviço e possíveis repercussões legais.
+                            <br><br>
+                            #### 10. **Contato para Suporte**<br>
+                            - Para dúvidas ou esclarecimentos sobre estas políticas ou sobre o uso do OpenVPN, os usuários devem entrar em contato com a equipe de suporte da bithostel TI.
+                        </p>
+
+                </div>
+            </div>
+            </section>
+            <div class="single-service-item">
+                <h2><a target="_blank" href="https://bithostel.company.site">Política de Privacidade</a></h2>
+                <p>
+
+                    Introdução
+
+                    Bem-vindo à BitHostel TI. Nós respeitamos a sua privacidade e estamos comprometidos em proteger seus dados pessoais. Esta política de privacidade informará como lidamos com seus dados pessoais quando você visita nosso site ou utiliza nossos serviços.
+                    Informações Importantes e Quem Somos
+                    Finalidade Desta Política de Privacidade
+
+                    Esta política de privacidade tem como objetivo fornecer informações sobre como a BitHostel TI coleta e processa seus dados pessoais através do uso de nosso site, incluindo quaisquer dados que você possa fornecer através deste site ao se inscrever para nossos serviços ou comprar um produto.
+                    Controlador
+
+                    A BitHostel TI é a controladora e responsável pelos seus dados pessoais (coletivamente referida como "BitHostel TI", "nós", "nos" ou "nosso" nesta política de privacidade).
+                    Os Dados Que Coletamos Sobre Você
+                    Dados Pessoais
+
+                    Dados pessoais, ou informações pessoais, significam qualquer informação sobre um indivíduo a partir da qual essa pessoa pode ser identificada. Podemos coletar, usar, armazenar e transferir diferentes tipos de dados pessoais sobre você que agrupamos da seguinte forma:
+
+                    Dados de Identidade: inclui nome, sobrenome, nome de usuário ou identificador similar.
+                    Dados de Contato: inclui endereço de cobrança, endereço de entrega, endereço de e-mail e números de telefone.
+                    Dados Financeiros: inclui detalhes de conta bancária e cartão de pagamento.
+                    Dados de Transação: inclui detalhes sobre pagamentos feitos e recebidos por você e outros detalhes de produtos e serviços que você comprou de nós.
+                    Dados Técnicos: inclui endereço de protocolo de internet (IP), seus dados de login, tipo e versão do navegador, configuração de fuso horário e localização, tipos e versões de plug-ins do navegador, sistema operacional e plataforma, e outras tecnologias nos dispositivos que você usa para acessar este site.
+                    Dados de Uso: inclui informações sobre como você usa nosso site, produtos e serviços.
+                    Dados de Marketing e Comunicações: inclui suas preferências em receber marketing de nós e suas preferências de comunicação.
+
+                    Como Seus Dados Pessoais São Coletados?
+
+                    Usamos diferentes métodos para coletar dados de e sobre você, incluindo através de:
+
+                    Interações diretas: Você pode nos fornecer seus Dados de Identidade, Contato e Financeiros preenchendo formulários ou se correspondendo conosco por correio, telefone, e-mail ou de outra forma.
+                    Tecnologias ou interações automatizadas: À medida que você interage com nosso site, podemos coletar automaticamente Dados Técnicos sobre seu equipamento, ações de navegação e padrões. Coletamos esses dados pessoais usando cookies, logs de servidor e outras tecnologias semelhantes.
+                    Terceiros ou fontes publicamente disponíveis: Podemos receber dados pessoais sobre você de várias terceiras partes e fontes públicas.
+
+                    Como Usamos Seus Dados Pessoais
+
+                    Usaremos seus dados pessoais apenas quando a lei nos permitir. Mais comumente, usaremos seus dados pessoais nas seguintes circunstâncias:
+
+                    Onde precisamos executar o contrato que estamos prestes a celebrar ou que celebramos com você.
+                    Onde for necessário para nossos interesses legítimos (ou de terceiros) e seus interesses e direitos fundamentais não se sobrepõem a esses interesses.
+                    Onde precisamos cumprir uma obrigação legal.
+
+                    Divulgações de Seus Dados Pessoais
+
+                    Podemos compartilhar seus dados pessoais com as partes indicadas abaixo para os fins estabelecidos na tabela acima:
+
+                    Prestadores de serviços que fornecem serviços de TI e administração de sistemas.
+                    Consultores profissionais, incluindo advogados, banqueiros, auditores e seguradoras que prestam serviços de consultoria, bancários, jurídicos, de seguros e de contabilidade.
+                    HM Revenue & Customs, reguladores e outras autoridades que exigem relatórios de atividades de processamento em certas circunstâncias.
+                    Terceiros a quem podemos escolher vender, transferir ou fundir partes de nosso negócio ou nossos ativos.
+
+                    Exigimos que todos os terceiros respeitem a segurança de seus dados pessoais e os tratem de acordo com a lei.
+                    Segurança dos Dados
+
+                    Implementamos medidas de segurança apropriadas para evitar que seus dados pessoais sejam acidentalmente perdidos, usados ou acessados de maneira não autorizada, alterados ou divulgados.
+                    Retenção de Dados
+
+                    Reteremos seus dados pessoais apenas pelo tempo necessário para cumprir os propósitos para os quais os coletamos, incluindo para fins de satisfazer quaisquer requisitos legais, contábeis ou de relatório.
+                    Seus Direitos Legais
+
+                    Sob certas circunstâncias, você tem direitos sob as leis de proteção de dados em relação aos seus dados pessoais, incluindo o direito de acessar, corrigir, apagar, restringir, transferir ou se opor ao processamento de seus dados pessoais.
+                    Detalhes de Contato
+
+                    Se você tiver alguma dúvida sobre esta política de privacidade ou nossas práticas de privacidade, entre em contato conosco em:
+
+                    Nome completo da entidade legal: BitHostel TI
+                    Endereço de e-mail: [Seu Email]
+                    Endereço postal: [Seu Endereço Postal]
+                    Número de telefone: [Seu Número de Telefone]
+                    Alterações a Esta Política de Privacidade
+
+                    Mantemos nossa política de privacidade sob revisão regular. Esta versão foi atualizada pela última vez em 2025-02-23.
 
-Você será informado do código para rastrear sua encomenda através do site dos correios assim que ela for postada.
+                    Por favor, verifique regularmente para ver quaisquer atualizações ou alterações em nossa política de privacidade.
+                </p>
+            </div>
 
 
-								</p>
-							</div>
-						</div>
-						<div class="col-md-4 col-sm-6">
-	<div class="single-service-item">
-								<h2><a href="#">Trocas e devoluções</a></h2>
-								<p>					
+            <div class="col-md-4 col-sm-6">
+                <div class="single-service-item">
+                    <h2><a href="#">Outros Serviços</a></h2>
+                    <p>
+                        Servidores Dedicados
+                        Servidor
+                        Virtual
+                        Data Center
+                        Virtual
+                        Colocation
+                        Gerenciado
+                        Nuvem
+                        Privada
+                        Desenvolvimento de Websites
+                        Lojas ON-LINE
+                    </p>
+                </div>
+            </div>
 
 
-Condições de Devolução
+            <div class="col-md-4 col-sm-6">
+                <div class="single-service-item">
+                    <h2><a href="#">Nossos computadores</a></h2>
+                    <p>
+                        Temos transparência total em nossos produtos. Todas as características e especificações estão informadas e listadas.</p>
+                </div>
 
-A mercadoria deverá retornar nas mesmas condições em que foi lhe foi entregue, ou seja: Lacres intactos do fabricante e/ou bithostel TI embalagem original em perfeitas condições e completa com todos os manuais, acessórios, CDs, cabos e quaisquer outros itens que façam parte do produto. É importante ressaltar que a caixa do produto também deve ser preservada em perfeitas condições, isto é, a embalagem não pode estar danificada ou violada. Esclarece-se que o produto NÃO PODE TER SIDO USADO.
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="single-service-item">
+                    <h2><a href="#">Método de ENVIO</a></h2>
+                    <p>
 
-Situações Possíveis de Retorno da Mercadoria
+                        Envio para todo BRASIL !
+                        - Método de retirada
+                        Retirada no local
+                        Local de retirada
+                        bithostel TI, Rua Frei Francisco Sampaio, 283 APTO 44, Santos-São Paulo,11035-105, Brasil
+                        Horário de funcionamento
+                        9:00-18:00 Seg-Sex
 
-Existem quatro hipóteses em que a mercadoria pode ser devolvida:
+                        Todos os produtos serão enviados de acordo com a forma escolhida pelo cliente, em até 2 dias úteis da confirmação do pagamento. O prazo para a entrega varia de acordo com a forma de envio escolhida e não é de nossa responsabilidade, ,já que a entrega fica a cargo dos Correios.
 
-A. Produto avariado
-B. Produto em desacordo com o pedido
-C. Desistência da compra (Prazo de 07 dias – Conforme art. 49 do Código de Defesa do Consumidor. O produto deverá ser devolvido nas mesmas condições no qual foi entregue, ou seja, lacrado e sem nenhum sinal de uso. A devolução por arrependimento só será aceita dentro destas condições.)
-D. Produto com defeito técnico ou de fabricação
+                        Você será informado do código para rastrear sua encomenda através do site dos correios assim que ela for postada.
 
-OBS: Todas as devoluções deverão ser previamente autorizadas por nosso setor técnico responsável. É importante ressaltar que para cada situação de Retorno haverá um Prazo; sendo 48 horas para Produto Avariado (item A) ou Produto em Desacordo com o Pedido (item B), 07 dias para Desistência da Compra (item C) e no caso de Produtos que apresentem Defeitos (item D) deverá ser consultado o prazo de garantia especificada na Nota Fiscal.
 
-Como obter a autorização para retorno de mercadoria
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="single-service-item">
+                    <h2><a href="#">Trocas e devoluções</a></h2>
+                    <p>
 
-O cliente poderá solicitar troca ou devolução no próprio site da bithostel TI, através de seu Login, acessando o link “Minha Conta”, selecionando a opção “Deu problema? Acione a Garantia”, Pedidos (cujo produto em questão, esteja relacionado), Produto que deseja obter autorização de retorno. Ao realizar este procedimento será gerado um protocolo, sobre qual o setor de RMA (Autorização de retorno de Mercadoria) entrará em contato com o cliente, formalizando ou não um código de autorização relativo ao retorno.
 
-Qualquer que seja o motivo do retorno da mercadoria, esta deverá regressar à loja com todos os componentes, na embalagem original, com manuais, CDs de instalação, cabos, etc, tendo o protocolo de autorização e remetente facilmente visíveis na parte exterior embalagem.
+                        Condições de Devolução
 
-A autorização tem prazo de validade de 7 dias, sendo este o prazo máximo e não renovável para postagem do produto no correio. Caso o produto não seja recebido neste prazo, a autorização perde seu efeito e uma nova deverá ser requerida.
+                        A mercadoria deverá retornar nas mesmas condições em que foi lhe foi entregue, ou seja: Lacres intactos do fabricante e/ou bithostel TI embalagem original em perfeitas condições e completa com todos os manuais, acessórios, CDs, cabos e quaisquer outros itens que façam parte do produto. É importante ressaltar que a caixa do produto também deve ser preservada em perfeitas condições, isto é, a embalagem não pode estar danificada ou violada. Esclarece-se que o produto NÃO PODE TER SIDO USADO.
 
-Esclarecemos que no caso de devolução por defeito no produto, mesmo sendo a solicitação realizada dentro do prazo previsto para devolução por arrependimento da compra, a bithostel TI reserva-se o direito de providenciar o conserto do produto, nos termos do Código de Defesa do Consumidor.
+                        Situações Possíveis de Retorno da Mercadoria
 
-A) Produto Avariado
+                        Existem quatro hipóteses em que a mercadoria pode ser devolvida:
 
-O cliente deverá ficar atento no ato da entrega, recusando imediatamente o produto ou a embalagem que estiver sido avariada no transporte, devendo então entrar em contato com o nosso SAC ou Minha Conta, no prazo Maximo de 48 horas* para acionar a Garantia (ver item 2.3 e selecionar “Dano físico”). *Todos os pedidos possuem um código de rastreamento indicando onde e quando o Produto foi entregue. Solicitações de avaria não serão aceitas fora do prazo.
+                        A. Produto avariado
+                        B. Produto em desacordo com o pedido
+                        C. Desistência da compra (Prazo de 07 dias – Conforme art. 49 do Código de Defesa do Consumidor. O produto deverá ser devolvido nas mesmas condições no qual foi entregue, ou seja, lacrado e sem nenhum sinal de uso. A devolução por arrependimento só será aceita dentro destas condições.)
+                        D. Produto com defeito técnico ou de fabricação
 
-A troca por um outro produto igual ao descrito em sua nota fiscal, será efetivada somente após o recebimento e análise das condições do produto devolvido. Constatada qualquer divergência como ausência de avaria, indícios de mau uso ou ausência de manual/acessórios, a bithostel TI fica isenta de aceitar a devolução e fazer a troca, podendo reenviar o produto ao cliente sem prévia consulta. Portanto, para sua segurança, certifique-se no ato da entrega se o produto foi avariado durante o transporte.
+                        OBS: Todas as devoluções deverão ser previamente autorizadas por nosso setor técnico responsável. É importante ressaltar que para cada situação de Retorno haverá um Prazo; sendo 48 horas para Produto Avariado (item A) ou Produto em Desacordo com o Pedido (item B), 07 dias para Desistência da Compra (item C) e no caso de Produtos que apresentem Defeitos (item D) deverá ser consultado o prazo de garantia especificada na Nota Fiscal.
 
-Depois de analisadas as condições do produto devolvido e constatadas as perfeitas condições do mesmo, a bithostel TI enviará um novo produto ao cliente.
+                        Como obter a autorização para retorno de mercadoria
 
-B) Produto em desacordo com o pedido
+                        O cliente poderá solicitar troca ou devolução no próprio site da bithostel TI, através de seu Login, acessando o link “Minha Conta”, selecionando a opção “Deu problema? Acione a Garantia”, Pedidos (cujo produto em questão, esteja relacionado), Produto que deseja obter autorização de retorno. Ao realizar este procedimento será gerado um protocolo, sobre qual o setor de RMA (Autorização de retorno de Mercadoria) entrará em contato com o cliente, formalizando ou não um código de autorização relativo ao retorno.
 
-Caso o cliente detecte no ato da entrega que o produto encomendado e o produto adquirido são diferentes, ele deverá recusar a entrega imediatamente, se aceitou a encomenda sem observar a descrição da Nota Fiscal, o prazo para entrar em contato com o nosso SAC e acionar a Garantia (ver item 2.3 e selecionar “Dano Físico/Desacordo”) será de 48 horas. Solicitações fora desse prazo não serão aceitas, pois será considerado que o consumidor aceitou o produto enviado.
+                        Qualquer que seja o motivo do retorno da mercadoria, esta deverá regressar à loja com todos os componentes, na embalagem original, com manuais, CDs de instalação, cabos, etc, tendo o protocolo de autorização e remetente facilmente visíveis na parte exterior embalagem.
 
-Constatado qualquer desacordo, como ausência de divergência entre o produto adquirido e produto entregue, indícios de mau uso ou ausência de manual/acessórios,a bithostel TI fica isenta de aceitar a devolução e fazer a troca, podendo reenviar o produto ao cliente sem prévia consulta por frete a pagar. Portanto, para sua segurança, certifique-se no ato da entrega se o produto entregue é igual ao produto adquirido, basta confrontar o e-mail de confirmação de compra com os dados da embalagem.
+                        A autorização tem prazo de validade de 7 dias, sendo este o prazo máximo e não renovável para postagem do produto no correio. Caso o produto não seja recebido neste prazo, a autorização perde seu efeito e uma nova deverá ser requerida.
 
-Depois de analisadas as condições do produto devolvido e constatadas as perfeitas condições do mesmo, a bithostel TI enviará o produto correto ao cliente.
+                        Esclarecemos que no caso de devolução por defeito no produto, mesmo sendo a solicitação realizada dentro do prazo previsto para devolução por arrependimento da compra, a bithostel TI reserva-se o direito de providenciar o conserto do produto, nos termos do Código de Defesa do Consumidor.
 
-C) Desistência da Compra
+                        A) Produto Avariado
 
-Na hipótese de desistência da compra, conforme previsto no Artigo 49 do Código de Defesa do Consumidor (CDC - Lei 8.078 de 11/Set/1990), restrita apenas às compras efetuadas pelo site bithostel TI, o cliente terá a opção de devolver a mercadoria no prazo de até 07 dias corridos do recebimento, respeitando requisitos dos itens 1.2 e 2.1.
+                        O cliente deverá ficar atento no ato da entrega, recusando imediatamente o produto ou a embalagem que estiver sido avariada no transporte, devendo então entrar em contato com o nosso SAC ou Minha Conta, no prazo Maximo de 48 horas* para acionar a Garantia (ver item 2.3 e selecionar “Dano físico”). *Todos os pedidos possuem um código de rastreamento indicando onde e quando o Produto foi entregue. Solicitações de avaria não serão aceitas fora do prazo.
 
-O cliente deverá enviar a 2ª via da nota fiscal (Pessoa Física), sendo aceito também a declaração de compra. Descreva, no verso, o motivo de sua solicitação de devolução. Em caso de cliente pessoa jurídica (CNPJ), a empresa deverá emitir uma nota fiscal de devolução (apenas dos produtos que apresentarem problemas) com os mesmos dados da nota fiscal de compra (modelo do produto, alíquotas de impostos, etc.) que foi enviada por nossa empresa juntamente com o pedido de compra. Caso esta pessoa jurídica não seja emissora de nota fiscal (como escolas, instituições, etc.), enviar umas das vias da nota fiscal de compra juntamente com uma declaração informando os produtos que estão sendo devolvidos e o motivo da devolução. O cliente irá receber uma restituição no valor dos produtos, desde que esteja dentro do prazo estabelecido pelo Código de Defesa do Consumidor.
+                        A troca por um outro produto igual ao descrito em sua nota fiscal, será efetivada somente após o recebimento e análise das condições do produto devolvido. Constatada qualquer divergência como ausência de avaria, indícios de mau uso ou ausência de manual/acessórios, a bithostel TI fica isenta de aceitar a devolução e fazer a troca, podendo reenviar o produto ao cliente sem prévia consulta. Portanto, para sua segurança, certifique-se no ato da entrega se o produto foi avariado durante o transporte.
 
-A restituição do valor será providenciada somente após o recebimento e análise das condições do produto devolvido. A bithostel TI terá o prazo de 30 dias após a confirmação da constatação do defeito pelos nossos técnicos para:
+                        Depois de analisadas as condições do produto devolvido e constatadas as perfeitas condições do mesmo, a bithostel TI enviará um novo produto ao cliente.
 
-1- Inserir crédito no valor do produto, incluindo o valor do frete, o qual o cliente poderá utilizar de uma só vez para adquirir qualquer outro produto.
-2- Estornar o valor do produto, incluindo o valor do frete, observando que:
-a- Em compras pagas no cartão de crédito, o estorno ocorrerá em até 2 (duas) faturas subseqüentes. Este procedimento é de inteira responsabilidade da administradora do seu cartão.
-b- Em compras pagas através de boleto bancário e cartão de débito, a restituição será efetuada via depósito, transferência, TED ou ordem de pagamento na conta corrente indicada pelo cliente. Esta devolução poderá ser feita em até 10 dias úteis.
+                        B) Produto em desacordo com o pedido
 
-Caso fique constatado que o cliente não cumpriu com as condições de devolução ou perdeu a garantia do produto, o mesmo será devolvido sem prévia comunicação por frete a cobrar.
+                        Caso o cliente detecte no ato da entrega que o produto encomendado e o produto adquirido são diferentes, ele deverá recusar a entrega imediatamente, se aceitou a encomenda sem observar a descrição da Nota Fiscal, o prazo para entrar em contato com o nosso SAC e acionar a Garantia (ver item 2.3 e selecionar “Dano Físico/Desacordo”) será de 48 horas. Solicitações fora desse prazo não serão aceitas, pois será considerado que o consumidor aceitou o produto enviado.
 
-D) Devolução de produtos com defeito
+                        Constatado qualquer desacordo, como ausência de divergência entre o produto adquirido e produto entregue, indícios de mau uso ou ausência de manual/acessórios,a bithostel TI fica isenta de aceitar a devolução e fazer a troca, podendo reenviar o produto ao cliente sem prévia consulta por frete a pagar. Portanto, para sua segurança, certifique-se no ato da entrega se o produto entregue é igual ao produto adquirido, basta confrontar o e-mail de confirmação de compra com os dados da embalagem.
 
-Na hipótese do produto apresentar defeito de fabricação, o mesmo deverá retornar à loja para manutenção e/ou troca. É o exercício da garantia em si, portanto, é necessário que o defeito apresentado seja comunicado oficialmente à bithostel TI dentro do respectivo prazo estabelecido para cada produto, conforme descrito na nota fiscal. A partir do recebimento da mercadoria,a bithostel TI terá o prazo de 30 dias (conforme art. 18 CDC) para efetuar testes para confirmação do defeito apontado. O cliente será contatado o mais breve possível no sentido de lhe informar o resultado dos testes e a previsão de disponibilidade do produto reparado ou trocado.
+                        Depois de analisadas as condições do produto devolvido e constatadas as perfeitas condições do mesmo, a bithostel TI enviará o produto correto ao cliente.
 
-Único - Após os 7 dias do recebimento, o cliente deverá observar se o produto possui garantia autorizada do fabricante/fornecedor, caso exista sua troca ou manutenção devem ser feitas diretamente com o fabricante ou na assistência técnica por ele indicada, mediante apresentação da Nota Fiscal e o Termo de Garantia fornecido pelo próprio fabricante. A mercadoria deve ser enviada nas mesmas condições em que saiu da loja, na embalagem original, completa, com todos os cabos, manuais, cds e acessórios que fazem parte do conjunto.
+                        C) Desistência da Compra
 
-ATENÇÃO: É de inteira responsabilidade do cliente a execução prévia de cópias de segurança de quaisquer programas ou dados que julgue necessários para a reinstalação do software e arquivos do disco rígido ou outras mídias, se for o caso.
+                        Na hipótese de desistência da compra, conforme previsto no Artigo 49 do Código de Defesa do Consumidor (CDC - Lei 8.078 de 11/Set/1990), restrita apenas às compras efetuadas pelo site bithostel TI, o cliente terá a opção de devolver a mercadoria no prazo de até 07 dias corridos do recebimento, respeitando requisitos dos itens 1.2 e 2.1.
 
-Pensando em melhor atender as necessidades de seus CLIENTES, a bithostel TI, fornece aos mesmos a Garantia estendida conforme especificado em Nota Fiscal além dos 3 meses inclusos da Garantia legal (art. 18 CDC).
+                        O cliente deverá enviar a 2ª via da nota fiscal (Pessoa Física), sendo aceito também a declaração de compra. Descreva, no verso, o motivo de sua solicitação de devolução. Em caso de cliente pessoa jurídica (CNPJ), a empresa deverá emitir uma nota fiscal de devolução (apenas dos produtos que apresentarem problemas) com os mesmos dados da nota fiscal de compra (modelo do produto, alíquotas de impostos, etc.) que foi enviada por nossa empresa juntamente com o pedido de compra. Caso esta pessoa jurídica não seja emissora de nota fiscal (como escolas, instituições, etc.), enviar umas das vias da nota fiscal de compra juntamente com uma declaração informando os produtos que estão sendo devolvidos e o motivo da devolução. O cliente irá receber uma restituição no valor dos produtos, desde que esteja dentro do prazo estabelecido pelo Código de Defesa do Consumidor.
 
-É importante esclarecer que há diferença entre ambas as Garantias, como observaremos a seguir.
+                        A restituição do valor será providenciada somente após o recebimento e análise das condições do produto devolvido. A bithostel TI terá o prazo de 30 dias após a confirmação da constatação do defeito pelos nossos técnicos para:
 
-Quando o produto apresentar defeito dentro dos 3 primeiros meses, e sendo este confirmado através de testes realizados em nosso departamento técnico, contactaremos o cliente o mais breve possível no sentido de lhe informar o resultado dos testes e a previsão de disponibilidade do produto reparado ou trocado.
+                        1- Inserir crédito no valor do produto, incluindo o valor do frete, o qual o cliente poderá utilizar de uma só vez para adquirir qualquer outro produto.
+                        2- Estornar o valor do produto, incluindo o valor do frete, observando que:
+                        a- Em compras pagas no cartão de crédito, o estorno ocorrerá em até 2 (duas) faturas subseqüentes. Este procedimento é de inteira responsabilidade da administradora do seu cartão.
+                        b- Em compras pagas através de boleto bancário e cartão de débito, a restituição será efetuada via depósito, transferência, TED ou ordem de pagamento na conta corrente indicada pelo cliente. Esta devolução poderá ser feita em até 10 dias úteis.
 
-Lembramos que, conforme o CDC/art18, a bithostel TI tem um prazo de 30 dias para a solução do problema apresentado. Se até o final desse prazo a loja não tiver condições de consertar ou repor, o cliente poderá optar entre:
+                        Caso fique constatado que o cliente não cumpriu com as condições de devolução ou perdeu a garantia do produto, o mesmo será devolvido sem prévia comunicação por frete a cobrar.
 
-1. Solicitar a restituição do valor pago pelo produto
-2. Negociar um abatimento no preço do produto defeituoso.
-3. Inserção de créditos no login no valor total do produto.
-4. Negociar um novo prazo para o conserto
-Já nos casos em que o vicio ocorrer após os 90 dias garantidos legalmente, a bithostel TI garantirá o serviço de reparo (mão de obra e peças originais), necessário para garantir seu perfeito funcionamento e uso.
+                        D) Devolução de produtos com defeito
 
-Ressaltamos que nos casos de impossibilidade de reparo, a bithostel TI, a seu exclusivo critério, substituirá o bem por um outro de mesma marca e modelo ou ainda por um modelo equivalente, mesmo que de outro fabricante, créditos no LOGIN ou restituição do valor pago.
+                        Na hipótese do produto apresentar defeito de fabricação, o mesmo deverá retornar à loja para manutenção e/ou troca. É o exercício da garantia em si, portanto, é necessário que o defeito apresentado seja comunicado oficialmente à bithostel TI dentro do respectivo prazo estabelecido para cada produto, conforme descrito na nota fiscal. A partir do recebimento da mercadoria,a bithostel TI terá o prazo de 30 dias (conforme art. 18 CDC) para efetuar testes para confirmação do defeito apontado. O cliente será contatado o mais breve possível no sentido de lhe informar o resultado dos testes e a previsão de disponibilidade do produto reparado ou trocado.
 
-Importante: A reposição ou conserto de um produto não se constitui em nova compra, não sendo, portanto, motivo de extensão ou renovação do prazo de garantia estipulado na nota fiscal. Esta, porém, deverá ser estendida ao mínimo de 90 dias, quando a garantia "restante", contada a partir da data de compra, for menor que 90 dias.
+                        Único - Após os 7 dias do recebimento, o cliente deverá observar se o produto possui garantia autorizada do fabricante/fornecedor, caso exista sua troca ou manutenção devem ser feitas diretamente com o fabricante ou na assistência técnica por ele indicada, mediante apresentação da Nota Fiscal e o Termo de Garantia fornecido pelo próprio fabricante. A mercadoria deve ser enviada nas mesmas condições em que saiu da loja, na embalagem original, completa, com todos os cabos, manuais, cds e acessórios que fazem parte do conjunto.
 
-D.1) Custos de Envio de Produtos Defeituosos
+                        ATENÇÃO: É de inteira responsabilidade do cliente a execução prévia de cópias de segurança de quaisquer programas ou dados que julgue necessários para a reinstalação do software e arquivos do disco rígido ou outras mídias, se for o caso.
 
-Todos os custos de transporte do produto entre bithostel TI e CLIENTE são de responsabilidade do CLIENTE, exceto no caso em que a loja lhe reenvia um produto que comprovadamente apresentou defeito de fabricação e que foi consertado, de acordo com as cláusulas deste Termo de Garantia. Neste caso, a modalidade de envio será a ENCOMENDA NORMAL cujo prazo de entrega geralmente varia de 3 a 10 dias úteis. Assim sendo, produtos que não apresentarem defeito, mesmo que sejam incompatíveis com o hardware do cliente não terão seu frete de retorno pagos pela bithostel TI. Caso o cliente tenha urgência no reenvio ele pode solicitar a modalidade de frete expresso, arcando, porém, com os custos de postagem adicionais.
+                        Pensando em melhor atender as necessidades de seus CLIENTES, a bithostel TI, fornece aos mesmos a Garantia estendida conforme especificado em Nota Fiscal além dos 3 meses inclusos da Garantia legal (art. 18 CDC).
 
-Por isso é importante que o cliente tenha certeza de que o produto adquirido apresenta defeito.
-</p>
-							</div>
+                        É importante esclarecer que há diferença entre ambas as Garantias, como observaremos a seguir.
 
-						</div>
-					<div class="col-md-4 col-sm-6">
-	<div class="single-service-item">
-								<h2><a href="#">	
-Tempo de Garantia</a></h2>
-								<p>					
+                        Quando o produto apresentar defeito dentro dos 3 primeiros meses, e sendo este confirmado através de testes realizados em nosso departamento técnico, contactaremos o cliente o mais breve possível no sentido de lhe informar o resultado dos testes e a previsão de disponibilidade do produto reparado ou trocado.
 
+                        Lembramos que, conforme o CDC/art18, a bithostel TI tem um prazo de 30 dias para a solução do problema apresentado. Se até o final desse prazo a loja não tiver condições de consertar ou repor, o cliente poderá optar entre:
 
-Todas as garantias são dadas pelos fabricantes, e variam de produto para produto. Elas serão informadas nas páginas de cada produto. Caso tenha alguma dúvida, entre em contato conosco.
+                        1. Solicitar a restituição do valor pago pelo produto
+                        2. Negociar um abatimento no preço do produto defeituoso.
+                        3. Inserção de créditos no login no valor total do produto.
+                        4. Negociar um novo prazo para o conserto
+                        Já nos casos em que o vicio ocorrer após os 90 dias garantidos legalmente, a bithostel TI garantirá o serviço de reparo (mão de obra e peças originais), necessário para garantir seu perfeito funcionamento e uso.
 
-Para devoluções, os produtos deverão ser remetidos em suas embalagens originais e caso for constatado mal uso, o custo será por parte do comprador.
-</p>
-							</div></div>
+                        Ressaltamos que nos casos de impossibilidade de reparo, a bithostel TI, a seu exclusivo critério, substituirá o bem por um outro de mesma marca e modelo ou ainda por um modelo equivalente, mesmo que de outro fabricante, créditos no LOGIN ou restituição do valor pago.
 
-						<div class="col-md-4 col-sm-6">
-	<div class="single-service-item">
-								<h2><a href="#">Políticas Gerais</a></h2>
-								<p>					
-							
+                        Importante: A reposição ou conserto de um produto não se constitui em nova compra, não sendo, portanto, motivo de extensão ou renovação do prazo de garantia estipulado na nota fiscal. Esta, porém, deverá ser estendida ao mínimo de 90 dias, quando a garantia "restante", contada a partir da data de compra, for menor que 90 dias.
 
+                        D.1) Custos de Envio de Produtos Defeituosos
 
+                        Todos os custos de transporte do produto entre bithostel TI e CLIENTE são de responsabilidade do CLIENTE, exceto no caso em que a loja lhe reenvia um produto que comprovadamente apresentou defeito de fabricação e que foi consertado, de acordo com as cláusulas deste Termo de Garantia. Neste caso, a modalidade de envio será a ENCOMENDA NORMAL cujo prazo de entrega geralmente varia de 3 a 10 dias úteis. Assim sendo, produtos que não apresentarem defeito, mesmo que sejam incompatíveis com o hardware do cliente não terão seu frete de retorno pagos pela bithostel TI. Caso o cliente tenha urgência no reenvio ele pode solicitar a modalidade de frete expresso, arcando, porém, com os custos de postagem adicionais.
 
-Políticas Gerais
+                        Por isso é importante que o cliente tenha certeza de que o produto adquirido apresenta defeito.
+                    </p>
+                </div>
 
-GARANTIA
-A empresa bithostel TI assegura garantia contra defeito de fabricação de todos os produtos adquiridos na empresa, durante o período de cobertura, salvo se os produtos possuírem assistência técnica do fabricante, conforme especificado na nota fiscal. Os prazos de garantia dos produtos já incluem a garantia legal, conforme Art.50 do Código de Defesa do Consumidor.
+            </div>
+            <div class="col-md-4 col-sm-6">
+                <div class="single-service-item">
+                    <h2><a href="#">
+                            Tempo de Garantia</a></h2>
+                    <p>
 
 
-A GARANTIA NÃO ABRANGE
-Bens não adquiridos no site da bithostel TI;
-Defeito do PRODUTO quando operado em condições para as quais ele não está preparado;
-Custo de instalação, montagem ou colocação do PRODUTO, bem como os defeitos causados pela má instalação, colocação ou erros na montagem do PRODUTO;
-Custo de conserto do PRODUTO durante o período de cobertura da garantia do fabricante, independentemente do fabricante honrar ou não tal garantia, por força de lei, condenação judicial ou não;
-Programas aplicativos, sistemas operacionais, ou qualquer outro software. A responsabilidade de fazer back-up é do CLIENTE;
-Defeitos ocasionados por falhas ou erros durante ou após atualizações de firmware.
-Casos de mau funcionamento do produto por falha na configuração de software ou drives.
-Conserto ou reposição de peças onde normalmente há desgaste natural ou troca periódica durante o tempo de vida do PRODUTO; por ex: adaptadores de força, cabos elétricos, cabeçotes laser de aparelhos de CDs, acessórios, vidros de proteção, fusíveis internos, pilhas ou baterias internas ou externas, fitas, cartuchos; Abuso ou mau uso, imprudência ou negligência;
-Perda ou dano ocasionado por força maior ou caso fortuito;
-Carregadores de bateria, controles remotos, bem como quaisquer tipos de transformadores externos ou estabilizadores de voltagem e outros acessórios externos ao PRODUTO;
+                        Todas as garantias são dadas pelos fabricantes, e variam de produto para produto. Elas serão informadas nas páginas de cada produto. Caso tenha alguma dúvida, entre em contato conosco.
 
+                        Para devoluções, os produtos deverão ser remetidos em suas embalagens originais e caso for constatado mal uso, o custo será por parte do comprador.
+                    </p>
+                </div>
+            </div>
 
-Perda de Garantia A garantia bithostel TI cobre apenas defeitos de fabricação. Logo, haverá perda total de garantia em qualquer das hipóteses abaixo:
+            <div class="col-md-4 col-sm-6">
+                <div class="single-service-item">
+                    <h2><a href="#">Políticas Gerais</a></h2>
+                    <p>
 
 
-Retirada ou violação dos selos de garantia ou identificação da bithostel TI e/ou fabricante.
-Violação, modificação, troca de componentes, ajustes ou conserto feito por pessoal não autorizado formalmente (por escrito) pela bithostel TI.
-Serviços solicitados e/ou executados diretamente pelo CLIENTE sem prévio consentimento da bithostel TI e/ou Fabricante;
-Manuseio incorreto em desacordo com o manual ou com indício de descuido.
-Uso de acessórios, componentes ou sistemas não originais ou não recomendados não aprovados pelo fabricante.
-Transporte inadequado expondo o produto a trepidações, umidade, quedas, calor ou excesso de peso sobre a peça ou embalagem.
-Danos físicos (amassados, arranhões, manuscritos, descaracterização, componentes queimados por descarga elétrica ou excesso de voltagem, danos decorrentes de exposição excessiva ao calor, fogo ou umidade, placas ou processadores queimados, trincados ou lascados).
-Danos causados por vírus.
-Qualquer outro defeito que não seja classificado como defeito de fabricação.
 
-TROCAS E DEVOLUÇÕES
-Condições de Devolução
+                        Políticas Gerais
 
+                        GARANTIA
+                        A empresa bithostel TI assegura garantia contra defeito de fabricação de todos os produtos adquiridos na empresa, durante o período de cobertura, salvo se os produtos possuírem assistência técnica do fabricante, conforme especificado na nota fiscal. Os prazos de garantia dos produtos já incluem a garantia legal, conforme Art.50 do Código de Defesa do Consumidor.
 
-A mercadoria deverá retornar nas mesmas condições em que foi lhe foi entregue, ou seja: Lacres intactos do fabricante e/ou bithostel TI embalagem original em perfeitas condições e completa com todos os manuais, acessórios, CDs, cabos e quaisquer outros itens que façam parte do produto. É importante ressaltar que a caixa do produto também deve ser preservada em perfeitas condições, isto é, a embalagem não pode estar danificada ou violada. Esclarece-se que o produto NÃO PODE TER SIDO USADO.
 
+                        A GARANTIA NÃO ABRANGE
+                        Bens não adquiridos no site da bithostel TI;
+                        Defeito do PRODUTO quando operado em condições para as quais ele não está preparado;
+                        Custo de instalação, montagem ou colocação do PRODUTO, bem como os defeitos causados pela má instalação, colocação ou erros na montagem do PRODUTO;
+                        Custo de conserto do PRODUTO durante o período de cobertura da garantia do fabricante, independentemente do fabricante honrar ou não tal garantia, por força de lei, condenação judicial ou não;
+                        Programas aplicativos, sistemas operacionais, ou qualquer outro software. A responsabilidade de fazer back-up é do CLIENTE;
+                        Defeitos ocasionados por falhas ou erros durante ou após atualizações de firmware.
+                        Casos de mau funcionamento do produto por falha na configuração de software ou drives.
+                        Conserto ou reposição de peças onde normalmente há desgaste natural ou troca periódica durante o tempo de vida do PRODUTO; por ex: adaptadores de força, cabos elétricos, cabeçotes laser de aparelhos de CDs, acessórios, vidros de proteção, fusíveis internos, pilhas ou baterias internas ou externas, fitas, cartuchos; Abuso ou mau uso, imprudência ou negligência;
+                        Perda ou dano ocasionado por força maior ou caso fortuito;
+                        Carregadores de bateria, controles remotos, bem como quaisquer tipos de transformadores externos ou estabilizadores de voltagem e outros acessórios externos ao PRODUTO;
 
-Situações Possíveis de Retorno da Mercadoria
-Existem quatro hipóteses em que a mercadoria pode ser devolvida:
-A. Produto avariado
-B. Produto em desacordo com o pedido
-C. Desistência da compra (Prazo de 07 dias – Conforme art. 49 do Código de Defesa do Consumidor. O produto deverá ser devolvido nas mesmas condições no qual foi entregue, ou seja, lacrado e sem nenhum sinal de uso. A devolução por arrependimento só será aceita dentro destas condições.)
-D. Produto com defeito técnico ou de fabricação
 
-OBS: Todas as devoluções deverão ser previamente autorizadas por nosso setor técnico responsável. É importante ressaltar que para cada situação de Retorno haverá um Prazo; sendo 48 horas para Produto Avariado (item A) ou Produto em Desacordo com o Pedido (item B), 07 dias para Desistência da Compra (item C) e no caso de Produtos que apresentem Defeitos (item D) deverá ser consultado o prazo de garantia especificada na Nota Fiscal.
+                        Perda de Garantia A garantia bithostel TI cobre apenas defeitos de fabricação. Logo, haverá perda total de garantia em qualquer das hipóteses abaixo:
 
-Como obter a autorização para retorno de mercadoria
 
+                        Retirada ou violação dos selos de garantia ou identificação da bithostel TI e/ou fabricante.
+                        Violação, modificação, troca de componentes, ajustes ou conserto feito por pessoal não autorizado formalmente (por escrito) pela bithostel TI.
+                        Serviços solicitados e/ou executados diretamente pelo CLIENTE sem prévio consentimento da bithostel TI e/ou Fabricante;
+                        Manuseio incorreto em desacordo com o manual ou com indício de descuido.
+                        Uso de acessórios, componentes ou sistemas não originais ou não recomendados não aprovados pelo fabricante.
+                        Transporte inadequado expondo o produto a trepidações, umidade, quedas, calor ou excesso de peso sobre a peça ou embalagem.
+                        Danos físicos (amassados, arranhões, manuscritos, descaracterização, componentes queimados por descarga elétrica ou excesso de voltagem, danos decorrentes de exposição excessiva ao calor, fogo ou umidade, placas ou processadores queimados, trincados ou lascados).
+                        Danos causados por vírus.
+                        Qualquer outro defeito que não seja classificado como defeito de fabricação.
 
-O cliente poderá solicitar troca ou devolução no próprio site da bithostel TI, através de seu Login, acessando o link “Minha Conta”, selecionando a opção “Deu problema? Acione a Garantia”, Pedidos (cujo produto em questão, esteja relacionado), Produto que deseja obter autorização de retorno. Ao realizar este procedimento será gerado um protocolo, sobre qual o setor de RMA (Autorização de retorno de Mercadoria) entrará em contato com o cliente, formalizando ou não um código de autorização relativo ao retorno.
+                        TROCAS E DEVOLUÇÕES
+                        Condições de Devolução
 
-Qualquer que seja o motivo do retorno da mercadoria, esta deverá regressar à loja com todos os componentes, na embalagem original, com manuais, CDs de instalação, cabos, etc, tendo o protocolo de autorização e remetente facilmente visíveis na parte exterior embalagem.
 
-A autorização tem prazo de validade de 7 dias, sendo este o prazo máximo e não renovável para postagem do produto no correio. Caso o produto não seja recebido neste prazo, a autorização perde seu efeito e uma nova deverá ser requerida.
+                        A mercadoria deverá retornar nas mesmas condições em que foi lhe foi entregue, ou seja: Lacres intactos do fabricante e/ou bithostel TI embalagem original em perfeitas condições e completa com todos os manuais, acessórios, CDs, cabos e quaisquer outros itens que façam parte do produto. É importante ressaltar que a caixa do produto também deve ser preservada em perfeitas condições, isto é, a embalagem não pode estar danificada ou violada. Esclarece-se que o produto NÃO PODE TER SIDO USADO.
 
-Esclarecemos que no caso de devolução por defeito no produto, mesmo sendo a solicitação realizada dentro do prazo previsto para devolução por arrependimento da compra, a bithostel TI reserva-se o direito de providenciar o conserto do produto, nos termos do Código de Defesa do Consumidor.
 
-A) Produto Avariado
+                        Situações Possíveis de Retorno da Mercadoria
+                        Existem quatro hipóteses em que a mercadoria pode ser devolvida:
+                        A. Produto avariado
+                        B. Produto em desacordo com o pedido
+                        C. Desistência da compra (Prazo de 07 dias – Conforme art. 49 do Código de Defesa do Consumidor. O produto deverá ser devolvido nas mesmas condições no qual foi entregue, ou seja, lacrado e sem nenhum sinal de uso. A devolução por arrependimento só será aceita dentro destas condições.)
+                        D. Produto com defeito técnico ou de fabricação
 
+                        OBS: Todas as devoluções deverão ser previamente autorizadas por nosso setor técnico responsável. É importante ressaltar que para cada situação de Retorno haverá um Prazo; sendo 48 horas para Produto Avariado (item A) ou Produto em Desacordo com o Pedido (item B), 07 dias para Desistência da Compra (item C) e no caso de Produtos que apresentem Defeitos (item D) deverá ser consultado o prazo de garantia especificada na Nota Fiscal.
 
-O cliente deverá ficar atento no ato da entrega, recusando imediatamente o produto ou a embalagem que estiver sido avariada no transporte, devendo então entrar em contato com o nosso SAC ou Minha Conta, no prazo Maximo de 48 horas* para acionar a Garantia (ver item 2.3 e selecionar “Dano físico”). *Todos os pedidos possuem um código de rastreamento indicando onde e quando o Produto foi entregue. Solicitações de avaria não serão aceitas fora do prazo.
+                        Como obter a autorização para retorno de mercadoria
 
-A troca por um outro produto igual ao descrito em sua nota fiscal, será efetivada somente após o recebimento e análise das condições do produto devolvido. Constatada qualquer divergência como ausência de avaria, indícios de mau uso ou ausência de manual/acessórios, a bithostel TI fica isenta de aceitar a devolução e fazer a troca, podendo reenviar o produto ao cliente sem prévia consulta. Portanto, para sua segurança, certifique-se no ato da entrega se o produto foi avariado durante o transporte.
 
-Depois de analisadas as condições do produto devolvido e constatadas as perfeitas condições do mesmo, a bithostel TI enviará um novo produto ao cliente.
+                        O cliente poderá solicitar troca ou devolução no próprio site da bithostel TI, através de seu Login, acessando o link “Minha Conta”, selecionando a opção “Deu problema? Acione a Garantia”, Pedidos (cujo produto em questão, esteja relacionado), Produto que deseja obter autorização de retorno. Ao realizar este procedimento será gerado um protocolo, sobre qual o setor de RMA (Autorização de retorno de Mercadoria) entrará em contato com o cliente, formalizando ou não um código de autorização relativo ao retorno.
 
-B) Produto em desacordo com o pedido
+                        Qualquer que seja o motivo do retorno da mercadoria, esta deverá regressar à loja com todos os componentes, na embalagem original, com manuais, CDs de instalação, cabos, etc, tendo o protocolo de autorização e remetente facilmente visíveis na parte exterior embalagem.
 
+                        A autorização tem prazo de validade de 7 dias, sendo este o prazo máximo e não renovável para postagem do produto no correio. Caso o produto não seja recebido neste prazo, a autorização perde seu efeito e uma nova deverá ser requerida.
 
-Caso o cliente detecte no ato da entrega que o produto encomendado e o produto adquirido são diferentes, ele deverá recusar a entrega imediatamente, se aceitou a encomenda sem observar a descrição da Nota Fiscal, o prazo para entrar em contato com o nosso SAC e acionar a Garantia (ver item 2.3 e selecionar “Dano Físico/Desacordo”) será de 48 horas. Solicitações fora desse prazo não serão aceitas, pois será considerado que o consumidor aceitou o produto enviado.
+                        Esclarecemos que no caso de devolução por defeito no produto, mesmo sendo a solicitação realizada dentro do prazo previsto para devolução por arrependimento da compra, a bithostel TI reserva-se o direito de providenciar o conserto do produto, nos termos do Código de Defesa do Consumidor.
 
-Constatado qualquer desacordo, como ausência de divergência entre o produto adquirido e produto entregue, indícios de mau uso ou ausência de manual/acessórios,a bithostel TI fica isenta de aceitar a devolução e fazer a troca, podendo reenviar o produto ao cliente sem prévia consulta por frete a pagar. Portanto, para sua segurança, certifique-se no ato da entrega se o produto entregue é igual ao produto adquirido, basta confrontar o e-mail de confirmação de compra com os dados da embalagem.
+                        A) Produto Avariado
 
-Depois de analisadas as condições do produto devolvido e constatadas as perfeitas condições do mesmo, a bithostel TI enviará o produto correto ao cliente.
 
-C) Desistência da Compra
+                        O cliente deverá ficar atento no ato da entrega, recusando imediatamente o produto ou a embalagem que estiver sido avariada no transporte, devendo então entrar em contato com o nosso SAC ou Minha Conta, no prazo Maximo de 48 horas* para acionar a Garantia (ver item 2.3 e selecionar “Dano físico”). *Todos os pedidos possuem um código de rastreamento indicando onde e quando o Produto foi entregue. Solicitações de avaria não serão aceitas fora do prazo.
 
+                        A troca por um outro produto igual ao descrito em sua nota fiscal, será efetivada somente após o recebimento e análise das condições do produto devolvido. Constatada qualquer divergência como ausência de avaria, indícios de mau uso ou ausência de manual/acessórios, a bithostel TI fica isenta de aceitar a devolução e fazer a troca, podendo reenviar o produto ao cliente sem prévia consulta. Portanto, para sua segurança, certifique-se no ato da entrega se o produto foi avariado durante o transporte.
 
-Na hipótese de desistência da compra, conforme previsto no Artigo 49 do Código de Defesa do Consumidor (CDC - Lei 8.078 de 11/Set/1990), restrita apenas às compras efetuadas pelo site bithostel TI, o cliente terá a opção de devolver a mercadoria no prazo de até 07 dias corridos do recebimento, respeitando requisitos dos itens 1.2 e 2.1.
+                        Depois de analisadas as condições do produto devolvido e constatadas as perfeitas condições do mesmo, a bithostel TI enviará um novo produto ao cliente.
 
-O cliente deverá enviar a 2ª via da nota fiscal (Pessoa Física), sendo aceito também a declaração de compra. Descreva, no verso, o motivo de sua solicitação de devolução. Em caso de cliente pessoa jurídica (CNPJ), a empresa deverá emitir uma nota fiscal de devolução (apenas dos produtos que apresentarem problemas) com os mesmos dados da nota fiscal de compra (modelo do produto, alíquotas de impostos, etc.) que foi enviada por nossa empresa juntamente com o pedido de compra. Caso esta pessoa jurídica não seja emissora de nota fiscal (como escolas, instituições, etc.), enviar umas das vias da nota fiscal de compra juntamente com uma declaração informando os produtos que estão sendo devolvidos e o motivo da devolução. O cliente irá receber uma restituição no valor dos produtos, desde que esteja dentro do prazo estabelecido pelo Código de Defesa do Consumidor.
+                        B) Produto em desacordo com o pedido
 
-A restituição do valor será providenciada somente após o recebimento e análise das condições do produto devolvido. A bithostel TI terá o prazo de 30 dias após a confirmação da constatação do defeito pelos nossos técnicos para:
 
-1- Inserir crédito no valor do produto, incluindo o valor do frete, o qual o cliente poderá utilizar de uma só vez para adquirir qualquer outro produto.
-2- Estornar o valor do produto, incluindo o valor do frete, observando que:
-a- Em compras pagas no cartão de crédito, o estorno ocorrerá em até 2 (duas) faturas subseqüentes. Este procedimento é de inteira responsabilidade da administradora do seu cartão.
-b- Em compras pagas através de boleto bancário e cartão de débito, a restituição será efetuada via depósito, transferência, TED ou ordem de pagamento na conta corrente indicada pelo cliente. Esta devolução poderá ser feita em até 10 dias úteis.
+                        Caso o cliente detecte no ato da entrega que o produto encomendado e o produto adquirido são diferentes, ele deverá recusar a entrega imediatamente, se aceitou a encomenda sem observar a descrição da Nota Fiscal, o prazo para entrar em contato com o nosso SAC e acionar a Garantia (ver item 2.3 e selecionar “Dano Físico/Desacordo”) será de 48 horas. Solicitações fora desse prazo não serão aceitas, pois será considerado que o consumidor aceitou o produto enviado.
 
+                        Constatado qualquer desacordo, como ausência de divergência entre o produto adquirido e produto entregue, indícios de mau uso ou ausência de manual/acessórios,a bithostel TI fica isenta de aceitar a devolução e fazer a troca, podendo reenviar o produto ao cliente sem prévia consulta por frete a pagar. Portanto, para sua segurança, certifique-se no ato da entrega se o produto entregue é igual ao produto adquirido, basta confrontar o e-mail de confirmação de compra com os dados da embalagem.
 
-Caso fique constatado que o cliente não cumpriu com as condições de devolução ou perdeu a garantia do produto, o mesmo será devolvido sem prévia comunicação por frete a cobrar.
+                        Depois de analisadas as condições do produto devolvido e constatadas as perfeitas condições do mesmo, a bithostel TI enviará o produto correto ao cliente.
 
-D) Devolução de produtos com defeito
+                        C) Desistência da Compra
 
 
-Na hipótese do produto apresentar defeito de fabricação, o mesmo deverá retornar à loja para manutenção e/ou troca. É o exercício da garantia em si, portanto, é necessário que o defeito apresentado seja comunicado oficialmente à bithostel TI dentro do respectivo prazo estabelecido para cada produto, conforme descrito na nota fiscal. A partir do recebimento da mercadoria,a bithostel TI terá o prazo de 30 dias (conforme art. 18 CDC) para efetuar testes para confirmação do defeito apontado. O cliente será contatado o mais breve possível no sentido de lhe informar o resultado dos testes e a previsão de disponibilidade do produto reparado ou trocado.
+                        Na hipótese de desistência da compra, conforme previsto no Artigo 49 do Código de Defesa do Consumidor (CDC - Lei 8.078 de 11/Set/1990), restrita apenas às compras efetuadas pelo site bithostel TI, o cliente terá a opção de devolver a mercadoria no prazo de até 07 dias corridos do recebimento, respeitando requisitos dos itens 1.2 e 2.1.
 
-§ único - Após os 7 dias do recebimento, o cliente deverá observar se o produto possui garantia autorizada do fabricante/fornecedor, caso exista sua troca ou manutenção devem ser feitas diretamente com o fabricante ou na assistência técnica por ele indicada, mediante apresentação da Nota Fiscal e o Termo de Garantia fornecido pelo próprio fabricante. A mercadoria deve ser enviada nas mesmas condições em que saiu da loja, na embalagem original, completa, com todos os cabos, manuais, cds e acessórios que fazem parte do conjunto.
+                        O cliente deverá enviar a 2ª via da nota fiscal (Pessoa Física), sendo aceito também a declaração de compra. Descreva, no verso, o motivo de sua solicitação de devolução. Em caso de cliente pessoa jurídica (CNPJ), a empresa deverá emitir uma nota fiscal de devolução (apenas dos produtos que apresentarem problemas) com os mesmos dados da nota fiscal de compra (modelo do produto, alíquotas de impostos, etc.) que foi enviada por nossa empresa juntamente com o pedido de compra. Caso esta pessoa jurídica não seja emissora de nota fiscal (como escolas, instituições, etc.), enviar umas das vias da nota fiscal de compra juntamente com uma declaração informando os produtos que estão sendo devolvidos e o motivo da devolução. O cliente irá receber uma restituição no valor dos produtos, desde que esteja dentro do prazo estabelecido pelo Código de Defesa do Consumidor.
 
-ATENÇÃO: É de inteira responsabilidade do cliente a execução prévia de cópias de segurança de quaisquer programas ou dados que julgue necessários para a reinstalação do software e arquivos do disco rígido ou outras mídias, se for o caso.
+                        A restituição do valor será providenciada somente após o recebimento e análise das condições do produto devolvido. A bithostel TI terá o prazo de 30 dias após a confirmação da constatação do defeito pelos nossos técnicos para:
 
-Pensando em melhor atender as necessidades de seus CLIENTES, a bithostel TI, fornece aos mesmos a Garantia estendida conforme especificado em Nota Fiscal além dos 3 meses inclusos da Garantia legal (art. 18 CDC).
+                        1- Inserir crédito no valor do produto, incluindo o valor do frete, o qual o cliente poderá utilizar de uma só vez para adquirir qualquer outro produto.
+                        2- Estornar o valor do produto, incluindo o valor do frete, observando que:
+                        a- Em compras pagas no cartão de crédito, o estorno ocorrerá em até 2 (duas) faturas subseqüentes. Este procedimento é de inteira responsabilidade da administradora do seu cartão.
+                        b- Em compras pagas através de boleto bancário e cartão de débito, a restituição será efetuada via depósito, transferência, TED ou ordem de pagamento na conta corrente indicada pelo cliente. Esta devolução poderá ser feita em até 10 dias úteis.
 
-É importante esclarecer que há diferença entre ambas as Garantias, como observaremos a seguir.
 
-Quando o produto apresentar defeito dentro dos 3 primeiros meses, e sendo este confirmado através de testes realizados em nosso departamento técnico, contactaremos o cliente o mais breve possível no sentido de lhe informar o resultado dos testes e a previsão de disponibilidade do produto reparado ou trocado.
+                        Caso fique constatado que o cliente não cumpriu com as condições de devolução ou perdeu a garantia do produto, o mesmo será devolvido sem prévia comunicação por frete a cobrar.
 
-Lembramos que, conforme o CDC/art18, a bithostel TI tem um prazo de 30 dias para a solução do problema apresentado. Se até o final desse prazo a loja não tiver condições de consertar ou repor, o cliente poderá optar entre:
+                        D) Devolução de produtos com defeito
 
-1. Solicitar a restituição do valor pago pelo produto
-2. Negociar um abatimento no preço do produto defeituoso.
-3. Inserção de créditos no login no valor total do produto.
-4. Negociar um novo prazo para o conserto
-Já nos casos em que o vicio ocorrer após os 90 dias garantidos legalmente, a bithostel TI garantirá o serviço de reparo (mão de obra e peças originais), necessário para garantir seu perfeito funcionamento e uso.
 
-Ressaltamos que nos casos de impossibilidade de reparo, a bithostel TI, a seu exclusivo critério, substituirá o bem por um outro de mesma marca e modelo ou ainda por um modelo equivalente, mesmo que de outro fabricante, créditos no LOGIN ou restituição do valor pago.
+                        Na hipótese do produto apresentar defeito de fabricação, o mesmo deverá retornar à loja para manutenção e/ou troca. É o exercício da garantia em si, portanto, é necessário que o defeito apresentado seja comunicado oficialmente à bithostel TI dentro do respectivo prazo estabelecido para cada produto, conforme descrito na nota fiscal. A partir do recebimento da mercadoria,a bithostel TI terá o prazo de 30 dias (conforme art. 18 CDC) para efetuar testes para confirmação do defeito apontado. O cliente será contatado o mais breve possível no sentido de lhe informar o resultado dos testes e a previsão de disponibilidade do produto reparado ou trocado.
 
-Importante: A reposição ou conserto de um produto não se constitui em nova compra, não sendo, portanto, motivo de extensão ou renovação do prazo de garantia estipulado na nota fiscal. Esta, porém, deverá ser estendida ao mínimo de 90 dias, quando a garantia "restante", contada a partir da data de compra, for menor que 90 dias.
+                        § único - Após os 7 dias do recebimento, o cliente deverá observar se o produto possui garantia autorizada do fabricante/fornecedor, caso exista sua troca ou manutenção devem ser feitas diretamente com o fabricante ou na assistência técnica por ele indicada, mediante apresentação da Nota Fiscal e o Termo de Garantia fornecido pelo próprio fabricante. A mercadoria deve ser enviada nas mesmas condições em que saiu da loja, na embalagem original, completa, com todos os cabos, manuais, cds e acessórios que fazem parte do conjunto.
 
-D.1) Custos de Envio de Produtos Defeituosos
+                        ATENÇÃO: É de inteira responsabilidade do cliente a execução prévia de cópias de segurança de quaisquer programas ou dados que julgue necessários para a reinstalação do software e arquivos do disco rígido ou outras mídias, se for o caso.
 
+                        Pensando em melhor atender as necessidades de seus CLIENTES, a bithostel TI, fornece aos mesmos a Garantia estendida conforme especificado em Nota Fiscal além dos 3 meses inclusos da Garantia legal (art. 18 CDC).
 
-Todos os custos de transporte do produto entre bithostel TI e CLIENTE são de responsabilidade do CLIENTE, exceto no caso em que a loja lhe reenvia um produto que comprovadamente apresentou defeito de fabricação e que foi consertado, de acordo com as cláusulas deste Termo de Garantia. Neste caso, a modalidade de envio será a ENCOMENDA NORMAL cujo prazo de entrega geralmente varia de 3 a 10 dias úteis. Assim sendo, produtos que não apresentarem defeito, mesmo que sejam incompatíveis com o hardware do cliente não terão seu frete de retorno pagos pela bithostel TI. Caso o cliente tenha urgência no reenvio ele pode solicitar a modalidade de frete expresso, arcando, porém, com os custos de postagem adicionais.
+                        É importante esclarecer que há diferença entre ambas as Garantias, como observaremos a seguir.
 
-Por isso é importante que o cliente tenha certeza de que o produto adquirido apresenta defeito.
+                        Quando o produto apresentar defeito dentro dos 3 primeiros meses, e sendo este confirmado através de testes realizados em nosso departamento técnico, contactaremos o cliente o mais breve possível no sentido de lhe informar o resultado dos testes e a previsão de disponibilidade do produto reparado ou trocado.
 
-FORMA DE REMESSA
+                        Lembramos que, conforme o CDC/art18, a bithostel TI tem um prazo de 30 dias para a solução do problema apresentado. Se até o final desse prazo a loja não tiver condições de consertar ou repor, o cliente poderá optar entre:
 
+                        1. Solicitar a restituição do valor pago pelo produto
+                        2. Negociar um abatimento no preço do produto defeituoso.
+                        3. Inserção de créditos no login no valor total do produto.
+                        4. Negociar um novo prazo para o conserto
+                        Já nos casos em que o vicio ocorrer após os 90 dias garantidos legalmente, a bithostel TI garantirá o serviço de reparo (mão de obra e peças originais), necessário para garantir seu perfeito funcionamento e uso.
 
-A remessa deve ser feita através dos Correios. O equipamento deve ser remetido diretamente à loja. A bithostel TI não se responsabiliza pela retirada nos correios ou em outros locais. O endereço para retorno dos produtos é:
+                        Ressaltamos que nos casos de impossibilidade de reparo, a bithostel TI, a seu exclusivo critério, substituirá o bem por um outro de mesma marca e modelo ou ainda por um modelo equivalente, mesmo que de outro fabricante, créditos no LOGIN ou restituição do valor pago.
 
-bithostel TI 
-Rua Frei Francisco Sampaio, 283/44 – Santos/SP
-CEP: 11040-221
-#NUMERODOPEDIDO
+                        Importante: A reposição ou conserto de um produto não se constitui em nova compra, não sendo, portanto, motivo de extensão ou renovação do prazo de garantia estipulado na nota fiscal. Esta, porém, deverá ser estendida ao mínimo de 90 dias, quando a garantia "restante", contada a partir da data de compra, for menor que 90 dias.
 
+                        D.1) Custos de Envio de Produtos Defeituosos
 
-</p>
-</div>
-						</div>
 
-					</div>
-				
-				
-				
-				
-				
-			</div><!--/.container-->
+                        Todos os custos de transporte do produto entre bithostel TI e CLIENTE são de responsabilidade do CLIENTE, exceto no caso em que a loja lhe reenvia um produto que comprovadamente apresentou defeito de fabricação e que foi consertado, de acordo com as cláusulas deste Termo de Garantia. Neste caso, a modalidade de envio será a ENCOMENDA NORMAL cujo prazo de entrega geralmente varia de 3 a 10 dias úteis. Assim sendo, produtos que não apresentarem defeito, mesmo que sejam incompatíveis com o hardware do cliente não terão seu frete de retorno pagos pela bithostel TI. Caso o cliente tenha urgência no reenvio ele pode solicitar a modalidade de frete expresso, arcando, porém, com os custos de postagem adicionais.
 
-		</section><!--/.service-->
-		
-		
-		<!-- clients-say strat -->
-		<section id="clients-say"  class="clients-say">
-			<div class="container">
-				<div class="section-header">
-					<h2>Algumas coisas sobre a bithostel TI</h2>
-				</div><!--/.section-header-->
-				<div class="row">
-					<div class="owl-carousel testimonial-carousel">
-						<div class="col-sm-3 col-xs-12">
-							<div class="single-testimonial-box">
-								<div class="testimonial-description">
-									<div class="testimonial-info">
-										<div class="testimonial-img">
-											<img src="assets/images/brand/br2.png" alt="image of clients person" />
-										</div><!--/.testimonial-img-->
-									</div><!--/.testimonial-info-->
-									<div class="testimonial-comment">
-										<p>
-										Temos como carro chefe de nossos produtos o MX Linux...
-										</p>
-									</div><!--/.testimonial-comment-->
-									<div class="testimonial-person">
-										<h2><a href="#">Fabio Lipel Schmit</a></h2>
-										<h4>bithostel ti</h4>
-									</div><!--/.testimonial-person-->
-								</div><!--/.testimonial-description-->
-							</div><!--/.single-testimonial-box-->
-						</div><!--/.col-->
-						<div class="col-sm-3 col-xs-12">
-							<div class="single-testimonial-box">
-								<div class="testimonial-description">
-									<div class="testimonial-info">
-										<div class="testimonial-img">
-											<img src="assets/images/brand/br1.png" alt="image of clients person" />
-										</div><!--/.testimonial-img-->
-									</div><!--/.testimonial-info-->
-									<div class="testimonial-comment">
-										<p>
-											Computadores com a qualidade da Oceano Informática com MX Linux BR, instalado. Enviamos em dois dias íteis...
-										</p>
-										
-									</div><!--/.testimonial-comment-->
-									<div class="testimonial-person">
-										<h2><a href="#">Oceano Informática</a></h2>
-										<h4>Santos-SP</h4>
-									</div><!--/.testimonial-person-->
-								</div><!--/.testimonial-description-->
-							</div><!--/.single-testimonial-box-->
-						</div><!--/.col-->
-						<div class="col-sm-3 col-xs-12">
-							<div class="single-testimonial-box">
-								<div class="testimonial-description">
-									<div class="testimonial-info">
-										<div class="testimonial-img">
-											<img src="assets/images/brand/DRWEBLOGO.png" alt="image of clients person" />
-											
-										</div><!--/.testimonial-img-->
-									</div><!--/.testimonial-info-->
-									<div class="testimonial-comment">
-										<p>
-											Proteção para seus dispositivos...
-										</p>
-									</div><!--/.testimonial-comment-->
-									<div class="testimonial-person">
-										<h2><a href="#">DR. WEB</a></h2>
-										<h4>Security Product</h4>
-									</div><!--/.testimonial-person-->
-								</div><!--/.testimonial-description-->
-							</div><!--/.single-testimonial-box-->
-						</div><!--/.col-->
-					</div><!--/.testimonial-carousel-->
-				</div><!--/.row-->
+                        Por isso é importante que o cliente tenha certeza de que o produto adquirido apresenta defeito.
 
+                        FORMA DE REMESSA
 
-			</div><!--/.container-->
 
-		</section><!--/.clients-say-->	
-		<!-- clients-say end -->
+                        A remessa deve ser feita através dos Correios. O equipamento deve ser remetido diretamente à loja. A bithostel TI não se responsabiliza pela retirada nos correios ou em outros locais. O endereço para retorno dos produtos é:
 
-		<!--brand strat -->
-		<section id="brand"  class="brand">
-			<div class="container">
-				<div class="brand-area">
-					<div class="owl-carousel owl-theme brand-item">
-						<div class="item">
-							<a href="#">
-								<img src="assets/images/brand/br1.png" alt="brand-image" />
-							</a>
-						</div><!--/.item-->
-						<div class="item">
-							<a href="#">
-								<img src="assets/images/brand/br2.png" alt="brand-image" />
-							</a>
-						</div><!--/.item-->
-						<div class="item">
-							<a href="#">
-								<img src="assets/images/brand/br3.png" alt="brand-image" />
-							</a>
-						</div><!--/.item-->
-						<div class="item">
-							<a href="#">
-								<img src="assets/images/brand/DRWEBLOGO.png" alt="brand-image" />
-							</a>
-						</div><!--/.item-->
+                        bithostel TI
+                        Rua Frei Francisco Sampaio, 283/44 – Santos/SP
+                        CEP: 11040-221
+                        #NUMERODOPEDIDO
 
-						<div class="item">
-							<a href="#">
-								<img src="assets/images/brand/br8.jpg" alt="brand-image" />
-							</a>
-						</div><!--/.item-->
 
-						<div class="item">
-							<a href="#">
-								<img src="assets/images/brand/br9.jpg" alt="brand-image" />
-							</a>
-						</div><!--/.item-->
-						<div class="item">
-							<a href="#">
-								<img src="assets/images/rfxlogo.png" alt="brand-image" />
-							</a>
-						</div><!--/.item-->
-						
-						
-					</div><!--/.owl-carousel-->
-		
-		
+                    </p>
+                </div>
+            </div>
 
-				</div><!--/.clients-area-->
+        </div>
 
 
-			</div><!--/.container-->
 
-		</section><!--/brand-->	
-		<!--brand end -->
 
-		<!--blog start -->
-		<section id="blog" class="blog"></section><!--/.blog-->
-		<!--blog end -->
 
 
-		
-		<!--contact start-->
-		<footer id="contact"  class="contact">
-			<div class="container">
-				     <div class="data">
+        </div></section><section id="clients-say" class="clients-say">
+        <div class="container">
+            <div class="section-header">
+                <h2>Algumas coisas sobre a bithostel TI</h2>
+            </div><div class="row">
+                <div class="owl-carousel testimonial-carousel">
+                    <div class="col-sm-3 col-xs-12">
+                        <div class="single-testimonial-box">
+                            <div class="testimonial-description">
+                                <div class="testimonial-info">
+                                    <div class="testimonial-img">
+                                        <img src="assets/images/brand/br2.png" alt="image of clients person" />
+                                    </div></div><div class="testimonial-comment">
+                                    <p>
+                                        Temos como carro chefe de nossos produtos o MX Linux...
+                                    </p>
+                                </div><div class="testimonial-person">
+                                    <h2><a href="#">Fabio Lipel Schmit</a></h2>
+                                    <h4>bithostel ti</h4>
+                                </div></div></div></div><div class="col-sm-3 col-xs-12">
+                        <div class="single-testimonial-box">
+                            <div class="testimonial-description">
+                                <div class="testimonial-info">
+                                    <div class="testimonial-img">
+                                        <img src="assets/images/brand/br1.png" alt="image of clients person" />
+                                    </div></div><div class="testimonial-comment">
+                                    <p>
+                                        Computadores com a qualidade da Oceano Informática com MX Linux BR, instalado. Enviamos em dois dias íteis...
+                                    </p>
 
+                                </div><div class="testimonial-person">
+                                    <h2><a href="#">Oceano Informática</a></h2>
+                                    <h4>Santos-SP</h4>
+                                </div></div></div></div><div class="col-sm-3 col-xs-12">
+                        <div class="single-testimonial-box">
+                            <div class="testimonial-description">
+                                <div class="testimonial-info">
+                                    <div class="testimonial-img">
+                                        <img src="assets/images/brand/DRWEBLOGO.png" alt="image of clients person" />
 
-  
+                                    </div></div><div class="testimonial-comment">
+                                    <p>
+                                        Proteção para seus dispositivos...
+                                    </p>
+                                </div><div class="testimonial-person">
+                                    <h2><a href="#">DR. WEB</a></h2>
+                                    <h4>Security Product</h4>
+                                </div></div></div></div></div></div></section><section id="brand" class="brand">
+        <div class="container">
+            <div class="brand-area">
+                <div class="owl-carousel owl-theme brand-item">
+                    <div class="item">
+                        <a href="#">
+                            <img src="assets/images/brand/br1.png" alt="brand-image" />
+                        </a>
+                    </div><div class="item">
+                        <a href="#">
+                            <img src="assets/images/brand/br2.png" alt="brand-image" />
+                        </a>
+                    </div><div class="item">
+                        <a href="#">
+                            <img src="assets/images/brand/br3.png" alt="brand-image" />
+                        </a>
+                    </div><div class="item">
+                        <a href="#">
+                            <img src="assets/images/brand/DRWEBLOGO.png" alt="brand-image" />
+                        </a>
+                    </div><div class="item">
+                        <a href="#">
+                            <img src="assets/images/brand/br8.jpg" alt="brand-image" />
+                        </a>
+                    </div><div class="item">
+                        <a href="#">
+                            <img src="assets/images/brand/br9.jpg" alt="brand-image" />
+                        </a>
+                    </div><div class="item">
+                        <a href="#">
+                            <img src="assets/images/rfxlogo.png" alt="brand-image" />
+                        </a>
+                    </div></div></div></div></section><section id="blog" class="blog"></section><footer id="contact" class="contact">
+        <div class="container">
+            <div class="data">
+
+
+
+            </div>
+            <div class="container">
+
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-footer-widget">
+                        <div class="footer-logo">
+                            <a href="index.html">bithostel TI</a>
+
+
+                            <p>
+                                Horário de funcionamento
+                                9:00-18:00 Seg-Sex
+
+                            </p>
+                            <div class="footer-contact">
+
+                                <p>hostmaster@bithostel.com.br</p>
+                                <p>suporte@bithostel.com.br</p>
+                                <p>+55 (13) 99671-1979</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="single-footer-widget">
+
+                        <div class="location" data-block="location">
+                            <div>
+                                <h2>Localizacão</h2>
+
+                                <div class="frame">
+                                    <iframe id="google-map" class="google-map" data-base="https://www.google.com/maps/embed/v1/place?key=AIzaSyCNCmAGyN4bJYu5qeLgbASzZafm-M5TA_o&language=pt_BR&zoom=16&q=" data-address="Rua%20Frei%20Franciso%20Sampaio%2C%20283%2C%20Santos%2C%20SP%20-%2011040-221%20-%20BRASIL" allowfullscreen="" title="Localização no mapa" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCNCmAGyN4bJYu5qeLgbASzZafm-M5TA_o&language=pt_BR&zoom=16&q=Rua%20Frei%20Franciso%20Sampaio%2C%20283%2C%20Santos%2C%20SP%20-%2011040-221%20-%20BRASIL"></iframe>
+                                </div>
+                                <div class="text">
+                                    <div class="columns">
+                                        <div class="single-footer-widget">
+                                            <h2>Endereço
+                                                <h2>Rua Frei Franciso Sampaio, 283, Santos, SP - 11040-221 - BRASIL</h2>
+
+
+                                                <div class="single-footer-widget">
+                                                    <h2>Acessos</h2>
+                                                    <ul>
+                                                        <li><a target="_blank" href="https://wa.me/c/5513996711979">Catálogo no Whatsapp</a></li>
+                                                        <li><a href="#">privacy policy</a></li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
                                     </div>
-                            <div class="container">
-		
-</div>
+                                </div>
+                            </div>
+                            <div></div>
 
-                        
-                            
-                               
-<div class="row">
-						<div class="col-md-3 col-sm-6">
-							<div class="single-footer-widget">
-								<div class="footer-logo">
-									<a href="index.html">bithostel TI</a>
-								
-								
-								<p>
-									Horário de funcionamento
-									9:00-18:00 Seg-Sex
-
-</p>
-								<div class="footer-contact">
-
-	<p>hostmaster@bithostel.com.br</p>
-									<p>suporte@bithostel.com.br</p>
-									<p>+55 (13) 99671-1979</p>
-								</div>
-							</div>
-						</div>
-
-<div class="single-footer-widget">
-
-			<div class="location" data-block="location">
-				<div>
-						<h2>Localizacão</h2>
-					
-								<div class="frame">
-									<iframe id="google-map" class="google-map" data-base="https://www.google.com/maps/embed/v1/place?key=AIzaSyCNCmAGyN4bJYu5qeLgbASzZafm-M5TA_o&amp;language=pt_BR&amp;zoom=16&amp;q=" data-address="Rua%20Frei%20Franciso%20Sampaio%2C%20283%2C%20Santos%2C%20SP%20-%2011040-221%20-%20BRASIL" allowfullscreen="" title="Localização no mapa" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCNCmAGyN4bJYu5qeLgbASzZafm-M5TA_o&amp;language=pt_BR&amp;zoom=16&amp;q=Rua%20Frei%20Franciso%20Sampaio%2C%20283%2C%20Santos%2C%20SP%20-%2011040-221%20-%20BRASIL"></iframe>
-								</div>
-						<div class="text">
-									<div class="columns">
-									<div class="single-footer-widget">
-										<h2>Endereço
-										<h2>Rua Frei Franciso Sampaio, 283, Santos, SP - 11040-221 - BRASIL</h2>
-										
-											
-											<div class="single-footer-widget">
-								<h2>Acessos</h2>
-								<ul>
-									<li><a target="_blank" href="https://wa.me/c/5513996711979">Catálogo no Whatsapp</a></li>
-									<li><a href="#">privacy policy</a></li>
-								</ul>
-							</div>
-							
-							</div>
-									</div>
-							</div>
-						</div>
-					</div>
-				<div></div>
-		
-	</div>
+                        </div>
 
 
 
 
 
 
-					
-						 <div class="col-md-2 col-sm-6">
-							
-						</div> 
-						
-						</div></div>
-					<!--	<div class="col-md-3 col-xs-12">
-							<div class="single-footer-widget">
-								<h2>top brands</h2>
-								<div class="row">
-									<div class="col-md-7 col-xs-6">
-										<ul>
-											<li><a href="#">BMW</a></li>
-											<li><a href="#">lamborghini</a></li>
-											<li><a href="#">camaro</a></li>
-											<li><a href="#">audi</a></li>
-											<li><a href="#">infiniti</a></li>
-											<li><a href="#">nissan</a></li>
-										</ul>
-									</div>
-									<div class="col-md-5 col-xs-6">
-										<ul>
-											<li><a href="#">ferrari</a></li>
-											<li><a href="#">porsche</a></li>
-											<li><a href="#">land rover</a></li>
-											<li><a href="#">aston martin</a></li>
-											<li><a href="#">mersedes</a></li>
-											<li><a href="#">opel</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-						</div> -->
- 					<div class="footer-copyright">
-					<div class="row">
-						<div class="col-sm-6">
-							<p>
-								&copy; copyright.designed and developed by <a href="https://www.themesine.com/">themesine</a>.
-								&copy; copyright. <a href="http://bithostel.com.br/">bithostel TI cnpj - 14.406.585/0001-59
-								</a>.
-							</p><!--/p-->
-						</div>
-						<div class="col-sm-6">
-							<div class="footer-social">
-								<a href="https://www.facebook.com/bithostel"><i class="fa fa-facebook"></i></a>	
-								
-							</div>
-						</div>
-					</div>
-				</div><!--/.footer-copyright-->
-			</div><!--/.container-->
+                        <div class="col-md-2 col-sm-6">
 
-			<div id="scroll-Top">
-				<div class="return-to-top">
-					<i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>
-				</div>
-				
-			</div><!--/.scroll-Top-->
-			
-        </footer><!--/.contact-->
-		<!--contact end-->
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-copyright">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>
+                                © copyright.designed and developed by <a href="https://www.themesine.com/">themesine</a>.
+                                © copyright. <a href="http://bithostel.com.br/">bithostel TI cnpj - 14.406.585/0001-59
+                                </a>.
+                            </p></div>
+                        <div class="col-sm-6">
+                            <div class="footer-social">
+                                <a href="https://www.facebook.com/bithostel"><i class="fa fa-facebook"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div></div><div id="scroll-Top">
+                <div class="return-to-top">
+                    <i class="fa fa-angle-up " id="scroll-top" data-toggle="tooltip" data-placement="top" title="" data-original-title="Back to Top" aria-hidden="true"></i>
+                </div>
 
+            </div></footer><script src="assets/js/jquery.js"></script>
 
-		
-		<!-- Include all js compiled plugins (below), or include individual files as needed -->
-
-		<script src="assets/js/jquery.js"></script>
-        
-        <!--modernizr.min.js-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
-		
-		<!--bootstrap.min.js-->
-        <script src="assets/js/bootstrap.min.js"></script>
-		
-		<!-- bootsnav js -->
-		<script src="assets/js/bootsnav.js"></script>
 
-		<!--owl.carousel.js-->
+        <script src="assets/js/bootstrap.min.js"></script>
+
+        <script src="assets/js/bootsnav.js"></script>
+
         <script src="assets/js/owl.carousel.min.js"></script>
 
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
-        <!--Custom JS-->
         <script src="assets/js/custom.js"></script>
-<script>
-    var url = 'https://whatsapp.socialintents.com/api/chat/siwhatsapp.1.0.js';
-    var s = document.createElement('script');s.type = 'text/javascript';s.async = true;s.src = url;
-    var chatSettings = {
-        "backgroundColor": "#25d366",
-        "textColor": "#000000",
-        "position": "left",
-        "marginBottom": "25",
-        "marginLeft": "0",
-        "marginRight": "25",
-        "logo": "https://whatsapp.socialintents.com/images/whatsapp.png",
-        "ctaText": "Whatsapp",
-        "chatIcon": "1",
-        "chatIconImageUrl": "",
-        "showPopup": false,
-        "welcomeText": "Ola como posso ajudar?",
-        "messageText": "Tenho interesse de falar com a {{page_link}}",
-        "phoneNumber": "+5513996711979"
-    };
-    s.onload = function() {
-        addWidget(chatSettings);
-    };
-    var x = document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s, x);
-</script>
-        
-    </body>
-	
+        <script>
+            var url = 'https://whatsapp.socialintents.com/api/chat/siwhatsapp.1.0.js';
+            var s = document.createElement('script');
+            s.type = 'text/javascript';
+            s.async = true;
+            s.src = url;
+            var chatSettings = {
+                "backgroundColor": "#25d366",
+                "textColor": "#000000",
+                "position": "left",
+                "marginBottom": "25",
+                "marginLeft": "0",
+                "marginRight": "25",
+                "logo": "https://whatsapp.socialintents.com/images/whatsapp.png",
+                "ctaText": "Whatsapp",
+                "chatIcon": "1",
+                "chatIconImageUrl": "",
+                "showPopup": false,
+                "welcomeText": "Ola como posso ajudar?",
+                "messageText": "Tenho interesse de falar com a {{page_link}}",
+                "phoneNumber": "+5513996711979"
+            };
+            s.onload = function() {
+                addWidget(chatSettings);
+            };
+            var x = document.getElementsByTagName('script')[0];
+            x.parentNode.insertBefore(s, x);
+        </script>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const overlay = document.getElementById('newProjectOverlay');
+                const closeButton = document.getElementById('closeOverlay');
+
+                // Show the overlay on page load
+                overlay.classList.add('active');
+
+                // Close the overlay when the close button is clicked
+                closeButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    overlay.classList.remove('active');
+                });
+
+                // Close the overlay when clicking outside the content
+                overlay.addEventListener('click', function(e) {
+                    if (e.target === overlay) {
+                        overlay.classList.remove('active');
+                    }
+                });
+            });
+        </script>
+</body>
+
 </html>
