@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Novo Computador na Nuvem</title>
+    <style>
+        /* Estilos básicos para o corpo da página */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Contêiner principal para centralizar o conteúdo */
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        /* Top bar styles */
+        .top-bar {
+            background-color: #222;
+            color: white;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+
+        .top-bar .logo {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .top-bar .logo a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .top-bar .logo img {
+            height: 30px; /* Adjust logo height as needed */
+            margin-right: 10px;
+        }
+
+        .top-bar nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .top-bar nav ul li {
+            margin-left: 20px;
+        }
+
+        .top-bar nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .top-bar nav ul li a:hover {
+            color: #007bff;
+        }
+
+        /* Cabeçalho da página */
+        header {
+            background-color: #0056b3;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        /* Seção de introdução ao produto */
+        .hero-section {
+            background-color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .hero-section h2 {
+            color: #0056b3;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+
+        .hero-section p {
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+        }
+
+        .hero-section .cta-button {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero-section .cta-button:hover {
+            background-color: #218838;
+        }
+
+        /* Seção de recursos e sistemas operacionais */
+        .features-os-section {
+            display: flex;
+            flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha em telas menores */
+            justify-content: center;
+            gap: 30px;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        .feature-card, .os-card {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            flex: 1; /* Permite que os cards cresçam e encolham */
+            min-width: 280px; /* Largura mínima para os cards */
+            max-width: 45%; /* Largura máxima para os cards em uma linha */
+            box-sizing: border-box; /* Inclui padding e border no cálculo da largura */
+        }
+
+        .feature-card h3, .os-card h3 {
+            color: #0056b3;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p, .os-card p {
+            font-size: 1em;
+        }
+
+        .os-card img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+
+        /* Seção de Planos */
+        .plans-section {
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #e9ecef;
+        }
+
+        .plans-section h2 {
+            color: #0056b3;
+            font-size: 2.2em;
+            margin-bottom: 40px;
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .plan-card {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .plan-card h3 {
+            color: #0056b3;
+            font-size: 1.6em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .plan-card .plan-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        .plan-card .plan-details ul li {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            color: #555;
+            display: flex;
+            align-items: center;
+        }
+
+        .plan-card .plan-details ul li::before {
+            content: '✔️'; /* Ícone de check */
+            margin-right: 10px;
+            color: #28a745;
+        }
+
+        .plan-card .plan-price {
+            font-size: 2em;
+            color: #28a745;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .plan-card .buy-button {
+            display: block;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box; /* Garante que padding não aumente a largura */
+        }
+
+        .plan-card .buy-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Rodapé da página */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            .top-bar .container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .top-bar nav ul {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .top-bar nav ul li {
+                margin: 5px 10px;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            .hero-section h2 {
+                font-size: 1.8em;
+            }
+
+            .features-os-section {
+                flex-direction: column; /* Empilha os cards em telas menores */
+                align-items: center; /* Centraliza os cards empilhados */
+            }
+
+            .feature-card, .os-card {
+                max-width: 90%; /* Ocupa mais largura em telas menores */
+                margin-bottom: 20px; /* Adiciona espaço entre os cards empilhados */
+            }
+
+            .plans-grid {
+                grid-template-columns: 1fr; /* Um plano por linha em telas menores */
+            }
+        }
+
+        @media (max-width: 480px) {
+            header {
+                padding: 30px 0;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            header p {
+                font-size: 1em;
+            }
+
+            .hero-section {
+                padding: 30px 15px;
+            }
+
+            .hero-section h2 {
+                font-size: 1.6em;
+            }
+
+            .hero-section .cta-button {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+
+            .features-os-section {
+                padding: 30px 15px;
+            }
+
+            .feature-card, .os-card {
+                padding: 20px;
+            }
+
+            .feature-card h3, .os-card h3 {
+                font-size: 1.5em;
+            }
+
+            .plans-section {
+                padding: 30px 15px;
+            }
+
+            .plan-card {
+                padding: 25px;
+            }
+
+            .plan-card h3 {
+                font-size: 1.4em;
+            }
+            .plan-card .plan-price {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <div class="container">
+            <div class="logo">
+                <a href="https://www.bithostel.com.br" target="_blank">
+                    <img src="logo.png" alt="bithostel TI Logo">
+                </a>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="https://www.bithostel.com.br" target="_blank">Website Principal</a></li>
+                    <li><a href="https://www.bithostel.com.br/VPN.html" target="_blank">Segurança Digital</a></li>
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <h1>Seu Novo Computador na Nuvem</h1>
+            <p>Performance, Flexibilidade e Inovação ao seu Alcance</p>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero-section">
+            <div class="container">
+                <h2>Chega de máquinas lentas! Apresentamos a mais nova geração de computadores na nuvem</h2>
+                <p>Experimente a Força de um Computador potente, na nuvem de Onde Quiser! Projetados para oferecer **velocidade, segurança e flexibilidade incomparáveis**. Trabalhe, jogue ou crie sem limites com o que melhor se adapta às suas necessidades.</p>
+                <a href="#planos" class="cta-button">Escolha seu Plano Agora!</a>
+            </div>
+        </section>
+
+        <section class="plans-section" id="planos">
+            <div class="container">
+                <h2>Nossos Planos de Computador na Nuvem</h2>
+                <p>Escolha o plano que melhor se encaixa nas suas necessidades e comece a usar seu novo computador na nuvem hoje mesmo!</p>
+                <div class="plans-grid">
+                        <div class="plan-card">
+                        <h3>Computador 4GB 4vCPU - 40GB SSD</h3>
+                        <div class="plan-details">
+                            <ul>
+                                <li>4GB RAM DDR4</li>
+                                <li>4 vCPU 2.4 GHz</li>
+                                <li>40GB SSD</li>
+                                <li>1 IPv4 Fixo</li>
+                                <li>250Mbps Burst Internet</li>
+                                <li>Tráfego Ilimitado</li>
+                                <li>Windows 10 ou MX Linux</li>
+                            </ul>
+                        </div>
+                        <div class="plan-price">R$ 76.86 /mês</div>
+                        <a href="https://app.monetizze.com.br/checkout/KJV434481" class="buy-button">Comprar</a>
+                    </div>
+
+                    <div class="plan-card">
+                        <h3>Computador 6GB 4vCPU - 40GB SSD</h3>
+                        <div class="plan-details">
+                            <ul>
+                                <li>6GB RAM DDR4</li>
+                                <li>4 vCPU 2.4 GHz</li>
+                                <li>40GB SSD</li>
+                                <li>1 IPv4 Fixo</li>
+                                <li>250Mbps Burst Internet</li>
+                                <li>Tráfego Ilimitado</li>
+                                <li>Windows 10 ou MX Linux</li>
+                            </ul>
+                        </div>
+                        <div class="plan-price">R$ 97.86 /mês</div>
+                        <a href="https://app.monetizze.com.br/checkout/DXL351591" class="buy-button">Comprar</a>
+                    </div>
+
+                    <div class="plan-card">
+                        <h3>Computador 8GB 4vCPU - 50GB SSD</h3>
+                        <div class="plan-details">
+                            <ul>
+                                <li>8GB RAM DDR4</li>
+                                <li>4 vCPU 2.4 GHz</li>
+                                <li>50GB SSD</li>
+                                <li>1 IPv4 Fixo</li>
+                                <li>250Mbps Burst Internet</li>
+                                <li>Tráfego Ilimitado</li>
+                                <li>Windows 10 ou MX Linux</li>
+                            </ul>
+                        </div>
+                        <div class="plan-price">R$ 107.66 /mês</div>
+                        <a href="https://app.monetizze.com.br/checkout/DVL351592" class="buy-button">Comprar</a>
+                    </div>
+
+                    <div class="plan-card">
+                        <h3>Computador 12GB 4vCPU - 60GB NVME</h3>
+                        <div class="plan-details">
+                            <ul>
+                                <li>12GB RAM DDR4</li>
+                                <li>4 vCPU 2.4 GHz</li>
+                                <li>60GB NVME</li>
+                                <li>1 IPv4 Fixo</li>
+                                <li>500Mbps Burst Internet</li>
+                                <li>Tráfego Ilimitado</li>
+                                <li>Windows 10 ou MX Linux</li>
+                            </ul>
+                        </div>
+                        <div class="plan-price">R$ 164.49 /mês</div>
+                        <a href="https://app.monetizze.com.br/checkout/DZH351594" class="buy-button">Comprar</a>
+                    </div>
+
+                    <div class="plan-card">
+                        <h3>Computador 16GB 4vCPU - 60GB NVME</h3>
+                        <div class="plan-details">
+                            <ul>
+                                <li>16GB RAM DDR4</li>
+                                <li>4 vCPU 2.4 GHz</li>
+                                <li>60GB NVME</li>
+                                <li>1 IPv4 Fixo</li>
+                                <li>500Mbps Burst Internet</li>
+                                <li>Tráfego Ilimitado</li>
+                                <li>Windows 10 ou MX Linux</li>
+                            </ul>
+                        </div>
+                        <div class="plan-price">R$ 193.89 /mês</div>
+                        <a href="https://app.monetizze.com.br/checkout/DLP351595" class="buy-button">Comprar</a>
+                    </div>
+
+                    <div class="plan-card">
+                        <h3>Computador 24GB 6vCPU - 60GB NVME</h3>
+                        <div class="plan-details">
+                            <ul>
+                                <li>24GB RAM DDR4</li>
+                                <li>6 vCPU 2.4 GHz</li>
+                                <li>60GB NVME</li>
+                                <li>1 IPv4 Fixo</li>
+                                <li>500Mbps Burst Internet</li>
+                                <li>Tráfego Ilimitado</li>
+                                <li>Windows 10 ou MX Linux</li>
+                            </ul>
+                        </div>
+                        <div class="plan-price">R$ 215.45 /mês</div>
+                        <a href="https://app.monetizze.com.br/checkout/DWP351596" class="buy-button">Comprar</a>
+                    </div>
+
+                    <div class="plan-card">
+                        <h3>Computador 32GB 6vCPU - 60GB NVME</h3>
+                        <div class="plan-details">
+                            <ul>
+                                <li>32GB RAM DDR4</li>
+                                <li>6 vCPU 2.4 GHz</li>
+                                <li>60GB NVME</li>
+                                <li>1 IPv4 Fixo</li>
+                                <li>500Mbps Burst Internet</li>
+                                <li>Tráfego Ilimitado</li>
+                                <li>Windows 10 ou MX Linux</li>
+                            </ul>
+                        </div>
+                        <div class="plan-price">R$ 246.25 /mês</div>
+                        <a href="https://app.monetizze.com.br/checkout/DVB351598" class="buy-button">Comprar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Seu Computador na Nuvem. bithostel TI - cnpj 14.406.585/0001-59 - Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
