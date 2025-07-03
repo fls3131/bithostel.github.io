@@ -99,6 +99,14 @@
             margin-top: 10px;
         }
 
+        header img {
+            height: 100px; /* Adjust as needed for better visual balance */
+            width: auto; /* Maintain aspect ratio */
+            margin: 0 10px; /* Space between logos */
+            vertical-align: middle; /* Align images nicely with text */
+        }
+
+
         /* Seção de introdução ao produto */
         .hero-section {
             background-color: #ffffff;
@@ -257,6 +265,48 @@
             background-color: #0056b3;
         }
 
+        /* Políticas Section Styles */
+        .policy-section {
+            background-color: #ffffff;
+            padding: 50px 20px;
+            text-align: left; /* Align text to the left for readability */
+            border-bottom: 1px solid #ddd;
+        }
+
+        .policy-section h2 {
+            color: #0056b3;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            text-align: center; /* Center the section title */
+        }
+
+        .policy-section h3 {
+            color: #0056b3;
+            font-size: 1.6em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee; /* Light separator */
+            padding-bottom: 5px;
+        }
+
+        .policy-section p {
+            font-size: 1em;
+            margin-bottom: 15px;
+        }
+
+        .policy-section ul {
+            list-style: disc; /* Use disk bullet points for lists */
+            margin-left: 20px;
+            margin-bottom: 15px;
+            padding-left: 0;
+        }
+
+        .policy-section ul li {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            color: #555;
+        }
+
         /* Rodapé da página */
         footer {
             background-color: #333;
@@ -304,6 +354,10 @@
 
             .plans-grid {
                 grid-template-columns: 1fr; /* Um plano por linha em telas menores */
+            }
+
+            header img {
+                height: 80px; /* Smaller logos on mobile */
             }
         }
 
@@ -359,6 +413,9 @@
             .plan-card .plan-price {
                 font-size: 1.8em;
             }
+            header img {
+                height: 60px; /* Even smaller logos on very small screens */
+            }
         }
     </style>
 </head>
@@ -381,12 +438,10 @@
 
     <header>
         <div class="container">
-			
-            <img src="mxlogo.png" height="150" widht="150">
-            <img src="w10.jpg" height="150" widht="150">
+            <img src="mxlogo.png" alt="MX Linux Logo">
+            <img src="w10.jpg" alt="Windows 10 Logo">
             <h1>Seu Novo Computador na Nuvem</h1>
             <p>Performance, Flexibilidade e Inovação ao seu Alcance</p>
-            
         </div>
     </header>
 
@@ -396,6 +451,60 @@
                 <h2>Chega de máquinas lentas! Apresentamos a mais nova geração de computadores na nuvem</h2>
                 <p>Experimente a Força de um Computador potente, na nuvem de Onde Quiser! Projetados para oferecer **velocidade, segurança e flexibilidade incomparáveis**. Escolha entre **Windows 10 ou MX Linux** e trabalhe, jogue ou crie sem limites com o que melhor se adapta às suas necessidades.</p>
                 <a href="#planos" class="cta-button">Escolha seu Plano Agora!</a>
+            </div>
+        </section>
+
+        <section class="policy-section" id="politicas-uso">
+            <div class="container">
+                <h2>Políticas de Uso do Computador na Nuvem - bithostel TI</h2>
+                <p>Ao utilizar o serviço de **Computador na Nuvem** da bithostel TI, você concorda em cumprir com as seguintes políticas de uso. Nosso objetivo é garantir um ambiente seguro, estável e justo para todos os usuários.</p>
+
+                <h3>1. Propósito e Escopo</h3>
+                <p>O serviço de Computador na Nuvem da bithostel TI é oferecido para fins legítimos de produtividade, desenvolvimento, jogos e outras atividades computacionais autorizadas. Qualquer uso que não esteja em conformidade com as leis aplicáveis ou que seja considerado mal-intencionado é estritamente proibido.</p>
+
+                <h3>2. Autorização de Acesso</h3>
+                <p>Apenas usuários devidamente autorizados, que tenham adquirido um plano de Computador na Nuvem da bithostel TI, terão acesso ao serviço. A criação e o uso de contas devem seguir rigorosamente os procedimentos estabelecidos pela bithostel TI.</p>
+
+                <h3>3. Uso Adequado</h3>
+                <p>Os usuários devem operar o Computador na Nuvem de forma responsável e ética, respeitando todas as leis e regulamentações aplicáveis, incluindo leis de direitos autorais, propriedade intelectual e privacidade de dados. Além disso, devem cumprir todas as políticas internas da bithostel TI.</p>
+
+                <h3>4. Segurança e Proteção de Dados</h3>
+                <ul>
+                    <li>**Credenciais**: Você é o único responsável pela proteção de suas credenciais de acesso ao Computador na Nuvem (senhas, chaves de acesso, informações de login). É proibido compartilhar essas informações com terceiros.</li>
+                    <li>**Dados e Conteúdo**: A segurança dos dados e conteúdos armazenados ou processados em seu Computador na Nuvem é de sua responsabilidade. Recomendamos o uso de senhas fortes, softwares de segurança e backups regulares.</li>
+                    <li>**Incidentes**: Qualquer atividade suspeita, acesso não autorizado ou incidente de segurança relacionado ao seu Computador na Nuvem deve ser relatado imediatamente à equipe de suporte da bithostel TI.</li>
+                </ul>
+
+                <h3>5. Atividades Proibidas</h3>
+                <p>É expressamente proibido utilizar o serviço de Computador na Nuvem da bithostel TI para:</p>
+                <ul>
+                    <li>**Atividades Ilegais**: Realizar qualquer atividade que seja ilegal, incluindo, mas não se limitando a: hacking, distribuição de malware, phishing, fraude, pirataria de software, ou qualquer outra violação de leis nacionais ou internacionais.</li>
+                    <li>**Conteúdo Proibido**: Acessar, transmitir, armazenar ou distribuir conteúdo que seja ilegal, difamatório, obsceno, prejudicial, ameaçador, que incite violência ou ódio, ou que infrinja direitos autorais, marcas registradas ou quaisquer outros direitos de propriedade intelectual.</li>
+                    <li>**Abuso de Rede/Recursos**: Realizar ataques de negação de serviço (DDoS), spamming, mineração de criptomoedas (sem autorização explícita), atividades de varredura de portas, ou qualquer outra forma de abuso que sobrecarregue ou prejudique a rede, os servidores ou os serviços de outros usuários da bithostel TI.</li>
+                    <li>**Violação de Privacidade**: Tentar acessar, coletar ou comprometer dados ou sistemas de outros usuários ou de terceiros sem autorização expressa.</li>
+                    <li>**Engenharia Reversa/Alterações**: Tentar reverter a engenharia, descompilar, desmontar ou de qualquer forma tentar obter o código-fonte de qualquer parte do serviço de Computador na Nuvem, ou realizar modificações não autorizadas no sistema operacional ou software da bithostel TI fornecido.</li>
+                </ul>
+
+                <h3>6. Privacidade</h3>
+                <p>A bithostel TI está comprometida em proteger a privacidade de seus usuários. Dados de conexão e logs de sistema podem ser registrados para fins de segurança, monitoramento de desempenho e manutenção do serviço. Esses dados não serão compartilhados com terceiros sem o seu consentimento, exceto quando expressamente exigido por lei ou ordem judicial. Não acessamos ou monitoramos o conteúdo dos seus dados ou atividades dentro do seu Computador na Nuvem, a menos que seja necessário para resolver problemas técnicos relatados por você ou para investigar uma potencial violação destas políticas, conforme permitido por lei.</p>
+
+                <h3>7. Responsabilidade do Usuário</h3>
+                <p>Você é totalmente responsável por todas as atividades realizadas sob suas credenciais de acesso ao Computador na Nuvem. É sua obrigação tomar todas as precauções razoáveis para garantir que o acesso ao serviço seja seguro e que seu uso esteja em conformidade com estas políticas.</p>
+
+                <h3>8. Modificações nas Políticas</h3>
+                <p>A bithostel TI reserva-se o direito de modificar estas políticas de uso a qualquer momento, para refletir mudanças nas leis, regulamentações, tecnologias ou práticas de serviço. Notificações sobre alterações significativas serão comunicadas aos usuários através dos canais de comunicação oficiais da bithostel TI. Seu uso continuado do serviço após a notificação de alterações constitui sua aceitação das novas políticas.</p>
+
+                <h3>9. Consequências pelo Não Cumprimento</h3>
+                <p>O não cumprimento destas políticas pode resultar em ações disciplinares, que podem incluir, mas não se limitam a:</p>
+                <ul>
+                    <li>Advertência;</li>
+                    <li>Suspensão temporária do acesso ao serviço;</li>
+                    <li>Revogação permanente do acesso ao serviço e encerramento da conta;</li>
+                    <li>Repercussões legais, se aplicável, incluindo a cooperação com autoridades legais.</li>
+                </ul>
+
+                <h3>10. Contato para Suporte</h3>
+                <p>Para quaisquer dúvidas, esclarecimentos sobre estas políticas ou para relatar problemas relacionados ao uso do seu Computador na Nuvem, os usuários devem entrar em contato com a equipe de suporte da bithostel TI através dos canais disponíveis em nosso website principal.</p>
             </div>
         </section>
 
