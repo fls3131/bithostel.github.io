@@ -10,8 +10,8 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
+            background-color: #1a1a2e; /* Dark background */
+            color: #e0e0e0; /* Light text */
             line-height: 1.6;
         }
 
@@ -24,7 +24,7 @@
 
         /* Top bar styles */
         .top-bar {
-            background-color: #222;
+            background-color: #0f0f1a; /* Even darker top bar */
             color: white;
             padding: 10px 0;
             display: flex;
@@ -80,7 +80,7 @@
         }
 
         .top-bar nav ul li a:hover {
-            color: #007bff;
+            color: #6495ed; /* Lighter blue for hover */
         }
 
         /* Hamburger menu icon for mobile */
@@ -110,8 +110,8 @@
             top: 100%; /* Position below the top bar */
             left: 0;
             width: 100%;
-            background-color: #333; /* Slightly darker background for menu */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            background-color: #2e2e4e; /* Slightly darker background for menu */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
             padding: 10px 0;
             border-top: 1px solid #555;
         }
@@ -121,10 +121,9 @@
             text-align: center;
         }
 
-
         /* Cabeçalho da página */
         header {
-            background-color: #0056b3;
+            background-color: #16213e; /* Darker blue header */
             color: white;
             padding: 40px 0;
             text-align: center;
@@ -149,14 +148,14 @@
 
         /* Seção de introdução ao produto */
         .hero-section {
-            background-color: #ffffff;
+            background-color: #1a1a2e; /* Dark background */
             padding: 50px 20px;
             text-align: center;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #3f3f5f; /* Darker border */
         }
 
         .hero-section h2 {
-            color: #0056b3;
+            color: #6495ed; /* Lighter blue heading */
             font-size: 2.2em;
             margin-bottom: 20px;
         }
@@ -165,11 +164,12 @@
             font-size: 1.1em;
             max-width: 800px;
             margin: 0 auto 30px auto;
+            color: #c0c0c0; /* Slightly lighter text for readability */
         }
 
         .hero-section .cta-button {
             display: inline-block;
-            background-color: #28a745;
+            background-color: #28a745; /* Green button remains */
             color: white;
             padding: 15px 30px;
             text-decoration: none;
@@ -180,19 +180,19 @@
         }
 
         .hero-section .cta-button:hover {
-            background-color: #218838;
+            background-color: #218838; /* Darker green on hover */
         }
 
         /* What is Cloud Computer Section */
         .what-is-cloud-section {
-            background-color: #f8f8f8;
+            background-color: #22223b; /* Slightly lighter dark background */
             padding: 50px 20px;
             text-align: center;
-            border-bottom: 1px solid #ddd;
+            border-bottom: 1px solid #3f3f5f; /* Darker border */
         }
 
         .what-is-cloud-section h2 {
-            color: #0056b3;
+            color: #6495ed; /* Lighter blue heading */
             font-size: 2.2em;
             margin-bottom: 20px;
         }
@@ -202,31 +202,34 @@
             max-width: 800px;
             margin: 0 auto;
             line-height: 1.8;
+            color: #c0c0c0; /* Slightly lighter text for readability */
         }
 
-        /* Seção de recursos e sistemas operacionais */
+        /* Seção de recursos e sistemas operacionais (cards removed as per original structure, but styles kept for reference if added back) */
         .features-os-section {
             display: flex;
-            flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha em telas menores */
+            flex-wrap: wrap;
             justify-content: center;
             gap: 30px;
             padding: 50px 20px;
             text-align: center;
+            background-color: #1a1a2e; /* Dark background */
         }
 
         .feature-card, .os-card {
-            background-color: #ffffff;
+            background-color: #22223b; /* Dark card background */
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            flex: 1; /* Permite que os cards cresçam e encolham */
-            min-width: 280px; /* Largura mínima para os cards */
-            max-width: 45%; /* Largura máxima para os cards em uma linha */
-            box-sizing: border-box; /* Inclui padding e border no cálculo da largura */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4); /* Darker shadow */
+            flex: 1;
+            min-width: 280px;
+            max-width: 45%;
+            box-sizing: border-box;
+            color: #e0e0e0;
         }
 
         .feature-card h3, .os-card h3 {
-            color: #0056b3;
+            color: #6495ed; /* Lighter blue heading */
             font-size: 1.8em;
             margin-bottom: 15px;
         }
@@ -245,11 +248,11 @@
         .plans-section {
             padding: 50px 20px;
             text-align: center;
-            background-color: #e9ecef;
+            background-color: #1a1a2e; /* Dark background */
         }
 
         .plans-section h2 {
-            color: #0056b3;
+            color: #6495ed; /* Lighter blue heading */
             font-size: 2.2em;
             margin-bottom: 40px;
         }
@@ -264,18 +267,19 @@
         }
 
         .plan-card {
-            background-color: #ffffff;
+            background-color: #22223b; /* Dark card background */
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4); /* Darker shadow */
             text-align: left;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            color: #e0e0e0; /* Light text for card */
         }
 
         .plan-card h3 {
-            color: #0056b3;
+            color: #6495ed; /* Lighter blue heading */
             font-size: 1.6em;
             margin-top: 0;
             margin-bottom: 15px;
@@ -290,7 +294,7 @@
         .plan-card .plan-details ul li {
             margin-bottom: 8px;
             font-size: 0.95em;
-            color: #555;
+            color: #c0c0c0; /* Slightly lighter text for list items */
             display: flex;
             align-items: center;
         }
@@ -298,12 +302,12 @@
         .plan-card .plan-details ul li::before {
             content: '✔️'; /* Ícone de check */
             margin-right: 10px;
-            color: #28a745;
+            color: #28a745; /* Green checkmark */
         }
 
         .plan-card .plan-price {
             font-size: 2em;
-            color: #28a745;
+            color: #3cb371; /* Medium sea green for price */
             font-weight: bold;
             margin-bottom: 20px;
             text-align: center;
@@ -311,7 +315,7 @@
 
         .plan-card .buy-button {
             display: block;
-            background-color: #007bff;
+            background-color: #007bff; /* Blue button remains */
             color: white;
             padding: 12px 20px;
             text-decoration: none;
@@ -324,40 +328,41 @@
         }
 
         .plan-card .buy-button:hover {
-            background-color: #0056b3;
+            background-color: #0056b3; /* Darker blue on hover */
         }
 
         /* Políticas Section Styles */
         .policy-section {
-            background-color: #ffffff;
+            background-color: #22223b; /* Slightly lighter dark background */
             padding: 50px 20px;
-            text-align: left; /* Align text to the left for readability */
-            border-bottom: 1px solid #ddd;
+            text-align: left;
+            border-bottom: 1px solid #3f3f5f; /* Darker border */
         }
 
         .policy-section h2 {
-            color: #0056b3;
+            color: #6495ed; /* Lighter blue heading */
             font-size: 2.2em;
             margin-bottom: 30px;
-            text-align: center; /* Center the section title */
+            text-align: center;
         }
 
         .policy-section h3 {
-            color: #0056b3;
+            color: #6495ed; /* Lighter blue heading */
             font-size: 1.6em;
             margin-top: 25px;
             margin-bottom: 15px;
-            border-bottom: 1px solid #eee; /* Light separator */
+            border-bottom: 1px solid #3f3f5f; /* Darker separator */
             padding-bottom: 5px;
         }
 
         .policy-section p {
             font-size: 1em;
             margin-bottom: 15px;
+            color: #c0c0c0; /* Slightly lighter text for readability */
         }
 
         .policy-section ul {
-            list-style: disc; /* Use disk bullet points for lists */
+            list-style: disc;
             margin-left: 20px;
             margin-bottom: 15px;
             padding-left: 0;
@@ -366,12 +371,12 @@
         .policy-section ul li {
             margin-bottom: 8px;
             font-size: 0.95em;
-            color: #555;
+            color: #c0c0c0; /* Slightly lighter text for list items */
         }
 
         /* Rodapé da página */
         footer {
-            background-color: #333;
+            background-color: #0f0f1a; /* Even darker footer */
             color: white;
             text-align: center;
             padding: 20px 0;
@@ -382,70 +387,57 @@
         /* Estilos responsivos */
         @media (max-width: 768px) {
             .top-bar .container {
-                flex-wrap: wrap; /* Allow items to wrap */
-                justify-content: center; /* Center logo and toggle when wrapped */
+                flex-wrap: wrap;
+                justify-content: center;
             }
-
             .top-bar nav {
-                display: none; /* Hide desktop nav by default on smaller screens */
-                width: 100%; /* Occupy full width when shown as mobile menu */
-                order: 1; /* Place below logo/toggle */
+                display: none;
+                width: 100%;
+                order: 1;
             }
-
             .menu-toggle {
-                display: flex; /* Show hamburger icon */
-                margin-left: auto; /* Push to the right */
+                display: flex;
+                margin-left: auto;
             }
-
             .top-bar nav.active {
-                display: block; /* Show menu when active */
+                display: block;
             }
-
             .top-bar nav ul {
                 flex-direction: column;
                 align-items: center;
-                margin-top: 0; /* Remove top margin */
+                margin-top: 0;
             }
-
             .top-bar nav ul li {
-                margin: 10px 0; /* Vertical spacing for menu items */
+                margin: 10px 0;
             }
-
             .hero-section .cta-button {
-                display: block; /* Stack buttons vertically */
-                width: 80%; /* Make buttons wider */
-                margin: 10px auto; /* Center buttons with spacing */
+                display: block;
+                width: 80%;
+                margin: 10px auto;
             }
-
             header h1 {
                 font-size: 2em;
             }
-
             .hero-section h2 {
                 font-size: 1.8em;
             }
-
             .features-os-section {
-                flex-direction: column; /* Empilha os cards em telas menores */
-                align-items: center; /* Centraliza os cards empilhados */
+                flex-direction: column;
+                align-items: center;
             }
-
             .feature-card, .os-card {
-                max-width: 90%; /* Ocupa mais largura em telas menores */
-                margin-bottom: 20px; /* Adiciona espaço entre os cards empilhados */
+                max-width: 90%;
+                margin-bottom: 20px;
             }
-
             .plans-grid {
-                grid-template-columns: 1fr; /* Um plano por linha em telas menores */
+                grid-template-columns: 1fr;
             }
-
             header img {
-                height: 80px; /* Smaller logos on mobile */
-                margin: 5px; /* Adjust spacing */
+                height: 80px;
+                margin: 5px;
             }
-
             .what-is-cloud-section {
-                padding: 30px 15px; /* Adjust padding for smaller screens */
+                padding: 30px 15px;
             }
         }
 
@@ -453,48 +445,37 @@
             header {
                 padding: 30px 0;
             }
-
             header h1 {
                 font-size: 1.8em;
             }
-
             header p {
                 font-size: 1em;
             }
-
             .hero-section {
                 padding: 30px 15px;
             }
-
             .hero-section h2 {
                 font-size: 1.6em;
             }
-
             .hero-section .cta-button {
                 padding: 12px 25px;
                 font-size: 1em;
             }
-
             .features-os-section {
                 padding: 30px 15px;
             }
-
             .feature-card, .os-card {
                 padding: 20px;
             }
-
             .feature-card h3, .os-card h3 {
                 font-size: 1.5em;
             }
-
             .plans-section {
                 padding: 30px 15px;
             }
-
             .plan-card {
                 padding: 25px;
             }
-
             .plan-card h3 {
                 font-size: 1.4em;
             }
@@ -502,7 +483,7 @@
                 font-size: 1.8em;
             }
             header img {
-                height: 60px; /* Even smaller logos on very small screens */
+                height: 60px;
             }
             .policy-section {
                 padding: 30px 15px;
@@ -548,12 +529,15 @@
             <p>Performance, Flexibilidade e Inovação ao seu Alcance</p>
         </div>
     </header>
-    <div align="center">
-		<h3>Computador na Nuvem Desvendando o Cloud PC da bithostel  TI – Potência e Regras Claras</h3>
-<audio controls>
-                    <source src="cloud.mp3" type="audio/mpeg">
-                    Seu navegador não suporta o elemento de áudio.
-                </audio></div>
+
+    <div align="center" style="background-color: #22223b; padding: 20px 0; border-bottom: 1px solid #3f3f5f;">
+        <h3 style="color: #6495ed;">Computador na Nuvem Desvendando o Cloud PC da bithostel TI – Potência e Regras Claras</h3>
+        <audio controls style="margin-top: 15px;">
+            <source src="cloud.mp3" type="audio/mpeg">
+            Seu navegador não suporta o elemento de áudio.
+        </audio>
+    </div>
+
     <main>
         <section class="hero-section">
             <div class="container">
@@ -564,12 +548,11 @@
             </div>
         </section>
 
-        <section class="what-is-cloud-section"  id="what-is-cloud-section">
+        <section class="what-is-cloud-section" id="what-is-cloud-section">
             <div class="container">
                 <h2>O Que é um Computador na Nuvem?</h2>
                 <p>Um **Computador na Nuvem** (também conhecido como "Cloud PC" ou "Desktop as a Service - DaaS") é, essencialmente, um computador virtual que existe e opera em um servidor remoto, acessado via internet. Ao invés de usar o hardware físico do seu dispositivo local, você se conecta a uma máquina potente hospedada em nossos data centers. Isso significa que a capacidade de processamento, memória RAM, armazenamento e até a placa de vídeo do seu "novo computador" não dependem do seu notebook, tablet ou PC. Você pode acessá-lo de qualquer lugar, a qualquer momento, com apenas uma conexão de internet e um dispositivo simples. É como ter um supercomputador sempre disponível, sem precisar se preocupar com atualizações de hardware ou manutenção local.</p>
-                                <h1></h1><a href="#planos" class="cta-button">Escolha seu Plano Agora!</a></h1>
-
+                <h1></h1><a href="#planos" class="cta-button">Escolha seu Plano Agora!</a></h1>
             </div>
         </section>
 
@@ -632,7 +615,7 @@
                 <h2>Nossos Planos de Computador na Nuvem</h2>
                 <p>Escolha o plano que melhor se encaixa nas suas necessidades e comece a usar seu novo computador na nuvem hoje mesmo!</p>
                 <div class="plans-grid">
-                        <div class="plan-card">
+                    <div class="plan-card">
                         <h3>Computador 4GB 4vCPU - 40GB SSD</h3>
                         <div class="plan-details">
                             <ul>
