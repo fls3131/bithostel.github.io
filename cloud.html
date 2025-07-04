@@ -31,6 +31,7 @@
             justify-content: space-between;
             align-items: center;
             font-size: 0.9em;
+            position: relative; /* Needed for hamburger icon positioning */
         }
 
         .top-bar .container {
@@ -46,6 +47,7 @@
         .top-bar .logo {
             font-weight: bold;
             font-size: 1.1em;
+            flex-shrink: 0; /* Prevent logo from shrinking */
         }
 
         .top-bar .logo a {
@@ -80,6 +82,45 @@
         .top-bar nav ul li a:hover {
             color: #007bff;
         }
+
+        /* Hamburger menu icon for mobile */
+        .menu-toggle {
+            display: none; /* Hidden by default, shown on mobile */
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+            z-index: 1000; /* Ensure it's above other content */
+        }
+
+        .menu-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Styles for when menu is active */
+        .top-bar nav.active ul {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 100%; /* Position below the top bar */
+            left: 0;
+            width: 100%;
+            background-color: #333; /* Slightly darker background for menu */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            padding: 10px 0;
+            border-top: 1px solid #555;
+        }
+
+        .top-bar nav.active ul li {
+            margin: 10px 20px;
+            text-align: center;
+        }
+
 
         /* Cabeçalho da página */
         header {
@@ -135,6 +176,7 @@
             border-radius: 5px;
             font-size: 1.1em;
             transition: background-color 0.3s ease;
+            margin: 10px; /* Add margin for spacing between buttons on small screens */
         }
 
         .hero-section .cta-button:hover {
@@ -161,7 +203,6 @@
             margin: 0 auto;
             line-height: 1.8;
         }
-
 
         /* Seção de recursos e sistemas operacionais */
         .features-os-section {
@@ -341,18 +382,39 @@
         /* Estilos responsivos */
         @media (max-width: 768px) {
             .top-bar .container {
-                flex-direction: column;
-                align-items: center;
+                flex-wrap: wrap; /* Allow items to wrap */
+                justify-content: center; /* Center logo and toggle when wrapped */
+            }
+
+            .top-bar nav {
+                display: none; /* Hide desktop nav by default on smaller screens */
+                width: 100%; /* Occupy full width when shown as mobile menu */
+                order: 1; /* Place below logo/toggle */
+            }
+
+            .menu-toggle {
+                display: flex; /* Show hamburger icon */
+                margin-left: auto; /* Push to the right */
+            }
+
+            .top-bar nav.active {
+                display: block; /* Show menu when active */
             }
 
             .top-bar nav ul {
-                margin-top: 10px;
-                flex-wrap: wrap;
-                justify-content: center;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 0; /* Remove top margin */
             }
 
             .top-bar nav ul li {
-                margin: 5px 10px;
+                margin: 10px 0; /* Vertical spacing for menu items */
+            }
+
+            .hero-section .cta-button {
+                display: block; /* Stack buttons vertically */
+                width: 80%; /* Make buttons wider */
+                margin: 10px auto; /* Center buttons with spacing */
             }
 
             header h1 {
@@ -379,6 +441,11 @@
 
             header img {
                 height: 80px; /* Smaller logos on mobile */
+                margin: 5px; /* Adjust spacing */
+            }
+
+            .what-is-cloud-section {
+                padding: 30px 15px; /* Adjust padding for smaller screens */
             }
         }
 
@@ -437,6 +504,15 @@
             header img {
                 height: 60px; /* Even smaller logos on very small screens */
             }
+            .policy-section {
+                padding: 30px 15px;
+            }
+            .policy-section h2 {
+                font-size: 1.8em;
+            }
+            .policy-section h3 {
+                font-size: 1.4em;
+            }
         }
     </style>
 </head>
@@ -448,13 +524,17 @@
                     <img src="logo.png" alt="bithostel TI Logo">
                 </a>
             </div>
-            <nav>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <nav id="main-nav">
                 <ul>
                     <li><a href="https://www.bithostel.com.br" target="_blank">Website Principal</a></li>
                     <li><a href="https://www.bithostel.com.br/VPN.html" target="_blank">Segurança Digital</a></li>
                     <li><a href="#politicas-uso">Política de USO</a></li>
                     <li><a href="#what-is-cloud-section">Computador na Nuvem?</a></li>
-                    
                 </ul>
             </nav>
         </div>
@@ -475,7 +555,7 @@
                 <h2>Chega de máquinas lentas! Apresentamos a mais nova geração de computadores na nuvem</h2>
                 <p>Experimente a Força de um Computador potente, na nuvem de Onde Quiser! Projetados para oferecer **velocidade, segurança e flexibilidade incomparáveis**. Escolha entre **Windows 10 ou MX Linux** e trabalhe, jogue ou crie sem limites com o que melhor se adapta às suas necessidades.</p>
                 <a href="#planos" class="cta-button">Escolha seu Plano Agora!</a>
-                <a href="#what-is-cloud-section" class="cta-button">O qué é um Computador na NUVEM?</a>
+                <a href="#what-is-cloud-section" class="cta-button">O que é um Computador na NUVEM?</a>
             </div>
         </section>
 
@@ -673,5 +753,12 @@
             <p>&copy; 2025 Seu Computador na Nuvem. bithostel TI - cnpj 14.406.585/0001-59 - Todos os direitos reservados.</p>
         </div>
     </footer>
+
+    <script>
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            var nav = document.getElementById('main-nav');
+            nav.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
