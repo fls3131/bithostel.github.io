@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seu Novo Computador na Nuvem</title>
     <link rel="icon" type="image/png" href="assets/logo//favicon.png"/>
-
     <style>
         /* Estilos básicos para o corpo da página */
         body {
@@ -35,7 +34,6 @@
             font-size: 0.9em;
             position: relative; /* Needed for hamburger icon positioning */
         }
-
         .top-bar .container {
             display: flex;
             justify-content: space-between;
@@ -45,46 +43,38 @@
             padding: 0 20px;
             width: 100%;
         }
-
         .top-bar .logo {
             font-weight: bold;
             font-size: 1.1em;
             flex-shrink: 0; /* Prevent logo from shrinking */
         }
-
         .top-bar .logo a {
             color: white;
             text-decoration: none;
             display: flex;
             align-items: center;
         }
-
         .top-bar .logo img {
             height: 30px; /* Adjust logo height as needed */
             margin-right: 10px;
         }
-
         .top-bar nav ul {
             list-style: none;
             margin: 0;
             padding: 0;
             display: flex;
         }
-
         .top-bar nav ul li {
             margin-left: 20px;
         }
-
         .top-bar nav ul li a {
             color: white;
             text-decoration: none;
             transition: color 0.3s ease;
         }
-
         .top-bar nav ul li a:hover {
             color: #6495ed; /* Lighter blue for hover */
         }
-
         /* Hamburger menu icon for mobile */
         .menu-toggle {
             display: none; /* Hidden by default, shown on mobile */
@@ -95,7 +85,6 @@
             cursor: pointer;
             z-index: 1000; /* Ensure it's above other content */
         }
-
         .menu-toggle .bar {
             width: 100%;
             height: 3px;
@@ -103,7 +92,6 @@
             border-radius: 5px;
             transition: all 0.3s ease;
         }
-
         /* Styles for when menu is active */
         .top-bar nav.active ul {
             display: flex;
@@ -117,12 +105,10 @@
             padding: 10px 0;
             border-top: 1px solid #555;
         }
-
         .top-bar nav.active ul li {
             margin: 10px 20px;
             text-align: center;
         }
-
         /* Cabeçalho da página */
         header {
             background-color: #16213e; /* Darker blue header */
@@ -130,24 +116,20 @@
             padding: 40px 0;
             text-align: center;
         }
-
         header h1 {
             margin: 0;
             font-size: 2.8em;
         }
-
         header p {
             font-size: 1.2em;
             margin-top: 10px;
         }
-
         header img {
             height: 100px; /* Adjust as needed for better visual balance */
             width: auto; /* Maintain aspect ratio */
             margin: 0 10px; /* Space between logos */
             vertical-align: middle; /* Align images nicely with text */
         }
-
         /* Seção de introdução ao produto */
         .hero-section {
             background-color: #1a1a2e; /* Dark background */
@@ -155,20 +137,17 @@
             text-align: center;
             border-bottom: 1px solid #3f3f5f; /* Darker border */
         }
-
         .hero-section h2 {
             color: #6495ed; /* Lighter blue heading */
             font-size: 2.2em;
             margin-bottom: 20px;
         }
-
         .hero-section p {
             font-size: 1.1em;
             max-width: 800px;
             margin: 0 auto 30px auto;
             color: #c0c0c0; /* Slightly lighter text for readability */
         }
-
         .hero-section .cta-button {
             display: inline-block;
             background-color: #28a745; /* Green button remains */
@@ -180,11 +159,9 @@
             transition: background-color 0.3s ease;
             margin: 10px; /* Add margin for spacing between buttons on small screens */
         }
-
         .hero-section .cta-button:hover {
             background-color: #218838; /* Darker green on hover */
         }
-
         /* What is Cloud Computer Section */
         .what-is-cloud-section {
             background-color: #22223b; /* Slightly lighter dark background */
@@ -192,13 +169,11 @@
             text-align: center;
             border-bottom: 1px solid #3f3f5f; /* Darker border */
         }
-
         .what-is-cloud-section h2 {
             color: #6495ed; /* Lighter blue heading */
             font-size: 2.2em;
             margin-bottom: 20px;
         }
-
         .what-is-cloud-section p {
             font-size: 1.1em;
             max-width: 800px;
@@ -206,7 +181,6 @@
             line-height: 1.8;
             color: #c0c0c0; /* Slightly lighter text for readability */
         }
-
         /* Seção de recursos e sistemas operacionais (cards removed as per original structure, but styles kept for reference if added back) */
         .features-os-section {
             display: flex;
@@ -217,7 +191,6 @@
             text-align: center;
             background-color: #1a1a2e; /* Dark background */
         }
-
         .feature-card, .os-card {
             background-color: #22223b; /* Dark card background */
             padding: 30px;
@@ -229,21 +202,140 @@
             box-sizing: border-box;
             color: #e0e0e0;
         }
-
         .feature-card h3, .os-card h3 {
             color: #6495ed; /* Lighter blue heading */
             font-size: 1.8em;
             margin-bottom: 15px;
         }
-
         .feature-card p, .os-card p {
             font-size: 1em;
         }
-
         .os-card img {
             width: 80px;
             height: auto;
             margin-bottom: 15px;
+        }
+        /* Raspberry Pi Section */
+        .raspberry-pi-section {
+            background-color: #1a1a2e; /* Dark background */
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 1px solid #3f3f5f; /* Darker border */
+        }
+        .raspberry-pi-section h2 {
+            color: #6495ed; /* Lighter blue heading */
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+        .raspberry-pi-section p {
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            color: #c0c0c0; /* Slightly lighter text for readability */
+        }
+        .raspberry-pi-section ul {
+            list-style: none;
+            padding: 0;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: left;
+            color: #c0c0c0;
+        }
+        .raspberry-pi-section ul li {
+            margin-bottom: 10px;
+            font-size: 1em;
+            position: relative;
+            padding-left: 25px;
+        }
+        .raspberry-pi-section ul li::before {
+            content: '•';
+            color: #28a745;
+            position: absolute;
+            left: 0;
+            font-size: 1.2em;
+            line-height: 1;
+        }
+        .raspberry-pi-section img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+
+        /* Raspberry Pi Grid for Products */
+        .raspberry-pi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 40px auto 0 auto; /* Added margin-top */
+        }
+
+        .raspberry-pi-card {
+            background-color: #22223b; /* Dark card background */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4); /* Darker shadow */
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #e0e0e0;
+        }
+
+        .raspberry-pi-card h3 {
+            color: #6495ed; /* Lighter blue heading */
+            font-size: 1.6em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .raspberry-pi-card .product-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+
+        .raspberry-pi-card .product-details ul li {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            color: #c0c0c0;
+            display: flex;
+            align-items: center;
+        }
+
+        .raspberry-pi-card .product-details ul li::before {
+            content: '✔️';
+            margin-right: 10px;
+            color: #28a745;
+        }
+
+        .raspberry-pi-card .product-price {
+            font-size: 2em;
+            color: #3cb371;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .raspberry-pi-card .buy-button {
+            display: block;
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .raspberry-pi-card .buy-button:hover {
+            background-color: #0056b3;
         }
 
         /* Seção de Planos */
@@ -252,13 +344,11 @@
             text-align: center;
             background-color: #1a1a2e; /* Dark background */
         }
-
         .plans-section h2 {
             color: #6495ed; /* Lighter blue heading */
             font-size: 2.2em;
             margin-bottom: 40px;
         }
-
         .plans-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -267,7 +357,6 @@
             max-width: 1000px;
             margin: 0 auto;
         }
-
         .plan-card {
             background-color: #22223b; /* Dark card background */
             padding: 30px;
@@ -279,20 +368,17 @@
             justify-content: space-between;
             color: #e0e0e0; /* Light text for card */
         }
-
         .plan-card h3 {
             color: #6495ed; /* Lighter blue heading */
             font-size: 1.6em;
             margin-top: 0;
             margin-bottom: 15px;
         }
-
         .plan-card .plan-details ul {
             list-style: none;
             padding: 0;
             margin: 0 0 20px 0;
         }
-
         .plan-card .plan-details ul li {
             margin-bottom: 8px;
             font-size: 0.95em;
@@ -300,13 +386,11 @@
             display: flex;
             align-items: center;
         }
-
         .plan-card .plan-details ul li::before {
             content: '✔️'; /* Ícone de check */
             margin-right: 10px;
             color: #28a745; /* Green checkmark */
         }
-
         .plan-card .plan-price {
             font-size: 2em;
             color: #3cb371; /* Medium sea green for price */
@@ -314,7 +398,6 @@
             margin-bottom: 20px;
             text-align: center;
         }
-
         .plan-card .buy-button {
             display: block;
             background-color: #007bff; /* Blue button remains */
@@ -328,11 +411,9 @@
             width: 100%;
             box-sizing: border-box; /* Garante que padding não aumente a largura */
         }
-
         .plan-card .buy-button:hover {
             background-color: #0056b3; /* Darker blue on hover */
         }
-
         /* Políticas Section Styles */
         .policy-section {
             background-color: #22223b; /* Slightly lighter dark background */
@@ -340,14 +421,12 @@
             text-align: left;
             border-bottom: 1px solid #3f3f5f; /* Darker border */
         }
-
         .policy-section h2 {
             color: #6495ed; /* Lighter blue heading */
             font-size: 2.2em;
             margin-bottom: 30px;
             text-align: center;
         }
-
         .policy-section h3 {
             color: #6495ed; /* Lighter blue heading */
             font-size: 1.6em;
@@ -356,26 +435,22 @@
             border-bottom: 1px solid #3f3f5f; /* Darker separator */
             padding-bottom: 5px;
         }
-
         .policy-section p {
             font-size: 1em;
             margin-bottom: 15px;
             color: #c0c0c0; /* Slightly lighter text for readability */
         }
-
         .policy-section ul {
             list-style: disc;
             margin-left: 20px;
             margin-bottom: 15px;
             padding-left: 0;
         }
-
         .policy-section ul li {
             margin-bottom: 8px;
             font-size: 0.95em;
             color: #c0c0c0; /* Slightly lighter text for list items */
         }
-
         /* Rodapé da página */
         footer {
             background-color: #0f0f1a; /* Even darker footer */
@@ -385,7 +460,6 @@
             margin-top: 30px;
             font-size: 0.9em;
         }
-
         /* Estilos responsivos */
         @media (max-width: 768px) {
             .top-bar .container {
@@ -431,7 +505,7 @@
                 max-width: 90%;
                 margin-bottom: 20px;
             }
-            .plans-grid {
+            .plans-grid, .raspberry-pi-grid { /* Apply to both grids */
                 grid-template-columns: 1fr;
             }
             header img {
@@ -442,7 +516,6 @@
                 padding: 30px 15px;
             }
         }
-
         @media (max-width: 480px) {
             header {
                 padding: 30px 0;
@@ -475,13 +548,13 @@
             .plans-section {
                 padding: 30px 15px;
             }
-            .plan-card {
+            .plan-card, .raspberry-pi-card { /* Apply to both card types */
                 padding: 25px;
             }
-            .plan-card h3 {
+            .plan-card h3, .raspberry-pi-card h3 { /* Apply to both card types */
                 font-size: 1.4em;
             }
-            .plan-card .plan-price {
+            .plan-card .plan-price, .raspberry-pi-card .product-price { /* Apply to both card types */
                 font-size: 1.8em;
             }
             header img {
@@ -518,6 +591,7 @@
                     <li><a href="https://www.bithostel.com.br/VPN.html" target="_blank">Segurança Digital</a></li>
                     <li><a href="#politicas-uso">Política de USO</a></li>
                     <li><a href="#what-is-cloud-section">Computador na Nuvem?</a></li>
+                    <li><a href="#raspberry-pi-desktop">Kit Raspberry Pi</a></li>
                 </ul>
             </nav>
         </div>
@@ -531,36 +605,85 @@
             <p>Performance, Flexibilidade e Inovação ao seu Alcance</p>
         </div>
     </header>
+
     <main>
         <section class="hero-section">
             <div class="container">
-				<h2>Chega de máquinas lentas! <br>Apresentamos a mais nova geração de computadores na nuvem</h2>
-                <p>Experimente a Força de um Computador potente, na nuvem de Onde Quiser! Projetados para oferecer **velocidade, segurança e flexibilidade incomparáveis**. Escolha entre **Windows 10 ou MX Linux** e trabalhe, jogue ou crie sem limites com o que melhor se adapta às suas necessidades.</p>
+				<h2>Chega de máquinas lentas! <br>Apresentamos a mais nova geração de computadores na nuvem.<br>Seu computador esta desatualizado?</h2>
+                <p>Suba de nível e faça um upgrade pra CLOUD, **COMPRE AGORA SEU CPU NA NUVEM.** Basicamente é a mesma coisa de ter um computador só seu, seu PC, mas pode ser usado e acessado de qualquer lugar com internet e tem a força de um computador potente, na nuvem! Sai mais barato que comprar um computador físico e é mais potente, seguro e com alta disponibilidade de acesso, muito mais conveniência. Projetados para oferecer **velocidade, segurança e flexibilidade incomparáveis**. Escolha entre **Windows 10 ou MX Linux** e trabalhe, jogue ou crie sem limites com o que melhor se adapta às suas necessidades.</p>
                  <a href="#planos" class="cta-button">Escolha seu Plano Agora!</a>
-                <a href="#what-is-cloud-section" class="cta-button">Computador na NUVEM?</a><br><br>	
-                			
-                
- <div align="center" style="background-color: #22223b; padding: 20px 0; border-bottom: 1px solid #3f3f5f;">
-	 
-        <h3 style="color: #6495ed;">Computador na Nuvem ?<br> Desvendando o Cloud PC da bithostel TI – Potência e Regras Claras</h3>
+                <a href="#what-is-cloud-section" class="cta-button">Computador na NUVEM?</a><br><br>
+	                			                 <div align="center" style="background-color: #22223b; padding: 20px 0; border-bottom: 1px solid #3f3f5f;">
+	         <h3 style="color: #6495ed;">Computador na Nuvem ?<br> Desvendando o Cloud PC da bithostel TI – Potência e Regras Claras</h3>
         <audio controls style="margin-top: 15px;">
             <source src="cloud.mp3" type="audio/mpeg">
             Seu navegador não suporta o elemento de áudio.
         </audio>
     </div>
-    
-            </div>
-            <script type="text/javascript" src="https://www.free-counters.org/count/i65n"></script><br>
- <a href='https://www.versicherungen.at/lebensversicherung/'>Lebensversicherung</a> <script type='text/javascript' src='https://whomania.com/ctr?id=df667472a6fb5b94bfff9d1819e3c6545a7cab15'></script>
- 
+                </div>
+            <script type="text/javascript" src="https://www.free-counters.org/count/i65n"></script><br> <a href='https://www.versicherungen.at/lebensversicherung/'>Lebensversicherung</a> <script type='text/javascript' src='https://whomania.com/ctr?id=df667472a6fb5b94bfff9d1819e3c6545a7cab15'></script>
         </section>
 
         <section class="what-is-cloud-section" id="what-is-cloud-section">
             <div class="container">
+				 <img src="assets/images/cloud-info.png" width="300" height="220" alt="Cloud PC">
                 <h2>O Que é um Computador na Nuvem?</h2>
+                <h3>Um computador na nuvem (cloud desktop), é um computador que roda na internet, permitindo que você acesse seus programas e arquivos de qualquer lugar, usando qualquer aparelho conectado à internet.</h3>
                 <p>Um **Computador na Nuvem** (também conhecido como "Cloud PC" ou "Desktop as a Service - DaaS") é, essencialmente, um computador virtual que existe e opera em um servidor remoto, acessado via internet. Ao invés de usar o hardware físico do seu dispositivo local, você se conecta a uma máquina potente hospedada em nossos data centers. Isso significa que a capacidade de processamento, memória RAM, armazenamento e até a placa de vídeo do seu "novo computador" não dependem do seu notebook, tablet ou PC. Você pode acessá-lo de qualquer lugar, a qualquer momento, com apenas uma conexão de internet e um dispositivo simples. É como ter um supercomputador sempre disponível, sem precisar se preocupar com atualizações de hardware ou manutenção local.</p>
                 <h1></h1><a href="#planos" class="cta-button">Escolha seu Plano Agora!</a></h1>
-                
+                            </div>
+        </section>
+
+        <section class="raspberry-pi-section" id="raspberry-pi-desktop">
+            <div class="container">
+				<img src="assets/logo/rasp.png" alt="Raspberry Pi Logo">
+                <h2>Conecte-se com o Kit Raspberry Pi Desktop</h2>
+                <p>O **Kit Raspberry Pi Desktop** é a solução completa para montar um computador compacto e versátil. Ideal para complementar seu Computador na Nuvem, ele permite que você tenha uma máquina física eficiente para tarefas locais e para se conectar ao seu ambiente na nuvem, utilizando **MX Linux ou Windows 10** como sistema operacional.</p>
+                <h2>É a combinação perfeita para quem busca **economia e funcionalidade**, aproveitando a potência do seu Computador na Nuvem com a praticidade de um dispositivo físico.</h2>
+                <img src="assets/images/kitraspi.png" alt="Raspberry Pi Desktop Kit" style="max-width: 500px;"><br><br>
+                <p>Com este kit, você pode navegar na internet, jogar e mergulhar na programação com uma das placas mais robustas do mundo maker.</p>
+                <h3>Principais características do Kit:</h3>
+                <ul>
+                    <li>**Raspberry Pi 3 B+, Pi 4 ou Pi 5:** Escolha a versão da placa que melhor se adapta às suas necessidades de performance.</li>
+                    <li>**Dissipador e fonte:** Componentes essenciais para o funcionamento seguro e eficiente do seu Raspberry Pi.</li>
+                    <li>**Cabo, case e cartão de memória:** Tudo o que você precisa para montar e proteger seu mini computador.</li>
+                    <li>**Teclado e Mouse Raspberry Pi:** Periféricos oficiais para uma experiência de uso completa e confortável.</li>
+                    <li>**Economia comprando junto:** Um pacote completo que oferece um excelente custo-benefício em comparação com a compra avulsa dos itens.</li>
+                </ul>
+<img src="assets/images/bitcloud.png" alt="Raspberry Pi Logo">
+
+                <div class="raspberry-pi-grid">
+                    <div class="raspberry-pi-card">
+                        <h3>Kit Raspberry Pi 3 B+ Desktop</h3>
+                        <div class="product-details">
+                            <ul>
+                                <li>Raspberry Pi 3 B+ homologado Anatel</li>
+                                <li>Teclado e Mouse Raspberry Pi</li>
+                                <li>Fonte de Alimentação e Dissipador</li>
+                                <li>Cabo HDMI e Case oficial</li>
+                                <li>Cartão de Memória com Sistema</li>
+                                <li>Compatível com Computador na Nuvem (MX Linux / Windows 10)</li>
+                            </ul>
+                        </div>
+                        <div class="product-price">R$ 1.290,00</div>
+                        <a href="LINK_DE_COMPRA_PI3" class="buy-button">Comprar Kit PI 3</a>
+                    </div>
+                    <div class="raspberry-pi-card">
+                        <h3>Kit Raspberry Pi 5 (2GB RAM) Desktop</h3>
+                        <div class="product-details">
+                            <ul>
+                                <li>Raspberry Pi 5 (2GB RAM) homologado Anatel</li>
+                                <li>Teclado e Mouse Raspberry Pi</li>
+                                <li>Fonte de Alimentação e Dissipador</li>
+                                <li>Cabo HDMI e Case oficial</li>
+                                <li>Cartão de Memória com Sistema</li>
+                                <li>Compatível com Computador na Nuvem (MX Linux / Windows 10)</li>
+                            </ul>
+                        </div>
+                        <div class="product-price">R$ 1.790,00</div>
+                        <a href="LINK_DE_COMPRA_PI5" class="buy-button">Comprar Kit PI 5</a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -614,8 +737,7 @@
                 </ul>
 
                 <h3>10. Contato para Suporte</h3>
-                <p>Para quaisquer dúvidas, esclarecimentos sobre estas políticas ou para relatar problemas relacionados ao uso do seu Computador na Nuvem, os usuários devem entrar em contato com a equipe de suporte da bithostel TI através dos canais disponíveis em nosso website principal.</p>
-            </div>
+                <p>Para quaisquer dúvidas, esclarecimentos sobre estas políticas ou para relatar problemas relacionados ao uso do seu Computador na Nuvem, os usuários devem entrar em contato com a equipe de suporte da bithostel TI através dos canais disponíveis em nosso website principal.</p>            </div>
         </section>
 
         <section class="plans-section" id="planos">
@@ -688,7 +810,7 @@
                             </ul>
                         </div>
                         <div class="plan-price">R$ 164.49 /mês</div>
-                        <a href="https://app.monetizze.com.br/checkout/DZH351594" class="buy-button">Comprar</a>
+                        <a href="https://app.monetizze.com.br/checkout/DZH351551594" class="buy-button">Comprar</a>
                     </div>
 
                     <div class="plan-card">
