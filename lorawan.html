@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação LoRaWAN</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2, h3 {
+            color: #0056b3;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+        .highlight {
+            background-color: #e0f7fa;
+            padding: 10px;
+            border-left: 5px solid #007bff;
+            margin-bottom: 15px;
+        }
+        @media (max-width: 768px) {
+            body {
+                padding: 15px;
+            }
+            .container {
+                padding: 20px;
+            }
+        }
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>O que é LoRaWAN?</h1>
+        <p><strong>LoRaWAN</strong> é uma sigla para <strong>Lo</strong>ng <strong>Ra</strong>nge <strong>W</strong>ide <strong>A</strong>rea <strong>N</strong>etwork. É uma tecnologia de rede de baixa potência e longa distância, projetada especificamente para aplicações de Internet das Coisas (IoT).</p>
+
+        <div class="highlight">
+            <p><strong>LoRa</strong>, como visto na imagem, é a abreviação de Long Range (Longa Distância). LoRaWAN é, portanto, uma rede de longa distância de baixo consumo.</p>
+        </div>
+
+        <h2>Características Principais do LoRaWAN</h2>
+
+        <h3>1. Longa Distância (Long Range)</h3>
+        <ul>
+            <li><strong>Alcance:</strong> LoRaWAN pode operar por vários quilômetros em áreas rurais (até 15-20 km em condições ideais) e em áreas urbanas (2-5 km, dependendo da obstrução).</li>
+            <li><strong>Penetração:</strong> Oferece boa penetração em ambientes fechados e urbanos, o que é crucial para dispositivos IoT que podem estar dentro de edifícios ou subterrâneos.</li>
+        </ul>
+
+        <h3>2. Baixo Consumo de Energia (Low Power)</h3>
+        <ul>
+            <li><strong>Vida Útil da Bateria:</strong> Os dispositivos LoRaWAN são projetados para operar por anos (até 10 anos ou mais) com uma única bateria, tornando-os ideais para aplicações onde a substituição frequente da bateria é impraticável ou cara.</li>
+            <li><strong>Otimização de Energia:</strong> Isso é conseguido através de modulação LoRa eficiente e protocolos de comunicação que minimizam o tempo de transmissão e o consumo de energia em estados ociosos.</li>
+        </ul>
+
+        <h3>3. Rede de Área Ampla (Wide Area Network)</h3>
+        <ul>
+            <li><strong>Infraestrutura:</strong> Uma rede LoRaWAN consiste em dispositivos finais (sensores, atuadores), gateways (que retransmitem dados), um servidor de rede e um servidor de aplicação.</li>
+            <li><strong>Escalabilidade:</strong> A arquitetura LoRaWAN permite a conexão de milhões de dispositivos a uma única rede, facilitando a implantação de soluções IoT em larga escala.</li>
+        </ul>
+
+        <h3>4. Segurança</h3>
+        <ul>
+            <li><strong>Criptografia:</strong> LoRaWAN incorpora criptografia de ponta a ponta (AES 128) em duas camadas: uma para o nível da rede e outra para o nível da aplicação, garantindo a segurança dos dados transmitidos.</li>
+        </ul>
+
+        <h3>5. Custo Efetivo</h3>
+        <ul>
+            <li><strong>Hardware Simplificado:</strong> Os módulos LoRa são relativamente baratos, e a infraestrutura de rede pode ser mais econômica em comparação com outras tecnologias de comunicação sem fio de longo alcance.</li>
+            <li><strong>Espectro Não Licenciado:</strong> Geralmente opera em bandas de frequência não licenciadas (como 868 MHz na Europa, 915 MHz nas Américas e 433 MHz na Ásia), reduzindo custos de licenciamento.</li>
+        </ul>
+
+        <h2>Como o LoRaWAN Funciona?</h2>
+        <p>Um dispositivo LoRaWAN (nó) envia dados usando a tecnologia de modulação LoRa para um ou mais gateways. Os gateways, por sua vez, reencaminham esses dados para um servidor de rede LoRaWAN. O servidor de rede lida com a remoção de duplicações, programação de reconhecimento e adaptação da taxa de dados, antes de encaminhar os dados para o servidor de aplicação correspondente, onde os dados são processados e utilizados.</p>
+
+        <h2>Aplicações Típicas do LoRaWAN</h2>
+        <ul>
+            <li><strong>Cidades Inteligentes:</strong> Monitoramento de estacionamentos, iluminação pública, gerenciamento de resíduos, monitoramento ambiental.</li>
+            <li><strong>Agricultura Inteligente:</strong> Monitoramento de solo, gado, irrigação.</li>
+            <li><strong>Logística e Cadeia de Suprimentos:</strong> Rastreamento de ativos, monitoramento de temperatura em transporte.</li>
+            <li><strong>Indústria 4.0:</strong> Monitoramento de máquinas, manutenção preditiva.</li>
+            <li><strong>Medição Inteligente:</strong> Medidores de água, gás e eletricidade.</li>
+        </ul>
+
+        <p>LoRaWAN é uma tecnologia robusta e eficiente que preenche uma lacuna importante no ecossistema IoT, oferecendo uma solução de conectividade de longo alcance e baixo consumo para uma vasta gama de aplicações.</p>
+    </div>
+</body>
+</html>
