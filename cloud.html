@@ -448,6 +448,37 @@
             margin-top: 30px;
             font-size: 0.9em;
         }
+
+        /* Styles for Shipping Info Section */
+        .shipping-info-section {
+            background-color: #22223b; /* Slightly lighter dark background */
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #3f3f5f; /* Darker border */
+            margin-top: 30px; /* Space from products grid */
+        }
+        .shipping-info-section h3 {
+            color: #6495ed; /* Lighter blue heading */
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+        .shipping-info-section p {
+            font-size: 1em;
+            color: #c0c0c0;
+            max-width: 800px;
+            margin: 0 auto 15px auto;
+            line-height: 1.6;
+        }
+        .shipping-info-section a {
+            color: #28a745; /* Green link for consistency */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .shipping-info-section a:hover {
+            color: #3cb371;
+        }
+
         /* Estilos responsivos */
         @media (max-width: 768px) {
             .top-bar .container {
@@ -503,6 +534,12 @@
             .what-is-cloud-section {
                 padding: 30px 15px;
             }
+            .shipping-info-section {
+                padding: 30px 15px;
+            }
+            .shipping-info-section h3 {
+                font-size: 1.6em;
+            }
         }
         @media (max-width: 480px) {
             header {
@@ -555,6 +592,12 @@
                 font-size: 1.8em;
             }
             .policy-section h3 {
+                font-size: 1.4em;
+            }
+            .shipping-info-section {
+                padding: 25px 15px;
+            }
+            .shipping-info-section h3 {
                 font-size: 1.4em;
             }
         }
@@ -691,9 +734,19 @@
                         <a href="https://docs.google.com/forms/d/e/1FAIpQLScveEdOVla54Up5s7Q_msWxpX4HJBq3c5xVyCA70zaxsmM7Gw/viewform?usp=dialog" class="buy-button">Comprar Kit PI 5</a>
                     </div>
                 </div>
+
+                <div class="shipping-info-section">
+                    <h3>Métodos de Envio</h3>
+                    <p><strong>Envio para todo o BRASIL!</strong></p>
+                    <p><strong>Método de retirada:</strong> Retirada no local</p>
+                    <p><strong>Local de retirada:</strong> bithostel TI, Rua Frei Francisco Sampaio, 283 APTO 44, Santos-São Paulo, 11035-105, Brasil</p>
+                    <p><strong>Horário de funcionamento:</strong> 9:00-18:00 Seg-Sex</p>
+                    <p>Todos os produtos serão enviados de acordo com a forma escolhida pelo cliente, em até 14 dias úteis da confirmação do pagamento. O prazo para a entrega varia de acordo com a forma de envio escolhida ou do produto a ser enviado, já que iremos instalar, preparar, disponibilizar infraestrutura e configurar individualmente alguns equipamentos, e a entrega não é de nossa responsabilidade, pois fica a cargo dos Correios. Você será informado do código para rastrear sua encomenda através do site dos Correios assim que ela for postada.</p>
+                    <p>Para mais informações sobre nossos métodos de envio, acesse: <a href="https://bithostel.com.br/index.html#envio" target="_blank">Métodos de Envio bithostel TI</a></p>
+                </div>
+
             </div>
         </section>
-
         <section class="policy-section" id="politicas-uso">
             <div class="container">
                 <h2>Políticas de Uso do Computador na Nuvem - bithostel TI</h2>
@@ -738,7 +791,6 @@
                 <p>Para quaisquer dúvidas, esclarecimentos sobre estas políticas ou para relatar problemas relacionados ao uso do seu Computador na Nuvem, os usuários devem entrar em contato com a equipe de suporte da bithostel TI através dos canais disponíveis em nosso website principal.</p>
             </div>
         </section>
-
         <section class="plans-section" id="planos">
             <div class="container">
                 <h2>Nossos Planos de Computador na Nuvem</h2>
@@ -761,10 +813,7 @@
                         <a href="https://app.monetizze.com.br/checkout/KJV434481" class="buy-button">Comprar</a><br>
                         <div class="plan-price">R$ 645.62 /ano</div>
                         <a href="https://app.monetizze.com.br/checkout/DPV352508" class="buy-button">Comprar</a>
-                        
-                        
                     </div>
-
                     <div class="plan-card">
                         <h3>Computador 6GB 4vCPU - 40GB SSD</h3>
                         <div class="plan-details">
@@ -783,7 +832,6 @@
                         <div class="plan-price">R$ 890.12 /ano</div>
                         <a href="https://app.monetizze.com.br/checkout/DYT352509" class="buy-button">Comprar</a>
                     </div>
-
                     <div class="plan-card">
                         <h3>Computador 8GB 4vCPU - 50GB SSD</h3>
                         <div class="plan-details">
@@ -800,7 +848,6 @@
                         <div class="plan-price">R$ 107.66 /mês</div>
                         <a href="https://app.monetizze.com.br/checkout/DVL351592" class="buy-button">Comprar</a>
                     </div>
-
                     <div class="plan-card">
                         <h3>Computador 12GB 4vCPU - 60GB NVME</h3>
                         <div class="plan-details">
@@ -817,7 +864,6 @@
                         <div class="plan-price">R$ 164.49 /mês</div>
                         <a href="https://app.monetizze.com.br/checkout/DZH351551594" class="buy-button">Comprar</a>
                     </div>
-
                     <div class="plan-card">
                         <h3>Computador 16GB 4vCPU - 60GB NVME</h3>
                         <div class="plan-details">
@@ -834,7 +880,6 @@
                         <div class="plan-price">R$ 193.89 /mês</div>
                         <a href="https://app.monetizze.com.br/checkout/DLP351595" class="buy-button">Comprar</a>
                     </div>
-
                     <div class="plan-card">
                         <h3>Computador 24GB 6vCPU - 60GB NVME</h3>
                         <div class="plan-details">
@@ -851,7 +896,6 @@
                         <div class="plan-price">R$ 215.45 /mês</div>
                         <a href="https://app.monetizze.com.br/checkout/DWP351596" class="buy-button">Comprar</a>
                     </div>
-
                     <div class="plan-card">
                         <h3>Computador 32GB 6vCPU - 60GB NVME</h3>
                         <div class="plan-details">
@@ -871,11 +915,9 @@
                 </div>
             </div>
         </section>
-
         <section class="plans-section" id="ryzen-plans">
             <div class="container">
 							<img src="assets/images/amd.png" width="150" height="110" alt="Cloud PC">
-
                 <h2>Nossos Planos de Computador na Nuvem com Processadores Ryzen</h2>
                 <p>Experimente a potência dos processadores AMD Ryzen em seus computadores na nuvem. Disponíveis na Europa e EUA, com desempenho superior para as suas tarefas mais exigentes!</p>
                 <div class="plans-grid">
@@ -895,9 +937,7 @@
                         <a href="https://app.monetizze.com.br/checkout/DCB352505" class="buy-button">Comprar</a><br>
                         <div class="plan-price">R$ 990.00 /ano</div>
                         <a href="https://app.monetizze.com.br/checkout/DWZ352506" class="buy-button">Comprar</a>
-                        
-                        </div>
-
+                    </div>
                     <div class="plan-card">
                         <h3>Computador com 4GB RAM - 4 vCPUs Ryzen - 60GB NVMe</h3>
                         <div class="plan-details">
@@ -913,7 +953,6 @@
                         <div class="plan-price">R$ 116.89 /mês</div>
                         <a href="https://app.monetizze.com.br/checkout/DLJ352510" class="buy-button">Comprar</a>
                     </div>
-
                     <div class="plan-card">
                         <h3>Computador com 6GB RAM - 6 vCPUs Ryzen - 90GB NVMe</h3>
                         <div class="plan-details">
@@ -929,7 +968,6 @@
                         <div class="plan-price">R$ 175.39 /mês</div>
                         <a href="https://app.monetizze.com.br/checkout/DCL352512" class="buy-button">Comprar</a>
                     </div>
-
                     <div class="plan-card">
                         <h3>Computador com 8GB RAM - 8 vCPUs Ryzen - 120GB NVMe</h3>
                         <div class="plan-details">
@@ -945,7 +983,6 @@
                         <div class="plan-price">R$ 233.89 /mês</div>
                         <a href="https://app.monetizze.com.br/checkout/DSN352513" class="buy-button">Comprar</a>
                     </div>
-
                     <div class="plan-card">
                         <h3>Computador com 16GB RAM - 8 vCPUs Ryzen - 240GB NVMe</h3>
                         <div class="plan-details">
