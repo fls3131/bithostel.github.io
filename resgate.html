@@ -169,6 +169,40 @@
             text-decoration: underline;
         }
 
+        .category-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-align: left;
+        }
+
+        .category-card h3 {
+            color: #007bff; /* Azul para categorias */
+            margin-top: 0;
+            text-align: center;
+        }
+
+        .category-card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+        }
+
+        .category-card ul li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .category-card ul li::before {
+            content: '✓'; /* Checkmark icon */
+            color: #28a745;
+            position: absolute;
+            left: 0;
+        }
+
         /* Rodapé */
         footer {
             background-color: #333;
@@ -188,7 +222,7 @@
                 margin: 5px 0;
             }
 
-            .service-grid {
+            .service-grid, .category-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -208,7 +242,7 @@
         <div class="container">
             <h1>Resgate Vida Nova</h1>
             <p>Emergência 24h para Dependência Química. Ajuda Imediata no Local.</p>
-            <a href="#contato" class="cta-button">Ligue Agora: (XX) XXXX-XXXX</a>
+            <a href="#contato" class="cta-button">Ligue Agora: (13) 98765-4321</a>
         </div>
     </header>
 
@@ -217,8 +251,8 @@
             <ul>
                 <li><a href="#emergencia">Serviço de Emergência</a></li>
                 <li><a href="#como-funciona">Como Funciona</a></li>
+                <li><a href="#categorias">Nossas Especialidades</a></li>
                 <li><a href="#porque-nos">Por Que Nos Escolher</a></li>
-                <li><a href="#tratamento">Tratamento Pós-Resgate</a></li>
                 <li><a href="#contato">Contato Imediato</a></li>
             </ul>
         </div>
@@ -229,10 +263,10 @@
             <h2 class="section-title">Precisa de Ajuda AGORA?</h2>
             <div class="highlight-box">
                 <h3>O Resgate Vida Nova está pronto para agir!</h3>
-                <p>Oferecemos **serviço de resgate emergencial 24 horas por dia**, sete dias por semana, para dependentes químicos em crise. Nossa equipe especializada vai até o local para oferecer suporte, estabilização e transporte seguro para uma de nossas unidades de tratamento.</p>
+                <p>Oferecemos **serviço de resgate emergencial 24 horas por dia**, sete dias por semana, para dependentes químicos em crise, na região de Santos e adjacências. Nossa equipe especializada vai até o local para oferecer suporte, estabilização e transporte seguro para uma de nossas unidades de tratamento especializadas.</p>
                 <p>Sua família não está sozinha. **Agimos com discrição, profissionalismo e humanidade.**</p>
             </div>
-            <p class="contact-info">Não espere! A vida pode mudar hoje. <a href="tel:XXNXXXX-XXXX">Ligue para (XX) XXXX-XXXX</a></p>
+            <p class="contact-info">Não espere! A vida pode mudar hoje. <a href="tel:13987654321">Ligue para (13) 98765-4321</a></p>
         </section>
 
         <section id="como-funciona" class="container">
@@ -252,7 +286,41 @@
                 </div>
                 <div class="service-card">
                     <span class="icon">&#127963;</span> <h3>4. Transporte para Tratamento</h3>
-                    <p>O dependente é transportado de forma segura e acompanhada para uma de nossas unidades terapêuticas, onde receberá o suporte e tratamento adequados.</p>
+                    <p>O dependente é transportado de forma segura e acompanhada para uma de nossas unidades terapêuticas especializadas, onde receberá o suporte e tratamento adequados ao seu perfil.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="categorias" class="container">
+            <h2 class="section-title">Nossas Especialidades de Tratamento</h2>
+            <p style="text-align: center; margin-bottom: 30px;">Após o resgate, garantimos que o encaminhamento será para o ambiente de tratamento mais adequado às necessidades do indivíduo. Contamos com unidades especializadas para:</p>
+            <div class="service-grid category-grid">
+                <div class="category-card">
+                    <h3>Tratamento Masculino</h3>
+                    <ul>
+                        <li>Atendimento exclusivo para homens.</li>
+                        <li>Programas terapêuticos adaptados às necessidades masculinas.</li>
+                        <li>Ambiente seguro e focado na recuperação.</li>
+                        <li>Equipe multidisciplinar especializada.</li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3>Tratamento Feminino</h3>
+                    <ul>
+                        <li>Atendimento exclusivo e acolhedor para mulheres.</li>
+                        <li>Programas sensíveis às questões de gênero e vulnerabilidades femininas.</li>
+                        <li>Apoio psicológico e terapêutico específico.</li>
+                        <li>Profissionais preparados para a abordagem feminina.</li>
+                    </ul>
+                </div>
+                <div class="category-card">
+                    <h3>Tratamento com Suporte Psiquiátrico Intensivo</h3>
+                    <ul>
+                        <li>Unidades com acompanhamento psiquiátrico 24h.</li>
+                        <li>Indicado para casos de comorbidades (dependência química + transtornos mentais).</li>
+                        <li>Medicação assistida e monitoramento constante.</li>
+                        <li>Equipe médica e terapêutica especializada em saúde mental.</li>
+                    </ul>
                 </div>
             </div>
         </section>
@@ -273,23 +341,10 @@
                     <p>Compreendemos a complexidade da dependência e agimos com empatia e respeito, focando na recuperação integral do indivíduo.</p>
                 </div>
                 <div class="service-card">
-                    <h3>Infraestrutura de Apoio</h3>
-                    <p>Oferecemos o resgate e o encaminhamento para comunidades terapêuticas parceiras de excelência, com tratamento completo e eficaz.</p>
+                    <h3>Encaminhamento Especializado</h3>
+                    <p>Após o resgate, o paciente é encaminhado para a unidade mais adequada (masculina, feminina ou psiquiátrica), garantindo um tratamento personalizado e eficaz.</p>
                 </div>
             </div>
-        </section>
-
-        <section id="tratamento" class="container">
-            <h2 class="section-title">Após o Resgate: Um Novo Caminho para a Recuperação</h2>
-            <p>Nosso serviço de resgate é o primeiro passo. Após a chegada segura à comunidade terapêutica, o indivíduo será integrado a um programa de tratamento completo, que inclui:</p>
-            <ul>
-                <li>**Desintoxicação Assistida:** Monitoramento médico para o processo de abstinência.</li>
-                <li>**Aconselhamento Psicológico:** Terapias individuais e em grupo para lidar com as causas da dependência.</li>
-                <li>**Terapia Ocupacional:** Atividades que promovem novas habilidades e rotinas saudáveis.</li>
-                <li>**Apoio Familiar:** Orientações e suporte para os familiares durante todo o processo.</li>
-                <li>**Reintegração Social:** Preparação para o retorno à vida em sociedade, com suporte contínuo.</li>
-            </ul>
-            <p>Nosso compromisso é com a recuperação duradoura e a qualidade de vida. Conte conosco para guiar você e sua família nesta jornada.</p>
         </section>
 
         <section id="contato" class="container">
@@ -298,7 +353,7 @@
                 Para Resgate Imediato, Ligue Agora:
             </p>
             <p style="text-align: center; font-size: 2.5em; font-weight: bolder; color: #dc3545; margin-top: 10px; margin-bottom: 30px;">
-                <a href="tel:XXNXXXX-XXXX" style="color: #dc3545; text-decoration: none;">(XX) XXXX-XXXX</a>
+                <a href="tel:13987654321" style="color: #dc3545; text-decoration: none;">(13) 98765-4321</a>
             </p>
             <p style="text-align: center;">Ou, se preferir, envie uma mensagem e entraremos em contato o mais breve possível (para situações não emergenciais imediatas):</p>
             <div class="contact-form">
@@ -316,7 +371,7 @@
                 </form>
             </div>
             <p style="text-align: center; margin-top: 20px;">Email: resgatevidanova@email.com.br</p>
-            <p style="text-align: center;">Atendemos em todo o território nacional.</p>
+            <p style="text-align: center;">Atendemos na região de Santos, São Paulo, e arredores. Consulte-nos sobre outras localidades.</p>
         </section>
     </main>
 
