@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidade Terapêutica Esperança</title>
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #0056b3;
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: white;
+        }
+
+        /* Navegação */
+        nav {
+            background-color: #0056b3;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Permite que os itens quebrem linha em telas pequenas */
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #004085;
+            border-radius: 5px;
+        }
+
+        /* Seções */
+        section {
+            padding: 40px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #f9f9f9;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .team-member {
+            text-align: center;
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+
+        /* Formulário de Contato (estilização básica) */
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box; /* Garante que padding e border sejam incluídos no width */
+        }
+
+        .contact-form button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .contact-form button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr; /* Uma coluna em telas menores */
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Comunidade Terapêutica Esperança</h1>
+            <p>Um novo caminho para a recuperação e bem-estar.</p>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#sobre">Sobre Nós</a></li>
+                <li><a href="#tratamento">Nosso Tratamento</a></li>
+                <li><a href="#equipe">Nossa Equipe</a></li>
+                <li><a href="#instalacoes">Instalações</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section id="sobre" class="container">
+            <h2 class="section-title">Sobre Nós</h2>
+            <p>A Comunidade Terapêutica Esperança é um espaço dedicado à recuperação de indivíduos que buscam superar a dependência química. Acreditamos na força da comunidade e na importância de um ambiente seguro e acolhedor para o processo de reabilitação.</p>
+            <p>Nosso objetivo é oferecer suporte integral, promovendo a saúde física, mental e espiritual, para que cada residente possa reconstruir sua vida com dignidade e autonomia.</p>
+            <p>Contamos com uma equipe multidisciplinar e uma metodologia comprovada, focada na individualidade de cada tratamento e na reintegração social.</p>
+        </section>
+
+        <section id="tratamento" class="container">
+            <h2 class="section-title">Nosso Tratamento</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <h3>Abordagem Terapêutica</h3>
+                    <p>Utilizamos uma abordagem humanizada e integrativa, combinando terapias individuais e em grupo, workshops e atividades recreativas para promover o autoconhecimento e o desenvolvimento de novas habilidades.</p>
+                </div>
+                <div class="card">
+                    <h3>Acompanhamento Psicológico</h3>
+                    <p>Sessões de terapia individual e em grupo com psicólogos especializados, focadas na identificação e superação de gatilhos, traumas e padrões de comportamento relacionados à dependência.</p>
+                </div>
+                <div class="card">
+                    <h3>Terapias Ocupacionais</h3>
+                    <p>Atividades que visam o desenvolvimento de habilidades práticas, criatividade e o senso de responsabilidade, como oficinas de arte, jardinagem e culinária.</p>
+                </div>
+                <div class="card">
+                    <h3>Reintegração Social</h3>
+                    <p>Programas de preparação para o retorno à sociedade, incluindo orientação profissional, educação continuada e apoio na busca por moradia e emprego.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="equipe" class="container">
+            <h2 class="section-title">Nossa Equipe</h2>
+            <div class="card-grid">
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Dra. Ana Costa">
+                    <h3>Dra. Ana Costa</h3>
+                    <p>Diretora Clínica - Psiquiatra</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Dr. João Silva">
+                    <h3>Dr. João Silva</h3>
+                    <p>Coordenador Terapêutico - Psicólogo</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Maria Santos">
+                    <h3>Maria Santos</h3>
+                    <p>Terapeuta Ocupacional</p>
+                </div>
+                <div class="team-member">
+                    <img src="https://via.placeholder.com/150" alt="Carlos Pereira">
+                    <h3>Carlos Pereira</h3>
+                    <p>Conselheiro em Dependência Química</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="instalacoes" class="container">
+            <h2 class="section-title">Nossas Instalações</h2>
+            <div class="card-grid">
+                <div class="card">
+                    <img src="https://via.placeholder.com/400x250" alt="Quartos Aconchegantes">
+                    <h3>Quartos Aconchegantes</h3>
+                    <p>Confortáveis acomodações para garantir o repouso e a privacidade dos nossos residentes.</p>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/400x250" alt="Áreas de Convivência">
+                    <h3>Áreas de Convivência</h3>
+                    <p>Espaços amplos e iluminados para atividades em grupo e momentos de socialização.</p>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/400x250" alt="Jardins e Natureza">
+                    <h3>Jardins e Natureza</h3>
+                    <p>Ambiente tranquilo e arborizado, ideal para terapias ao ar livre e momentos de reflexão.</p>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/400x250" alt="Espaços para Terapia">
+                    <h3>Espaços para Terapia</h3>
+                    <p>Salas equipadas e preparadas para as sessões de terapia individual e em grupo.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="container">
+            <h2 class="section-title">Entre em Contato</h2>
+            <p>Se você ou alguém que você conhece precisa de ajuda, não hesite em nos contatar. Estamos aqui para oferecer o suporte necessário.</p>
+            <div class="contact-form">
+                <form action="#" method="POST">
+                    <label for="nome">Nome Completo:</label>
+                    <input type="text" id="nome" name="nome" required>
+
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" name="email" required>
+
+                    <label for="telefone">Telefone:</label>
+                    <input type="tel" id="telefone" name="telefone">
+
+                    <label for="mensagem">Mensagem:</label>
+                    <textarea id="mensagem" name="mensagem" rows="6" required></textarea>
+
+                    <button type="submit">Enviar Mensagem</button>
+                </form>
+            </div>
+            <p style="text-align: center; margin-top: 20px;">Ou ligue para nós: (XX) XXXX-XXXX</p>
+            <p style="text-align: center;">Email: contato@comunidadeesperanca.com.br</p>
+            <p style="text-align: center;">Endereço: Rua da Recuperação, 123, Bairro da Paz, Cidade Esperança - SP</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Comunidade Terapêutica Esperança. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>
