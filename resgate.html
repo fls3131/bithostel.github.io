@@ -183,6 +183,40 @@
             padding: 20px 0;
             margin-top: 30px;
         }
+
+        /* Botão Flutuante do WhatsApp */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #25d366; /* Cor verde do WhatsApp */
+            color: white;
+            border-radius: 10px; /* Mais retangular para caber o texto e ícone */
+            padding: 10px 15px; /* Ajuste para dar espaço ao texto */
+            display: flex;
+            align-items: center;
+            gap: 8px; /* Espaço entre o ícone e o texto */
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 1000; /* Garante que fique acima de outros elementos */
+            transition: transform 0.3s ease;
+            font-size: 1.1em; /* Tamanho da fonte para o texto 'WhatsApp' */
+            font-weight: bold;
+        }
+
+        .whatsapp-button i.fab { /* Para usar o ícone Font Awesome (se implementado) */
+            font-size: 24px;
+        }
+
+        .whatsapp-button .whatsapp-icon-text { /* Para o ícone de texto Unicode */
+            font-size: 24px; /* Tamanho do ícone de texto */
+            line-height: 1; /* Alinha o ícone verticalmente */
+        }
+
+        .whatsapp-button:hover {
+            transform: scale(1.05); /* Um pouco menos de zoom para um botão maior */
+        }
+
         /* Responsividade */
         @media (max-width: 768px) {
             nav ul {
@@ -200,6 +234,16 @@
             .cta-button {
                 font-size: 1.1em;
                 padding: 12px 25px;
+            }
+            /* Ajuste para o botão do WhatsApp em telas menores */
+            .whatsapp-button {
+                bottom: 15px;
+                left: 15px;
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+            .whatsapp-button .whatsapp-icon-text {
+                font-size: 20px;
             }
         }
     </style>
@@ -320,6 +364,10 @@
             <p style="text-align: center;">Atendemos na região de Santos, e Grande São Paulo, e arredores. Consulte-nos sobre outras localidades.</p>
         </section>
     </main>
+
+    <a href="https://wa.me/5513997687326" class="whatsapp-button" target="_blank" aria-label="Fale conosco pelo WhatsApp">
+        <span class="whatsapp-icon-text">&#x2709;</span> WhatsApp </a>
+
     <footer>
         <div class="container">
             <p>&copy; 2025 Resgate. Todos os direitos reservados. Ajuda humanizada e profissional.</p>
