@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resgate Vida Nova - Ajuda Imediata para Dependentes Químicos</title>
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #d9534f; /* Cor mais forte para chamar atenção */
+        }
+
+        p {
+            margin-bottom: 15px;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: #dc3545; /* Vermelho mais forte para emergência */
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            color: white;
+            font-size: 2.5em;
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: #28a745; /* Verde para ação */
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #218838;
+        }
+
+        /* Navegação */
+        nav {
+            background-color: #c82333; /* Vermelho escuro */
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 5px 10px;
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #b01a2c;
+            border-radius: 5px;
+        }
+
+        /* Seções */
+        section {
+            padding: 40px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #f9f9f9;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2em;
+            color: #dc3545;
+        }
+
+        .highlight-box {
+            background-color: #ffeeba; /* Amarelo claro para destaque */
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .highlight-box h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+
+        .highlight-box p {
+            font-size: 1.1em;
+            color: #856404;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .service-card {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .service-card .icon {
+            font-size: 3em;
+            color: #dc3545;
+            margin-bottom: 15px;
+        }
+
+        .contact-info {
+            text-align: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #dc3545;
+        }
+
+        .contact-info a {
+            color: #dc3545;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 5px 0;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2em;
+            }
+
+            .cta-button {
+                font-size: 1.1em;
+                padding: 12px 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Resgate Vida Nova</h1>
+            <p>Emergência 24h para Dependência Química. Ajuda Imediata no Local.</p>
+            <a href="#contato" class="cta-button">Ligue Agora: (XX) XXXX-XXXX</a>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#emergencia">Serviço de Emergência</a></li>
+                <li><a href="#como-funciona">Como Funciona</a></li>
+                <li><a href="#porque-nos">Por Que Nos Escolher</a></li>
+                <li><a href="#tratamento">Tratamento Pós-Resgate</a></li>
+                <li><a href="#contato">Contato Imediato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section id="emergencia" class="container">
+            <h2 class="section-title">Precisa de Ajuda AGORA?</h2>
+            <div class="highlight-box">
+                <h3>O Resgate Vida Nova está pronto para agir!</h3>
+                <p>Oferecemos **serviço de resgate emergencial 24 horas por dia**, sete dias por semana, para dependentes químicos em crise. Nossa equipe especializada vai até o local para oferecer suporte, estabilização e transporte seguro para uma de nossas unidades de tratamento.</p>
+                <p>Sua família não está sozinha. **Agimos com discrição, profissionalismo e humanidade.**</p>
+            </div>
+            <p class="contact-info">Não espere! A vida pode mudar hoje. <a href="tel:XXNXXXX-XXXX">Ligue para (XX) XXXX-XXXX</a></p>
+        </section>
+
+        <section id="como-funciona" class="container">
+            <h2 class="section-title">Como Nosso Resgate Funciona</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <span class="icon">&#9742;</span> <h3>1. Chamada de Emergência</h3>
+                    <p>Entre em contato conosco 24h por dia, 7 dias por semana, através do nosso telefone de emergência. Nossos atendentes estão prontos para ouvir e orientar.</p>
+                </div>
+                <div class="service-card">
+                    <span class="icon">&#128697;</span> <h3>2. Equipe em Campo</h3>
+                    <p>Uma equipe treinada, composta por profissionais de saúde e segurança, é enviada imediatamente ao local indicado, com veículos discretos e equipados.</p>
+                </div>
+                <div class="service-card">
+                    <span class="icon">&#128138;</span> <h3>3. Abordagem Humanizada e Segura</h3>
+                    <p>No local, realizamos uma abordagem cuidadosa, visando a estabilização e segurança do indivíduo. Priorizamos o diálogo e o respeito à dignidade.</p>
+                </div>
+                <div class="service-card">
+                    <span class="icon">&#127963;</span> <h3>4. Transporte para Tratamento</h3>
+                    <p>O dependente é transportado de forma segura e acompanhada para uma de nossas unidades terapêuticas, onde receberá o suporte e tratamento adequados.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="porque-nos" class="container">
+            <h2 class="section-title">Por Que Escolher o Resgate Vida Nova?</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>Disponibilidade 24/7</h3>
+                    <p>Estamos prontos para atender sua emergência a qualquer hora, qualquer dia da semana. A dependência não espera, nós também não.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Equipe Especializada</h3>
+                    <p>Nossos profissionais são treinados para lidar com situações de crise, garantindo a segurança de todos os envolvidos.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Abordagem Humanizada</h3>
+                    <p>Compreendemos a complexidade da dependência e agimos com empatia e respeito, focando na recuperação integral do indivíduo.</p>
+                </div>
+                <div class="service-card">
+                    <h3>Infraestrutura de Apoio</h3>
+                    <p>Oferecemos o resgate e o encaminhamento para comunidades terapêuticas parceiras de excelência, com tratamento completo e eficaz.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tratamento" class="container">
+            <h2 class="section-title">Após o Resgate: Um Novo Caminho para a Recuperação</h2>
+            <p>Nosso serviço de resgate é o primeiro passo. Após a chegada segura à comunidade terapêutica, o indivíduo será integrado a um programa de tratamento completo, que inclui:</p>
+            <ul>
+                <li>**Desintoxicação Assistida:** Monitoramento médico para o processo de abstinência.</li>
+                <li>**Aconselhamento Psicológico:** Terapias individuais e em grupo para lidar com as causas da dependência.</li>
+                <li>**Terapia Ocupacional:** Atividades que promovem novas habilidades e rotinas saudáveis.</li>
+                <li>**Apoio Familiar:** Orientações e suporte para os familiares durante todo o processo.</li>
+                <li>**Reintegração Social:** Preparação para o retorno à vida em sociedade, com suporte contínuo.</li>
+            </ul>
+            <p>Nosso compromisso é com a recuperação duradoura e a qualidade de vida. Conte conosco para guiar você e sua família nesta jornada.</p>
+        </section>
+
+        <section id="contato" class="container">
+            <h2 class="section-title">Contato de Emergência</h2>
+            <p style="text-align: center; font-size: 1.5em; font-weight: bold; color: #dc3545;">
+                Para Resgate Imediato, Ligue Agora:
+            </p>
+            <p style="text-align: center; font-size: 2.5em; font-weight: bolder; color: #dc3545; margin-top: 10px; margin-bottom: 30px;">
+                <a href="tel:XXNXXXX-XXXX" style="color: #dc3545; text-decoration: none;">(XX) XXXX-XXXX</a>
+            </p>
+            <p style="text-align: center;">Ou, se preferir, envie uma mensagem e entraremos em contato o mais breve possível (para situações não emergenciais imediatas):</p>
+            <div class="contact-form">
+                <form action="#" method="POST">
+                    <label for="nome">Seu Nome:</label>
+                    <input type="text" id="nome" name="nome" required>
+
+                    <label for="telefone">Telefone de Contato (com DDD):</label>
+                    <input type="tel" id="telefone" name="telefone" required>
+
+                    <label for="mensagem">Mensagem (descreva a situação):</label>
+                    <textarea id="mensagem" name="mensagem" rows="6" required></textarea>
+
+                    <button type="submit">Solicitar Contato</button>
+                </form>
+            </div>
+            <p style="text-align: center; margin-top: 20px;">Email: resgatevidanova@email.com.br</p>
+            <p style="text-align: center;">Atendemos em todo o território nacional.</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Resgate Vida Nova. Todos os direitos reservados. Ajuda humanizada e profissional.</p>
+        </div>
+    </footer>
+</body>
+</html>
