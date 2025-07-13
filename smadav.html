@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smadav Antivírus - Proteção Leve e Eficaz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative; /* Necessário para posicionar o botão do menu */
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin-top: 5px;
+            font-weight: 300;
+        }
+
+        /* Navegação */
+        nav {
+            background-color: #0056b3;
+            padding: 10px 0;
+            margin-top: 15px;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap; /* Para quebrar linhas em telas menores */
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            background-color: #004085;
+        }
+
+        /* Botão Hamburguer para Mobile */
+        .menu-toggle {
+            display: none; /* Esconde por padrão em desktop */
+            background: none;
+            border: none;
+            font-size: 2em;
+            color: #fff;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        /* Seções */
+        section {
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        section:nth-of-type(even) {
+            background-color: #e9ecef;
+        }
+
+        h2 {
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        /* Destaque / Call to Action */
+        .hero {
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: #fff;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://via.placeholder.com/1500x500/0056b3/ffffff?text=Smadav+Background') no-repeat center center/cover; /* Substitua por uma imagem real de fundo */
+            opacity: 0.1;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h2 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #28a745;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin: 5px; /* Adicionado para espaçamento entre os botões de compra */
+        }
+
+        .btn:hover {
+            background-color: #218838;
+        }
+
+        /* Recursos */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+        }
+
+        .feature-item h3 {
+            color: #007bff;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .feature-item p {
+            font-size: 1em;
+            color: #555;
+        }
+
+        /* Depoimentos */
+        .testimonials {
+            background-color: #f8f9fa;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .testimonial-item {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+
+        .testimonial-item p {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #666;
+        }
+
+        .testimonial-item span {
+            font-weight: 600;
+            color: #333;
+        }
+
+        /* Preço */
+        .pricing-table {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .price-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+            flex: 1 1 300px; /* Flexível para responsividade */
+            max-width: 350px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .price-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .price-card h3 {
+            color: #007bff;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .price-card .price {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+
+        .price-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+
+        .price-card ul li {
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 1.1em;
+        }
+
+        .price-card ul li::before {
+            content: '✔️';
+            margin-right: 10px;
+            color: #28a745;
+        }
+
+        /* Histórico de Versões */
+        .version-history {
+            text-align: left;
+        }
+
+        .version-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+
+        .version-item h3 {
+            color: #007bff;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+
+        .version-item ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .version-item ul li {
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .version-item ul li::before {
+            content: '• ';
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        /* Seções de Conteúdo Expandido (Funções e Comparação) */
+        .content-section {
+            text-align: left;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+
+        .content-section h3 {
+            color: #007bff;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .content-section p, .content-section ul {
+            margin-bottom: 15px;
+            color: #555;
+        }
+
+        .content-section ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+
+        .content-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .smadav-comparison {
+            margin-top: 20px;
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e2e6ea;
+        }
+
+        .smadav-comparison h4 {
+            color: #007bff;
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+
+        .smadav-comparison ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .smadav-comparison ul li {
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #444;
+        }
+        .smadav-comparison ul li strong {
+            color: #28a745;
+        }
+
+
+        /* Rodapé */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9em;
+        }
+
+        footer p {
+            margin: 0;
+        }
+
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+
+            .hero h2 {
+                font-size: 2.2em;
+            }
+
+            .hero p {
+                font-size: 1.2em;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                font-size: 1.1em;
+            }
+
+            .features-grid, .testimonial-grid {
+                grid-template-columns: 1fr; /* Coluna única em telas menores */
+            }
+
+            .price-card {
+                max-width: 100%; /* Ocupa toda a largura disponível */
+            }
+
+            .content-section {
+                padding: 20px;
+            }
+
+            /* Menu Responsivo */
+            .menu-toggle {
+                display: block; /* Mostra o botão hamburguer */
+            }
+
+            nav ul {
+                display: none; /* Esconde a lista de navegação por padrão */
+                flex-direction: column;
+                align-items: center;
+                background-color: #004085; /* Fundo para o menu aberto */
+                position: absolute;
+                top: 100%; /* Abaixo do cabeçalho */
+                left: 0;
+                width: 100%;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                z-index: 99;
+                padding: 10px 0;
+            }
+
+            nav ul.active {
+                display: flex; /* Mostra a lista quando o menu está ativo */
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            nav ul li a {
+                display: block;
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            .hero {
+                padding: 50px 15px;
+            }
+
+            .hero h2 {
+                font-size: 1.8em;
+            }
+
+            .hero p {
+                font-size: 1em;
+            }
+
+            h2 {
+                font-size: 1.8em;
+            }
+
+            .feature-item h3 {
+                font-size: 1.3em;
+            }
+
+            .price-card .price {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+			
+			<img src="smadav.png">
+            <h1>Smadav Antivírus</h1>
+            <p>Sua defesa leve e poderosa contra ameaças digitais</p>
+            <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+        </div>
+        <nav>
+            <ul id="main-nav">
+                <li><a href="#features">Por que Smadav?</a></li>
+                <li><a href="#main-functions">Funções Principais</a></li>
+                <li><a href="#testimonials">Depoimentos</a></li>
+                <li><a href="#buy">Adquira Já</a></li>
+                <li><a href="#version-history">Atualizações</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Proteja seu PC com a Segurança Confiável do Smadav!</h2>
+                <p>O antivírus leve que se concentra na detecção e remoção de vírus de USB e oferece proteção adicional para seu sistema.</p>
+                <a href="#buy" class="btn">Adquira Já o Smadav Pro!</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Por Que Escolher Smadav?</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3><span style="color:#28a745;">&#10003;</span> Proteção Leve e Rápida</h3>
+                        <p>O Smadav é extremamente leve e não sobrecarrega seu sistema, garantindo que seu computador continue rápido enquanto está protegido.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><span style="color:#28a745;">&#10003;</span> Foco em USB e Flashdrives</h3>
+                        <p>Especializado na detecção e eliminação de vírus de unidades USB e flashdrives, impedindo a propagação de infecções.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><span style="color:#28a745;">&#10003;</span> Proteção Adicional</h3>
+                        <p>Ideal para ser usado em conjunto com outros antivírus, oferecendo uma camada extra de segurança sem conflitos.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><span style="color:#28a745;">&#10003;</span> Baixo Uso de Recursos</h3>
+                        <p>Otimizado para consumir pouquíssimos recursos do sistema, perfeito para computadores mais antigos ou com configurações modestas.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><span style="color:#28a745;">&#10003;</span> Prevenção de Ransomware</h3>
+                        <p>Recursos que ajudam a proteger seus arquivos contra ataques de ransomware, mantendo seus dados seguros.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><span style="color:#28a745;">&#10003;</span> Atualizações Frequentes</h3>
+                        <p>Receba atualizações regulares para garantir que o Smadav esteja sempre à frente das novas ameaças de vírus.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="main-functions">
+            <div class="container">
+                <h2>As 4 Principais Funções do Smadav</h2>
+                <div class="content-section">
+                    <h3>1) Proteção Adicional para seu PC (Compatibilidade Elevada)</h3>
+                    <p>A maioria dos antivírus não permite a instalação de outros produtos de segurança, pois são projetados para serem a proteção principal do seu PC. O Smadav, no entanto, é diferente. Ele foi desenvolvido como uma **camada de proteção adicional (segunda camada)**, o que o torna altamente compatível. Você pode instalá-lo e executá-lo junto com outro antivírus no seu computador sem conflitos. O Smadav utiliza suas próprias técnicas (análise de comportamento, heurística e lista de permissões) para detectar e remover vírus, aprimorando a segurança do seu PC.</p>
+                </div>
+                <div class="content-section">
+                    <h3>2) Proteção Adicional para Pendrives USB</h3>
+                    <p>Pendrives USB são um dos meios mais comuns para a propagação de vírus. O Smadav emprega sua tecnologia exclusiva para **evitar a disseminação e infecção por vírus de pendrives USB**. Ele pode detectar alguns vírus novos e desconhecidos em USB, mesmo que não estejam em sua base de dados. Além da proteção, o Smadav também pode ajudar a limpar pendrives USB de vírus e **restaurar arquivos ocultos/infectados** na unidade.</p>
+                </div>
+                <div class="content-section">
+                    <h3>3) Antivírus de Baixo Consumo de Recursos</h3>
+                    <p>O Smadav se destaca pelo seu **pequeno tamanho de instalador (menos de 10 MB)** e baixo uso de internet enquanto ativo no seu PC. Além disso, o Smadav utiliza apenas uma pequena fração dos recursos do seu computador. Na maior parte do tempo, o Smadav consome pouca memória e CPU. Com esse baixo uso de recursos, o Smadav **não irá desacelerar significativamente seu computador**, e você ainda pode instalar outro antivírus junto com ele para proteger seu PC.</p>
+                </div>
+                <div class="content-section">
+                    <h3>4) Ferramentas de Limpeza e Remoção de Vírus</h3>
+                    <p>O Smadav pode **limpar alguns vírus que já infectaram seu PC** e também corrigir as alterações de registro feitas pelo vírus. Muitas ferramentas estão incluídas no **Smadav Pro** para auxiliar na limpeza de vírus. As ferramentas são:</p>
+                    <ul>
+                        <li><strong>One-Virus By-User:</strong> Para adicionar manualmente um arquivo suspeito para limpeza de vírus no PC.</li>
+                        <li><strong>Gerenciador de Processos:</strong> Para gerenciar processos e programas em execução no seu PC.</li>
+                        <li><strong>Editor de Sistema:</strong> Para alterar algumas opções do sistema que geralmente são modificadas por vírus.</li>
+                        <li><strong>Win-Force:</strong> Para forçar a abertura de alguns programas de gerenciamento do sistema no Windows.</li>
+                    </ul>
+                </div>
+
+                <div class="content-section smadav-comparison">
+                    <h4>Smadav Pro vs. Smadav Gratuito?</h4>
+                    <p>O **Smadav Pro** não exibirá mensagens para fazer upgrade para a versão Pro a cada inicialização. As principais diferenças entre o Smadav Gratuito e o Pro incluem:</p>
+                    <ul>
+                        <li>**Ocultar mensagem de oferta na inicialização** (Pro).</li>
+                        <li>**Seção de Ferramentas no aplicativo** (somente Pro).</li>
+                        <li>**Configurações Adicionais (Proteção) no aplicativo** (somente Pro).</li>
+                        <li>**Lista de Exceções** (somente Pro).</li>
+                        <li>**Alteração de cores do tema** (somente Pro).</li>
+                        <li>**Senha de Administrador** (somente Pro).</li>
+                        <li>**Licença para uso em empresas/organizações/companhias** (somente Pro).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <div class="container">
+                <h2>O Que Nossos Usuários Dizem?</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-item">
+                        <p>"Finalmente um antivírus que não deixa meu PC lento! O Smadav é perfeito para minhas necessidades diárias."</p>
+                        <span>- Ana Lúcia S.</span>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>"Sempre usei o Smadav para proteger meus pendrives, e ele nunca me decepcionou. Recomendo muito!"</p>
+                        <span>- Carlos Eduardo M.</span>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>"A combinação Smadav + meu antivírus principal me dá total tranquilidade. Excelente proteção!"</p>
+                        <span>- Rafaela G.</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="buy">
+            <div class="container">
+                <h2>Escolha Sua Proteção Smadav Pro</h2>
+                <p>Desfrute de recursos adicionais e suporte prioritário com o Smadav Pro.</p>
+                <div class="pricing-table">
+                    <div class="price-card">
+                        <h3>Licença Anual</h3>
+                        <div class="price">R$ 44,90</div>
+                        <ul>
+                            <li>✔️ Proteção Avançada contra Vírus</li>
+                            <li>✔️ Limpeza de USB aprimorada</li>
+                            <li>✔️ Filtro de Navegação</li>
+                            <li><li>Suporte Técnico Prioritário</li>
+                            <li>✔️ Atualizações automáticas</li>
+                        </ul>
+                        <a href="https://app.monetizze.com.br/checkout/DYT352682" class="btn">Comprar Agora</a>
+                        <a href="https://app.monetizze.com.br/checkout/DYT352682" class="btn">Parcele em até 6x de R$ 8,29*</a>
+                    </div>
+                    <div class="price-card">
+                        <h3>Licença Vitalícia</h3>
+                        <div class="price">R$ 199,90</div>
+                        <ul>
+                            <li>✔️ Todas as vantagens da Licença Anual</li>
+                            <li>✔️ Atualizações Vitalícias</li>
+                            <li>✔️ Sem renovações anuais</li>
+                            <li>✔️ Acesso a futuras versões Pro</li>
+                            <li>✔️ Instalação em até 3 PCs</li>
+                        </ul>
+                        <a href="#" class="btn">Melhor Custo-Benefício!</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="version-history" class="version-history">
+            <div class="container">
+                <h2>Histórico de Atualizações do Smadav</h2>
+                <div class="version-item">
+                    <h3>Smadav 2025 Rev. 15.4</h3>
+                    <ul>
+                        <li>Nova base de dados de detecção com **58.300 vírus**.</li>
+                        <li>Alterações na exibição de informações do Smadav Gratuito.</li>
+                        <li>Correção de algumas **detecções falsas**.</li>
+                        <li>E outras pequenas correções no aplicativo.</li>
+                    </ul>
+                </div>
+                <div class="version-item">
+                    <h3>Smadav 2025 Rev. 15.3</h3>
+                    <ul>
+                        <li>Nova base de dados de detecção com **67.400 vírus**.</li>
+                        <li>Novo design de cabeçalho e tela de abertura no Smadav 2025.</li>
+                        <li>Correção de algumas **detecções falsas**.</li>
+                        <li>E outras pequenas correções no aplicativo.</li>
+                    </ul>
+                </div>
+                <div class="version-item">
+                    <h3>Smadav 2024 Rev. 15.2</h3>
+                    <ul>
+                        <li>Nova base de dados de detecção com **62.700 vírus**.</li>
+                        <li>Novo design de cabeçalho e tela de abertura no Smadav 2024.</li>
+                        <li>Mudanças em algumas funcionalidades/ferramentas para ficarem sem ícones.</li>
+                        <li>E outras pequenas correções no aplicativo.</li>
+                    </ul>
+                </div>
+                <div class="version-item">
+                    <h3>Smadav 2023 Rev. 15.1</h3>
+                    <ul>
+                        <li>Nova base de dados de detecção com **4.000 vírus**.</li>
+                        <li>Nova base de dados de detecção para alguns vírus em pendrives USB.</li>
+                        <li>Melhorias no recurso de **Atualizador do Smadav**.</li>
+                        <li>Melhorias no upload automático de amostras de aplicativos.</li>
+                        <li>Correção de bug nas opções de **escaneamento rápido para pendrives USB**.</li>
+                        <li>E outras pequenas correções no aplicativo.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Smadav Antivírus. Todos os direitos reservados. | <a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mainNav = document.getElementById('main-nav');
+
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+
+            // Fechar o menu ao clicar em um link (para mobile)
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
