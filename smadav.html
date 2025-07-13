@@ -15,6 +15,7 @@
             background-color: #f4f7f6;
             color: #333;
             line-height: 1.6;
+            scroll-behavior: smooth; /* Rolagem suave ao clicar nos links internos */
         }
 
         .container {
@@ -25,12 +26,12 @@
 
         /* Cabeçalho */
         header {
-            background-color: #007bff;
+            background-color: #28a745; /* Verde Smadav */
             color: #fff;
             padding: 20px 0;
             text-align: center;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            position: relative; /* Necessário para posicionar o botão do menu */
+            position: relative;
         }
 
         header h1 {
@@ -44,10 +45,15 @@
             margin-top: 5px;
             font-weight: 300;
         }
+        
+        header img {
+            max-width: 80px; /* Tamanho do logo */
+            margin-bottom: 10px;
+        }
 
         /* Navegação */
         nav {
-            background-color: #0056b3;
+            background-color: #218838; /* Verde mais escuro para a navegação */
             padding: 10px 0;
             margin-top: 15px;
         }
@@ -58,7 +64,7 @@
             margin: 0;
             display: flex;
             justify-content: center;
-            flex-wrap: wrap; /* Para quebrar linhas em telas menores */
+            flex-wrap: wrap;
         }
 
         nav ul li {
@@ -75,12 +81,12 @@
         }
 
         nav ul li a:hover {
-            background-color: #004085;
+            background-color: #1e7e34; /* Tom de verde para hover */
         }
 
         /* Botão Hamburguer para Mobile */
         .menu-toggle {
-            display: none; /* Esconde por padrão em desktop */
+            display: none;
             background: none;
             border: none;
             font-size: 2em;
@@ -99,19 +105,19 @@
         }
 
         section:nth-of-type(even) {
-            background-color: #e9ecef;
+            background-color: #e6f2ed; /* Cor de fundo suave para seções alternadas */
         }
 
         h2 {
             font-size: 2em;
-            color: #007bff;
+            color: #28a745; /* Verde principal para títulos */
             margin-bottom: 20px;
             font-weight: 600;
         }
 
         /* Destaque / Call to Action */
         .hero {
-            background: linear-gradient(to right, #007bff, #0056b3);
+            background: linear-gradient(to right, #28a745, #1e7e34); /* Gradiente de verde */
             color: #fff;
             padding: 80px 20px;
             text-align: center;
@@ -126,7 +132,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://via.placeholder.com/1500x500/0056b3/ffffff?text=Smadav+Background') no-repeat center center/cover; /* Substitua por uma imagem real de fundo */
+            background: url('https://via.placeholder.com/1500x500/1e7e34/ffffff?text=Fundo+Smadav') no-repeat center center/cover; /* Substitua por uma imagem real de fundo verde */
             opacity: 0.1;
             z-index: 1;
         }
@@ -151,7 +157,7 @@
 
         .btn {
             display: inline-block;
-            background-color: #28a745;
+            background-color: #007bff; /* Azul para botões de ação secundários ou para contrastar */
             color: #fff;
             padding: 15px 30px;
             border-radius: 5px;
@@ -159,11 +165,28 @@
             font-size: 1.3em;
             font-weight: 600;
             transition: background-color 0.3s ease;
-            margin: 5px; /* Adicionado para espaçamento entre os botões de compra */
+            margin: 5px;
         }
 
         .btn:hover {
-            background-color: #218838;
+            background-color: #0056b3; /* Azul mais escuro para hover */
+        }
+
+        /* Botão para download (verde) */
+        .btn-download {
+            background-color: #28a745; /* Verde principal */
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn-download:hover {
+            background-color: #1e7e34; /* Verde mais escuro no hover */
         }
 
         /* Recursos */
@@ -189,7 +212,7 @@
         }
 
         .feature-item h3 {
-            color: #007bff;
+            color: #28a745; /* Verde para títulos de features */
             font-size: 1.5em;
             margin-bottom: 15px;
         }
@@ -245,7 +268,7 @@
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.08);
             text-align: center;
-            flex: 1 1 300px; /* Flexível para responsividade */
+            flex: 1 1 300px;
             max-width: 350px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
@@ -256,7 +279,7 @@
         }
 
         .price-card h3 {
-            color: #007bff;
+            color: #28a745; /* Verde para títulos de preço */
             font-size: 1.8em;
             margin-bottom: 15px;
         }
@@ -264,7 +287,7 @@
         .price-card .price {
             font-size: 2.5em;
             font-weight: 700;
-            color: #28a745;
+            color: #007bff; /* Azul para o preço, criando contraste */
             margin-bottom: 20px;
         }
 
@@ -283,7 +306,7 @@
         .price-card ul li::before {
             content: '✔️';
             margin-right: 10px;
-            color: #28a745;
+            color: #28a745; /* Verde para os checks */
         }
 
         /* Histórico de Versões */
@@ -300,7 +323,7 @@
         }
 
         .version-item h3 {
-            color: #007bff;
+            color: #28a745; /* Verde para títulos de versão */
             margin-top: 0;
             margin-bottom: 10px;
         }
@@ -317,7 +340,7 @@
         }
         .version-item ul li::before {
             content: '• ';
-            color: #007bff;
+            color: #28a745; /* Verde para marcadores de lista */
             font-weight: bold;
         }
 
@@ -332,7 +355,7 @@
         }
 
         .content-section h3 {
-            color: #007bff;
+            color: #28a745; /* Verde para títulos de funções */
             font-size: 1.8em;
             margin-bottom: 15px;
         }
@@ -353,14 +376,14 @@
 
         .smadav-comparison {
             margin-top: 20px;
-            background-color: #f8f9fa;
+            background-color: #e6f2ed; /* Fundo suave para comparação */
             padding: 20px;
             border-radius: 8px;
-            border: 1px solid #e2e6ea;
+            border: 1px solid #d4e0db;
         }
 
         .smadav-comparison h4 {
-            color: #007bff;
+            color: #28a745; /* Verde para título da comparação */
             font-size: 1.4em;
             margin-bottom: 15px;
         }
@@ -376,9 +399,33 @@
             color: #444;
         }
         .smadav-comparison ul li strong {
-            color: #28a745;
+            color: #007bff; /* Azul para destacar "Pro" */
         }
 
+        /* Botão Voltar ao Topo */
+        #back-to-top {
+            display: none; /* Escondido por padrão */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #28a745; /* Verde */
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 2em;
+            text-align: center;
+            line-height: 50px; /* Centraliza o ícone */
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        #back-to-top:hover {
+            background-color: #1e7e34; /* Verde mais escuro no hover */
+        }
 
         /* Rodapé */
         footer {
@@ -394,7 +441,7 @@
         }
 
         footer a {
-            color: #007bff;
+            color: #28a745; /* Verde para links no rodapé */
             text-decoration: none;
         }
 
@@ -416,17 +463,17 @@
                 font-size: 1.2em;
             }
 
-            .btn {
+            .btn, .btn-download {
                 padding: 12px 25px;
                 font-size: 1.1em;
             }
 
             .features-grid, .testimonial-grid {
-                grid-template-columns: 1fr; /* Coluna única em telas menores */
+                grid-template-columns: 1fr;
             }
 
             .price-card {
-                max-width: 100%; /* Ocupa toda a largura disponível */
+                max-width: 100%;
             }
 
             .content-section {
@@ -435,16 +482,16 @@
 
             /* Menu Responsivo */
             .menu-toggle {
-                display: block; /* Mostra o botão hamburguer */
+                display: block;
             }
 
             nav ul {
-                display: none; /* Esconde a lista de navegação por padrão */
+                display: none;
                 flex-direction: column;
                 align-items: center;
-                background-color: #004085; /* Fundo para o menu aberto */
+                background-color: #1e7e34;
                 position: absolute;
-                top: 100%; /* Abaixo do cabeçalho */
+                top: 100%;
                 left: 0;
                 width: 100%;
                 box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -453,7 +500,7 @@
             }
 
             nav ul.active {
-                display: flex; /* Mostra a lista quando o menu está ativo */
+                display: flex;
             }
 
             nav ul li {
@@ -502,9 +549,7 @@
 <body>
     <header>
         <div class="container">
-			
-			<img src="smadav.png">
-            <h1>Smadav Antivírus</h1>
+            <img src="smadav.png" alt="Logo Smadav"> <h1>Smadav Antivírus</h1>
             <p>Sua defesa leve e poderosa contra ameaças digitais</p>
             <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
         </div>
@@ -513,8 +558,8 @@
                 <li><a href="#features">Por que Smadav?</a></li>
                 <li><a href="#main-functions">Funções Principais</a></li>
                 <li><a href="#testimonials">Depoimentos</a></li>
-                <li><a href="#buy">Adquira Já</a></li>
-                <li><a href="#version-history">Atualizações</a></li>
+                <li><a href="#buy">Adquira o Pro</a></li>
+                <li><a href="#download-free">Download Grátis</a></li> <li><a href="#version-history">Atualizações</a></li>
             </ul>
         </nav>
     </header>
@@ -602,7 +647,7 @@
             </div>
         </section>
 
-        <section class="testimonials">
+        <section class="testimonials" id="testimonials">
             <div class="container">
                 <h2>O Que Nossos Usuários Dizem?</h2>
                 <div class="testimonial-grid">
@@ -634,11 +679,11 @@
                             <li>✔️ Proteção Avançada contra Vírus</li>
                             <li>✔️ Limpeza de USB aprimorada</li>
                             <li>✔️ Filtro de Navegação</li>
-                            <li><li>Suporte Técnico Prioritário</li>
+                            <li>✔️ Suporte Técnico Prioritário</li>
                             <li>✔️ Atualizações automáticas</li>
                         </ul>
                         <a href="https://app.monetizze.com.br/checkout/DYT352682" class="btn">Comprar Agora</a>
-                        <a href="https://app.monetizze.com.br/checkout/DYT352682" class="btn">Parcele em até 6x de R$ 8,29*</a>
+                        <a href="https://app.monetizze.com.br/checkout/DYT352682" class="btn">Parcele em até <br>6x de R$ 8,29*</a>
                     </div>
                     <div class="price-card">
                         <h3>Licença Vitalícia</h3>
@@ -650,11 +695,32 @@
                             <li>✔️ Acesso a futuras versões Pro</li>
                             <li>✔️ Instalação em até 3 PCs</li>
                         </ul>
-                        <a href="#" class="btn">Melhor Custo-Benefício!</a>
+                        <a href="https://app.monetizze.com.br/checkout/DEG352732" class="btn">Melhor Custo-Benefício!</a>
+                        <a href="https://app.monetizze.com.br/checkout/DEG352732" class="btn">Parcele em até <br>12x de R$ 20,07*</a>
                     </div>
                 </div>
             </div>
         </section>
+
+        ---
+
+        <section id="download-free">
+            <div class="container">
+                <h2>Baixe o Smadav Gratuito</h2>
+                <p>Comece a proteger seu PC agora mesmo com a versão gratuita do Smadav. Leve, eficaz e sempre pronto para agir.</p>
+                <p>O Smadav Free oferece uma camada essencial de proteção contra vírus de USB e ameaças comuns, ideal para complementar seu antivírus principal ou para usuários que buscam uma solução leve e focada.</p>
+                <a href="https://smadsoft.com/smadav2025rev154.exe" class="btn-download" target="_blank" rel="noopener noreferrer">
+                    Download Smadav Free 2025 Rev. 15.4
+                </a>
+                <p class="small-text" style="font-size: 0.9em; color: #666; margin-top: 15px;">
+                    (Tamanho do arquivo: Aproximadamente 1.4 MB)
+                    <br>
+                   <h2>Compatível com Windows XP, Vista, 7, 8, 10, 11 (32-bit e 64-bit).</h2>
+                </p>
+            </div>
+        </section>
+
+        ---
 
         <section id="version-history" class="version-history">
             <div class="container">
@@ -701,6 +767,8 @@
         </section>
     </main>
 
+    <button id="back-to-top" title="Voltar ao Topo">&#x2191;</button>
+
     <footer>
         <div class="container">
             <p>&copy; 2025 Smadav Antivírus. Todos os direitos reservados. | <a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
@@ -711,7 +779,9 @@
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.querySelector('.menu-toggle');
             const mainNav = document.getElementById('main-nav');
+            const backToTopButton = document.getElementById('back-to-top');
 
+            // Funcionalidade do menu hamburguer
             menuToggle.addEventListener('click', function() {
                 mainNav.classList.toggle('active');
             });
@@ -722,6 +792,22 @@
                     if (mainNav.classList.contains('active')) {
                         mainNav.classList.remove('active');
                     }
+                });
+            });
+
+            // Funcionalidade do botão Voltar ao Topo
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopButton.style.display = 'block';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            });
+
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
                 });
             });
         });
