@@ -214,6 +214,34 @@
         .whatsapp-button:hover {
             transform: scale(1.05); /* Um pouco menos de zoom para um botão maior */
         }
+
+        /* Facebook Button */
+        .facebook-button {
+            position: fixed;
+            top: 20px; /* Adjust as needed for spacing from the top */
+            right: 20px; /* Adjust as needed for spacing from the right */
+            z-index: 1000; /* Ensure it's above other content */
+            background-color: #1877f2; /* Facebook blue */
+            border-radius: 50%; /* Makes it circular */
+            padding: 5px; /* Spacing around the icon */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px; /* Adjust size as needed */
+            height: 40px; /* Adjust size as needed */
+            transition: transform 0.3s ease;
+        }
+
+        .facebook-button:hover {
+            transform: scale(1.1); /* Slightly enlarge on hover */
+        }
+
+        .facebook-button a {
+            display: flex; /* Ensures the image inside is centered if its parent is larger */
+            line-height: 0; /* Remove extra space below image */
+        }
+
         /* Responsividade */
         @media (max-width: 768px) {
             nav ul {
@@ -242,10 +270,27 @@
             .whatsapp-button .whatsapp-icon-text {
                 font-size: 20px;
             }
+
+            /* Ajuste para o botão do Facebook em telas menores */
+            .facebook-button {
+                top: 15px;
+                right: 15px;
+                width: 35px;
+                height: 35px;
+            }
+            .facebook-button img {
+                width: 25px;
+                height: 25px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="facebook-button">
+        <a href="https://www.facebook.com/profile.php?id=61578312332788" target="_blank" aria-label="Visite nossa página no Facebook">
+            <img src="face.png" alt="Facebook" style="width:30px;height:30px;">
+        </a>
+    </div>
     <header>
         <div class="container">
             <h1>Resgate</h1>
@@ -266,7 +311,6 @@
     </nav>
     <main>
         <section id="emergencia" class="container">
-			<div align="center"><img src="sirene.gif" widht+"75" height="75"></div>
             <h2 class="section-title">Precisa de Ajuda AGORA?</h2>
             <div class="highlight-box">
                 <h3>O Resgate está pronto para agir!</h3>
@@ -287,7 +331,7 @@
                 </div>
                 <div class="service-card">
                     <span class="icon">&#x2695;</span> <h3>3. Abordagem Profissional</h3>
-                    <p>No local, realizamos uma abordagem cuidadosa, visando a estabilização e segurança do indivíduo. Priorizamos o diálogo e o respeito à dignidade.</p>
+                    <p>No local, realizamos uma abordagem cuidadosa, visando a estabilização e segurança do indivíduulo. Priorizamos o diálogo e o respeito à dignidade.</p>
                 </div>
                 <div class="service-card">
                     <span class="icon">&#x27A1;</span> <h3>4. Encaminhamento Seguro</h3>
@@ -366,8 +410,7 @@
     </a>
     <footer>
         <div class="container">
-			<script type="text/javascript" src="https://www.free-counters.org/count/i7wk"></script><br>
- <a href='https://www.versicherungen.at/lebensversicherung/'>Lebensversicherung</a> <script type='text/javascript' src='https://www.whomania.com/ctr?id=a983cd65bb4ac7ff411b450fd93aea31e97235b3'></script>
+            <script type="text/javascript" src="https://www.free-counters.org/count/i7wk"></script><br> <a href='https://www.versicherungen.at/lebensversicherung/'>Lebensversicherung</a> <script type='text/javascript' src='https://www.whomania.com/ctr?id=a983cd65bb4ac7ff411b450fd93aea31e97235b3'></script>
             <p>&copy; 2025 Resgate. Todos os direitos reservados. Ajuda humanizada e profissional.</p>
         </div>
     </footer>
