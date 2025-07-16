@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bithostel TI - Venda de Websites e Registro de Domínio .br</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth; /* Rolagem suave ao clicar nos links internos */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        /* Cabeçalho */
+        header {
+            background-color: #007bff; /* Azul Bithostel */
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+        header p {
+            font-size: 1.2em;
+            margin-top: 5px;
+            font-weight: 300;
+        }
+                header img {
+            max-width: 80px; /* Tamanho do logo */
+            margin-bottom: 10px;
+        }
+        /* Navegação */
+        nav {
+            background-color: #0056b3; /* Azul mais escuro para a navegação */
+            padding: 10px 0;
+            margin-top: 15px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        nav ul li a:hover {
+            background-color: #004085; /* Tom de azul para hover */
+        }
+        /* Botão Hamburguer para Mobile */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 2em;
+            color: #fff;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        /* Seções */
+        section {
+            padding: 40px 0;
+            text-align: center;
+        }
+        section:nth-of-type(even) {
+            background-color: #e6f0fa; /* Cor de fundo suave para seções alternadas */
+        }
+        h2 {
+            font-size: 2em;
+            color: #007bff; /* Azul principal para títulos */
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        /* Destaque / Call to Action */
+        .hero {
+            background: linear-gradient(to right, #007bff, #0056b3); /* Gradiente de azul */
+            color: #fff;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://via.placeholder.com/1500x500/0056b3/ffffff?text=Fundo+Bithostel') no-repeat center center/cover; /* Substitua por uma imagem real de fundo azul */
+            opacity: 0.1;
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero h2 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 700;
+        }
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #28a745; /* Verde para botões de ação secundários ou para contrastar */
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin: 5px;
+        }
+        .btn:hover {
+            background-color: #218838; /* Verde mais escuro para hover */
+        }
+        /* Botão para download (azul) */
+        .btn-main-action {
+            background-color: #007bff; /* Azul principal */
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        .btn-main-action:hover {
+            background-color: #0056b3; /* Azul mais escuro no hover */
+        }
+        /* Recursos */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .feature-item {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+        }
+        .feature-item h3 {
+            color: #007bff; /* Azul para títulos de features */
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        .feature-item p {
+            font-size: 1em;
+            color: #555;
+        }
+        /* Depoimentos */
+        .testimonials {
+            background-color: #f8f9fa;
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .testimonial-item {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .testimonial-item p {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #666;
+        }
+        .testimonial-item span {
+            font-weight: 600;
+            color: #333;
+        }
+        /* Preço */
+        .pricing-table {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .price-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+            flex: 1 1 300px;
+            max-width: 350px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .price-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .price-card h3 {
+            color: #007bff; /* Azul para títulos de preço */
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        .price-card .price {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #28a745; /* Verde para o preço, criando contraste */
+            margin-bottom: 20px;
+        }
+        .price-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+        .price-card ul li {
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 1.1em;
+        }
+        .price-card ul li::before {
+            content: '✔️';
+            margin-right: 10px;
+            color: #007bff; /* Azul para os checks */
+        }
+        /* Histórico de Versões */
+        .version-history {
+            text-align: left;
+        }
+        .version-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .version-item h3 {
+            color: #007bff; /* Azul para títulos de versão */
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .version-item ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .version-item ul li {
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .version-item ul li::before {
+            content: '• ';
+            color: #007bff; /* Azul para marcadores de lista */
+            font-weight: bold;
+        }
+        /* Seções de Conteúdo Expandido (Funções e Comparação) */
+        .content-section {
+            text-align: left;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .content-section h3 {
+            color: #007bff; /* Azul para títulos de funções */
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        .content-section p, .content-section ul {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        .content-section ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+        .content-section ul li {
+            margin-bottom: 8px;
+        }
+        .comparison-table {
+            margin-top: 20px;
+            background-color: #e6f0fa; /* Fundo suave para comparação */
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #d4dcef;
+        }
+        .comparison-table h4 {
+            color: #007bff; /* Azul para título da comparação */
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+        .comparison-table ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comparison-table ul li {
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #444;
+        }
+        .comparison-table ul li strong {
+            color: #28a745; /* Verde para destacar "Pro" */
+        }
+        /* Botão Voltar ao Topo */
+        #back-to-top {
+            display: none; /* Escondido por padrão */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff; /* Azul */
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 2em;
+            text-align: center;
+            line-height: 50px; /* Centraliza o ícone */
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+            z-index: 1000;
+        }
+        #back-to-top:hover {
+            background-color: #0056b3; /* Azul mais escuro no hover */
+        }
+        /* Rodapé */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        footer p {
+            margin: 0;
+        }
+        footer a {
+            color: #007bff; /* Azul para links no rodapé */
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            .hero h2 {
+                font-size: 2.2em;
+            }
+            .hero p {
+                font-size: 1.2em;
+            }
+            .btn, .btn-main-action {
+                padding: 12px 25px;
+                font-size: 1.1em;
+            }
+            .features-grid, .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            .price-card {
+                max-width: 100%;
+            }
+            .content-section {
+                padding: 20px;
+            }
+            /* Menu Responsivo */
+            .menu-toggle {
+                display: block;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                background-color: #0056b3;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                z-index: 99;
+                padding: 10px 0;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                margin: 10px 0;
+            }
+            nav ul li a {
+                display: block;
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+            }
+        }
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            .hero {
+                padding: 50px 15px;
+            }
+            .hero h2 {
+                font-size: 1.8em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .feature-item h3 {
+                font-size: 1.3em;
+            }
+            .price-card .price {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="logo.png" alt="Logo bithostel TI"><br>
+            <h1>bithostel TI</h1>
+            <p>Seu Parceiro Completo em Presença Digital</p>
+            <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+        </div>
+        <nav>
+            <ul id="main-nav">
+                <li><a href="#features">Por Que Escolher?</a></li>
+                <li><a href="#services">Nossos Serviços</a></li>
+                <li><a href="#testimonials">Depoimentos</a></li>
+                <li><a href="#plans">Planos de Website e Hospedagem</a></li>
+                <li><a href="#domain-check">Registre Seu Domínio</a></li>
+                <li><a href="#faq">Perguntas Frequentes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Crie Seu Website Profissional, Registre Seu Domínio .br e mantenha online seu negócio!</h2>
+                <p>Tenha uma presença online forte com websites personalizados e o registro do seu domínio brasileiro com a bithostel TI.</p>
+                <a href="#plans" class="btn">Conheça Nossos Planos!</a>
+            </div>
+        </section>
+
+        <section id="features">
+            <div class="container">
+                <h2>Por Que Escolher a bithostel TI?</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3><span style="color:#007bff;">&#10003;</span> Design Moderno e Responsivo</h3>
+                        <p>Desenvolvemos websites que se adaptam perfeitamente a qualquer tela: desktops, tablets e smartphones.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><span style="color:#007bff;">&#10003;</span> Otimização para Buscadores (SEO)</h3>
+                        <p>Seu site será construído com as melhores práticas de SEO para aparecer nas primeiras posições do Google.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><span style="color:#007bff;">&#10003;</span> Registro de Domínio .br Facilitado</h3>
+                        <p>Cuidamos de todo o processo de registro do seu domínio .br, garantindo agilidade e segurança.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><span style="color:#007bff;">&#10003;</span> Suporte Técnico Dedicado</h3>
+                        <p>Conte com uma equipe pronta para te ajudar em todas as etapas, do planejamento à manutenção.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><span style="color:#007bff;">&#10003;</span> Integração com Redes Sociais</h3>
+                        <p>Conecte seu website com suas redes sociais para aumentar seu alcance e engajamento.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><span style="color:#007bff;">&#10003;</span> Hospedagem de Alta Performance</h3>
+                        <p>Garanta que seu site esteja sempre online e rápido com nossas soluções de hospedagem seguras.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services">
+            <div class="container">
+                <h2>Nossos Serviços Principais</h2>
+                <div class="content-section">
+                    <h3>1) Criação de Websites Personalizados</h3>
+                    <p>Desenvolvemos websites sob medida para suas necessidades, seja um site institucional, e-commerce, blog ou portfólio. Nossa equipe trabalha com você para entender sua visão e transformá-la em uma presença online impactante e funcional.</p>
+                </div>
+                <div class="content-section">
+                    <h3>2) Registro e Gestão de Domínios .br</h3>
+                    <p>Facilitamos o registro do seu domínio com final .br, essencial para empresas e profissionais que buscam fortalecer sua identidade nacional. Cuidamos de toda a burocracia, desde a verificação de disponibilidade até a configuração do seu domínio.</p>
+                </div>
+                <div class="content-section">
+                    <h3>3) Hospedagem de Sites Otimizada</h3>
+                    <p>Oferecemos planos de hospedagem robustos e otimizados para garantir que seu website tenha alta performance e esteja sempre disponível. Com infraestrutura segura e suporte técnico, sua preocupação será apenas com o seu negócio.</p>
+                </div>
+                <div class="content-section">
+                    <h3>4) Otimização para Motores de Busca (SEO)</h3>
+                    <p>Para que seu site seja encontrado, ele precisa ser visível. Aplicamos as melhores estratégias de SEO para que seu website alcance as primeiras posições nos resultados de busca do Google e outros buscadores, gerando mais tráfego qualificado.</p>
+                </div>
+                <div class="content-section comparison-table">
+                    <h4>Website Institucional vs. E-commerce: Qual o ideal para você?</h4>
+                    <p>Entenda as diferenças entre os tipos de website que oferecemos:</p>
+                    <ul>
+                        <li><strong>Website Institucional:</strong> Ideal para apresentar sua empresa, serviços, portfólio e informações de contato. Foco em branding e comunicação.</li>
+                        <li><strong>E-commerce (Loja Virtual):</strong> Perfeito para vender produtos e serviços online. Inclui catálogo de produtos, carrinho de compras, integração de pagamentos e gestão de pedidos.</li>
+                        <li><strong>Blog:</strong> Para criação e gestão de conteúdo, ideal para marketing de conteúdo, educação e engajamento com sua audiência.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section class="testimonials" id="testimonials">
+            <div class="container">
+                <h2>O Que Nossos Clientes Dizem?</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-item">
+                        <p>"A bithostel TI superou minhas expectativas! Meu site ficou lindo, super rápido e já estou recebendo muitos contatos."</p>
+                        <span>- Mariana S., Empresária</span>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>"O processo de registro do domínio .br foi muito fácil e rápido. Recomendo a bithostel TI para quem busca profissionalismo!"</p>
+                        <span>- Ricardo P., Autônomo</span>
+                    </div>
+                    <div class="testimonial-item">
+                        <p>"Finalmente um suporte técnico que entende do assunto e me atende prontamente. Qualidade impecável!"</p>
+                        <span>- Fernanda G., Loja Online</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="plans">
+            <div class="container">
+                <h2>Escolha Seu Plano de Website e Hospedagem</h2>
+                <p>Encontre o plano ideal para a sua presença digital e comece a construir sua marca online.</p>
+                <div class="pricing-table">
+                    <div class="price-card">
+                        <h3>Plano Essencial (Website)</h3>
+                        <div class="price">R$ 399,00</div>
+                        <ul>
+                            <li> Website Institucional (até 5 páginas)</li>
+                            <li> Design Responsivo</li>
+                            <li> Otimização Básica SEO</li>
+                            <li> Integração com Redes Sociais</li>
+                            <li> Suporte por E-mail</li>
+                        </ul>
+                        <a href="https://wa.me/SEU_NUMERO_WHATSAPP?text=Olá! Gostaria de saber mais sobre o Plano Essencial de Website." class="btn">Saiba Mais</a>
+                    </div>
+                    <div class="price-card">
+                        <h3>Plano Profissional (Website)</h3>
+                        <div class="price">R$ 899,00</div>
+                        <ul>
+                            <li> Website Institucional Completo (até 10 páginas)</li>
+                            <li> Design Responsivo Premium</li>
+                            <li> Otimização Avançada SEO</li>
+                            <li> Integração com CRM/Analytics</li>
+                            <li> Suporte Prioritário</li>
+                            <li> Treinamento Básico de Uso</li>
+                        </ul>
+                        <a href="https://wa.me/SEU_NUMERO_WHATSAPP?text=Olá! Tenho interesse no Plano Profissional de Website." class="btn">Mais Detalhes!</a>
+                    </div>
+                    <div class="price-card">
+                        <h3>Plano E-commerce (Website)</h3>
+                        <div class="price">A Consultar</div>
+                        <ul>
+                            <li>✔ Loja Virtual Completa</li>
+                            <li>✔ Design Responsivo Exclusivo</li>
+                            <li>✔ Otimização SEO para E-commerce</li>
+                            <li>✔ Integração com Meios de Pagamento</li>
+                            <li>✔ Gestão de Estoque e Pedidos</li>
+                            <li>✔ Suporte Dedicado</li>
+                        </ul>
+                        <a href="https://wa.me/SEU_NUMERO_WHATSAPP?text=Olá! Gostaria de uma consultoria sobre o Plano E-commerce." class="btn">Solicitar Orçamento</a>
+                    </div>
+                    <div class="price-card">
+                        <h3>Hospedagem Básica(Compartilhado)</h3>
+                        <div class="price">R$ 79,90/mês</div>
+                        <ul>
+                            <li> 5 GB de Espaço em Disco</li>
+                            <li> CPANEL</li>
+                            <li> 1 Domínio</li>
+                            <li> 5 Contas de E-mail</li>
+                            <li> Certificado SSL Grátis</li>
+                        </ul>
+                        <a href="https://wa.me/SEU_NUMERO_WHATSAPP?text=Olá! Gostaria de saber mais sobre o Plano de Hospedagem Básica." class="btn">Contratar</a>
+                    </div>
+                    <div class="price-card">
+                        <h3>Hospedagem Avançada(EXCLUSIVO)</h3>
+                        <div class="price">R$ 170,40/mês</div>
+                        <ul>
+                            <li> 10 Domínios</li>
+                            <li> 01 IPV4</li>
+                            <li> CPANEL</li>
+                            <li> Contas de E-mail Ilimitadas</li>
+                            <li> Suporte Prioritário</li>
+                            <li> Backups Diários</li>
+                        </ul>
+                        <a href="https://wa.me/SEU_NUMERO_WHATSAPP?text=Olá! Gostaria de saber mais sobre o Plano de Hospedagem Avançada." class="btn">Contratar</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        ---
+
+        <section id="domain-check">
+            <div class="container">
+                <h2>Verifique e Registre Seu Domínio .br</h2>
+                <p>Garanta o nome ideal para sua empresa ou projeto na internet brasileira.</p>
+                <p>Use a ferramenta abaixo para verificar a disponibilidade do seu domínio .br. Se estiver disponível, já podemos iniciar o processo de registro para você!</p>
+                <div style="background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); margin-top: 20px;">
+                    <form action="https://registro.br/cgi-bin/whois" method="get" target="_blank" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px;">
+                        <input type="text" name="query" placeholder="SeuDominio.com.br" style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; flex: 1; max-width: 350px; font-size: 1em;">
+                        <button type="submit" class="btn-main-action" style="background-color: #28a745; margin: 0;">Verificar Domínio</button>
+                    </form>
+                    <p style="font-size: 0.9em; color: #666; margin-top: 20px;">
+                        Após a verificação, entre em contato conosco para prosseguir com o registro e configuração do seu domínio.
+                    </p>
+                    <a href="https://wa.me/SEU_NUMERO_WHATSAPP?text=Olá! Preciso de ajuda para registrar meu domínio." class="btn" style="margin-top: 15px;">Fale Conosco para Registro</a>
+                </div>
+            </div>
+        </section>
+
+        ---
+
+        <section id="faq" class="version-history">
+            <div class="container">
+                <h2>Perguntas Frequentes</h2>
+                <div class="version-item">
+                    <h3>O que é um domínio .br?</h3>
+                    <ul>
+                        <li>É um domínio de nível superior específico para o Brasil, administrado pelo Registro.br. É ideal para empresas e indivíduos que operam no país.</li>
+                    </ul>
+                </div>
+                <div class="version-item">
+                    <h3>Preciso de hospedagem se já tenho um domínio?</h3>
+                    <ul>
+                        <li>Sim, o domínio é o "endereço" do seu site e a hospedagem é o "terreno" onde ele fica armazenado. Ambos são essenciais para que seu site esteja online.</li>
+                    </ul>
+                </div>
+                <div class="version-item">
+                    <h3>Quanto tempo leva para meu site ficar pronto?</h3>
+                    <ul>
+                        <li>O prazo varia de acordo com a complexidade do projeto e o plano escolhido. Geralmente, um site institucional pode levar de 7 a 20 dias úteis após a entrega de todo o conteúdo.</li>
+                    </ul>
+                </div>
+                <div class="version-item">
+                    <h3>A bithostel TI oferece manutenção para o site?</h3>
+                    <ul>
+                        <li>Sim, oferecemos planos de manutenção para garantir que seu site esteja sempre atualizado, seguro e funcionando perfeitamente.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button id="back-to-top" title="Voltar ao Topo">&#x2191;</button>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 bithostel TI. Todos os direitos reservados. | <a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mainNav = document.getElementById('main-nav');
+            const backToTopButton = document.getElementById('back-to-top');
+
+            // Funcionalidade do menu hamburguer
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+
+            // Fechar o menu ao clicar em um link (para mobile)
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+
+            // Funcionalidade do botão Voltar ao Topo
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopButton.style.display = 'block';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            });
+
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
