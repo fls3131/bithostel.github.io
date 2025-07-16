@@ -242,6 +242,31 @@
             line-height: 0; /* Remove extra space below image */
         }
 
+        /* Estilos para o Botão "Scroll to Top" */
+        #scrollToTopBtn {
+            display: none; /* Escondido por padrão */
+            position: fixed; /* Fixado na tela */
+            bottom: 20px; /* 20px do fundo */
+            right: 20px; /* 20px da direita */
+            z-index: 99; /* Alto z-index para ficar acima de outros elementos */
+            border: none; /* Sem borda */
+            outline: none; /* Sem contorno ao focar */
+            background-color: #007bff; /* Cor de fundo azul (sua cor primária) */
+            color: white; /* Cor do texto (seta) */
+            cursor: pointer; /* Cursor de clique */
+            padding: 15px; /* Espaçamento interno */
+            border-radius: 50%; /* Torna o botão redondo */
+            font-size: 24px; /* Tamanho da seta */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra para destaque */
+            transition: background-color 0.3s ease, transform 0.3s ease; /* Transições suaves */
+        }
+
+        #scrollToTopBtn:hover {
+            background-color: #0056b3; /* Cor mais escura no hover */
+            transform: translateY(-3px); /* Leve movimento para cima no hover */
+        }
+
+
         /* Responsividade */
         @media (max-width: 768px) {
             nav ul {
@@ -281,6 +306,13 @@
             .facebook-button img {
                 width: 25px;
                 height: 25px;
+            }
+            /* Responsividade para o botão "Scroll to Top" */
+            #scrollToTopBtn {
+                bottom: 15px;
+                right: 15px;
+                padding: 12px;
+                font-size: 20px;
             }
         }
     </style>
@@ -423,6 +455,9 @@
     <a href="https://wa.me/5513997687326?text=Vamos%20te%20ajudar!%0APara%20agilizar%20o%20atendimento%2C%20nos%20passe%20algumas%20informações%20por%20gentileza%3A%0A1-%20Seu%20nome%3A%0A2-%20Masculino%20ou%20feminino%3F%0A3-%20Cidade%2FRegião%3F%0A4-%20Idade%20da%20pessoa%20a%20ser%20ajudada%3A%0A5-%20Possui%20alguma%20deficiência%20física%3F" class="whatsapp-button" target="_blank" aria-label="Fale conosco pelo WhatsApp">
         <span class="whatsapp-icon-text">&#x2709;</span> WhatsApp
     </a>
+
+    <button id="scrollToTopBtn" title="Ir para o topo">↑</button>
+
     <footer>
         <div class="container">
             <script type="text/javascript" src="https://www.free-counters.org/count/i7wk"></script><br> <a href='https://www.versicherungen.at/lebensversicherung/'>Lebensversicherung</a> <script type='text/javascript' src='https://www.whomania.com/ctr?id=a983cd65bb4ac7ff411b450fd93aea31e97235b3'></script>
@@ -430,5 +465,28 @@
             <p>&copy; 2025 bithostel TI. Todos os direitos reservados. Publicado e Apoiado.</p>
         </div>
     </footer>
+    <script>
+        // Pega o botão
+        let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+        // Quando o usuário rolar 20px para baixo, mostra o botão
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        }
+
+        // Quando o usuário clica no botão, rola a página para o topo
+        scrollToTopBtn.addEventListener("click", function() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+    </script>
 </body>
 </html>
