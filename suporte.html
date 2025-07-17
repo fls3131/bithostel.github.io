@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bithostel TI - Assistência Técnica de Informática</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Gerais (mantidos para consistência) */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        /* Cabeçalho */
+        header {
+            background-color: #007bff;
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+        header p {
+            font-size: 1.2em;
+            margin-top: 5px;
+            font-weight: 300;
+        }
+        header img {
+            max-width: 80px;
+            margin-bottom: 10px;
+        }
+        /* Navegação (simplificada para página única, ou pode ser um link "Voltar") */
+        nav {
+            background-color: #0056b3;
+            padding: 10px 0;
+            margin-top: 15px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        nav ul li a:hover {
+            background-color: #004085;
+        }
+        /* Botão Hamburguer para Mobile */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 2em;
+            color: #fff;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        /* Seções */
+        section {
+            padding: 40px 0;
+            text-align: center;
+        }
+        section:nth-of-type(even) {
+            background-color: #e6f0fa;
+        }
+        h2 {
+            font-size: 2em;
+            color: #007bff;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        /* Destaque / Call to Action */
+        .hero {
+            background: linear-gradient(to right, #007bff, #0056b3);
+            color: #fff;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://via.placeholder.com/1500x500/0056b3/ffffff?text=Fundo+Assistência+Técnica') no-repeat center center/cover;
+            opacity: 0.1;
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero h2 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 700;
+        }
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #28a745;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin: 5px;
+        }
+        .btn:hover {
+            background-color: #218838;
+        }
+        /* Recursos / Itens de Serviço */
+        .features-grid, .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .feature-item, .service-item {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-item:hover, .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+        }
+        .feature-item h3, .service-item h3 {
+            color: #007bff;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        .feature-item p, .service-item p {
+            font-size: 1em;
+            color: #555;
+        }
+        /* FAQ / Histórico de Versões (reaproveitado para FAQ) */
+        .version-history {
+            text-align: left;
+        }
+        .version-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .version-item h3 {
+            color: #007bff;
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .version-item ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .version-item ul li {
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .version-item ul li::before {
+            content: '• ';
+            color: #007bff;
+            font-weight: bold;
+        }
+        /* Botão Voltar ao Topo */
+        #back-to-top {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 2em;
+            text-align: center;
+            line-height: 50px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+            z-index: 1000;
+        }
+        #back-to-top:hover {
+            background-color: #0056b3;
+        }
+        /* Rodapé */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        footer p {
+            margin: 0;
+        }
+        footer a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        /* Responsividade (mantida) */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            .hero h2 {
+                font-size: 2.2em;
+            }
+            .hero p {
+                font-size: 1.2em;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 1.1em;
+            }
+            .features-grid, .service-grid {
+                grid-template-columns: 1fr;
+            }
+            /* Menu Responsivo */
+            .menu-toggle {
+                display: block;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                background-color: #0056b3;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                z-index: 99;
+                padding: 10px 0;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                margin: 10px 0;
+            }
+            nav ul li a {
+                display: block;
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+            }
+        }
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            .hero {
+                padding: 50px 15px;
+            }
+            .hero h2 {
+                font-size: 1.8em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .feature-item h3, .service-item h3 {
+                font-size: 1.3em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="logo.png" alt="Logo bithostel TI"><br>
+            <h1>bithostel TI</h1>
+            <p>Assistência Técnica de Informática</p>
+            <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+        </div>
+        <nav>
+            <ul id="main-nav">
+                <li><a href="index.html">Voltar ao Início</a></li>
+                <li><a href="#why-choose">Por Que Nos Escolher?</a></li>
+                <li><a href="#services-offered">Nossos Serviços</a></li>
+                <li><a href="#faq">Perguntas Frequentes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Seu Computador e Notebook em Boas Mãos!</h2>
+                <p>Reparos, Manutenção e Suporte Técnico Especializado para Residências e Empresas.</p>
+                <a href="https://wa.me/5513996711979?text=Olá! Preciso de assistência técnica para meu computador." class="btn">Solicitar Atendimento Agora!</a>
+            </div>
+        </section>
+
+        <section id="why-choose">
+            <div class="container">
+                <h2>Por Que Escolher a bithostel TI para sua Assistência?</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3><span style="color:#007bff;">&#10003;</span> Técnicos Qualificados</h3>
+                        <p>Nossa equipe é formada por profissionais experientes e certificados para resolver qualquer problema.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><span style="color:#007bff;">&#10003;</span> Atendimento Rápido e Eficaz</h3>
+                        <p>Agilidade no diagnóstico e na solução para que você volte a usar seus equipamentos o quanto antes.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><span style="color:#007bff;">&#10003;</span> Preço Justo e Transparente</h3>
+                        <p>Orçamentos claros e sem surpresas. Você sabe exatamente o que está pagando.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><span style="color:#007bff;">&#10003;</span> Suporte Personalizado</h3>
+                        <p>Atendimento focado nas suas necessidades, com soluções sob medida para cada situação.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><span style="color:#007bff;">&#10003;</span> Segurança dos seus Dados</h3>
+                        <p>Trabalhamos com o máximo cuidado para proteger suas informações durante todo o processo.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3><span style="color:#007bff;">&#10003;</span> Peças de Qualidade</h3>
+                        <p>Utilizamos apenas componentes de alta qualidade para garantir a durabilidade dos reparos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services-offered">
+            <div class="container">
+                <h2>Nossos Serviços de Assistência Técnica</h2>
+                <div class="service-grid">
+                    <div class="service-item">
+                        <h3>Manutenção Preventiva e Corretiva</h3>
+                        <p>Limpeza interna, troca de pasta térmica, otimização de sistema, reparo de hardware e substituição de peças.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Formatação e Instalação de Sistema</h3>
+                        <p>Formatação segura, instalação de Windows, Linux ou macOS, drivers e programas essenciais.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Remoção de Vírus e Malwares</h3>
+                        <p>Limpeza profunda do sistema, remoção de ameaças e instalação de antivírus para sua proteção.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Upgrade de Hardware</h3>
+                        <p>Instalação de SSD, mais memória RAM, placas de vídeo e outros componentes para melhorar a performance.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Configuração de Redes e Periféricos</h3>
+                        <p>Instalação e configuração de impressoras, roteadores, Wi-Fi e outros dispositivos para seu dia a dia.</p>
+                    </div>
+                    <div class="service-item">
+                        <h3>Recuperação de Dados</h3>
+                        <p>Serviço especializado para tentar recuperar arquivos importantes de HDs ou SSDs danificados.</p>
+                    </div>
+                </div>
+                <a href="https://wa.me/5513996711979?text=Olá! Gostaria de um orçamento para assistência técnica de informática." class="btn" style="margin-top: 40px;">Fale Conosco para um Orçamento!</a>
+            </div>
+        </section>
+
+        <section id="faq" class="version-history">
+            <div class="container">
+                <h2>Perguntas Frequentes sobre Assistência Técnica</h2>
+                <div class="version-item">
+                    <h3>Quais tipos de equipamentos vocês consertam?</h3>
+                    <ul>
+                        <li>Atendemos notebooks, desktops (computadores de mesa) de diversas marcas e modelos.</li>
+                    </ul>
+                </div>
+                <div class="version-item">
+                    <h3>Quanto tempo leva para o conserto?</h3>
+                    <ul>
+                        <li>O tempo de conserto varia conforme a complexidade do problema e a disponibilidade de peças. Após o diagnóstico, informaremos um prazo estimado.</li>
+                    </ul>
+                </div>
+                <div class="version-item">
+                    <h3>Meus dados estarão seguros?</h3>
+                    <ul>
+                        <li>Sim, a segurança dos seus dados é nossa prioridade. Realizamos backups quando possível e garantimos a confidencialidade das suas informações.</li>
+                    </ul>
+                </div>
+                <div class="version-item">
+                    <h3>Vocês fazem atendimento a domicílio ou empresarial?</h3>
+                    <ul>
+                        <li>Disponibilizamos atendimento em nossa loja física. Para serviços empresariais ou casos específicos, consulte-nos sobre a possibilidade de atendimento no local.</li>
+                    </ul>
+                </div>
+                <div class="version-item">
+                    <h3>Há garantia sobre os serviços prestados?</h3>
+                    <ul>
+                        <li>Sim, todos os nossos serviços e peças substituídas possuem garantia. Os termos serão informados no orçamento.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <button id="back-to-top" title="Voltar ao Topo">&#x2191;</button>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 bithostel TI. Todos os direitos reservados. | <a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mainNav = document.getElementById('main-nav');
+            const backToTopButton = document.getElementById('back-to-top');
+
+            // Funcionalidade do menu hamburguer
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+
+            // Fechar o menu ao clicar em um link (para mobile)
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+
+            // Funcionalidade do botão Voltar ao Topo
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopButton.style.display = 'block';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            });
+
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
