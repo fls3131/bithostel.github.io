@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bithostel TI - Assistência Técnica de Informática</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/logo/favicon.png">
     <style>
         /* Estilos Gerais (mantidos para consistência) */
         body {
@@ -173,6 +174,8 @@
             color: #007bff;
             font-size: 1.5em;
             margin-bottom: 15px;
+            display: flex; /* Para alinhar o ícone com o texto */
+            align-items: center;
         }
         .feature-item p, .service-item p {
             font-size: 1em;
@@ -208,6 +211,36 @@
             color: #007bff;
             font-weight: bold;
         }
+        /* Nova Seção de Contato */
+        .contact-info {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            margin-top: 30px;
+            text-align: center;
+        }
+        .contact-info p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+        .contact-info p strong {
+            margin-left: 5px;
+        }
+        .contact-info a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .contact-info a:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
         /* Botão Voltar ao Topo */
         #back-to-top {
             display: none;
@@ -296,6 +329,9 @@
                 text-align: center;
                 padding: 10px 0;
             }
+            .contact-info p {
+                flex-direction: column; /* Stack contact info vertically on small screens */
+            }
         }
         @media (max-width: 480px) {
             header h1 {
@@ -317,6 +353,34 @@
                 font-size: 1.3em;
             }
         }
+
+        /* Novas regras de CSS para os ícones */
+        .feature-item h3 span,
+        .service-item h3 span,
+        .contact-info p span {
+            margin-right: 10px; /* Espaçamento entre o ícone e o texto */
+            color: #007bff; /* Cor do ícone */
+            font-size: 1.2em; /* Tamanho do ícone */
+        }
+
+        /* Estilos específicos para cada ícone usando Unicode */
+        .icon-qualified::before { content: '\1F468\200D\1F4BC'; /* 👨‍💼 Man Office Worker */ }
+        .icon-speed::before { content: '\23F1\FE0F'; /* ⏱️ Stopwatch */ }
+        .icon-price::before { content: '\1F4B8'; /* 💸 Money With Wings */ }
+        .icon-support-person::before { content: '\1F464'; /* 👤 Bust In Silhouette */ }
+        .icon-security::before { content: '\1F512'; /* 🔒 Locked */ }
+        .icon-quality::before { content: '\1F4AA'; /* 💪 Flexed Biceps */ }
+
+        .icon-maintenance::before { content: '\1F527'; /* 🔧 Wrench */ }
+        .icon-format::before { content: '\1F4BE'; /* 💾 Floppy Disk */ }
+        .icon-virus::before { content: '\1F4C6'; /* 📄 Page With Curl */ } /* Using a document icon as a placeholder for virus removal */
+        .icon-upgrade::before { content: '\1F50E'; /* 🔎 Right-Pointing Magnifying Glass */ } /* Using search icon for upgrade */
+        .icon-network::before { content: '\1F4BB'; /* 💻 Laptop (for network/peripherals) */ }
+        .icon-recovery::before { content: '\1F4C4'; /* 📄 Page Facing Up */ } /* Using page icon for data recovery */
+
+        .icon-whatsapp::before { content: '\1F4F1'; /* 📱 Mobile Phone */ }
+        .icon-email::before { content: '\1F4E7'; /* 📧 E-Mail Symbol */ }
+
     </style>
 </head>
 <body>
@@ -333,7 +397,7 @@
                 <li><a href="#why-choose">Por Que Nos Escolher?</a></li>
                 <li><a href="#services-offered">Nossos Serviços</a></li>
                 <li><a href="#faq">Perguntas Frequentes</a></li>
-            </ul>
+                <li><a href="#contact">Contato</a></li> </ul>
         </nav>
     </header>
 
@@ -351,27 +415,27 @@
                 <h2>Por Que Escolher a bithostel TI para sua Assistência?</h2>
                 <div class="features-grid">
                     <div class="feature-item">
-                        <h3><span style="color:#007bff;">&#10003;</span> Técnicos Qualificados</h3>
+                        <h3><span class="icon-qualified"></span> Técnicos Qualificados</h3>
                         <p>Nossa equipe é formada por profissionais experientes e certificados para resolver qualquer problema.</p>
                     </div>
                     <div class="feature-item">
-                        <h3><span style="color:#007bff;">&#10003;</span> Atendimento Rápido e Eficaz</h3>
+                        <h3><span class="icon-speed"></span> Atendimento Rápido e Eficaz</h3>
                         <p>Agilidade no diagnóstico e na solução para que você volte a usar seus equipamentos o quanto antes.</p>
                     </div>
                     <div class="feature-item">
-                        <h3><span style="color:#007bff;">&#10003;</span> Preço Justo e Transparente</h3>
+                        <h3><span class="icon-price"></span> Preço Justo e Transparente</h3>
                         <p>Orçamentos claros e sem surpresas. Você sabe exatamente o que está pagando.</p>
                     </div>
                     <div class="feature-item">
-                        <h3><span style="color:#007bff;">&#10003;</span> Suporte Personalizado</h3>
+                        <h3><span class="icon-support-person"></span> Suporte Personalizado</h3>
                         <p>Atendimento focado nas suas necessidades, com soluções sob medida para cada situação.</p>
                     </div>
                     <div class="feature-item">
-                        <h3><span style="color:#007bff;">&#10003;</span> Segurança dos seus Dados</h3>
+                        <h3><span class="icon-security"></span> Segurança dos seus Dados</h3>
                         <p>Trabalhamos com o máximo cuidado para proteger suas informações durante todo o processo.</p>
                     </div>
                     <div class="feature-item">
-                        <h3><span style="color:#007bff;">&#10003;</span> Peças de Qualidade</h3>
+                        <h3><span class="icon-quality"></span> Peças de Qualidade</h3>
                         <p>Utilizamos apenas componentes de alta qualidade para garantir a durabilidade dos reparos.</p>
                     </div>
                 </div>
@@ -383,27 +447,27 @@
                 <h2>Nossos Serviços de Assistência Técnica</h2>
                 <div class="service-grid">
                     <div class="service-item">
-                        <h3>Manutenção Preventiva e Corretiva</h3>
+                        <h3><span class="icon-maintenance"></span> Manutenção Preventiva e Corretiva</h3>
                         <p>Limpeza interna, troca de pasta térmica, otimização de sistema, reparo de hardware e substituição de peças.</p>
                     </div>
                     <div class="service-item">
-                        <h3>Formatação e Instalação de Sistema</h3>
+                        <h3><span class="icon-format"></span> Formatação e Instalação de Sistema</h3>
                         <p>Formatação segura, instalação de Windows, Linux ou macOS, drivers e programas essenciais.</p>
                     </div>
                     <div class="service-item">
-                        <h3>Remoção de Vírus e Malwares</h3>
+                        <h3><span class="icon-virus"></span> Remoção de Vírus e Malwares</h3>
                         <p>Limpeza profunda do sistema, remoção de ameaças e instalação de antivírus para sua proteção.</p>
                     </div>
                     <div class="service-item">
-                        <h3>Upgrade de Hardware</h3>
+                        <h3><span class="icon-upgrade"></span> Upgrade de Hardware</h3>
                         <p>Instalação de SSD, mais memória RAM, placas de vídeo e outros componentes para melhorar a performance.</p>
                     </div>
                     <div class="service-item">
-                        <h3>Configuração de Redes e Periféricos</h3>
+                        <h3><span class="icon-network"></span> Configuração de Redes e Periféricos</h3>
                         <p>Instalação e configuração de impressoras, roteadores, Wi-Fi e outros dispositivos para seu dia a dia.</p>
                     </div>
                     <div class="service-item">
-                        <h3>Recuperação de Dados</h3>
+                        <h3><span class="icon-recovery"></span> Recuperação de Dados</h3>
                         <p>Serviço especializado para tentar recuperar arquivos importantes de HDs ou SSDs danificados.</p>
                     </div>
                 </div>
@@ -446,16 +510,28 @@
                 </div>
             </div>
         </section>
+
+        ---
+
+        <section id="contact">
+            <div class="container">
+                <h2>Entre em Contato Conosco!</h2>
+                <p>Estamos prontos para te ajudar com suas necessidades de informática.</p>
+                <div class="contact-info">
+                    <p><span class="icon-whatsapp"></span> **WhatsApp:** <a href="https://wa.me/5513996711979" target="_blank">+55 (13) 99671-1979</a></p>
+                    <p><span class="icon-email"></span> **E-mail:** <a href="mailto:hostmaster@bithostel.com.br">hostmaster@bithostel.com.br</a></p>
+                </div>
+                <a href="https://wa.me/5513996711979?text=Olá! Gostaria de falar com a bithostel TI sobre assistência técnica." class="btn" style="margin-top: 30px;">Envie uma Mensagem Agora!</a>
+            </div>
+        </section>
+
     </main>
-
     <button id="back-to-top" title="Voltar ao Topo">&#x2191;</button>
-
     <footer>
         <div class="container">
             <p>&copy; 2025 bithostel TI. Todos os direitos reservados. | <a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
         </div>
     </footer>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.querySelector('.menu-toggle');
