@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bithostel TI - Venda de Websites e Registro de Domínio .br</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-        <link rel="icon" type="image/png" href="assets/logo/favicon.png">
+    <link rel="icon" type="image/png" href="assets/logo/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWtSRqSg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         /* Estilos Gerais */
@@ -102,6 +103,10 @@
             margin-bottom: 20px;
             font-weight: 600;
         }
+        h2 .fa-solid, h2 .fa-regular, h2 .fa-brands { /* Estilo para ícones nos títulos H2 */
+            margin-right: 10px;
+            color: #007bff; /* Garante que o ícone mantenha a cor do título */
+        }
         /* Destaque / Call to Action */
         .hero {
             background: linear-gradient(to right, #007bff, #0056b3); /* Gradiente de azul */
@@ -152,6 +157,9 @@
         .btn:hover {
             background-color: #218838; /* Verde mais escuro para hover */
         }
+        .btn .fa-solid, .btn .fa-brands { /* Estilo para ícones dentro de botões */
+            margin-right: 8px;
+        }
         /* Botão para download (azul) */
         .btn-main-action {
             background-color: #007bff; /* Azul principal */
@@ -190,6 +198,9 @@
             color: #007bff; /* Azul para títulos de features */
             font-size: 1.5em;
             margin-bottom: 15px;
+        }
+        .feature-item h3 .fa-solid { /* Estilo para ícones nos títulos H3 de features */
+            margin-right: 10px;
         }
         .feature-item p {
             font-size: 1em;
@@ -248,6 +259,9 @@
             font-size: 1.8em;
             margin-bottom: 15px;
         }
+        .price-card h3 .fa-solid { /* Estilo para ícones nos títulos H3 de price-card */
+            margin-right: 10px;
+        }
         .price-card .price {
             font-size: 2.5em;
             font-weight: 700;
@@ -264,8 +278,7 @@
             color: #555;
             font-size: 1.1em;
         }
-        .price-card ul li::before {
-            content: '✔️';
+        .price-card ul li .fa-solid { /* Estilo para ícones nas listas de price-card */
             margin-right: 10px;
             color: #007bff; /* Azul para os checks */
         }
@@ -285,6 +298,9 @@
             margin-top: 0;
             margin-bottom: 10px;
         }
+        .version-item h3 .fa-solid { /* Estilo para ícones nos títulos H3 de version-item */
+            margin-right: 10px;
+        }
         .version-item ul {
             list-style: none;
             padding: 0;
@@ -294,10 +310,9 @@
             margin-bottom: 5px;
             color: #555;
         }
-        .version-item ul li::before {
-            content: '• ';
+        .version-item ul li .fa-solid { /* Estilo para ícones nas listas de version-item */
+            margin-right: 8px;
             color: #007bff; /* Azul para marcadores de lista */
-            font-weight: bold;
         }
         /* Seções de Conteúdo Expandido (Funções e Comparação) */
         .content-section {
@@ -313,16 +328,23 @@
             font-size: 1.8em;
             margin-bottom: 15px;
         }
+        .content-section h3 .fa-solid { /* Estilo para ícones nos títulos H3 de content-section */
+            margin-right: 10px;
+        }
         .content-section p, .content-section ul {
             margin-bottom: 15px;
             color: #555;
         }
         .content-section ul {
-            list-style: disc;
-            padding-left: 20px;
+            list-style: none; /* Remove o estilo padrão da lista para adicionar ícones personalizados */
+            padding-left: 0;
         }
         .content-section ul li {
             margin-bottom: 8px;
+        }
+        .content-section ul li .fa-solid { /* Estilo para ícones nas listas de content-section */
+            margin-right: 10px;
+            color: #007bff; /* Cor dos ícones de lista */
         }
         .comparison-table {
             margin-top: 20px;
@@ -336,6 +358,9 @@
             font-size: 1.4em;
             margin-bottom: 15px;
         }
+        .comparison-table h4 .fa-solid { /* Estilo para ícones nos títulos H4 da tabela de comparação */
+            margin-right: 10px;
+        }
         .comparison-table ul {
             list-style: none;
             padding: 0;
@@ -344,6 +369,10 @@
             margin-bottom: 8px;
             font-weight: 500;
             color: #444;
+        }
+        .comparison-table ul li .fa-solid { /* Estilo para ícones nas listas da tabela de comparação */
+            margin-right: 10px;
+            color: #007bff; /* Cor dos ícones de lista */
         }
         .comparison-table ul li strong {
             color: #28a745; /* Verde para destacar "Pro" */
@@ -478,12 +507,12 @@
         </div>
         <nav>
             <ul id="main-nav">
-                <li><a href="#features">Por Que Escolher?</a></li>
-                <li><a href="#services">Nossos Serviços</a></li>
-                <li><a href="#testimonials">Depoimentos</a></li>
-                <li><a href="#plans">Planos de Website e Hospedagem</a></li>
-                <li><a href="#domain-check">Registre Seu Domínio</a></li>
-                <li><a href="#faq">Perguntas Frequentes</a></li>
+                <li><a href="#features"><i class="fa-solid fa-lightbulb"></i> Por Que Escolher?</a></li>
+                <li><a href="#services"><i class="fa-solid fa-briefcase"></i> Nossos Serviços</a></li>
+                <li><a href="#testimonials"><i class="fa-solid fa-comments"></i> Depoimentos</a></li>
+                <li><a href="#plans"><i class="fa-solid fa-boxes-stacked"></i> Planos de Website e Hospedagem</a></li>
+                <li><a href="#domain-check"><i class="fa-solid fa-globe"></i> Registre Seu Domínio</a></li>
+                <li><a href="#faq"><i class="fa-solid fa-circle-question"></i> Perguntas Frequentes</a></li>
             </ul>
         </nav>
     </header>
@@ -497,38 +526,38 @@
         </section>
         <section id="features">
             <div class="container">
-                <h2>Por Que Escolher a bithostel TI?</h2>
+                <h2><i class="fa-solid fa-check-circle"></i> Por Que Escolher a bithostel TI?</h2>
                 <div class="features-grid">
                     <div class="feature-item">
-                        <h3><span style="color:#007bff;">&#10003;</span> Design Moderno e Responsivo</h3>
+                        <h3><i class="fa-solid fa-mobile-screen-button" style="color:#007bff;"></i> Design Moderno e Responsivo</h3>
                         <p>Desenvolvemos websites que se adaptam perfeitamente a qualquer tela: desktops, tablets e smartphones.</p>
                     </div>
                     <div class="feature-item">
-                        <h3><span style="color:#007bff;">&#10003;</span> Otimização para Buscadores (SEO)</h3>
+                        <h3><i class="fa-solid fa-magnifying-glass" style="color:#007bff;"></i> Otimização para Buscadores (SEO)</h3>
                         <p>Seu site será construído com as melhores práticas de SEO para aparecer nas primeiras posições do Google.</p>
                     </div>
                     <div class="feature-item">
-                        <h3><span style="color:#007bff;">&#10003;</span> Registro de Domínio .br Facilitado</h3>
+                        <h3><i class="fa-solid fa-earth-americas" style="color:#007bff;"></i> Registro de Domínio .br Facilitado</h3>
                         <p>Cuidamos de todo o processo de registro do seu domínio .br, garantindo agilidade e segurança.</p>
                     </div>
                     <div class="feature-item">
-                        <h3><span style="color:#007bff;">&#10003;</span> Suporte Técnico Dedicado</h3>
+                        <h3><i class="fa-solid fa-headset" style="color:#007bff;"></i> Suporte Técnico Dedicado</h3>
                         <p>Conte com uma equipe pronta para te ajudar em todas as etapas, do planejamento à manutenção.</p>
                     </div>
                     <div class="feature-item">
-                        <h3><span style="color:#007bff;">&#10003;</span> Integração com Redes Sociais</h3>
+                        <h3><i class="fa-solid fa-share-nodes" style="color:#007bff;"></i> Integração com Redes Sociais</h3>
                         <p>Conecte seu website com suas redes sociais para aumentar seu alcance e engajamento.</p>
                     </div>
                     <div class="feature-item">
-                        <h3><span style="color:#007bff;">&#10003;</span> Hospedagem de Alta Performance</h3>
+                        <h3><i class="fa-solid fa-server" style="color:#007bff;"></i> Hospedagem de Alta Performance</h3>
                         <p>Garanta que seu site esteja sempre online e rápido com nossas soluções de hospedagem seguras.</p>
                     </div>
                     <div class="feature-item">
-                        <h3><span style="color:#007bff;">&#10003;</span> Resgate e Migração de Websites</h3>
+                        <h3><i class="fa-solid fa-arrows-rotate" style="color:#007bff;"></i> Resgate e Migração de Websites</h3>
                         <p>Recupere o acesso e a administração do seu domínio e site, mesmo sem contato com o desenvolvedor anterior.</p>
                     </div>
                     <div class="feature-item">
-                        <h3><span style="color:#007bff;">&#10003;</span> Modernização e Reestruturação</h3>
+                        <h3><i class="fa-solid fa-bezier-curve" style="color:#007bff;"></i> Modernização e Reestruturação</h3>
                         <p>Atualize seu site antigo com design moderno, novas funcionalidades e otimização para performance e SEO.</p>
                     </div>
                 </div>
@@ -536,47 +565,47 @@
         </section>
         <section id="services">
             <div class="container">
-                <h2>Nossos Serviços Principais</h2>
+                <h2><i class="fa-solid fa-handshake"></i> Nossos Serviços Principais</h2>
                 <div class="content-section">
-                    <h3>1) Criação de Websites Personalizados</h3>
+                    <h3><i class="fa-solid fa-laptop-code"></i> 1) Criação de Websites Personalizados</h3>
                     <p>Desenvolvemos websites sob medida para suas necessidades, seja um site institucional, e-commerce, blog ou portfólio. Nossa equipe trabalha com você para entender sua visão e transformá-la em uma presença online impactante e funcional.</p>
                 </div>
                 <div class="content-section">
-                    <h3>2) Registro e Gestão de Domínios .br</h3>
+                    <h3><i class="fa-solid fa-globe"></i> 2) Registro e Gestão de Domínios .br</h3>
                     <p>Facilitamos o registro do seu domínio com final .br, essencial para empresas e profissionais que buscam fortalecer sua identidade nacional. Cuidamos de toda a burocracia, desde a verificação de disponibilidade até a configuração do seu domínio.</p>
                 </div>
                 <div class="content-section">
-                    <h3>3) Hospedagem de Sites Otimizada</h3>
+                    <h3><i class="fa-solid fa-database"></i> 3) Hospedagem de Sites Otimizada</h3>
                     <p>Oferecemos planos de hospedagem robustos e otimizados para garantir que seu website tenha alta performance e esteja sempre disponível. Com infraestrutura segura e suporte técnico, sua preocupação será apenas com o seu negócio.</p>
                 </div>
                 <div class="content-section">
-                    <h3>4) Otimização para Motores de Busca (SEO)</h3>
+                    <h3><i class="fa-solid fa-chart-line"></i> 4) Otimização para Motores de Busca (SEO)</h3>
                     <p>Para que seu site seja encontrado, ele precisa ser visível. Aplicamos as melhores estratégias de SEO para que seu website alcance as primeiras posições nos resultados de busca do Google e outros buscadores, gerando mais tráfego qualificado.</p>
                 </div>
                 <div class="content-section">
-                    <h3>5) Resgate de Domínio e Website</h3>
+                    <h3><i class="fa-solid fa-redo-alt"></i> 5) Resgate de Domínio e Website</h3>
                     <p>Perdeu o acesso ou contato com o responsável pelo seu site e domínio? Nós te ajudamos a **resgatar a administração** completa, garantindo que você tenha total controle sobre sua presença online novamente.</p>
                     <p>Este serviço inclui a recuperação de acessos, transferência de propriedade e, se necessário, a migração do seu site para um ambiente que você controle totalmente.</p>
                 </div>
                 <div class="content-section">
-                    <h3>6) Modernização e Transferência de Websites Existentes</h3>
+                    <h3><i class="fa-solid fa-sync-alt"></i> 6) Modernização e Transferência de Websites Existentes</h3>
                     <p>Se você já possui um site, mas ele está desatualizado, lento ou precisa de um visual novo, a bithostel TI oferece a **modernização completa**. Atualizamos o design, otimizamos a performance e implementamos novas funcionalidades.</p>
                     <p>Além disso, realizamos a **transferência segura** do seu site para nossos servidores de alta performance, garantindo um processo sem interrupções e com total segurança dos seus dados.</p>
                 </div>
                 <div class="content-section comparison-table">
-                    <h4>Website Institucional vs. E-commerce: Qual o ideal para você?</h4>
+                    <h4><i class="fa-solid fa-balance-scale"></i> Website Institucional vs. E-commerce: Qual o ideal para você?</h4>
                     <p>Entenda as diferenças entre os tipos de website que oferecemos:</p>
                     <ul>
-                        <li><strong>Website Institucional:</strong> Ideal para apresentar sua empresa, serviços, portfólio e informações de contato. Foco em branding e comunicação.</li>
-                        <li><strong>E-commerce (Loja Virtual):</strong> Perfeito para vender produtos e serviços online. Inclui catálogo de produtos, carrinho de compras, integração de pagamentos e gestão de pedidos.</li>
-                        <li><strong>Blog:</strong> Para criação e gestão de conteúdo, ideal para marketing de conteúdo, educação e engajamento com sua audiência.</li>
+                        <li><i class="fa-solid fa-building"></i> <strong>Website Institucional:</strong> Ideal para apresentar sua empresa, serviços, portfólio e informações de contato. Foco em branding e comunicação.</li>
+                        <li><i class="fa-solid fa-store"></i> <strong>E-commerce (Loja Virtual):</strong> Perfeito para vender produtos e serviços online. Inclui catálogo de produtos, carrinho de compras, integração de pagamentos e gestão de pedidos.</li>
+                        <li><i class="fa-solid fa-blog"></i> <strong>Blog:</strong> Para criação e gestão de conteúdo, ideal para marketing de conteúdo, educação e engajamento com sua audiência.</li>
                     </ul>
                 </div>
             </div>
         </section>
         <section class="testimonials" id="testimonials">
             <div class="container">
-                <h2>O Que Nossos Clientes Dizem?</h2>
+                <h2><i class="fa-solid fa-quote-left"></i> O Que Nossos Clientes Dizem?</h2>
                 <div class="testimonial-grid">
                     <div class="testimonial-item">
                         <p>"A bithostel TI superou minhas expectativas! Meu site ficou lindo, super rápido e já estou recebendo muitos contatos."</p>
@@ -595,81 +624,81 @@
         </section>
         <section id="plans">
             <div class="container">
-                <h2>Escolha Seu Plano de Website e Hospedagem</h2>
+                <h2><i class="fa-solid fa-tags"></i> Escolha Seu Plano de Website e Hospedagem</h2>
                 <p>Encontre o plano ideal para a sua presença digital e comece a construir sua marca online.</p>
                 <div class="pricing-table">
                     <div class="price-card">
-                        <h3>Plano Essencial (Website)</h3>
+                        <h3><i class="fa-solid fa-file-alt"></i> Plano Essencial (Website)</h3>
                         <div class="price">R$ 399,00</div>
                         <ul>
-                            <li> Website Institucional (até 5 páginas)</li>
-                            <li> Design Responsivo</li>
-                            <li> Otimização Básica SEO</li>
-                            <li> Integração com Redes Sociais</li>
-                            <li> Suporte por E-mail</li>
+                            <li><i class="fa-solid fa-check"></i> Website Institucional (até 5 páginas)</li>
+                            <li><i class="fa-solid fa-check"></i> Design Responsivo</li>
+                            <li><i class="fa-solid fa-check"></i> Otimização Básica SEO</li>
+                            <li><i class="fa-solid fa-check"></i> Integração com Redes Sociais</li>
+                            <li><i class="fa-solid fa-check"></i> Suporte por E-mail</li>
                         </ul>
                         <a href="https://wa.me/5513996711979?text=Olá! Gostaria de saber mais sobre o Plano Essencial de Website." class="btn">Saiba Mais</a>
                     </div>
                     <div class="price-card">
-                        <h3>Plano Profissional (Website)</h3>
+                        <h3><i class="fa-solid fa-laptop"></i> Plano Profissional (Website)</h3>
                         <div class="price">R$ 899,00</div>
                         <ul>
-                            <li> Website Institucional Completo (até 10 páginas)</li>
-                            <li> Design Responsivo Premium</li>
-                            <li> Otimização Avançada SEO</li>
-                            <li> Integração com CRM/Analytics</li>
-                            <li> Suporte Prioritário</li>
-                            <li> Treinamento Básico de Uso</li>
+                            <li><i class="fa-solid fa-check"></i> Website Institucional Completo (até 10 páginas)</li>
+                            <li><i class="fa-solid fa-check"></i> Design Responsivo Premium</li>
+                            <li><i class="fa-solid fa-check"></i> Otimização Avançada SEO</li>
+                            <li><i class="fa-solid fa-check"></i> Integração com CRM/Analytics</li>
+                            <li><i class="fa-solid fa-check"></i> Suporte Prioritário</li>
+                            <li><i class="fa-solid fa-check"></i> Treinamento Básico de Uso</li>
                         </ul>
                         <a href="https://wa.me/5513996711979?text=Olá! Tenho interesse no Plano Profissional de Website." class="btn">Mais Detalhes!</a>
                     </div>
                     <div class="price-card">
-                        <h3>Plano E-commerce (Website)</h3>
+                        <h3><i class="fa-solid fa-shopping-cart"></i> Plano E-commerce (Website)</h3>
                         <div class="price">A Consultar</div>
                         <ul>
-                            <li>✔ Loja Virtual Completa</li>
-                            <li>✔ Design Responsivo Exclusivo</li>
-                            <li>✔ Otimização SEO para E-commerce</li>
-                            <li>✔ Integração com Meios de Pagamento</li>
-                            <li>✔ Gestão de Estoque e Pedidos</li>
-                            <li>✔ Suporte Dedicado</li>
+                            <li><i class="fa-solid fa-check"></i> Loja Virtual Completa</li>
+                            <li><i class="fa-solid fa-check"></i> Design Responsivo Exclusivo</li>
+                            <li><i class="fa-solid fa-check"></i> Otimização SEO para E-commerce</li>
+                            <li><i class="fa-solid fa-check"></i> Integração com Meios de Pagamento</li>
+                            <li><i class="fa-solid fa-check"></i> Gestão de Estoque e Pedidos</li>
+                            <li><i class="fa-solid fa-check"></i> Suporte Dedicado</li>
                         </ul>
                         <a href="https://wa.me/5513996711979?text=Olá! Gostaria de uma consultoria sobre o Plano E-commerce." class="btn">Solicitar Orçamento</a>
                     </div>
                     <div class="price-card">
-                        <h3>Plano Resgate (Domínio/Website)</h3>
+                        <h3><i class="fa-solid fa-life-ring"></i> Plano Resgate (Domínio/Website)</h3>
                         <div class="price">A Consultar</div>
                         <ul>
-                            <li>✔ Análise de Situação do Domínio/Site</li>
-                            <li>✔ Auxílio na Recuperação de Acesso</li>
-                            <li>✔ Orientação para Transferência de Propriedade</li>
-                            <li>✔ Migração de Conteúdo (se necessário)</li>
-                            <li>✔ Reconfiguração Básica</li>
+                            <li><i class="fa-solid fa-check"></i> Análise de Situação do Domínio/Site</li>
+                            <li><i class="fa-solid fa-check"></i> Auxílio na Recuperação de Acesso</li>
+                            <li><i class="fa-solid fa-check"></i> Orientação para Transferência de Propriedade</li>
+                            <li><i class="fa-solid fa-check"></i> Migração de Conteúdo (se necessário)</li>
+                            <li><i class="fa-solid fa-check"></i> Reconfiguração Básica</li>
                         </ul>
                         <a href="https://wa.me/5513996711979?text=Olá! Preciso de ajuda com o serviço de Resgate de Domínio/Website." class="btn">RESGATAR</a>
                     </div>
                     <div class="price-card">
-                        <h3>Hospedagem Básica(Compartilhado)</h3>
+                        <h3><i class="fa-solid fa-cloud"></i> Hospedagem Básica(Compartilhado)</h3>
                         <div class="price">R$ 79,90/mês</div>
                         <ul>
-                            <li> 5 GB de Espaço em Disco</li>
-                            <li> CPANEL</li>
-                            <li> 1 Domínio</li>
-                            <li> 5 Contas de E-mail</li>
-                            <li> Certificado SSL Grátis</li>
+                            <li><i class="fa-solid fa-check"></i> 5 GB de Espaço em Disco</li>
+                            <li><i class="fa-solid fa-check"></i> CPANEL</li>
+                            <li><i class="fa-solid fa-check"></i> 1 Domínio</li>
+                            <li><i class="fa-solid fa-check"></i> 5 Contas de E-mail</li>
+                            <li><i class="fa-solid fa-check"></i> Certificado SSL Grátis</li>
                         </ul>
                         <a href="https://wa.me/5513996711979?text=Olá! Gostaria de saber mais sobre o Plano de Hospedagem Básica." class="btn">Contratar</a>
                     </div>
                     <div class="price-card">
-                        <h3>Hospedagem Avançada(EXCLUSIVO)</h3>
+                        <h3><i class="fa-solid fa-rocket"></i> Hospedagem Avançada(EXCLUSIVO)</h3>
                         <div class="price">R$ 170,40/mês</div>
                         <ul>
-                            <li> 10 Domínios</li>
-                            <li> 01 IPV4</li>
-                            <li> CPANEL</li>
-                            <li> Contas de E-mail Ilimitadas</li>
-                            <li> Suporte Prioritário</li>
-                            <li> Backups Diários</li>
+                            <li><i class="fa-solid fa-check"></i> 10 Domínios</li>
+                            <li><i class="fa-solid fa-check"></i> 01 IPV4</li>
+                            <li><i class="fa-solid fa-check"></i> CPANEL</li>
+                            <li><i class="fa-solid fa-check"></i> Contas de E-mail Ilimitadas</li>
+                            <li><i class="fa-solid fa-check"></i> Suporte Prioritário</li>
+                            <li><i class="fa-solid fa-check"></i> Backups Diários</li>
                         </ul>
                         <a href="https://wa.me/5513996711979?text=Olá! Gostaria de saber mais sobre o Plano de Hospedagem Avançada." class="btn">Contratar</a>
                     </div>
@@ -679,59 +708,59 @@
         ---
         <section id="domain-check">
             <div class="container">
-                <h2>Verifique e Registre Seu Domínio .br</h2>
+                <h2><i class="fa-solid fa-search"></i> Verifique e Registre Seu Domínio .br</h2>
                 <p>Garanta o nome ideal para sua empresa ou projeto na internet brasileira.</p>
                 <p>Use a ferramenta abaixo para verificar a disponibilidade do seu domínio .br. Se estiver disponível, já podemos iniciar o processo de registro para você!</p>
                 <div style="background-color: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.08); margin-top: 20px;">
                     <form action="https://registro.br/cgi-bin/whois" method="get" target="_blank" style="display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 15px;">
                         <input type="text" name="query" placeholder="SeuDominio.com.br" style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; flex: 1; max-width: 350px; font-size: 1em;">
-                        <button type="submit" class="btn-main-action" style="background-color: #28a745; margin: 0;">Verificar Domínio</button>
+                        <button type="submit" class="btn-main-action" style="background-color: #28a745; margin: 0;"><i class="fa-solid fa-magnifying-glass"></i> Verificar Domínio</button>
                     </form>
                     <p style="font-size: 0.9em; color: #666; margin-top: 20px;">
                         Após a verificação, entre em contato conosco para prosseguir com o registro e configuração do seu domínio.
                     </p>
-                    <a href="https://wa.me/5513996711979?text=Olá! Preciso de ajuda para registrar meu domínio." class="btn" style="margin-top: 15px;">Fale Conosco para Registro</a>
+                    <a href="https://wa.me/5513996711979?text=Olá! Preciso de ajuda para registrar meu domínio." class="btn" style="margin-top: 15px;"><i class="fa-brands fa-whatsapp"></i> Fale Conosco para Registro</a>
                 </div>
             </div>
         </section>
         ---
         <section id="faq" class="version-history">
             <div class="container">
-                <h2>Perguntas Frequentes</h2>
+                <h2><i class="fa-solid fa-question-circle"></i> Perguntas Frequentes</h2>
                 <div class="version-item">
-                    <h3>O que é um domínio .br?</h3>
+                    <h3><i class="fa-solid fa-question"></i> O que é um domínio .br?</h3>
                     <ul>
-                        <li>É um domínio de nível superior específico para o Brasil, administrado pelo Registro.br. É ideal para empresas e indivíduos que operam no país.</li>
+                        <li><i class="fa-solid fa-circle-info"></i> É um domínio de nível superior específico para o Brasil, administrado pelo Registro.br. É ideal para empresas e indivíduos que operam no país.</li>
                     </ul>
                 </div>
                 <div class="version-item">
-                    <h3>Preciso de hospedagem se já tenho um domínio?</h3>
+                    <h3><i class="fa-solid fa-question"></i> Preciso de hospedagem se já tenho um domínio?</h3>
                     <ul>
-                        <li>Sim, o domínio é o "endereço" do seu site e a hospedagem é o "terreno" onde ele fica armazenado. Ambos são essenciais para que seu site esteja online.</li>
+                        <li><i class="fa-solid fa-circle-info"></i> Sim, o domínio é o "endereço" do seu site e a hospedagem é o "terreno" onde ele fica armazenado. Ambos são essenciais para que seu site esteja online.</li>
                     </ul>
                 </div>
                 <div class="version-item">
-                    <h3>Quanto tempo leva para meu site ficar pronto?</h3>
+                    <h3><i class="fa-solid fa-question"></i> Quanto tempo leva para meu site ficar pronto?</h3>
                     <ul>
-                        <li>O prazo varia de acordo com a complexidade do projeto e o plano escolhido. Geralmente, um site institucional pode levar de 7 a 20 dias úteis após a entrega de todo o conteúdo.</li>
+                        <li><i class="fa-solid fa-circle-info"></i> O prazo varia de acordo com a complexidade do projeto e o plano escolhido. Geralmente, um site institucional pode levar de 7 a 20 dias úteis após a entrega de todo o conteúdo.</li>
                     </ul>
                 </div>
                 <div class="version-item">
-                    <h3>A bithostel TI oferece manutenção para o site?</h3>
+                    <h3><i class="fa-solid fa-question"></i> A bithostel TI oferece manutenção para o site?</h3>
                     <ul>
-                        <li>Sim, oferecemos planos de manutenção para garantir que seu site esteja sempre atualizado, seguro e funcionando perfeitamente.</li>
+                        <li><i class="fa-solid fa-circle-info"></i> Sim, oferecemos planos de manutenção para garantir que seu site esteja sempre atualizado, seguro e funcionando perfeitamente.</li>
                     </ul>
                 </div>
                  <div class="version-item">
-                    <h3>Como funciona o serviço de resgate de domínio/website?</h3>
+                    <h3><i class="fa-solid fa-question"></i> Como funciona o serviço de resgate de domínio/website?</h3>
                     <ul>
-                        <li>Se você perdeu o acesso ao seu domínio ou site, ou o contato com o técnico anterior, nós o auxiliamos no processo de recuperação de acesso, transferência de propriedade e, se necessário, migração para nossos servidores, garantindo que você retome o controle.</li>
+                        <li><i class="fa-solid fa-circle-info"></i> Se você perdeu o acesso ao seu domínio ou site, ou o contato com o técnico anterior, nós o auxiliamos no processo de recuperação de acesso, transferência de propriedade e, se necessário, migração para nossos servidores, garantindo que você retome o controle.</li>
                     </ul>
                 </div>
                 <div class="version-item">
-                    <h3>Meu site é antigo, a bithostel TI pode modernizá-lo?</h3>
+                    <h3><i class="fa-solid fa-question"></i> Meu site é antigo, a bithostel TI pode modernizá-lo?</h3>
                     <ul>
-                        <li>Com certeza! Oferecemos serviços de modernização para sites existentes, atualizando o design, a tecnologia e a otimização para motores de busca, além de poder transferir seu site para nossa hospedagem de alta performance.</li>
+                        <li><i class="fa-solid fa-circle-info"></i> Com certeza! Oferecemos serviços de modernização para sites existentes, atualizando o design, a tecnologia e a otimização para motores de busca, além de poder transferir seu site para nossa hospedagem de alta performance.</li>
                     </ul>
                 </div>
             </div>
