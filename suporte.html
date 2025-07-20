@@ -7,14 +7,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/logo/favicon.png">
     <style>
-        /* Estilos Gerais (mantidos para consistência) */
+        /* Variáveis de Cores - Dark Mode */
+        :root {
+            --dark-bg: #1a1a1a;        /* Fundo principal escuro */
+            --dark-surface: #2c2c2c;   /* Fundo de seções/cards */
+            --dark-text: #e0e0e0;      /* Texto principal claro */
+            --dark-light-text: #a0a0a0; /* Texto secundário */
+            --primary-accent: #00aaff; /* Azul vibrante para destaque (era 007bff) */
+            --secondary-accent: #34c759; /* Verde para botões de ação (era 28a745) */
+            --border-color: #444;      /* Bordas sutis */
+            --header-bg: #111;         /* Fundo do cabeçalho */
+            --nav-bg: #222;            /* Fundo da navegação */
+        }
+
+        /* Estilos Globais e Reset */
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            background-color: #f4f7f6;
-            color: #333;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
             line-height: 1.6;
             scroll-behavior: smooth;
         }
@@ -23,39 +36,56 @@
             margin: 0 auto;
             padding: 20px;
         }
+        a {
+            text-decoration: none;
+            color: var(--primary-accent);
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #007bb3; /* Um tom ligeiramente mais escuro do primary-accent no hover */
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
         /* Cabeçalho */
         header {
-            background-color: #007bff;
-            color: #fff;
+            background-color: var(--header-bg);
+            color: var(--dark-text);
             padding: 20px 0;
             text-align: center;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             position: relative;
         }
         header h1 {
             margin: 0;
-            font-size: 2.5em;
+            font-size: 2.8em; /* Um pouco maior */
             font-weight: 700;
+            color: var(--primary-accent); /* Título em destaque */
         }
         header p {
             font-size: 1.2em;
             margin-top: 5px;
             font-weight: 300;
+            color: var(--dark-light-text);
         }
         header img {
-            max-width: 80px;
+            max-width: 90px; /* Logo um pouco maior */
             margin-bottom: 10px;
+            border-radius: 50%; /* Se for um logo redondo */
+            border: 2px solid var(--primary-accent); /* Borda para destaque */
         }
-        /* Navegação (simplificada para página única, ou pode ser um link "Voltar") */
+
+        /* Navegação */
         nav {
-            background-color: #0056b3;
+            background-color: var(--nav-bg);
             padding: 10px 0;
             margin-top: 15px;
+            border-top: 1px solid var(--border-color); /* Borda sutil */
         }
         nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
@@ -64,51 +94,70 @@
             margin: 0 15px;
         }
         nav ul li a {
-            color: #fff;
+            color: var(--dark-text);
             text-decoration: none;
             font-weight: 600;
             padding: 8px 15px;
             border-radius: 5px;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         nav ul li a:hover {
-            background-color: #004085;
+            background-color: var(--primary-accent);
+            color: var(--dark-bg); /* Texto escuro no hover do menu */
         }
+
         /* Botão Hamburguer para Mobile */
         .menu-toggle {
             display: none;
             background: none;
             border: none;
-            font-size: 2em;
-            color: #fff;
+            font-size: 2.2em;
+            color: var(--primary-accent);
             cursor: pointer;
             position: absolute;
             top: 20px;
             right: 20px;
             z-index: 100;
         }
+
         /* Seções */
         section {
-            padding: 40px 0;
+            padding: 60px 0; /* Mais espaçamento */
             text-align: center;
+            border-bottom: 1px solid var(--border-color); /* Separador sutil */
         }
         section:nth-of-type(even) {
-            background-color: #e6f0fa;
+            background-color: var(--dark-surface); /* Fundo alternativo */
         }
         h2 {
-            font-size: 2em;
-            color: #007bff;
-            margin-bottom: 20px;
-            font-weight: 600;
+            font-size: 2.5em; /* Títulos maiores */
+            color: var(--primary-accent);
+            margin-bottom: 25px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 10px;
         }
-        /* Destaque / Call to Action */
+        h2::after { /* Linha de destaque abaixo dos títulos */
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-accent);
+            border-radius: 2px;
+        }
+
+        /* Hero Section */
         .hero {
-            background: linear-gradient(to right, #007bff, #0056b3);
-            color: #fff;
-            padding: 80px 20px;
+            background: linear-gradient(to right, var(--primary-accent), #0077b3); /* Gradiente mais dark */
+            color: var(--dark-text);
+            padding: 100px 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
         }
         .hero::before {
             content: '';
@@ -117,8 +166,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('https://via.placeholder.com/1500x500/0056b3/ffffff?text=Fundo+Assistência+Técnica') no-repeat center center/cover;
-            opacity: 0.1;
+            background: url('https://via.placeholder.com/1500x500/0056b3/ffffff?text=Fundo+Assistência+Técnica+Dark') no-repeat center center/cover;
+            opacity: 0.15; /* Um pouco mais visível */
             z-index: 1;
         }
         .hero-content {
@@ -126,76 +175,90 @@
             z-index: 2;
         }
         .hero h2 {
-            font-size: 3em;
-            margin-bottom: 15px;
-            color: #fff;
+            font-size: 3.5em; /* Ainda maior */
+            margin-bottom: 20px;
+            color: var(--dark-text); /* Título principal em branco */
             font-weight: 700;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5); /* Sombra para destaque */
+        }
+        .hero h2::after { /* Remover a linha de destaque neste H2 específico */
+            content: none;
         }
         .hero p {
-            font-size: 1.5em;
-            margin-bottom: 30px;
+            font-size: 1.6em;
+            margin-bottom: 40px;
             font-weight: 300;
+            color: var(--dark-light-text);
         }
         .btn {
             display: inline-block;
-            background-color: #28a745;
-            color: #fff;
-            padding: 15px 30px;
-            border-radius: 5px;
+            background-color: var(--secondary-accent);
+            color: var(--dark-bg); /* Texto escuro no botão */
+            padding: 18px 35px; /* Botões maiores */
+            border-radius: 8px; /* Cantos mais suaves */
             text-decoration: none;
-            font-size: 1.3em;
-            font-weight: 600;
-            transition: background-color 0.3s ease;
-            margin: 5px;
+            font-size: 1.4em;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin: 10px; /* Mais espaçamento */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         .btn:hover {
-            background-color: #218838;
+            background-color: #2da44e; /* Tom mais escuro do verde */
+            transform: translateY(-3px); /* Efeito "levantar" */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
         }
+
         /* Recursos / Itens de Serviço */
         .features-grid, .service-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Min-width um pouco maior */
             gap: 30px;
-            margin-top: 30px;
+            margin-top: 40px;
         }
         .feature-item, .service-item {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            background-color: var(--dark-surface);
+            padding: 35px; /* Mais padding */
+            border-radius: 10px; /* Cantos mais suaves */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2); /* Sombra mais pronunciada */
             text-align: left;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color); /* Borda sutil */
         }
         .feature-item:hover, .service-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+            transform: translateY(-7px); /* Mais efeito "levantar" */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
         .feature-item h3, .service-item h3 {
-            color: #007bff;
-            font-size: 1.5em;
+            color: var(--primary-accent);
+            font-size: 1.6em; /* Títulos dos itens maiores */
             margin-bottom: 15px;
-            display: flex; /* Para alinhar o ícone com o texto */
+            display: flex;
             align-items: center;
+            font-weight: 600;
         }
         .feature-item p, .service-item p {
-            font-size: 1em;
-            color: #555;
+            font-size: 1.1em; /* Texto maior */
+            color: var(--dark-light-text);
         }
+
         /* FAQ / Histórico de Versões (reaproveitado para FAQ) */
         .version-history {
             text-align: left;
         }
         .version-item {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            background-color: var(--dark-surface);
+            padding: 25px; /* Mais padding */
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             margin-bottom: 20px;
+            border: 1px solid var(--border-color);
         }
         .version-item h3 {
-            color: #007bff;
+            color: var(--primary-accent);
             margin-top: 0;
             margin-bottom: 10px;
+            font-size: 1.4em; /* Títulos do FAQ um pouco maiores */
         }
         .version-item ul {
             list-style: none;
@@ -203,41 +266,46 @@
             margin: 0;
         }
         .version-item ul li {
-            margin-bottom: 5px;
-            color: #555;
+            margin-bottom: 8px;
+            color: var(--dark-light-text);
+            font-size: 1.1em;
         }
         .version-item ul li::before {
             content: '• ';
-            color: #007bff;
+            color: var(--secondary-accent); /* Bolinha verde */
             font-weight: bold;
+            margin-right: 5px;
         }
-        /* Nova Seção de Contato */
+
+        /* Seção de Contato */
         .contact-info {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            margin-top: 30px;
+            background-color: var(--dark-surface);
+            padding: 40px; /* Mais padding */
+            border-radius: 10px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            margin-top: 40px;
             text-align: center;
+            border: 1px solid var(--border-color);
         }
         .contact-info p {
-            font-size: 1.2em;
-            margin-bottom: 15px;
+            font-size: 1.3em; /* Texto maior */
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #333;
+            color: var(--dark-text);
         }
         .contact-info p strong {
-            margin-left: 5px;
+            margin-left: 8px;
+            color: var(--primary-accent);
         }
         .contact-info a {
-            color: #007bff;
+            color: var(--primary-accent);
             text-decoration: none;
             transition: color 0.3s ease;
         }
         .contact-info a:hover {
-            color: #0056b3;
+            color: #007bb3;
             text-decoration: underline;
         }
 
@@ -245,70 +313,80 @@
         #back-to-top {
             display: none;
             position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #007bff;
-            color: #fff;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--primary-accent);
+            color: var(--dark-bg); /* Texto escuro no botão */
             border: none;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 2em;
+            width: 60px; /* Maior */
+            height: 60px; /* Maior */
+            font-size: 2.5em; /* Ícone maior */
             text-align: center;
-            line-height: 50px;
+            line-height: 60px;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            transition: background-color 0.3s ease, opacity 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            transition: background-color 0.3s ease, opacity 0.3s ease, transform 0.2s ease;
             z-index: 1000;
         }
         #back-to-top:hover {
-            background-color: #0056b3;
+            background-color: #007bb3;
+            transform: translateY(-3px);
         }
+
         /* Rodapé */
         footer {
-            background-color: #333;
-            color: #fff;
+            background-color: var(--header-bg); /* O mesmo do cabeçalho */
+            color: var(--dark-light-text);
             padding: 30px 0;
             text-align: center;
-            font-size: 0.9em;
+            font-size: 0.95em;
+            border-top: 1px solid var(--border-color);
         }
         footer p {
             margin: 0;
         }
         footer a {
-            color: #007bff;
+            color: var(--primary-accent);
             text-decoration: none;
         }
         footer a:hover {
             text-decoration: underline;
         }
-        /* Responsividade (mantida) */
+
+        /* Responsividade */
         @media (max-width: 768px) {
             header h1 {
-                font-size: 2em;
-            }
-            .hero h2 {
                 font-size: 2.2em;
             }
+            .hero h2 {
+                font-size: 2.8em;
+            }
             .hero p {
-                font-size: 1.2em;
+                font-size: 1.4em;
             }
             .btn {
-                padding: 12px 25px;
-                font-size: 1.1em;
+                padding: 15px 30px;
+                font-size: 1.2em;
+            }
+            section {
+                padding: 40px 0;
+            }
+            h2 {
+                font-size: 2.2em;
             }
             .features-grid, .service-grid {
                 grid-template-columns: 1fr;
             }
-            /* Menu Responsivo */
-            .menu-toggle {
-                display: block;
+            .feature-item, .service-item {
+                padding: 25px;
             }
+            /* Menu Hamburguer para Mobile */
             nav ul {
                 display: none;
                 flex-direction: column;
                 align-items: center;
-                background-color: #0056b3;
+                background-color: var(--nav-bg);
                 position: absolute;
                 top: 100%;
                 left: 0;
@@ -322,97 +400,106 @@
             }
             nav ul li {
                 margin: 10px 0;
+                width: 100%; /* Ocupa a largura total */
             }
             nav ul li a {
                 display: block;
                 width: 100%;
                 text-align: center;
-                padding: 10px 0;
+                padding: 12px 0; /* Maior área clicável */
+                background-color: var(--dark-surface); /* Fundo dos itens do menu */
+                border-radius: 5px;
+            }
+            nav ul li a:hover {
+                background-color: var(--primary-accent);
+                color: var(--dark-bg);
+            }
+            .menu-toggle {
+                display: block;
             }
             .contact-info p {
-                flex-direction: column; /* Stack contact info vertically on small screens */
+                flex-direction: column;
+                font-size: 1.1em;
             }
         }
         @media (max-width: 480px) {
             header h1 {
-                font-size: 1.8em;
+                font-size: 2em;
             }
             .hero {
-                padding: 50px 15px;
+                padding: 60px 15px;
             }
             .hero h2 {
-                font-size: 1.8em;
+                font-size: 2.2em;
             }
             .hero p {
-                font-size: 1em;
+                font-size: 1.2em;
             }
             h2 {
-                font-size: 1.8em;
+                font-size: 2em;
             }
             .feature-item h3, .service-item h3 {
-                font-size: 1.3em;
+                font-size: 1.4em;
             }
         }
-
-        /* Novas regras de CSS para os ícones */
+        /* Ícones Unicode */
         .feature-item h3 span,
         .service-item h3 span,
         .contact-info p span {
-            margin-right: 10px; /* Espaçamento entre o ícone e o texto */
-            color: #007bff; /* Cor do ícone */
-            font-size: 1.2em; /* Tamanho do ícone */
+            margin-right: 10px;
+            color: var(--secondary-accent); /* Cores dos ícones */
+            font-size: 1.3em; /* Ícones um pouco maiores */
         }
-
-        /* Estilos específicos para cada ícone usando Unicode */
-        .icon-qualified::before { content: '\1F468\200D\1F4BC'; /* 👨‍💼 Man Office Worker */ }
-        .icon-speed::before { content: '\23F1\FE0F'; /* ⏱️ Stopwatch */ }
-        .icon-price::before { content: '\1F4B8'; /* 💸 Money With Wings */ }
-        .icon-support-person::before { content: '\1F464'; /* 👤 Bust In Silhouette */ }
-        .icon-security::before { content: '\1F512'; /* 🔒 Locked */ }
-        .icon-quality::before { content: '\1F4AA'; /* 💪 Flexed Biceps */ }
+        .icon-qualified::before { content: '\1F468\200D\1F4BB'; /* 👨‍💻 Tech guy */ }
+        .icon-speed::before { content: '\1F680'; /* 🚀 Rocket */ }
+        .icon-price::before { content: '\1F4B0'; /* 💰 Money Bag */ }
+        .icon-support-person::before { content: '\1F9D1\200D\1F91D\200D\1F9D1'; /* 🤝 People Holding Hands for support */ }
+        .icon-security::before { content: '\1F510'; /* 🔐 Locked with key */ }
+        .icon-quality::before { content: '\2B50'; /* ⭐ Star */ }
 
         .icon-maintenance::before { content: '\1F527'; /* 🔧 Wrench */ }
-        .icon-format::before { content: '\1F4BE'; /* 💾 Floppy Disk */ }
-        .icon-virus::before { content: '\1F4C6'; /* 📄 Page With Curl */ } /* Using a document icon as a placeholder for virus removal */
-        .icon-upgrade::before { content: '\1F50E'; /* 🔎 Right-Pointing Magnifying Glass */ } /* Using search icon for upgrade */
-        .icon-network::before { content: '\1F4BB'; /* 💻 Laptop (for network/peripherals) */ }
-        .icon-recovery::before { content: '\1F4C4'; /* 📄 Page Facing Up */ } /* Using page icon for data recovery */
+        .icon-format::before { content: '\1F5A5\FE0F'; /* 🖥️ Desktop Computer */ } /* Changed for format to represent system */
+        .icon-virus::before { content: '\1F5C3\FE0F'; /* 🗃️ Card File Box for organization/clean */ } /* Changed for virus removal */
+        .icon-upgrade::before { content: '\1F4C8'; /* 📈 Chart Increasing */ }
+        .icon-network::before { content: '\1F5A9\FE0F'; /* 📡 Satellite Antenna */ } /* More network-like */
+        .icon-recovery::before { content: '\1F504'; /* 🔄 Counterclockwise Arrows Button */ } /* Recycle/recovery */
+        .icon-remote-support::before { content: '\1F310'; /* 🌐 Globe With Meridians */ }
 
         .icon-whatsapp::before { content: '\1F4F1'; /* 📱 Mobile Phone */ }
         .icon-email::before { content: '\1F4E7'; /* 📧 E-Mail Symbol */ }
-
     </style>
 </head>
 <body>
     <header>
         <div class="container">
-            <img src="logo.png" alt="Logo bithostel TI"><br>
+            <img src="assets/logo/logo.png" alt="Logo bithostel TI"><br>
             <h1>bithostel TI</h1>
-            <p>Assistência Técnica de Informática</p>
+            <p>Assistência Técnica de Informática em Santos, SP</p>
             <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
         </div>
         <nav>
             <ul id="main-nav">
-                <li><a href="index.html">Voltar ao Início</a></li>
+                <li><a href="#hero">Início</a></li>
                 <li><a href="#why-choose">Por Que Nos Escolher?</a></li>
                 <li><a href="#services-offered">Nossos Serviços</a></li>
                 <li><a href="#faq">Perguntas Frequentes</a></li>
-                <li><a href="#contact">Contato</a></li> </ul>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
         </nav>
     </header>
 
     <main>
-        <section class="hero">
+        <section id="hero" class="hero">
             <div class="hero-content">
                 <h2>Seu Computador e Notebook em Boas Mãos!</h2>
-                <p>Reparos, Manutenção e Suporte Técnico Especializado para Residências e Empresas.</p>
+                <p>Reparos, Manutenção e Suporte Técnico Especializado para Residências e Empresas em Santos e Região.</p>
                 <a href="https://wa.me/5513997853113?text=Olá! Preciso de assistência técnica para meu computador." class="btn">Solicitar Atendimento Agora!</a>
             </div>
         </section>
 
         <section id="why-choose">
             <div class="container">
-                <h2>Por Que Escolher a bithostel TI para sua Assistência?</h2>
+                <h2>Por Que Escolher a bithostel TI?</h2>
                 <div class="features-grid">
                     <div class="feature-item">
                         <h3><span class="icon-qualified"></span> Técnicos Qualificados</h3>
@@ -470,6 +557,10 @@
                         <h3><span class="icon-recovery"></span> Recuperação de Dados</h3>
                         <p>Serviço especializado para tentar recuperar arquivos importantes de HDs ou SSDs danificados.</p>
                     </div>
+                     <div class="service-item">
+                        <h3><span class="icon-remote-support"></span> Suporte Remoto</h3>
+                        <p>Atendimento online para resolver problemas de software, configurações e tirar dúvidas sem sair de casa.</p>
+                    </div>
                 </div>
                 <a href="https://wa.me/5513997853113?text=Olá! Gostaria de um orçamento para assistência técnica de informática." class="btn" style="margin-top: 40px;">Fale Conosco para um Orçamento!</a>
             </div>
@@ -481,7 +572,7 @@
                 <div class="version-item">
                     <h3>Quais tipos de equipamentos vocês consertam?</h3>
                     <ul>
-                        <li>Atendemos notebooks, desktops (computadores de mesa) de diversas marcas e modelos.</li>
+                        <li>Atendemos notebooks, desktops (computadores de mesa), e smartphones Android de diversas marcas e modelos.</li>
                     </ul>
                 </div>
                 <div class="version-item">
@@ -499,7 +590,7 @@
                 <div class="version-item">
                     <h3>Vocês fazem atendimento a domicílio ou empresarial?</h3>
                     <ul>
-                        <li>Disponibilizamos atendimento em nossa loja física. Para serviços empresariais ou casos específicos, consulte-nos sobre a possibilidade de atendimento no local.</li>
+                        <li>Disponibilizamos atendimento em nossa loja física em Santos, SP. Para serviços empresariais ou casos específicos, consulte-nos sobre a possibilidade de atendimento no local.</li>
                     </ul>
                 </div>
                 <div class="version-item">
@@ -510,13 +601,11 @@
                 </div>
             </div>
         </section>
-
-        ---
-
+        
         <section id="contact">
             <div class="container">
                 <h2>Entre em Contato Conosco!</h2>
-                <p>Estamos prontos para te ajudar com suas necessidades de informática.</p>
+                <p>Estamos prontos para te ajudar com suas necessidades de informática em Santos e região.</p>
                 <div class="contact-info">
                     <p><span class="icon-whatsapp"></span> **WhatsApp:** <a href="https://wa.me/5513997853113" target="_blank">+55 (13) 99785-3113</a></p>
                     <p><span class="icon-email"></span> **E-mail:** <a href="mailto:hostmaster@bithostel.com.br">hostmaster@bithostel.com.br</a></p>
@@ -524,7 +613,6 @@
                 <a href="https://wa.me/5513997853113?text=Olá! Gostaria de falar com a bithostel TI sobre assistência técnica." class="btn" style="margin-top: 30px;">Envie uma Mensagem Agora!</a>
             </div>
         </section>
-
     </main>
     <button id="back-to-top" title="Voltar ao Topo">&#x2191;</button>
     <footer>
