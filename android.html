@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backup e Formatação de Smartphone Android - bithostel TI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/logo/favicon.png">
+    <style>
+        /* Variáveis de Cores - Dark Mode */
+        :root {
+            --dark-bg: #1a1a1a;        /* Fundo principal escuro */
+            --dark-surface: #2c2c2c;   /* Fundo de seções/cards */
+            --dark-text: #e0e0e0;      /* Texto principal claro */
+            --dark-light-text: #a0a0a0; /* Texto secundário */
+            --primary-accent: #00aaff; /* Azul vibrante para destaque */
+            --secondary-accent: #34c759; /* Verde para botões de ação */
+            --border-color: #444;      /* Bordas sutis */
+            --header-bg: #111;         /* Fundo do cabeçalho */
+            --nav-bg: #222;            /* Fundo da navegação */
+        }
+
+        /* Estilos Globais e Reset */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        a {
+            text-decoration: none;
+            color: var(--primary-accent);
+            transition: color 0.3s ease;
+        }
+        a:hover {
+            color: #007bb3; /* Um tom ligeiramente mais escuro do primary-accent no hover */
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--header-bg);
+            color: var(--dark-text);
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            position: relative;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            font-weight: 700;
+            color: var(--primary-accent);
+        }
+        header p {
+            font-size: 1.2em;
+            margin-top: 5px;
+            font-weight: 300;
+            color: var(--dark-light-text);
+        }
+        header img {
+            max-width: 90px;
+            margin-bottom: 10px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-accent);
+        }
+
+        /* Navegação */
+        nav {
+            background-color: var(--nav-bg);
+            padding: 10px 0;
+            margin-top: 15px;
+            border-top: 1px solid var(--border-color);
+        }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: var(--dark-text);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        nav ul li a:hover {
+            background-color: var(--primary-accent);
+            color: var(--dark-bg);
+        }
+
+        /* Botão Hamburguer para Mobile */
+        .menu-toggle {
+            display: none; /* Inicia oculto, mostra em mobile */
+            background: none;
+            border: none;
+            font-size: 2.2em;
+            color: var(--primary-accent);
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        /* Seções */
+        section {
+            padding: 60px 0;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        section:nth-of-type(even) {
+            background-color: var(--dark-surface);
+        }
+        h2 {
+            font-size: 2.5em;
+            color: var(--primary-accent);
+            margin-bottom: 25px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        h2::after { /* Linha de destaque abaixo dos títulos */
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-accent);
+            border-radius: 2px;
+        }
+        p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--dark-text); /* Texto principal mais claro */
+        }
+        ul {
+            text-align: left;
+            max-width: 800px;
+            margin: 20px auto;
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            background-color: var(--dark-surface); /* Fundo dos itens da lista */
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            border: 1px solid var(--border-color); /* Borda sutil */
+            color: var(--dark-light-text); /* Texto da lista um pouco mais claro */
+        }
+        ul li strong {
+            color: var(--primary-accent); /* Destaque para o strong da lista */
+        }
+        ul li::before {
+            content: '✓';
+            color: var(--secondary-accent); /* Ícone de check verde */
+            font-weight: bold;
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        /* Hero / Destaque do Serviço */
+        .hero-service {
+            background: linear-gradient(to right, var(--primary-accent), #0077b3);
+            color: var(--dark-text);
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+        }
+        .hero-service::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://via.placeholder.com/1500x500/0056b3/ffffff?text=Fundo+Backup+e+Formatacao+Android+Dark') no-repeat center center/cover;
+            opacity: 0.15;
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero-service h2 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            color: var(--dark-text);
+            font-weight: 700;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        .hero-service h2::after { /* Remover a linha de destaque neste H2 específico */
+            content: none;
+        }
+        .hero-service p {
+            font-size: 1.6em;
+            margin-bottom: 40px;
+            font-weight: 300;
+            color: var(--dark-light-text);
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary-accent);
+            color: var(--dark-bg);
+            padding: 18px 35px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.4em;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .btn:hover {
+            background-color: #2da44e;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        /* Seção de Benefícios */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .benefit-item {
+            background-color: var(--dark-surface);
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--border-color);
+        }
+        .benefit-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+        }
+        .benefit-item .icon {
+            font-size: 3em;
+            color: var(--primary-accent); /* Ícones com a cor de destaque principal */
+            margin-bottom: 15px;
+        }
+        .benefit-item h3 {
+            color: var(--primary-accent);
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        .benefit-item p {
+            font-size: 1em;
+            color: var(--dark-light-text);
+        }
+
+        /* Seção de Preço */
+        #price-section {
+            background-color: var(--primary-accent);
+            color: var(--dark-bg); /* Texto principal com fundo primary-accent */
+            padding: 60px 20px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        #price-section h2 {
+            color: var(--dark-bg); /* Título na cor de fundo escura */
+            margin-bottom: 30px;
+        }
+        #price-section h2::after { /* Linha de destaque para o H2 de preço */
+            background-color: var(--dark-bg); /* Linha escura no fundo claro */
+        }
+        #price-section .price-box {
+            background-color: var(--dark-surface); /* Fundo da caixa de preço */
+            color: var(--dark-text); /* Texto da caixa de preço */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            display: inline-block;
+            min-width: 300px;
+            border: 1px solid var(--border-color);
+        }
+        #price-section .price-box .price-tag {
+            font-size: 3em;
+            font-weight: 700;
+            color: var(--secondary-accent); /* Tag de preço em verde */
+            margin-bottom: 10px;
+        }
+        #price-section .price-box .details {
+            font-size: 1.1em;
+            margin-bottom: 20px;
+            color: var(--dark-light-text);
+        }
+        #price-section .price-box .details p {
+             color: var(--dark-light-text); /* Assegurar a cor do texto dentro dos detalhes */
+        }
+        #price-section .price-box .details p strong {
+             color: var(--primary-accent); /* Destaque para strong dentro dos detalhes */
+        }
+
+
+        /* Contato (reaproveitado do site principal) */
+        .contact-info {
+            background-color: var(--dark-surface);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            margin-top: 30px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+        .contact-info p {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark-text);
+        }
+        .contact-info p strong {
+            margin-left: 8px;
+            color: var(--primary-accent);
+        }
+        .contact-info a {
+            color: var(--primary-accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .contact-info a:hover {
+            color: #007bb3;
+            text-decoration: underline;
+        }
+
+        /* Rodapé (reaproveitado do site principal) */
+        footer {
+            background-color: var(--header-bg);
+            color: var(--dark-light-text);
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.95em;
+            border-top: 1px solid var(--border-color);
+        }
+        footer p {
+            margin: 0;
+        }
+        footer a {
+            color: var(--primary-accent);
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsividade (adaptada) */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            .hero-service h2 {
+                font-size: 2.2em;
+            }
+            .hero-service p {
+                font-size: 1.2em;
+            }
+            .btn {
+                padding: 12px 25px;
+                font-size: 1.1em;
+            }
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .contact-info p {
+                flex-direction: column;
+                font-size: 1.1em;
+            }
+            /* Menu Hamburguer para Mobile */
+            nav ul {
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                background-color: var(--nav-bg);
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                z-index: 99;
+                padding: 10px 0;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                margin: 10px 0;
+                width: 100%; /* Ocupa a largura total */
+            }
+            nav ul li a {
+                display: block;
+                width: 100%;
+                text-align: center;
+                padding: 12px 0; /* Maior área clicável */
+                background-color: var(--dark-surface); /* Fundo dos itens do menu */
+                border-radius: 5px;
+            }
+            nav ul li a:hover {
+                background-color: var(--primary-accent);
+                color: var(--dark-bg);
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            .hero-service {
+                padding: 50px 15px;
+            }
+            .hero-service h2 {
+                font-size: 1.8em;
+            }
+            .hero-service p {
+                font-size: 1em;
+            }
+            #price-section .price-box {
+                min-width: unset;
+                width: 100%;
+                box-sizing: border-box;
+            }
+            h2 {
+                font-size: 1.6em;
+            }
+        }
+        /* Ícones Unicode para benefícios e contato */
+        .icon { /* Estilo geral para os ícones de benefício */
+            font-size: 3em;
+            color: var(--primary-accent);
+            margin-bottom: 15px;
+            display: block; /* Garante que o ícone fique em sua própria linha */
+        }
+        .icon-whatsapp::before { content: '\1F4F1'; /* 📱 Mobile Phone */ }
+        .icon-email::before { content: '\1F4E7'; /* 📧 E-Mail Symbol */ }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="assets/logo/logo.png" alt="Logo bithostel TI"><br>
+            <h1>bithostel TI</h1>
+            <p>Assistência Técnica de Informática</p>
+            <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+        </div>
+        <nav>
+            <ul id="main-nav">
+                <li><a href="index.html">Voltar ao Início</a></li>
+                <li><a href="#about-service">Sobre o Serviço</a></li>
+                <li><a href="#how-it-works">Como Funciona</a></li>
+                <li><a href="#benefits">Benefícios</a></li>
+                <li><a href="#price-section">Preço</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero-service">
+            <div class="hero-content">
+                <h2>Proteja Suas Memórias Digitais: Backup e Formatação Segura do seu Android</h2>
+                <p>Mantenha seus dados seguros e seu smartphone funcionando como novo!</p>
+                <a href="https://wa.me/5513997853113?text=Olá! Quero saber mais sobre o serviço de Backup e Formatação para meu Android." class="btn">Solicitar Serviço Agora!</a>
+            </div>
+        </section>
+
+        <section id="about-service" class="container">
+            <h2>Por Que Fazer Backup e Formatação no seu Smartphone Android?</h2>
+            <p>Com o tempo, seu smartphone Android pode acumular arquivos desnecessários, vírus, ou simplesmente ficar lento e travando. A **formatação** é a solução definitiva para restaurar o desempenho original, limpando completamente o sistema.</p>
+            <p>Mas antes de tudo, o **backup** é essencial! Na bithostel TI, garantimos que suas fotos, vídeos, contatos, aplicativos e conversas importantes sejam salvos com segurança antes de qualquer procedimento, evitando a perda de dados valiosos.</p>
+        </section>
+
+        <section id="how-it-works" class="container">
+            <h2>Nosso Processo Descomplicado de Backup e Formatação</h2>
+            <ul>
+                <li>
+                    <strong>1. Contato e Avaliação:</strong> Você nos procura, descreve seu problema com o smartphone Android e agendamos a coleta ou entrega do aparelho em nossa loja.
+                </li>
+                <li>
+                    <strong>2. Backup Completo dos Dados:</strong> Nossa prioridade é copiar com segurança todos os seus arquivos essenciais (fotos, vídeos, documentos, contatos, conversas do WhatsApp e outros dados de aplicativos) para um local externo e seguro.
+                </li>
+                <li>
+                    <strong>3. Formatação e Otimização:</strong> Realizamos a formatação de fábrica do seu Android e, se desejar, instalamos e configuramos o sistema operacional mais recente, drivers e apps essenciais para o dia a dia.
+                </li>
+                <li>
+                    <strong>4. Restauração e Entrega:</strong> Devolvemos seus dados copiados para o smartphone formatado (ou para um novo aparelho, se for o caso), e você recebe seu celular funcionando como novo, rápido e seguro!
+                </li>
+            </ul>
+        </section>
+
+        <section id="benefits" class="container">
+            <h2>Benefícios do Nosso Serviço de Backup e Formatação para Android</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <span class="icon">&#128274;</span> <h3>Segurança Total dos Seus Dados</h3>
+                    <p>Mantenha suas fotos, vídeos e documentos importantes do Android protegidos contra perdas acidentais ou permanentes.</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="icon">&#128640;</span> <h3>Desempenho de Aparelho Novo</h3>
+                    <p>Seu smartphone Android mais rápido, sem travamentos e com a bateria durando mais, como se tivesse acabado de sair da loja.</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="icon">&#128295;</span> <h3>Serviço Profissional e Confiável</h3>
+                    <p>Técnicos especializados da bithostel TI garantem um procedimento seguro, eficaz e com total sigilo dos seus dados.</p>
+                </div>
+                <div class="benefit-item">
+                    <span class="icon">&#128176;</span> <h3>Excelente Custo-Benefício</h3>
+                    <p>Invista na saúde e longevidade do seu smartphone Android, evitando gastos maiores com reparos ou a compra de um novo aparelho.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="price-section">
+            <div class="container">
+                <h2>Investimento para a Saúde do Seu Smartphone Android</h2>
+                <div class="price-box">
+                    <div class="price-tag">A partir de R$ 120,00*</div>
+                    <div class="details">
+                        <p>Nosso serviço completo de **Backup e Formatação de Smartphone Android** inclui:</p>
+                        <p>✓ **Backup seguro** de fotos, vídeos, documentos, contatos e conversas do WhatsApp.</p>
+                        <p>✓ **Formatação completa** e otimização do sistema operacional Android.</p>
+                        <p>✓ Reinstalação e configuração do Android e **apps essenciais**.</p>
+                        <p style="font-size: 0.9em; margin-top: 15px;">*O valor final pode variar conforme o volume de dados para backup, a complexidade do aparelho e eventuais serviços adicionais. Consulte-nos para um orçamento preciso e sem compromisso!</p>
+                    </div>
+                    <a href="https://wa.me/5513997853113?text=Olá! Gostaria de um orçamento para o serviço de Backup e Formatação para meu Smartphone Android." class="btn">Solicitar Orçamento Personalizado</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="container">
+            <h2>Fale com a bithostel TI!</h2>
+            <p>Não espere seu smartphone Android parar de vez ou perder dados importantes. Garanta a segurança das suas informações e o bom funcionamento do seu aparelho hoje mesmo.</p>
+            <div class="contact-info">
+                <p><span class="icon-whatsapp"></span> **WhatsApp:** <a href="https://wa.me/5513997853113" target="_blank">+55 (13) 99785-3113</a></p>
+                <p><span class="icon-email"></span> **E-mail:** <a href="mailto:hostmaster@bithostel.com.br">hostmaster@bithostel.com.br</a></p>
+            </div>
+            <a href="https://wa.me/5513997853113?text=Olá! Gostaria de agendar o serviço de Backup e Formatação para meu Smartphone Android." class="btn" style="margin-top: 30px;">Agendar Serviço Agora!</a>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 bithostel TI. Todos os direitos reservados. | <a href="index.html">Voltar ao Início</a></p>
+        </div>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mainNav = document.getElementById('main-nav');
+
+            // Funcionalidade do menu hamburguer
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+
+            // Fechar o menu ao clicar em um link (para mobile)
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                    }
+                });
+            });
+            // O botão "Voltar ao Topo" não está presente nesta página de serviço
+            // Então, o código JS relacionado a ele foi removido para evitar erros.
+        });
+    </script>
+</body>
+</html>
