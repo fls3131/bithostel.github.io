@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name = "description" content = "tratamento dependência química, clínica reabilitação, internação involuntária, ajuda dependente químico, apoio familiar dependência, grupos de apoio dependentes, como lidar com dependente químico, terapia para dependentes, recuperação dependência, clínicas de recuperação, tratamento drogas, tratamento alcoolismo, comunidade terapêutica, apoio psicológico família, custo tratamento dependência, psiquiatra dependência, superação dependência, intervenção familiar, clínicas gratuitas, ambulatório dependência">
+    <meta name="description" content="tratamento dependência química, clínica reabilitação, internação involuntária, ajuda dependente químico, apoio familiar dependência, grupos de apoio dependentes, como lidar com dependente químico, terapia para dependentes, recuperação dependência, clínicas de recuperação, tratamento drogas, tratamento alcoolismo, comunidade terapêutica, apoio psicológico família, custo tratamento dependência, psiquiatra dependência, superação dependência, intervenção familiar, clínicas gratuitas, ambulatório dependência">
     <link rel="icon" type="image/png" href="faviconreg.png"/>
     <title>Resgate - Tratamento Completo e Resgate para Dependência Química</title>
     <style>
@@ -15,6 +15,7 @@
             box-sizing: border-box;
             line-height: 1.6;
             color: #333;
+            background-color: #f8fbfd; /* Very light blue/gray for clean theme */
         }
         .container {
             max-width: 1200px;
@@ -22,46 +23,115 @@
             padding: 20px;
         }
         h1, h2, h3 {
-            color: #007bff; /* Azul primário para chamar atenção */
+            color: #0056b3; /* Darker blue for primary headings, more professional */
         }
         p {
             margin-bottom: 15px;
         }
-        /* Cabeçalho */
+        /* Cabeçalho - Agora mais integrado ao Hero */
         header {
-            background-color: #0056b3; /* Azul mais escuro para o cabeçalho */
-            color: white;
-            padding: 20px 0;
+            background-color: #ffffff; /* White background for clean look */
+            padding: 0; /* No padding here, hero will handle it */
             text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* Subtle shadow */
+            position: relative;
+            z-index: 100; /* Ensure header is above other content if necessary */
         }
-        header h1 {
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        header .logo .icon {
+            font-size: 2em;
+            color: #007bff;
+        }
+        header .logo h1 {
             margin: 0;
-            color: white;
-            font-size: 2.5em;
+            color: #0056b3;
+            font-size: 1.8em; /* Slightly smaller for integrated header */
         }
-        header p {
-            font-size: 1.2em;
-            margin-top: 10px;
-        }
-        .cta-button {
+        header .cta-button {
             display: inline-block;
-            background-color: #28a745; /* Verde para ação (mantido) */
+            background-color: #28a745;
             color: white;
-            padding: 15px 30px;
+            padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
-            font-size: 1.3em;
+            font-size: 1em;
             font-weight: bold;
-            margin-top: 20px;
             transition: background-color 0.3s ease;
         }
         .cta-button:hover {
             background-color: #218838;
         }
-        /* Navegação */
+
+        /* Hero Banner (Slider Placeholder) */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            height: 450px; /* Adjusted height for a prominent hero */
+            overflow: hidden;
+            background-color: #e0f7fa; /* Default background */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white; /* Text color over images */
+            margin-top: -85px; /* Pull it up to sit behind the fixed header */
+            z-index: 1; /* Keep it behind the header */
+        }
+        .hero-slide { /* Placeholder for individual slides */
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0; /* Hidden by default */
+            transition: opacity 1s ease-in-out; /* Smooth fade effect */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5); /* Shadow for text readability */
+        }
+        .hero-slide.active {
+            opacity: 1; /* Active slide visible */
+        }
+        /* Example images - Replace with your actual image paths */
+        .hero-slide:nth-child(1) { background-image: url('hero-bg-1.jpg'); /* Replace with actual image path */ }
+        .hero-slide:nth-child(2) { background-image: url('hero-bg-2.jpg'); /* Replace with actual image path */ }
+        /* Add more .hero-slide for more images */
+
+        .hero-banner h2 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            color: white;
+        }
+        .hero-banner p {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: white;
+        }
+        .hero-banner .cta-button {
+            font-size: 1.2em;
+            padding: 12px 28px;
+        }
+
+
+        /* Navegação com Dropdown */
         nav {
-            background-color: #004085; /* Azul mais escuro para navegação */
-            padding: 10px 0;
+            background-color: #007bff; /* Primary blue for navigation */
+            padding: 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         nav ul {
             list-style: none;
@@ -70,222 +140,326 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
+            position: relative; /* For dropdown positioning */
         }
         nav ul li {
-            margin: 0 15px;
+            position: relative; /* For dropdown positioning */
+            margin: 0; /* Remove horizontal margin */
         }
         nav ul li a {
             color: white;
             text-decoration: none;
-            padding: 5px 10px;
+            padding: 15px 20px; /* Larger clickable area */
             display: block;
+            transition: background-color 0.3s ease;
         }
         nav ul li a:hover {
-            background-color: #003366; /* Azul ainda mais escuro no hover */
-            border-radius: 5px;
+            background-color: #0056b3; /* Darker blue on hover */
         }
+
+        /* Dropdown Menu Styles (CSS-only hover) */
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #0056b3; /* Darker blue for dropdown background */
+            min-width: 220px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            left: 0; /* Align dropdown with parent menu item */
+            top: 100%; /* Position below the parent link */
+            border-radius: 0 0 5px 5px;
+            overflow: hidden; /* Ensures border-radius applies to children */
+        }
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.3s ease;
+            font-size: 0.95em; /* Slightly smaller font for dropdown items */
+        }
+        .dropdown-content a:hover {
+            background-color: #003366; /* Even darker blue on hover for dropdown items */
+        }
+        .dropdown:hover .dropdown-content {
+            display: block; /* Show dropdown on hover */
+        }
+
+
         /* Seções */
         section {
-            padding: 40px 0;
-            border-bottom: 1px solid #eee;
+            padding: 60px 0; /* More vertical padding */
+            border-bottom: 1px solid #e0e0e0; /* Softer border */
         }
         section:nth-of-type(even) {
-            background-color: #f9f9f9;
+            background-color: #f0f6fc; /* Lighter shade of blue/gray */
         }
         .section-title {
             text-align: center;
-            margin-bottom: 30px;
-            font-size: 2em;
-            color: #007bff; /* Azul primário para títulos de seção */
+            margin-bottom: 40px; /* More margin */
+            font-size: 2.2em;
+            color: #0056b3; /* Consistent dark blue for titles */
         }
         .highlight-box {
-            background-color: #e0f7fa; /* Azul claro para destaque */
-            border: 1px solid #80deea; /* Borda azul mais acentuada */
+            background-color: #e6f7ff; /* Even lighter blue */
+            border: 1px solid #a3d9f7; /* Soft blue border */
             border-radius: 8px;
-            padding: 25px;
+            padding: 30px; /* More padding */
             margin-bottom: 30px;
             text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08); /* More pronounced but soft shadow */
         }
         .highlight-box h3 {
-            color: #00796b; /* Um tom de azul esverdeado para o título do destaque */
+            color: #0056b3;
             margin-top: 0;
+            font-size: 1.6em;
         }
         .highlight-box p {
             font-size: 1.1em;
-            color: #00796b;
+            color: #333;
+        }
+        .highlight-box img {
+            max-width: 100%; /* Ensure image fits */
+            height: auto;
+            margin-top: 15px;
+            border-radius: 5px; /* Slightly rounded image corners */
         }
         .service-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Slightly wider cards */
+            gap: 25px; /* More gap */
         }
         .service-card {
             background-color: white;
-            border: 1px solid #ddd;
+            border: 1px solid #e0e0e0; /* Softer border */
             border-radius: 8px;
-            padding: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 25px; /* More padding */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08); /* More pronounced but soft shadow */
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
         }
         .service-card .icon {
-            font-size: 3em;
-            color: #007bff; /* Azul primário para ícones de serviço */
-            margin-bottom: 15px;
-            /* Estilo para tornar o ícone mais 'corporativo' */
-            font-family: 'Arial', sans-serif; /* Garante que a fonte seja neutra */
-            font-weight: normal;
+            font-size: 3.5em; /* Slightly larger icon */
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .service-card h3 {
+            font-size: 1.4em;
         }
         .contact-info {
             text-align: center;
-            font-size: 1.2em;
+            font-size: 1.3em; /* Slightly larger */
             font-weight: bold;
-            color: #007bff; /* Azul primário para informações de contato */
+            color: #0056b3; /* Consistent darker blue */
+            margin-top: 40px;
         }
         .contact-info a {
             color: #007bff;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
         .contact-info a:hover {
             text-decoration: underline;
+            color: #004085;
         }
         .category-card {
             background-color: white;
-            border: 1px solid #ddd;
+            border: 1px solid #e0e0e0;
             border-radius: 8px;
-            padding: 25px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 30px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
             text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
         }
         .category-card h3 {
-            color: #0056b3; /* Azul mais escuro para títulos de categoria */
+            color: #0056b3;
             margin-top: 0;
             text-align: center;
+            font-size: 1.6em;
         }
         .category-card ul {
             list-style: none;
             padding: 0;
-            margin-top: 15px;
+            margin-top: 20px;
         }
         .category-card ul li {
-            margin-bottom: 10px;
-            padding-left: 20px;
+            margin-bottom: 12px; /* More space */
+            padding-left: 25px; /* More padding */
             position: relative;
+            font-size: 1.05em;
         }
         .category-card ul li::before {
-            content: '✓'; /* Checkmark icon (mantido verde) */
+            content: '✓';
             color: #28a745;
             position: absolute;
             left: 0;
+            font-weight: bold;
         }
         /* Rodapé */
         footer {
-            background-color: #333;
+            background-color: #1a2a40; /* Darker, more professional footer */
             color: white;
             text-align: center;
-            padding: 20px 0;
-            margin-top: 30px;
+            padding: 25px 0; /* More padding */
+            margin-top: 50px;
         }
         /* Botão Flutuante do WhatsApp */
         .whatsapp-button {
             position: fixed;
             bottom: 20px;
             left: 20px;
-            background-color: #25d366; /* Cor verde do WhatsApp (mantido) */
+            background-color: #25d366;
             color: white;
-            border-radius: 10px; /* Mais retangular para caber o texto e ícone */
-            padding: 10px 15px; /* Ajuste para dar espaço ao texto */
+            border-radius: 10px;
+            padding: 12px 18px; /* Slightly larger */
             display: flex;
             align-items: center;
-            gap: 8px; /* Espaço entre o ícone e o texto */
+            gap: 10px;
             text-decoration: none;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-            z-index: 1000; /* Garante que fique acima de outros elementos */
-            transition: transform 0.3s ease;
-            font-size: 1.1em; /* Tamanho da fonte para o texto 'WhatsApp' */
+            z-index: 1000;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            font-size: 1.1em;
             font-weight: bold;
         }
-        .whatsapp-button i.fab { /* Para usar o ícone Font Awesome (se implementado) */
-            font-size: 24px;
-        }
-        .whatsapp-button .whatsapp-icon-text { /* Para o ícone de texto Unicode */
-            font-size: 24px; /* Tamanho do ícone de texto */
-            line-height: 1; /* Alinha o ícone verticalmente */
+        .whatsapp-button .whatsapp-icon-text {
+            font-size: 26px; /* Slightly larger icon */
         }
         .whatsapp-button:hover {
-            transform: scale(1.05); /* Um pouco menos de zoom para um botão maior */
+            transform: scale(1.08); /* More noticeable hover */
+            background-color: #1da851;
         }
-
         /* Facebook Button */
         .facebook-button {
             position: fixed;
-            top: 20px; /* Adjust as needed for spacing from the top */
-            right: 20px; /* Adjust as needed for spacing from the right */
-            z-index: 1000; /* Ensure it's above other content */
-            background-color: #1877f2; /* Facebook blue */
-            border-radius: 50%; /* Makes it circular */
-            padding: 5px; /* Spacing around the icon */
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: #1877f2;
+            border-radius: 50%;
+            padding: 8px; /* Larger padding for a slightly larger button */
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px; /* Adjust size as needed */
-            height: 40px; /* Adjust size as needed */
-            transition: transform 0.3s ease;
+            width: 45px; /* Adjust size */
+            height: 45px; /* Adjust size */
+            transition: transform 0.3s ease, background-color 0.3s ease;
         }
-
         .facebook-button:hover {
-            transform: scale(1.1); /* Slightly enlarge on hover */
+            transform: scale(1.15); /* More noticeable hover */
+            background-color: #0c67da;
         }
-
-        .facebook-button a {
-            display: flex; /* Ensures the image inside is centered if its parent is larger */
-            line-height: 0; /* Remove extra space below image */
+        .facebook-button img {
+            width: 100%; /* Ensure image fills the button */
+            height: 100%;
         }
-
         /* Estilos para o Botão "Scroll to Top" */
         #scrollToTopBtn {
-            display: none; /* Escondido por padrão */
-            position: fixed; /* Fixado na tela */
-            bottom: 20px; /* 20px do fundo */
-            right: 20px; /* 20px da direita */
-            z-index: 99; /* Alto z-index para ficar acima de outros elementos */
-            border: none; /* Sem borda */
-            outline: none; /* Sem contorno ao focar */
-            background-color: #007bff; /* Cor de fundo azul (sua cor primária) */
-            color: white; /* Cor do texto (seta) */
-            cursor: pointer; /* Cursor de clique */
-            padding: 15px; /* Espaçamento interno */
-            border-radius: 50%; /* Torna o botão redondo */
-            font-size: 24px; /* Tamanho da seta */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Sombra para destaque */
-            transition: background-color 0.3s ease, transform 0.3s ease; /* Transições suaves */
+            display: none;
+            position: fixed;
+            bottom: 25px; /* Slightly higher */
+            right: 25px; /* Slightly more to the right */
+            z-index: 99;
+            border: none;
+            outline: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            padding: 16px; /* Slightly larger */
+            border-radius: 50%;
+            font-size: 26px; /* Slightly larger arrow */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.25); /* More prominent shadow */
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
         }
-
         #scrollToTopBtn:hover {
-            background-color: #0056b3; /* Cor mais escura no hover */
-            transform: translateY(-3px); /* Leve movimento para cima no hover */
+            background-color: #0056b3;
+            transform: translateY(-5px) scale(1.05); /* More movement and slight scale */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
-
 
         /* Responsividade */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) { /* Adjust breakpoint for larger tablets */
             nav ul {
                 flex-direction: column;
+                align-items: center; /* Center menu items */
             }
             nav ul li {
-                margin: 5px 0;
+                width: 100%; /* Full width for menu items */
+                text-align: center;
+                margin: 0;
+            }
+            nav ul li a {
+                padding: 12px 15px;
+            }
+            .dropdown-content {
+                position: static; /* Stack dropdown items normally */
+                box-shadow: none;
+                border-radius: 0;
+                width: 100%;
+                display: none; /* Hide by default, will need JS for toggle */
+            }
+            .dropdown:hover .dropdown-content {
+                display: block; /* For hover on desktop, needs JS for click on mobile */
+            }
+            .hero-banner {
+                height: 350px; /* Adjust height for smaller screens */
+            }
+            .hero-banner h2 {
+                font-size: 2.2em;
+            }
+            .hero-banner p {
+                font-size: 1.1em;
+            }
+            header .header-content {
+                flex-direction: column;
+                gap: 10px;
+                padding: 10px 15px;
+            }
+            header .logo h1 {
+                font-size: 1.5em;
+            }
+            header .cta-button {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            section {
+                padding: 30px 0;
+            }
+            .section-title {
+                font-size: 1.8em;
+                margin-bottom: 25px;
+            }
+            .highlight-box {
+                padding: 20px;
+            }
+            .highlight-box h3 {
+                font-size: 1.4em;
             }
             .service-grid, .category-grid {
                 grid-template-columns: 1fr;
             }
-            header h1 {
-                font-size: 2em;
+            .service-card, .category-card {
+                padding: 20px;
             }
-            .cta-button {
+            .service-card .icon {
+                font-size: 3em;
+            }
+            .contact-info {
                 font-size: 1.1em;
-                padding: 12px 25px;
             }
-            /* Ajuste para o botão do WhatsApp em telas menores */
             .whatsapp-button {
                 bottom: 15px;
                 left: 15px;
@@ -295,19 +469,13 @@
             .whatsapp-button .whatsapp-icon-text {
                 font-size: 20px;
             }
-
-            /* Ajuste para o botão do Facebook em telas menores */
             .facebook-button {
                 top: 15px;
                 right: 15px;
                 width: 35px;
                 height: 35px;
+                padding: 5px;
             }
-            .facebook-button img {
-                width: 25px;
-                height: 25px;
-            }
-            /* Responsividade para o botão "Scroll to Top" */
             #scrollToTopBtn {
                 bottom: 15px;
                 right: 15px;
@@ -320,43 +488,73 @@
 <body>
     <div class="facebook-button">
         <a href="https://www.facebook.com/profile.php?id=61578312332788" target="_blank" aria-label="Visite nossa página no Facebook">
-            <img src="face.png" alt="Facebook" style="width:30px;height:30px;">
+            <img src="face.png" alt="Facebook" style="width:100%;height:auto;">
         </a>
     </div>
+
     <header>
-        <div class="container">
-			<span class="icon">&#x2695;</span>
-            <h1>Resgate</h1>
-            <p>Tratamento Especializado e Internação para Dependência Química. Resgate Imediato quando necessário.</p>
+        <div class="header-content">
+            <div class="logo">
+                <span class="icon">&#x2695;</span>
+                <h1>Resgate</h1>
+            </div>
             <a href="#contato" class="cta-button">Fale Conosco: (13) 99768-7326</a>
         </div>
     </header>
+
+    <div class="hero-banner">
+        <div class="hero-slide active" style="background-image: url('hero01.jpg');">
+            <h2>Cuidado Humanizado e Recuperação Completa</h2>
+            <p>Nossa equipe especializada está pronta para oferecer o melhor tratamento.</p>
+            <a href="#contato" class="cta-button">Fale Conosco Agora</a>
+        </div>
+        <div class="hero-slide" style="background-image: url('hero02.jpg');">
+            <h2>Ambientes Seguros para Sua Recuperação</h2>
+            <p>Clínicas modernas e acolhedoras para um tratamento eficaz.</p>
+            <a href="#tratamento" class="cta-button">Saiba Mais Sobre Tratamento</a>
+        </div>
+        <div class="hero-slide" style="background-image: url('hero03.jpg');">
+            <h2>Resgate Imediato em Casos Urgentes</h2>
+            <p>Intervenção 24h para momentos críticos, com profissionalismo e discrição.</p>
+            <a href="#como-funciona-resgate" class="cta-button">Solicitar Resgate</a>
+        </div>
+        </div>
+
+
     <nav>
         <div class="container">
             <ul>
                 <li><a href="#tratamento">Tratamento em Internação</a></li>
                 <li><a href="#categorias">Nossas Especialidades</a></li>
-                <li><a href="#tipos-internacao-drogas">Tratamentos Voluntários e Involuntários</a></li> <li><a href="#como-funciona-resgate">Resgate de Emergência</a></li>
+                <li class="dropdown">
+                    <a href="#tipos-internacao-drogas">Tipos de Tratamento &#9662;</a> <div class="dropdown-content">
+                        <a href="#internacao-voluntaria">Internação Voluntária</a>
+                        <a href="#internacao-involuntaria">Internação Involuntária</a>
+                        <a href="#tratamentos-abrangentes">Tratamentos Diversos</a>
+                    </div>
+                </li>
+                <li><a href="#como-funciona-resgate">Resgate de Emergência</a></li>
                 <li><a href="#porque-nos">Por Que Nos Escolher</a></li>
                 <li><a href="#custo-e-jornada">Custo e Jornada da Recuperação</a></li>
                 <li><a href="#contato">Contato Imediato</a></li>
             </ul>
         </div>
     </nav>
+
     <main>
         <section id="tratamento" class="container">
             <h2 class="section-title">O Caminho para a Recuperação Começa Aqui.</h2>
             <div class="highlight-box">
                 <h3>Tratamento Completo em Internação</h3>
                 <p>Na Resgate, nosso foco principal é oferecer um **tratamento de internação abrangente e humanizado** para dependentes químicos. Entendemos que a recuperação é um processo contínuo que exige um ambiente seguro, acompanhamento profissional constante e um plano terapêutico individualizado. Nossas clínicas especializadas proporcionam o suporte necessário para que o indivíduo possa se dedicar integralmente à sua reabilitação, longe dos gatilhos e influências externas.</p>
-                <p><img src="mental.jpg" widht="200" height="150"></p>
-                <p>Desde a chegada, seja por admissão programada ou via nosso serviço de resgate, cada paciente é acolhido por uma equipe multidisciplinar dedicada, que inclui médicos, psiquiatras, psicólogos e terapeutas. Acreditamos que a **internação é uma ferramenta vital para estabilizar o paciente**, promover a desintoxicação e iniciar as bases para uma vida livre da dependência.</p>
+                <p><img src="mental.jpg" width="200" height="150" alt="Profissional de saúde com paciente, simbolizando tratamento mental"></p>
+                <p>Desde a chegada, seja por admissão programada ou via nosso serviço de resgate, cada paciente é acolhido por uma **equipe multidisciplinar dedicada**, que inclui médicos, psiquiatras, psicólogos e terapeutas. Acreditamos que a **internação é uma ferramenta vital para estabilizar o paciente**, promover a desintoxicação e iniciar as bases para uma vida livre da dependência.</p>
             </div>
             <p class="contact-info">Busque a ajuda que transforma vidas. <a href="tel:13997687326">Entre em contato: (13) 99768-7326</a></p>
         </section>
 
         <section id="categorias" class="container">
-            <h2 class="section-title">Nossas Especialidades de Tratamento em Internação</h2>
+            <h2 class="section-title">Nossas Especialidades de Internação</h2>
             <p style="text-align: center; margin-bottom: 30px;">Contamos com unidades de internação especializadas, desenhadas para atender às necessidades específicas de cada perfil, garantindo um tratamento focado e eficaz:</p>
             <div class="service-grid category-grid">
                 <div class="category-card">
@@ -394,7 +592,7 @@
             <h2 class="section-title">Tipos de Internação e Tratamento de Dependência Química e Alcoolismo</h2>
             <p style="text-align: center; margin-bottom: 30px;">Oferecemos modalidades de internação e tratamentos especializados para diversas substâncias, garantindo a abordagem mais adequada para cada caso.</p>
 
-            <div class="highlight-box">
+            <div class="highlight-box" id="internacao-voluntaria">
                 <h3>Internação Voluntária: O Primeiro Passo para a Liberdade</h3>
                 <p>A **internação voluntária** ocorre quando o próprio indivíduo dependente químico ou alcoólatra reconhece a necessidade de ajuda e busca ativamente o tratamento. Esta modalidade é a mais indicada, pois o desejo de recuperação do paciente é um fator crucial para o sucesso terapêutico.</p>
                 <p>Na Resgate, acolhemos pacientes que tomam essa corajosa decisão, oferecendo um ambiente seguro e todo o suporte necessário para iniciar a jornada de recuperação. Incentivamos a participação ativa do paciente em seu plano de tratamento, promovendo o engajamento e a responsabilidade pessoal.</p>
@@ -405,7 +603,7 @@
                 </ul>
             </div>
 
-            <div class="highlight-box">
+            <div class="highlight-box" id="internacao-involuntaria">
                 <h3>Internação Involuntária: Intervenção em Crise</h3>
                 <p>A **internação involuntária** é um recurso legal utilizado em situações onde o dependente químico ou alcoólatra perdeu o controle sobre sua vida e representa um risco iminente para si mesmo ou para terceiros, ou quando sua capacidade de julgamento está seriamente comprometida pela substância. Esta modalidade é realizada sem o consentimento do paciente, mediante solicitação familiar ou de terceiros legalmente responsáveis, e deve seguir rigorosamente as leis e regulamentações vigentes (Lei Federal 10.216/2001 e suas atualizações).</p>
                 <p>Nossa equipe é especializada em realizar abordagens humanizadas em casos de internação involuntária, garantindo a segurança e o bem-estar do paciente durante todo o processo, desde o resgate até a admissão na clínica. O objetivo é estabilizar o indivíduo e iniciar o tratamento que ele, no momento de crise, não consegue buscar por si só.</p>
@@ -416,7 +614,7 @@
                 </ul>
             </div>
 
-            <h3 style="text-align: center; margin-top: 40px; margin-bottom: 20px;">Tratamentos Abrangentes para Diversas Dependências:</h3>
+            <h3 style="text-align: center; margin-top: 40px; margin-bottom: 20px;" id="tratamentos-abrangentes">Tratamentos Abrangentes para Diversas Dependências:</h3>
             <div class="service-grid">
                 <div class="service-card">
                     <h3>Tratamento para Alcoolismo</h3>
@@ -444,13 +642,13 @@
                 </div>
             </div>
         </section>
-        ---
 
+        ---
         <section id="como-funciona-resgate" class="container">
             <h2 class="section-title">Nosso Serviço de Resgate de Emergência</h2>
             <div class="highlight-box">
                 <h3>Ajuda Imediata em Momentos Críticos</h3>
-                <p>Para aqueles momentos em que a intervenção é urgente, o **serviço de resgate da Resgate atua como um suporte essencial** ao tratamento. Oferecemos resgate emergencial 24 horas por dia, sete dias por semana, para dependentes químicos em crise no Estado de São Paulo e adjacências. Nossa equipe especializada vai até o local para oferecer suporte, estabilização e garantir o transporte seguro para uma de nossas unidades de internação.</p>
+                <p>Para aqueles momentos em que a intervenção é urgente, o **serviço de resgate da Resgate atua como um suporte essencial** ao tratamento. Oferecemos resgate emergencial 24 horas por dia, sete dias por semana, para dependentes químicos em crise no Estado de São Paulo e adjacências. Nossa **equipe especializada** vai até o local para oferecer suporte, estabilização e garantir o transporte seguro para uma de nossas unidades de internação.</p>
                 <p>Agimos com discrição, profissionalismo e humanidade, assegurando que, mesmo em situações de crise, a dignidade do indivíduo seja mantida e o caminho para a recuperação seja iniciado de forma segura.</p>
             </div>
             <h3 style="text-align: center;">Como Funciona o Resgate:</h3>
@@ -461,7 +659,7 @@
                 </div>
                 <div class="service-card">
                     <span class="icon">&#x231B;</span> <h3>2. Atendimento Imediato</h3>
-                    <p>Uma equipe treinada, composta por profissionais de saúde e segurança, é enviada imediatamente ao local indicado, com veículos discretos e equipados.</p>
+                    <p>Uma **equipe treinada**, composta por profissionais de saúde e segurança, é enviada imediatamente ao local indicado, com veículos discretos e equipados.</p>
                 </div>
                 <div class="service-card">
                     <span class="icon">&#x2695;</span> <h3>3. Abordagem Profissional</h3>
@@ -473,7 +671,6 @@
                 </div>
             </div>
         </section>
-
         <section id="porque-nos" class="container">
             <h2 class="section-title">Por Que Escolher a Resgate para o Tratamento e Resgate?</h2>
             <div class="service-grid">
@@ -487,7 +684,7 @@
                 </div>
                 <div class="service-card">
                     <h3>Equipe Multidisciplinar</h3>
-                    <p>Nossos profissionais são altamente qualificados em diversas áreas para oferecer o melhor tratamento e suporte, seja na internação ou no resgate.</p>
+                    <p>Nossos **profissionais são altamente qualificados** em diversas áreas para oferecer o melhor tratamento e suporte, seja na internação ou no resgate.</p>
                 </div>
                 <div class="service-card">
                     <h3>Abordagem Humanizada</h3>
@@ -499,7 +696,6 @@
         ---
         <section id="custo-e-jornada" class="container">
             <h2 class="section-title">Custo e Jornada da Recuperação</h2>
-
             <div class="highlight-box">
                 <h3>Fatores que Influenciam o Custo de uma Clínica de Recuperação Particular</h3>
                 <p>Ao considerar o investimento necessário para o tratamento em uma clínica de recuperação particular, é importante entender os diversos fatores que influenciam os custos envolvidos. Estes podem variar significativamente dependendo de uma série de aspectos, desde a localização geográfica até as especializações oferecidas pela instituição. Conhecer esses elementos pode ajudar a tomar uma decisão informada e adequada às necessidades do paciente.</p>
@@ -511,7 +707,6 @@
                 <p class="contact-info">"Escolher a clínica certa envolve equilibrar custos com a qualidade e adequação dos serviços oferecidos às necessidades específicas do paciente."</p>
                 <p>A compreensão desses fatores é fundamental para avaliar o investimento necessário em um tratamento eficaz e sustentável em uma clínica de recuperação particular.</p>
             </div>
-
             <div class="highlight-box">
                 <h3>Importância da Escolha Informada na Recuperação</h3>
                 <p>A escolha de uma clínica de recuperação particular é um passo crítico no processo de tratamento e pode ter um impacto significativo no sucesso da recuperação do paciente. Tomar uma decisão informada não só ajuda a maximizar os benefícios do tratamento, mas também minimiza o estresse financeiro e emocional para o paciente e sua família.</p>
@@ -520,7 +715,6 @@
                 <p>A **participação ativa do paciente** no processo de escolha também é crucial. Envolver o paciente na decisão pode aumentar seu comprometimento com o tratamento, promovendo um senso de responsabilidade pessoal e motivação para a recuperação.</p>
                 <p class="contact-info">"Uma escolha bem-informada fortalece o compromisso com o tratamento, criando uma base sólida para uma recuperação bem-sucedida."</p>
             </div>
-
             <div class="highlight-box">
                 <h3>Superação e Aprendizados na Jornada de Recuperação</h3>
                 <p>A jornada de recuperação em uma clínica particular não é apenas um processo de tratamento, mas também uma oportunidade para aprendizado e crescimento pessoal. Cada paciente enfrenta desafios únicos, mas muitos encontram força interior e desenvolvem habilidades valiosas ao longo do caminho.</p>
@@ -530,12 +724,10 @@
                 <p class="contact-info">"A recuperação é uma jornada de autodescoberta, onde cada desafio superado fortalece o caminho para um futuro mais saudável."</p>
                 <p>Em última análise, escolher a clínica certa é apenas o começo. O verdadeiro trabalho ocorre ao longo da jornada de recuperação, onde cada passo representa uma vitória em direção à superação pessoal e à construção de uma vida plena e significativa.</p>
             </div>
-
             <div class="highlight-box">
                 <h3>Quanto Custa uma Clínica de Recuperação Particular?</h3>
                 <p>Embora não seja possível fornecer um valor exato, pois os custos são altamente variáveis, a informação detalhada nos tópicos anteriores serve como um guia para entender os fatores que compõem o investimento. Para um orçamento preciso, o ideal é entrar em contato direto com a Resgate para que possamos entender suas necessidades específicas e oferecer a melhor solução.</p>
             </div>
-
             <div class="highlight-box">
                 <h3>Considerações Finais sobre o Investimento em Recuperação</h3>
                 <p>Concluindo, o custo de uma clínica de recuperação particular é influenciado por diversos fatores, incluindo localização, infraestrutura, especialização da equipe e tipo de programa oferecido. Tomar uma decisão informada exige uma análise cuidadosa desses elementos, equilibrando as necessidades financeiras, emocionais e clínicas do paciente.</p>
@@ -543,8 +735,8 @@
                 <p>Em última análise, o sucesso da recuperação depende tanto da qualidade dos serviços prestados quanto do comprometimento do paciente e de sua rede de apoio. Uma escolha bem-informada fortalece essa jornada, oferecendo as melhores chances para uma vida plena e saudável.</p>
             </div>
         </section>
-        ---
 
+        ---
         <section id="contato" class="container">
             <h2 class="section-title">Contato para Tratamento e Resgate</h2>
             <p style="text-align: center; font-size: 1.5em; font-weight: bold; color: #007bff;">
@@ -560,9 +752,7 @@
     <a href="https://wa.me/5513997687326?text=Vamos%20te%20ajudar!%0APara%20agilizar%20o%20atendimento%2C%20nos%20passe%20algumas%20informações%20por%20gentileza%3A%0A1-%20Seu%20nome%3A%0A2-%20Masculino%20ou%20feminino%3F%0A3-%20Cidade%2FRegião%3F%0A4-%20Idade%20da%20pessoa%20a%20ser%20ajudada%3A%0A5-%20Possui%20alguma%20deficiência%20física%3F" class="whatsapp-button" target="_blank" aria-label="Fale conosco pelo WhatsApp">
         <span class="whatsapp-icon-text">&#x2709;</span> WhatsApp
     </a>
-
     <button id="scrollToTopBtn" title="Ir para o topo">↑</button>
-
     <footer>
         <div class="container">
             <script type="text/javascript" src="https://www.free-counters.org/count/i7wk"></script><br> <a href='https://www.versicherungen.at/lebensversicherung/'>Lebensversicherung</a> <script type='text/javascript' src='https://www.whomania.com/ctr?id=a983cd65bb4ac7ff411b450fd93aea31e97235b3'></script>
@@ -571,11 +761,30 @@
         </div>
     </footer>
     <script>
-        // Pega o botão
-        let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        // Hero Slider JavaScript (Basic auto-play and manual navigation - you can enhance this)
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const numSlides = slides.length;
 
-        // Quando o usuário rolar 20px para baixo, mostra o botão
-        window.onscroll = function() {scrollFunction()};
+        function showSlides() {
+            for (let i = 0; i < numSlides; i++) {
+                slides[i].classList.remove('active');
+            }
+            slideIndex++;
+            if (slideIndex > numSlides) { slideIndex = 1 }
+            slides[slideIndex - 1].classList.add('active');
+            setTimeout(showSlides, 5000); // Change image every 5 seconds
+        }
+
+        // Initialize slider
+        if (numSlides > 0) {
+            slides[0].classList.add('active'); // Ensure the first slide is active on load
+            setTimeout(showSlides, 5000);
+        }
+
+        // Scroll to Top Button JavaScript
+        let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+        window.onscroll = function() { scrollFunction() };
 
         function scrollFunction() {
             if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -585,7 +794,6 @@
             }
         }
 
-        // Quando o usuário clica no botão, rola a página para o topo
         scrollToTopBtn.addEventListener("click", function() {
             window.scrollTo({
                 top: 0,
