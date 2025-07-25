@@ -112,10 +112,10 @@
         /* Add more .hero-slide for more images */
 
         .hero-banner h2 {
-            font-size: 2em;
+            font-size: 1.2Xem;
             margin-bottom: 10px;
             color: white;
-        }
+        }f
         .hero-banner p {
             font-size: 1.5em;
             margin-bottom: 20px;
@@ -510,17 +510,17 @@
 
     <div class="hero-banner">
         <div class="hero-slide active" style="background-image: url('hero01.jpg');">
-            <h2>Cuidado Humanizado e Recuperação Completa</h2>
+            <h2>Cuidado Humanizado</h2>
             <p>Nossa equipe especializada está pronta para oferecer o melhor tratamento.</p>
             <a href="#contato" class="cta-button">Fale Conosco Agora</a>
         </div>
         <div class="hero-slide" style="background-image: url('hero02.jpg');">
-            <h2>Ambientes Seguros para Sua Recuperação</h2>
+            <h2>Ambientes Seguros</h2>
             <p>Clínicas modernas e acolhedoras para um tratamento eficaz.</p>
             <a href="#tratamento" class="cta-button">Saiba Mais Sobre Tratamento</a>
         </div>
         <div class="hero-slide" style="background-image: url('hero03.jpg');">
-            <h2>Resgate Imediato em Casos Urgentes</h2>
+            <h2>Resgate Imediato</h2>
             <p>Intervenção 24h para momentos críticos, com profissionalismo e discrição.</p>
             <a href="#como-funciona-resgate" class="cta-button">Solicitar Resgate</a>
         </div>
@@ -779,13 +779,13 @@
             slideIndex++;
             if (slideIndex > numSlides) { slideIndex = 1 }
             slides[slideIndex - 1].classList.add('active');
-            setTimeout(showSlides, 5000); // Change image every 5 seconds
+            setTimeout(showSlides, 3000); // Change image every 5 seconds
         }
 
         // Initialize slider
         if (numSlides > 0) {
             slides[0].classList.add('active'); // Ensure the first slide is active on load
-            setTimeout(showSlides, 5000);
+            setTimeout(showSlides, 3000);
         }
 
         // Scroll to Top Button JavaScript
