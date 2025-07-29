@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte Remoto 24h e Emergência - BitHostel TI</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #1a1a1a; /* Fundo escuro */
+            color: #e0e0e0; /* Texto claro */
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 25px;
+            background-color: #2b2b2b; /* Fundo do container mais escuro */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Sombra mais visível no escuro */
+        }
+
+        /* --- Menu de Navegação --- */
+        nav {
+            background-color: #004080; /* Azul escuro para o menu */
+            padding: 10px 0;
+            text-align: center;
+            margin-bottom: 25px;
+            border-radius: 8px;
+        }
+        nav .menu-toggle {
+            display: none;
+            font-size: 1.1em;
+            color: white;
+            cursor: pointer;
+            padding: 5px 15px;
+            float: right;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 15px;
+            display: block;
+            transition: background-color 0.3s ease;
+            border-radius: 5px;
+        }
+        nav ul li a:hover {
+            background-color: #002a5c; /* Tom mais escuro no hover */
+        }
+
+        /* --- Responsividade do Menu --- */
+        @media (max-width: 768px) {
+            nav .menu-toggle {
+                display: block;
+                text-align: left;
+                width: 100%;
+                box-sizing: border-box;
+                padding-right: 25px;
+            }
+            nav ul {
+                flex-direction: column;
+                display: none;
+                width: 100%;
+                text-align: center;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                margin: 5px 0;
+                width: 100%;
+            }
+            nav ul li a {
+                padding: 12px 0;
+                background-color: #003366; /* Fundo diferente para itens do menu mobile */
+            }
+            nav ul li a:hover {
+                background-color: #002a5c;
+            }
+        }
+
+        header {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #444; /* Borda mais clara no escuro */
+        }
+        header .logo {
+            max-width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            color: #66b3ff; /* Azul claro para o título */
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.1em;
+            color: #c0c0c0; /* Texto mais claro */
+        }
+        header .about-text {
+            font-size: 1em;
+            color: #a0a0a0; /* Texto sobre a empresa mais sutil */
+            margin-top: 15px;
+        }
+        .urgent-alert {
+            background-color: #4a0000; /* Fundo vermelho escuro para alerta */
+            color: #ff9999; /* Texto vermelho claro para alerta */
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+            border: 1px solid #800000; /* Borda vermelha escura */
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 153, 153, 0.7); } /* Sombra clara para o efeito */
+            70% { box-shadow: 0 0 0 10px rgba(255, 153, 153, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 153, 153, 0); }
+        }
+
+        .section {
+            padding: 20px 0;
+            border-bottom: 1px dashed #444; /* Borda dashed mais clara */
+        }
+        .section:last-child {
+            border-bottom: none;
+        }
+        h2 {
+            color: #66b3ff; /* Azul claro para subtítulos */
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            background: #3a3a3a; /* Fundo dos itens de lista escuro */
+            margin-bottom: 10px;
+            padding: 12px 20px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra mais escura */
+        }
+        ul li strong {
+            color: #99ccff; /* Azul mais claro para destaque */
+            margin-right: 10px;
+        }
+        .anydesk-info {
+            background-color: #333344; /* Fundo azulado escuro para AnyDesk */
+            border: 1px solid #4a4a5a; /* Borda mais escura */
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .anydesk-info h3 {
+            color: #99ccff; /* Azul claro para o título AnyDesk */
+            font-size: 1.6em;
+            margin-bottom: 15px;
+        }
+        .anydesk-info p {
+            font-size: 1.1em;
+            color: #c0c0c0; /* Texto claro */
+            margin-bottom: 15px;
+        }
+        .anydesk-info .download-button {
+            background-color: #cc3344; /* Vermelho escuro para o botão de download */
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin-top: 10px;
+        }
+        .anydesk-info .download-button:hover {
+            background-color: #b32b38;
+        }
+        .anydesk-steps ol {
+            text-align: left;
+            margin: 0 auto;
+            max-width: 600px;
+            padding-left: 20px;
+            color: #e0e0e0; /* Texto da lista claro */
+        }
+        .anydesk-steps ol li {
+            background: none;
+            box-shadow: none;
+            margin-bottom: 15px;
+            padding: 5px 0;
+            display: list-item;
+        }
+        .anydesk-steps ol li strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #99ccff; /* Destaque na lista AnyDesk */
+        }
+        .contact-info {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .contact-info a {
+            background-color: #218838; /* Verde escuro para botões de contato */
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            margin: 10px;
+            display: inline-block;
+        }
+        .contact-info a:hover {
+            background-color: #1a6f2f;
+        }
+        .contact-info p {
+            font-size: 1.1em;
+            color: #c0c0c0; /* Texto claro */
+            margin-top: 20px;
+        }
+        .disclaimer {
+            font-size: 0.9em;
+            color: #a0a0a0; /* Texto de rodapé mais sutil */
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #444; /* Borda de rodapé mais clara */
+        }
+        footer {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 30px;
+            color: #a0a0a0; /* Texto do footer */
+            font-size: 0.9em;
+            border-top: 2px solid #444; /* Borda do footer */
+        }
+
+        /* --- WhatsApp Floating Button --- */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #25D366; /* Cor oficial do WhatsApp */
+            color: white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            text-decoration: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Sombra mais escura */
+            z-index: 1000;
+            transition: transform 0.3s ease-in-out;
+        }
+        .whatsapp-button:hover {
+            transform: scale(1.1);
+        }
+        .whatsapp-button span {
+            line-height: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="menu-toggle" id="mobile-menu">
+                &#9776; </div>
+            <ul id="main-nav">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#quando-possivel">Quando é Possível?</a></li>
+                <li><a href="#anydesk">AnyDesk</a></li>
+                <li><a href="#contato">Contato 24h</a></li>
+            </ul>
+        </nav>
+        <header id="inicio">
+            <img src="logo.png" alt="Logo BitHostel TI" class="logo">
+            <h1>🚨 Suporte Remoto 24h e de Emergência 📱💻</h1>
+            <div class="urgent-alert">
+                ✨ **Nosso técnico está disponível AGORA para suporte remoto!** ✨
+            </div>
+            <p>Problemas críticos com seu computador ou smartphone Android? A **BitHostel TI** oferece **suporte remoto 24 horas por dia**, pronto para atender suas emergências de TI.</p>
+            <p class="about-text">A BitHostel TI, fundada em 2011 em Santos, Brasil, construiu uma sólida trajetória no mercado de tecnologia da informação, expandindo constantemente seu portfólio de serviços.</p>
+        </header>
+
+        ---
+
+        <div class="section" id="servicos">
+            <h2>Serviços que Oferecemos Remotamente (incluindo Emergências):</h2>
+            <ul>
+                <li><strong>Computadores (Windows/Linux):</strong>
+                    Remoção urgente de vírus e malwares, diagnóstico e reparo de sistema operacional corrompido, configuração de rede e internet, instalação e configuração de softwares essenciais, otimização de desempenho e backup de dados (quando o sistema permite acesso).
+                </li>
+                <li><strong>Smartphones Android:</strong>
+                    Remoção urgente de vírus e spyware, otimização de desempenho, configuração de aplicativos, auxílio com problemas críticos de conectividade (Wi-Fi/4G), gerenciamento de armazenamento e orientação para uso de funções essenciais.
+                </li>
+            </ul>
+        </div>
+
+        ---
+
+        <div class="section" id="quando-possivel">
+            <h2>Quando o Suporte Remoto de Emergência é Possível?</h2>
+            <p>Nosso suporte remoto 24h é ideal para resolver problemas urgentes que não exigem a presença física de um técnico. Ele é possível quando:</p>
+            <ul>
+                <li>Seu **computador** ou **smartphone** liga e consegue acessar a internet.</li>
+                <li>Você consegue baixar e executar o programa **AnyDesk** (ou similar).</li>
+                <li>O problema é **relacionado a software** (erros críticos de sistema, infecção por vírus/malware, falhas de aplicativos que impedem o uso).</li>
+                <li>Você precisa de **orientação imediata** para restaurar a funcionalidade.</li>
+            </ul>
+            <p>**Atenção:** Problemas de hardware (peças queimadas, tela quebrada, etc.) ou quando o dispositivo não liga ou não consegue estabelecer conexão com a internet, geralmente exigem atendimento presencial e não podem ser resolvidos remotamente.</p>
+        </div>
+
+        ---
+        
+        <div class="section anydesk-info" id="anydesk">
+            <h3>Preparando o Acesso Remoto de Emergência com AnyDesk</h3>
+            <p>Para agilizar o atendimento de emergência, utilize o **AnyDesk**. É nossa ferramenta preferencial, rápida, segura e nos permite acessar seu dispositivo para solucionar o problema.</p>
+            <a href="https://anydesk.com/pt/downloads" target="_blank" class="download-button">
+                Baixar AnyDesk Agora
+            </a>
+            <p style="margin-top: 20px;">Ou procure por "AnyDesk" na Google Play Store para Android.</p>
+
+            <div class="anydesk-steps">
+                <h3>Como Iniciar uma Sessão de Suporte Remoto:</h3>
+                <ol>
+                    <li><strong>Baixe e Execute o AnyDesk:</strong> Clique no botão acima para baixar o AnyDesk. No computador, execute o arquivo baixado. No Android, instale o app da Play Store e abra-o. Não é necessário instalar, apenas executar para suporte remoto.</li>
+                    <li><strong>Informe Seu ID:</strong> Após abrir o AnyDesk, você verá um número de 9 ou 10 dígitos (seu "ID AnyDesk" ou "Este Posto de Trabalho").</li>
+                    <li><strong>Entre em Contato Conosco 24h:</strong> Use os botões de WhatsApp ou Telefone abaixo e forneça o seu ID AnyDesk para que possamos iniciar a conexão imediatamente.</li>
+                    <li><strong>Permita a Conexão:</strong> Quando solicitarmos a conexão, uma janela de permissão aparecerá. Clique em "Aceitar" para nos dar acesso.</li>
+                </ol>
+            </div>
+        </div>
+
+        ---
+
+        <div class="contact-info" id="contato">
+            <h2>Pronto para Receber Suporte Remoto? Fale Conosco 24h!</h2>
+            <a href="https://wa.me/5513997853113?text=Preciso%20de%20suporte%20remoto%20de%20emerg%C3%AAncia%20e%20já%20estou%20com%20o%20AnyDesk%20pronto." target="_blank">
+                WhatsApp 24h BitHostel TI
+            </a>
+            <a href="tel:+5513997853113">
+                Ligue Agora (24h) para BitHostel TI
+            </a>
+            <p>Não espere! Nosso técnico está **pronto para te atender AGORA** para casos de suporte remoto elegíveis.</p>
+            <p>(Lembre-se de substituir **'5513997853113'** pelo seu número de telefone/WhatsApp real, incluindo o DDD 13 para a região de Santos.)</p>
+        </div>
+
+        ---
+
+        <div class="disclaimer">
+            <p><strong>Importante:</strong> Nosso suporte remoto 24h é focado na agilidade para resolver problemas de software que permitam a conexão. A BitHostel TI não se responsabiliza por falhas de hardware ou por problemas que impeçam o estabelecimento da conexão remota.</p>
+            <p>Para dúvidas sobre outros serviços, agendamentos para problemas não urgentes ou atendimentos presenciais, entre em contato em horário comercial.</p>
+        </div>
+
+        ---
+
+        <footer>
+            <p>&copy; 2025 BitHostel TI. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <a href="https://wa.me/5513997853113?text=Ol%C3%A1!%20Preciso%20de%20suporte%20remoto%20de%20emerg%C3%AAncia." class="whatsapp-button" target="_blank">
+        <span>&#x1F4AC;</span> </a>
+    <script>
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            var nav = document.getElementById('main-nav');
+            if (nav.classList.contains('active')) {
+                nav.classList.remove('active');
+            } else {
+                nav.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>
