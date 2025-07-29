@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Suporte Remoto 24h e Emergência - BitHostel TI</title>
+    <title>Suporte Remoto 24h e Emergência - bithostel TI</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -22,81 +22,12 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Sombra mais visível no escuro */
         }
 
-        /* --- Menu de Navegação --- */
-        nav {
-            background-color: #004080; /* Azul escuro para o menu */
-            padding: 10px 0;
-            text-align: center;
-            margin-bottom: 25px;
-            border-radius: 8px;
-        }
-        nav .menu-toggle {
-            display: none;
-            font-size: 1.1em;
-            color: white;
-            cursor: pointer;
-            padding: 5px 15px;
-            float: right;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        nav ul li {
-            margin: 0 15px;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 8px 15px;
-            display: block;
-            transition: background-color 0.3s ease;
-            border-radius: 5px;
-        }
-        nav ul li a:hover {
-            background-color: #002a5c; /* Tom mais escuro no hover */
-        }
-
-        /* --- Responsividade do Menu --- */
-        @media (max-width: 768px) {
-            nav .menu-toggle {
-                display: block;
-                text-align: left;
-                width: 100%;
-                box-sizing: border-box;
-                padding-right: 25px;
-            }
-            nav ul {
-                flex-direction: column;
-                display: none;
-                width: 100%;
-                text-align: center;
-            }
-            nav ul.active {
-                display: flex;
-            }
-            nav ul li {
-                margin: 5px 0;
-                width: 100%;
-            }
-            nav ul li a {
-                padding: 12px 0;
-                background-color: #003366; /* Fundo diferente para itens do menu mobile */
-            }
-            nav ul li a:hover {
-                background-color: #002a5c;
-            }
-        }
-
+        /* --- Logo no Topo e Header --- */
         header {
             text-align: center;
             padding-bottom: 20px;
             border-bottom: 2px solid #444; /* Borda mais clara no escuro */
+            margin-bottom: 25px; /* Espaço entre o header e o menu/conteúdo */
         }
         header .logo {
             max-width: 200px;
@@ -117,6 +48,82 @@
             color: #a0a0a0; /* Texto sobre a empresa mais sutil */
             margin-top: 15px;
         }
+
+        /* --- Menu de Navegação - Agora sempre dropdown (mobile-first) --- */
+        nav {
+            background-color: #004080; /* Azul escuro para o menu */
+            padding: 10px 0;
+            text-align: center;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            position: relative;
+        }
+        nav .menu-toggle {
+            display: block; /* Sempre visível para ativar o dropdown */
+            font-size: 1.8em; /* Ícone maior */
+            color: white;
+            cursor: pointer;
+            padding: 5px 15px;
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-direction: column; /* Sempre em coluna, como um dropdown */
+            display: none; /* Escondido por padrão */
+            width: 100%;
+            text-align: center;
+            background-color: #003366; /* Fundo do menu colapsado */
+            position: absolute;
+            top: 100%; /* Posiciona abaixo da barra de navegação */
+            left: 0;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            z-index: 5;
+        }
+        nav ul.active {
+            display: flex; /* Mostra o menu quando ativo */
+        }
+        nav ul li {
+            margin: 0;
+            width: 100%;
+            border-top: 1px solid rgba(255, 255, 255, 0.1); /* Separador */
+        }
+        nav ul li:first-child {
+            border-top: none;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 15px 0; /* Padding maior para cliques */
+            display: block;
+            transition: background-color 0.3s ease;
+            background-color: transparent; /* Transparente para usar o fundo da UL */
+        }
+        nav ul li a:hover {
+            background-color: #002a5c;
+        }
+        /* Ajusta o layout da nav para conter o toggle e, futuramente, um título se quiser */
+        nav {
+            display: flex;
+            justify-content: space-between; /* Alinha o toggle à direita */
+            align-items: center;
+            padding-right: 25px; /* Espaço para o botão toggle */
+        }
+        /* Texto dentro da barra de navegação principal (opcional, para exibir "Menu" ou similar) */
+        nav .nav-title {
+            color: white;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding-left: 15px;
+        }
+
         .urgent-alert {
             background-color: #4a0000; /* Fundo vermelho escuro para alerta */
             color: #ff9999; /* Texto vermelho claro para alerta */
@@ -221,20 +228,37 @@
             text-align: center;
             margin-top: 30px;
         }
-        .contact-info a {
-            background-color: #218838; /* Verde escuro para botões de contato */
+        .contact-info .whatsapp-contact-button { /* Specific style for primary WhatsApp button */
+            background-color: #25D366; /* WhatsApp Green */
+            color: white;
+            padding: 18px 35px; /* Larger padding */
+            border-radius: 10px; /* Slightly more rounded */
+            text-decoration: none;
+            font-size: 1.4em; /* Larger font */
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            margin: 10px;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .contact-info .whatsapp-contact-button:hover {
+            background-color: #1DA851;
+            transform: translateY(-2px); /* Slight lift on hover */
+        }
+        .contact-info a.secondary-contact-button { /* Style for other contact buttons */
+            background-color: #007bff; /* A nice blue for secondary actions */
             color: white;
             padding: 15px 30px;
             border-radius: 8px;
             text-decoration: none;
-            font-size: 1.3em;
+            font-size: 1.2em;
             font-weight: bold;
             transition: background-color 0.3s ease;
             margin: 10px;
             display: inline-block;
         }
-        .contact-info a:hover {
-            background-color: #1a6f2f;
+        .contact-info a.secondary-contact-button:hover {
+            background-color: #0056b3;
         }
         .contact-info p {
             font-size: 1.1em;
@@ -287,28 +311,29 @@
 </head>
 <body>
     <div class="container">
+        <header id="inicio">
+            <img src="logo.png" alt="Logo bithostel TI" class="logo">
+            <h1>🚨 Suporte Remoto 24h 📱💻</h1>
+            <div class="urgent-alert">
+                ✨ **Nosso técnico está disponível AGORA para suporte remoto!** ✨
+            </div>
+            <p>Problemas críticos com seu computador ou smartphone Android? A **bithostel TI** oferece **suporte remoto 24 horas por dia**, pronto para atender suas emergências de TI.</p>
+            <p class="about-text">A bithostel TI, fundada em 2011 em Santos, Brasil, construiu uma sólida trajetória no mercado de tecnologia da informação, expandindo constantemente seu portfólio de serviços.</p>
+        </header>
+
         <nav>
+            <div class="nav-title">Menu Principal</div>
             <div class="menu-toggle" id="mobile-menu">
                 &#9776; </div>
             <ul id="main-nav">
                 <li><a href="#inicio">Início</a></li>
+                <li><a href="index.html">Website Principal</a></li>
                 <li><a href="#servicos">Serviços</a></li>
                 <li><a href="#quando-possivel">Quando é Possível?</a></li>
-                <li><a href="#anydesk">AnyDesk</a></li>
+                <li><a href="#anydesk">Preparando o Acesso Remoto</a></li>
                 <li><a href="#contato">Contato 24h</a></li>
             </ul>
         </nav>
-        <header id="inicio">
-            <img src="logo.png" alt="Logo BitHostel TI" class="logo">
-            <h1>🚨 Suporte Remoto 24h e de Emergência 📱💻</h1>
-            <div class="urgent-alert">
-                ✨ **Nosso técnico está disponível AGORA para suporte remoto!** ✨
-            </div>
-            <p>Problemas críticos com seu computador ou smartphone Android? A **BitHostel TI** oferece **suporte remoto 24 horas por dia**, pronto para atender suas emergências de TI.</p>
-            <p class="about-text">A BitHostel TI, fundada em 2011 em Santos, Brasil, construiu uma sólida trajetória no mercado de tecnologia da informação, expandindo constantemente seu portfólio de serviços.</p>
-        </header>
-
-        ---
 
         <div class="section" id="servicos">
             <h2>Serviços que Oferecemos Remotamente (incluindo Emergências):</h2>
@@ -337,7 +362,7 @@
         </div>
 
         ---
-        
+
         <div class="section anydesk-info" id="anydesk">
             <h3>Preparando o Acesso Remoto de Emergência com AnyDesk</h3>
             <p>Para agilizar o atendimento de emergência, utilize o **AnyDesk**. É nossa ferramenta preferencial, rápida, segura e nos permite acessar seu dispositivo para solucionar o problema.</p>
@@ -351,7 +376,7 @@
                 <ol>
                     <li><strong>Baixe e Execute o AnyDesk:</strong> Clique no botão acima para baixar o AnyDesk. No computador, execute o arquivo baixado. No Android, instale o app da Play Store e abra-o. Não é necessário instalar, apenas executar para suporte remoto.</li>
                     <li><strong>Informe Seu ID:</strong> Após abrir o AnyDesk, você verá um número de 9 ou 10 dígitos (seu "ID AnyDesk" ou "Este Posto de Trabalho").</li>
-                    <li><strong>Entre em Contato Conosco 24h:</strong> Use os botões de WhatsApp ou Telefone abaixo e forneça o seu ID AnyDesk para que possamos iniciar a conexão imediatamente.</li>
+                    <li><strong>Entre em Contato Conosco 24h pelo WhatsApp:</strong> Clique no botão do WhatsApp abaixo e forneça o seu ID AnyDesk para que possamos iniciar a conexão imediatamente. **Este é o método mais rápido para emergências!**</li>
                     <li><strong>Permita a Conexão:</strong> Quando solicitarmos a conexão, uma janela de permissão aparecerá. Clique em "Aceitar" para nos dar acesso.</li>
                 </ol>
             </div>
@@ -361,40 +386,43 @@
 
         <div class="contact-info" id="contato">
             <h2>Pronto para Receber Suporte Remoto? Fale Conosco 24h!</h2>
-            <a href="https://wa.me/5513997853113?text=Preciso%20de%20suporte%20remoto%20de%20emerg%C3%AAncia%20e%20já%20estou%20com%20o%20AnyDesk%20pronto." target="_blank">
-                WhatsApp 24h BitHostel TI
-            </a>
-            <a href="tel:+5513997853113">
-                Ligue Agora (24h) para BitHostel TI
+            <p>Para agilizar seu atendimento de emergência, envie uma mensagem para nosso WhatsApp:</p>
+            <a href="https://wa.me/5513997853113?text=Preciso%20de%20suporte%20remoto%20de%20emerg%C3%AAncia%20e%20já%20estou%20com%20o%20AnyDesk%20pronto." target="_blank" class="whatsapp-contact-button">
+                💬 WhatsApp 24h bithostel TI (Emergências)
             </a>
             <p>Não espere! Nosso técnico está **pronto para te atender AGORA** para casos de suporte remoto elegíveis.</p>
-            <p>(Lembre-se de substituir **'5513997853113'** pelo seu número de telefone/WhatsApp real, incluindo o DDD 13 para a região de Santos.)</p>
         </div>
 
         ---
 
         <div class="disclaimer">
-            <p><strong>Importante:</strong> Nosso suporte remoto 24h é focado na agilidade para resolver problemas de software que permitam a conexão. A BitHostel TI não se responsabiliza por falhas de hardware ou por problemas que impeçam o estabelecimento da conexão remota.</p>
+            <p><strong>Importante:</strong> Nosso suporte remoto 24h é focado na agilidade para resolver problemas de software que permitam a conexão. A bithostel TI não se responsabiliza por falhas de hardware ou por problemas que impeçam o estabelecimento da conexão remota.</p>
             <p>Para dúvidas sobre outros serviços, agendamentos para problemas não urgentes ou atendimentos presenciais, entre em contato em horário comercial.</p>
         </div>
 
         ---
 
         <footer>
-            <p>&copy; 2025 BitHostel TI. Todos os direitos reservados.</p>
+            <p>&copy; 2025 bithostel TI. Todos os direitos reservados.</p>
         </footer>
     </div>
 
     <a href="https://wa.me/5513997853113?text=Ol%C3%A1!%20Preciso%20de%20suporte%20remoto%20de%20emerg%C3%AAncia." class="whatsapp-button" target="_blank">
-        <span>&#x1F4AC;</span> </a>
+        <span>&#x1F4AC;</span>
+    </a>
     <script>
         document.getElementById('mobile-menu').addEventListener('click', function() {
             var nav = document.getElementById('main-nav');
-            if (nav.classList.contains('active')) {
-                nav.classList.remove('active');
-            } else {
-                nav.classList.add('active');
-            }
+            nav.classList.toggle('active'); // Use toggle for cleaner activation/deactivation
+        });
+
+        // Add event listener to close menu when a link is clicked
+        var navLinks = document.querySelectorAll('#main-nav a');
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                var nav = document.getElementById('main-nav');
+                nav.classList.remove('active'); // Remove 'active' class to close the menu
+            });
         });
     </script>
 </body>
