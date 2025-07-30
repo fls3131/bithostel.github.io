@@ -4,372 +4,706 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Suporte Remoto 24h e Emergência - bithostel TI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* Base Styles & Reset */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #1a1a1a; /* Fundo escuro */
-            color: #e0e0e0; /* Texto claro */
-            line-height: 1.6;
+            background-color: #0e1217; /* Very dark blue-gray */
+            color: #e0e6ed; /* Light text for readability */
+            line-height: 1.7;
+            scroll-behavior: smooth;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
+
         .container {
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 25px;
-            background-color: #2b2b2b; /* Fundo do container mais escuro */
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4); /* Sombra mais visível no escuro */
+            max-width: 1000px; /* Wider container */
+            margin: 0 auto; /* Full width on smaller screens */
+            padding: 0 20px;
         }
 
-        /* --- Logo no Topo e Header --- */
+        /* --- Header & Hero Section --- */
         header {
+            background-color: #1a202c; /* Darker blue for header background */
+            padding: 40px 0 60px;
             text-align: center;
-            padding-bottom: 20px;
-            border-bottom: 2px solid #444; /* Borda mais clara no escuro */
-            margin-bottom: 25px; /* Espaço entre o header e o menu/conteúdo */
-        }
-        header .logo {
-            max-width: 200px;
-            height: auto;
-            margin-bottom: 20px;
-        }
-        header h1 {
-            color: #66b3ff; /* Azul claro para o título */
-            font-size: 2em; /* Reduzido de 2.5em */
-            margin-bottom: 10px;
-        }
-        header p {
-            font-size: 1.1em;
-            color: #c0c0c0; /* Texto mais claro */
-        }
-        header .about-text {
-            font-size: 1em;
-            color: #a0a0a0; /* Texto sobre a empresa mais sutil */
-            margin-top: 15px;
+            position: relative;
+            overflow: hidden; /* For background effects */
+            border-bottom: 5px solid #007bff; /* Strong accent line */
         }
 
-        /* --- Menu de Navegação - Agora sempre dropdown (mobile-first) --- */
-        nav {
-            background-color: #004080; /* Azul escuro para o menu */
-            padding: 10px 0;
-            text-align: center;
-            margin-bottom: 25px;
-            border-radius: 8px;
+        header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             position: relative;
+            z-index: 2;
         }
-        nav .menu-toggle {
-            display: block; /* Sempre visível para ativar o dropdown */
-            font-size: 1.8em; /* Ícone maior */
+
+        header .logo {
+            max-width: 250px; /* Larger logo */
+            height: auto;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 10px rgba(0, 123, 255, 0.6));
+        }
+
+        header h1 {
+            color: #66b3ff; /* Bright blue for main title */
+            font-size: 3.2em; /* Much larger title */
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: #c9d1d9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .urgent-alert {
+            background-color: #e63946; /* Vibrant red */
             color: white;
-            cursor: pointer;
-            padding: 5px 15px;
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
+            padding: 18px 30px;
+            border-radius: 10px;
+            margin: 30px auto;
+            max-width: 600px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.4em;
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
+            animation: pulse-pro 2s infinite ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
+
+        @keyframes pulse-pro {
+            0% { transform: scale(1); box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4); }
+            50% { transform: scale(1.02); box-shadow: 0 12px 25px rgba(230, 57, 70, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4); }
+        }
+
+        .header-main-btn {
+            background-color: #25D366; /* WhatsApp Green */
+            color: white;
+            padding: 20px 45px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 1.6em;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+            margin-top: 20px;
+        }
+
+        .header-main-btn:hover {
+            background-color: #1DA851;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        /* --- Navigation --- */
+        nav {
+            background-color: #0d1217; /* Matches body background */
+            padding: 15px 0;
+            border-bottom: 1px solid #0056b3;
+            position: sticky; /* Sticky nav */
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: flex-start; /* Align menu to the left */
+            align-items: center;
+            gap: 30px; /* Space between items */
+        }
+
+        nav .nav-title {
+            color: #66b3ff;
+            font-size: 1.3em;
+            font-weight: 600;
+            display: none; /* Hidden on desktop, shown on mobile */
+        }
+
+        nav .menu-toggle {
+            display: none; /* Hidden on desktop */
+            font-size: 2.2em;
+            color: #66b3ff;
+            cursor: pointer;
+            margin-left: auto; /* Push to the right */
+        }
+
         nav ul {
             list-style: none;
             padding: 0;
             margin: 0;
-            flex-direction: column; /* Sempre em coluna, como um dropdown */
-            display: none; /* Escondido por padrão */
-            width: 100%;
-            text-align: center;
-            background-color: #003366; /* Fundo do menu colapsado */
-            position: absolute;
-            top: 100%; /* Posiciona abaixo da barra de navegação */
-            left: 0;
-            border-radius: 0 0 8px 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            z-index: 5;
-        }
-        nav ul.active {
-            display: flex; /* Mostra o menu quando ativo */
-        }
-        nav ul li {
-            margin: 0;
-            width: 100%;
-            border-top: 1px solid rgba(255, 255, 255, 0.1); /* Separador */
-        }
-        nav ul li:first-child {
-            border-top: none;
-        }
-        nav ul li a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 15px 0; /* Padding maior para cliques */
-            display: block;
-            transition: background-color 0.3s ease;
-            background-color: transparent; /* Transparente para usar o fundo da UL */
-        }
-        nav ul li a:hover {
-            background-color: #002a5c;
-        }
-        /* Ajusta o layout da nav para conter o toggle e, futuramente, um título se quiser */
-        nav {
             display: flex;
-            justify-content: space-between; /* Alinha o toggle à direita */
-            align-items: center;
-            padding-right: 25px; /* Espaço para o botão toggle */
-        }
-        /* Texto dentro da barra de navegação principal (opcional, para exibir "Menu" ou similar) */
-        nav .nav-title {
-            color: white;
-            font-size: 1em; /* Reduzido de 1.2em */
-            font-weight: bold;
-            padding-left: 15px;
+            flex-wrap: wrap; /* Allow wrapping on smaller desktop screens */
+            gap: 25px;
         }
 
-        .urgent-alert {
-            background-color: #4a0000; /* Fundo vermelho escuro para alerta */
-            color: #ff9999; /* Texto vermelho claro para alerta */
-            padding: 15px 20px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 1em; /* Reduzido de 1.2em */
-            border: 1px solid #800000; /* Borda vermelha escura */
-            animation: pulse 1.5s infinite;
+        nav ul li a {
+            color: #e0e6ed;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 15px;
+            transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+            border-radius: 6px;
+            position: relative;
         }
 
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 153, 153, 0.7); } /* Sombra clara para o efeito */
-            70% { box-shadow: 0 0 0 10px rgba(255, 153, 153, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 153, 153, 0); }
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #007bff;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
         }
 
-        .section {
-            padding: 20px 0;
-            border-bottom: 1px dashed #444; /* Borda dashed mais clara */
+        nav ul li a:hover::after {
+            transform: scaleX(1);
         }
-        .section:last-child {
-            border-bottom: none;
+
+        nav ul li a:hover {
+            color: #ffffff;
+            background-color: rgba(0, 123, 255, 0.15); /* Subtle hover background */
         }
+
+        /* --- Section Styling (Card-based) --- */
+        .section-padding {
+            padding: 60px 0;
+        }
+
         h2 {
-            color: #66b3ff; /* Azul claro para subtítulos */
-            font-size: 1.5em; /* Reduzido de 1.8em */
-            margin-bottom: 15px;
+            color: #66b3ff;
+            font-size: 2.8em;
+            margin-bottom: 40px;
             text-align: center;
+            font-weight: 700;
+            letter-spacing: -0.5px;
         }
-        ul {
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+            gap: 30px;
+            padding-bottom: 40px;
+        }
+
+        .card {
+            background-color: #1a202c; /* Card background */
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #2d3748;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            border-color: #007bff; /* Highlight on hover */
+        }
+
+        .card h3 {
+            color: #8be9fd; /* Light blue for card titles */
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .card ul {
             list-style: none;
             padding: 0;
-        }
-        ul li {
-            background: #3a3a3a; /* Fundo dos itens de lista escuro */
-            margin-bottom: 10px;
-            padding: 12px 20px;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra mais escura */
-        }
-        ul li strong {
-            color: #99ccff; /* Azul mais claro para destaque */
-            margin-right: 10px;
-        }
-        .anydesk-info {
-            background-color: #333344; /* Fundo azulado escuro para AnyDesk */
-            border: 1px solid #4a4a5a; /* Borda mais escura */
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-            text-align: center;
-        }
-        .anydesk-info h3 {
-            color: #99ccff; /* Azul claro para o título AnyDesk */
-            font-size: 1.3em; /* Reduzido de 1.6em */
-            margin-bottom: 15px;
-        }
-        .anydesk-info p {
-            font-size: 1.1em;
-            color: #c0c0c0; /* Texto claro */
-            margin-bottom: 15px;
-        }
-        .anydesk-info .download-button {
-            background-color: #cc3344; /* Vermelho escuro para o botão de download */
-            color: white;
-            padding: 15px 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1.3em;
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            margin-top: 10px;
-        }
-        .anydesk-info .download-button:hover {
-            background-color: #b32b38;
-        }
-        .anydesk-steps ol {
-            text-align: left;
-            margin: 0 auto;
-            max-width: 600px;
-            padding-left: 20px;
-            color: #e0e0e0; /* Texto da lista claro */
-        }
-        .anydesk-steps ol li {
-            background: none;
-            box-shadow: none;
-            margin-bottom: 15px;
-            padding: 5px 0;
-            display: list-item;
-        }
-        .anydesk-steps ol li strong {
-            display: block;
-            margin-bottom: 5px;
-            color: #99ccff; /* Destaque na lista AnyDesk */
-        }
-        .contact-info {
-            text-align: center;
-            margin-top: 30px;
-        }
-        .contact-info .whatsapp-contact-button { /* Specific style for primary WhatsApp button */
-            background-color: #25D366; /* WhatsApp Green */
-            color: white;
-            padding: 18px 35px; /* Larger padding */
-            border-radius: 10px; /* Slightly more rounded */
-            text-decoration: none;
-            font-size: 1.2em; /* Reduzido de 1.4em */
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-            margin: 10px;
-            display: inline-block;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        .contact-info .whatsapp-contact-button:hover {
-            background-color: #1DA851;
-            transform: translateY(-2px); /* Slight lift on hover */
-        }
-        .contact-info a.secondary-contact-button { /* Style for other contact buttons */
-            background-color: #007bff; /* A nice blue for secondary actions */
-            color: white;
-            padding: 15px 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 1em; /* Reduzido de 1.2em */
-            font-weight: bold;
-            transition: background-color 0.3s ease;
-            margin: 10px;
-            display: inline-block;
-        }
-        .contact-info a.secondary-contact-button:hover {
-            background-color: #0056b3;
-        }
-        .contact-info p {
-            font-size: 1.1em;
-            color: #c0c0c0; /* Texto claro */
-            margin-top: 20px;
-        }
-        .disclaimer {
-            font-size: 0.9em;
-            color: #a0a0a0; /* Texto de rodapé mais sutil */
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #444; /* Borda de rodapé mais clara */
-        }
-        footer {
-            text-align: center;
-            padding-top: 20px;
-            margin-top: 30px;
-            color: #a0a0a0; /* Texto do footer */
-            font-size: 0.9em;
-            border-top: 2px solid #444; /* Borda do footer */
+            margin: 0;
         }
 
-        /* --- WhatsApp Floating Button --- */
-        .whatsapp-button {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background-color: #25D366; /* Cor oficial do WhatsApp */
+        .card ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+            color: #e0e6ed;
+            font-size: 1.05em;
+        }
+
+        .card ul li::before {
+            content: '✓'; /* Checkmark icon */
+            color: #25D366; /* Green checkmark */
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        /* --- AnyDesk Section --- */
+        .anydesk-section {
+            background-color: #1a202c;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            margin-top: 40px;
+            border: 1px solid #2d3748;
+        }
+
+        .anydesk-section h3 {
+            color: #66b3ff;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .anydesk-section p {
+            font-size: 1.1em;
+            color: #c9d1d9;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .anydesk-download-btn {
+            background-color: #ff6b6b; /* Soft red for download */
             color: white;
+            padding: 18px 40px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1.5em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 6px 15px rgba(255, 107, 107, 0.4);
+            margin-bottom: 20px;
+        }
+
+        .anydesk-download-btn:hover {
+            background-color: #e55a5a;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.6);
+        }
+
+        .anydesk-steps ol {
+            list-style: none;
+            padding: 0;
+            margin: 40px auto 0;
+            max-width: 700px;
+            text-align: left;
+            counter-reset: anydesk-counter; /* Reset counter */
+        }
+
+        .anydesk-steps ol li {
+            background-color: #2d3748; /* Darker background for steps */
+            padding: 20px 25px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            padding-left: 60px; /* Space for step number */
+        }
+        
+        .anydesk-steps ol li::before {
+            counter-increment: anydesk-counter; /* Increment counter */
+            content: counter(anydesk-counter); /* Display counter */
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #007bff;
+            color: white;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2em; /* Reduzido de 2.5em */
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .anydesk-steps ol li strong {
+            color: #8be9fd;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        /* --- Contact Section --- */
+        .contact-section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .contact-section p {
+            font-size: 1.2em;
+            color: #c9d1d9;
+            margin-bottom: 30px;
+        }
+
+        .main-whatsapp-cta {
+            background-color: #25D366;
+            color: white;
+            padding: 22px 50px;
+            border-radius: 15px;
             text-decoration: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); /* Sombra mais escura */
+            font-size: 1.8em;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            display: inline-flex; /* Use flex for icon alignment */
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        .main-whatsapp-cta:hover {
+            background-color: #1DA851;
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.7);
+        }
+
+        .main-whatsapp-cta span.icon {
+            font-size: 1.2em; /* Adjust icon size relative to text */
+        }
+
+        /* --- Disclaimer & Footer --- */
+        .disclaimer {
+            font-size: 0.9em;
+            color: #8b949e;
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid #2d3748;
+            margin-top: 40px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 0;
+            color: #6e7681;
+            font-size: 0.85em;
+            border-top: 1px solid #2d3748;
+        }
+
+        /* --- Floating WhatsApp Button --- */
+        .whatsapp-float-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
             z-index: 1000;
-            transition: transform 0.3s ease-in-out;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
         }
-        .whatsapp-button:hover {
-            transform: scale(1.1);
+
+        .whatsapp-float-btn:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.8);
         }
-        .whatsapp-button span {
-            line-height: 1;
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 992px) {
+            header h1 {
+                font-size: 2.8em;
+            }
+            .urgent-alert {
+                font-size: 1.2em;
+                padding: 15px 20px;
+            }
+            .header-main-btn {
+                font-size: 1.4em;
+                padding: 18px 35px;
+            }
+            nav ul {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            header {
+                padding: 30px 0 50px;
+            }
+            header .logo {
+                max-width: 200px;
+            }
+            header h1 {
+                font-size: 2.4em;
+            }
+            header p {
+                font-size: 1.1em;
+            }
+            .urgent-alert {
+                font-size: 1.1em;
+                padding: 12px 15px;
+            }
+            .header-main-btn {
+                font-size: 1.2em;
+                padding: 15px 30px;
+            }
+
+            nav .container {
+                flex-wrap: wrap; /* Allow title and toggle to wrap if needed */
+                justify-content: space-between;
+            }
+            nav .nav-title {
+                display: block; /* Show menu title on mobile */
+                margin-right: auto; /* Push toggle to right */
+            }
+            nav .menu-toggle {
+                display: block; /* Show hamburger icon */
+            }
+            nav ul {
+                flex-direction: column; /* Stack vertically for mobile dropdown */
+                width: 100%;
+                background-color: #1a202c; /* Background for dropdown */
+                border-top: 1px solid #0056b3;
+                box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+                position: absolute;
+                top: 100%; /* Position below nav bar */
+                left: 0;
+                padding: 10px 0;
+                display: none; /* Hidden by default */
+                border-radius: 0 0 8px 8px;
+            }
+            nav ul.active {
+                display: flex; /* Show when active */
+            }
+            nav ul li {
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid rgba(45, 55, 72, 0.5); /* Separator */
+            }
+            nav ul li:last-child {
+                border-bottom: none;
+            }
+            nav ul li a {
+                padding: 15px 0; /* Larger clickable area */
+            }
+
+            h2 {
+                font-size: 2.2em;
+                margin-bottom: 30px;
+            }
+            .card {
+                padding: 20px;
+            }
+            .card h3 {
+                font-size: 1.6em;
+            }
+            .card ul li {
+                font-size: 1em;
+            }
+            .anydesk-section {
+                padding: 30px;
+            }
+            .anydesk-section h3 {
+                font-size: 1.8em;
+            }
+            .anydesk-section p {
+                font-size: 1em;
+            }
+            .anydesk-download-btn {
+                font-size: 1.3em;
+                padding: 15px 30px;
+            }
+            .anydesk-steps ol li {
+                padding: 15px 20px 15px 50px;
+            }
+            .whatsapp-float-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 2.5em;
+                bottom: 20px;
+                left: 20px;
+            }
+            .main-whatsapp-cta {
+                font-size: 1.5em;
+                padding: 18px 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.9em;
+            }
+            header p {
+                font-size: 0.95em;
+            }
+            .urgent-alert {
+                font-size: 0.95em;
+                padding: 10px;
+            }
+            .header-main-btn {
+                font-size: 1.1em;
+                padding: 12px 25px;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .card h3 {
+                font-size: 1.4em;
+            }
+            .anydesk-section h3 {
+                font-size: 1.6em;
+            }
+            .anydesk-download-btn {
+                font-size: 1.1em;
+                padding: 12px 25px;
+            }
+            .anydesk-steps ol li {
+                font-size: 0.95em;
+            }
+            .main-whatsapp-cta {
+                font-size: 1.3em;
+                padding: 15px 25px;
+                width: 90%; /* Make it almost full width */
+                box-sizing: border-box;
+            }
+            .whatsapp-float-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 2.2em;
+                bottom: 15px;
+                left: 15px;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header id="inicio">
+    <header id="inicio">
+        <div class="container">
             <img src="logo.png" alt="Logo bithostel TI" class="logo">
-            <h1>🚨 Suporte Remoto 24h 📱💻</h1>
-            <div class="urgent-alert">
-                ✨ **Nosso técnico está disponível AGORA para suporte remoto!** ✨
-            </div>
+            <h1>🚨 Suporte Remoto & <br> Emergência 📱💻<br> 24h</h1>
+            
             <p>Problemas críticos com seu computador ou smartphone Android? A **bithostel TI** oferece **suporte remoto 24 horas por dia**, pronto para atender suas emergências de TI.</p>
-            <p class="about-text">A bithostel TI, fundada em 2011 em Santos, Brasil, construiu uma sólida trajetória no mercado de tecnologia da informação, expandindo constantemente seu portfólio de serviços.</p>
-            <a href="index.html">Website Principal</a>
-        </header>
 
-        <nav>
-            <div class="nav-title">Menu Principal</div>
+            <div class="urgent-alert">
+                <span>✨</span> **Nosso técnico está disponível AGORA para suporte remoto!** <span>✨</span>
+            </div>
+
+            <a href="https://wa.me/5513997853113?text=Preciso%20de%20suporte%20remoto%20de%20emerg%C3%AAncia%20e%20já%20estou%20com%20o%20AnyDesk%20pronto." target="_blank" rel="noopener noreferrer" class="header-main-btn">
+                Fale com Nosso Técnico AGORA!
+            </a>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <div class="nav-title">Navegação</div>
             <div class="menu-toggle" id="mobile-menu">
                 &#9776; </div>
             <ul id="main-nav">
                 <li><a href="#inicio">Início</a></li>
                 <li><a href="index.html">Website Principal</a></li>
                 <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#quando-possivel">Quando é Possível?</a></li>
-                <li><a href="#anydesk">Preparando o Acesso Remoto</a></li>
+                <li><a href="#quando-possivel">Quando Podemos Ajudar?</a></li>
+                <li><a href="#anydesk">Acesso Remoto</a></li>
                 <li><a href="#contato">Contato 24h</a></li>
             </ul>
-        </nav>
+        </div>
+    </nav>
 
-        <div class="section" id="servicos">
-            <h2>Serviços que Oferecemos Remotamente (incluindo Emergências):</h2>
-            <ul>
-                <li><strong>Computadores (Windows/Linux):</strong>
-                    Remoção urgente de vírus e malwares, diagnóstico e reparo de sistema operacional corrompido, configuração de rede e internet, instalação e configuração de softwares essenciais, otimização de desempenho e backup de dados (quando o sistema permite acesso).
-                </li>
-                <li><strong>Smartphones Android:</strong>
-                    Remoção urgente de vírus e spyware, otimização de desempenho, configuração de aplicativos, auxílio com problemas críticos de conectividade (Wi-Fi/4G), gerenciamento de armazenamento e orientação para uso de funções essenciais.
-                </li>
-            </ul>
-        </div>
+    <main class="container">
+        <section id="servicos" class="section-padding">
+            <h2>Serviços de Suporte Remoto que Oferecemos:</h2>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Computadores (Windows/Linux)</h3>
+                    <ul>
+                        <li>Remoção urgente de vírus e malwares.</li>
+                        <li>Diagnóstico e reparo de sistema operacional corrompido.</li>
+                        <li>Configuração de rede e internet.</li>
+                        <li>Instalação e configuração de softwares essenciais.</li>
+                        <li>Otimização de desempenho.</li>
+                        <li>Backup de dados (quando o sistema permite acesso).</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Smartphones Android</h3>
+                    <ul>
+                        <li>Remoção urgente de vírus e spyware.</li>
+                        <li>Otimização de desempenho.</li>
+                        <li>Configuração de aplicativos.</li>
+                        <li>Auxílio com problemas críticos de conectividade (Wi-Fi/4G).</li>
+                        <li>Gerenciamento de armazenamento.</li>
+                        <li>Orientação para uso de funções essenciais.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
         ---
-        <div class="section" id="quando-possivel">
-            <h2>Quando o Suporte Remoto de Emergência é Possível?</h2>
-            <p>Nosso suporte remoto 24h é ideal para resolver problemas urgentes que não exigem a presença física de um técnico. Ele é possível quando:</p>
-            <ul>
-                <li>Seu **computador** ou **smartphone** liga e consegue acessar a internet.</li>
-                <li>Você consegue baixar e executar o programa **AnyDesk** (ou similar).</li>
-                <li>O problema é **relacionado a software** (erros críticos de sistema, infecção por vírus/malware, falhas de aplicativos que impedem o uso).</li>
-                <li>Você precisa de **orientação imediata** para restaurar a funcionalidade.</li>
-            </ul>
-            <p>**Atenção:** Problemas de hardware (peças queimadas, tela quebrada, etc.) ou quando o dispositivo não liga ou não consegue estabelecer conexão com a internet, geralmente exigem atendimento presencial e não podem ser resolvidos remotamente.</p>
-        </div>
+
+        <section id="quando-possivel" class="section-padding">
+            <h2>Quando o Suporte Remoto é a Solução Ideal?</h2>
+            <p style="text-align: center; font-size: 1.15em; color: #c9d1d9; max-width: 800px; margin: 0 auto 30px;">
+                Nosso suporte remoto 24h é perfeito para resolver problemas urgentes que não necessitam da presença física de um técnico. Ele é possível quando:
+            </p>
+            <div class="grid-container">
+                <div class="card">
+                    <h3>Dispositivo Funcional</h3>
+                    <ul>
+                        <li>Seu **computador** ou **smartphone** liga.</li>
+                        <li>Consegue acessar a internet.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Problemas de Software</h3>
+                    <ul>
+                        <li>Erros críticos de sistema.</li>
+                        <li>Infecção por vírus/malware.</li>
+                        <li>Falhas de aplicativos que impedem o uso.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Acesso Remoto</h3>
+                    <ul>
+                        <li>Você consegue baixar e executar o programa **AnyDesk** (ou similar).</li>
+                        <li>Precisão de **orientação imediata** para restaurar a funcionalidade.</li>
+                    </ul>
+                </div>
+            </div>
+            <p style="text-align: center; font-size: 1em; color: #ff6b6b; font-weight: 600; margin-top: 40px;">
+                <strong>Atenção:</strong> Problemas de hardware (peças queimadas, tela quebrada, etc.) ou quando o dispositivo não liga ou não consegue estabelecer conexão com a internet, geralmente exigem atendimento presencial e não podem ser resolvidos remotamente.
+            </p>
+        </section>
+
         ---
-        <div class="section anydesk-info" id="anydesk">
+
+        <section id="anydesk" class="section-padding anydesk-section">
             <h3>Preparando o Acesso Remoto de Emergência com AnyDesk</h3>
-            <p>Para agilizar o atendimento de emergência, utilize o **AnyDesk**. É nossa ferramenta preferencial, rápida, segura e nos permite acessar seu dispositivo para solucionar o problema.</p>
-            <a href="https://anydesk.com/pt/downloads" target="_blank" class="download-button">
+            <p>Para agilizar seu atendimento, utilize o **AnyDesk**. É nossa ferramenta preferencial, rápida, segura e nos permite acessar seu dispositivo para solucionar o problema.</p>
+
+            <a href="https://anydesk.com/pt/downloads" target="_blank" rel="noopener noreferrer" class="anydesk-download-btn">
                 Baixar AnyDesk Agora
             </a>
-            <p style="margin-top: 20px;">Ou procure por "AnyDesk" na Google Play Store para Android.</p>
+            <p style="font-size: 0.95em; color: #a0a8b3;">(Ou procure por "AnyDesk" na Google Play Store para Android.)</p>
 
             <div class="anydesk-steps">
-                <h3>Como Iniciar uma Sessão de Suporte Remoto:</h3>
+                <h4>Como Iniciar uma Sessão de Suporte Remoto:</h4>
                 <ol>
                     <li><strong>Baixe e Execute o AnyDesk:</strong> Clique no botão acima para baixar o AnyDesk. No computador, execute o arquivo baixado. No Android, instale o app da Play Store e abra-o. Não é necessário instalar, apenas executar para suporte remoto.</li>
                     <li><strong>Informe Seu ID:</strong> Após abrir o AnyDesk, você verá um número de 9 ou 10 dígitos (seu "ID AnyDesk" ou "Este Posto de Trabalho").</li>
@@ -377,42 +711,53 @@
                     <li><strong>Permita a Conexão:</strong> Quando solicitarmos a conexão, uma janela de permissão aparecerá. Clique em "Aceitar" para nos dar acesso.</li>
                 </ol>
             </div>
-        </div>
+        </section>
+
         ---
-        <div class="contact-info" id="contato">
+
+        <section id="contato" class="section-padding contact-section">
             <h2>Pronto para Receber Suporte Remoto? Fale Conosco 24h!</h2>
             <p>Para agilizar seu atendimento de emergência, envie uma mensagem para nosso WhatsApp:</p>
-            <a href="https://wa.me/5513997853113?text=Preciso%20de%20suporte%20remoto%20de%20emerg%C3%AAncia%20e%20já%20estou%20com%20o%20AnyDesk%20pronto." target="_blank" class="whatsapp-contact-button">
-                💬 WhatsApp 24h bithostel TI (Emergências)
+            <a href="https://wa.me/5513997853113?text=Preciso%20de%20suporte%20remoto%20de%20emerg%C3%AAncia%20e%20já%20estou%20com%20o%20AnyDesk%20pronto." target="_blank" rel="noopener noreferrer" class="main-whatsapp-cta">
+                <span class="icon">&#x1F4AC;</span> WhatsApp 24h bithostel TI
             </a>
-            <p>Não espere! Nosso técnico está **pronto para te atender AGORA** para casos de suporte remoto elegíveis.</p>
-        </div>
-        ---
-        <div class="disclaimer">
+            <p style="font-size: 1.1em; color: #66b3ff; font-weight: 500; margin-top: 30px;">
+                Não espere! Nosso técnico está **pronto para te atender AGORA** para casos de suporte remoto elegíveis.
+            </p>
+        </section>
+    </main>
+
+    <div class="disclaimer">
+        <div class="container">
             <p><strong>Importante:</strong> Nosso suporte remoto 24h é focado na agilidade para resolver problemas de software que permitam a conexão. A bithostel TI não se responsabiliza por falhas de hardware ou por problemas que impeçam o estabelecimento da conexão remota.</p>
             <p>Para dúvidas sobre outros serviços, agendamentos para problemas não urgentes ou atendimentos presenciais, entre em contato em horário comercial.</p>
         </div>
-        ---
-        <footer>
-            <p>&copy; 2025 bithostel TI. Todos os direitos reservados.</p>
-        </footer>
     </div>
 
-    <a href="https://wa.me/5513997853113?text=Ol%C3%A1!%20Preciso%20de%20suporte%20remoto%20de%20emerg%C3%AAncia." class="whatsapp-button" target="_blank">
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 bithostel TI. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5513997853113?text=Ol%C3%A1!%20Preciso%20de%20suporte%20remoto%20de%20emerg%C3%AAncia." class="whatsapp-float-btn" target="_blank" rel="noopener noreferrer">
         <span>&#x1F4AC;</span>
     </a>
+
     <script>
         document.getElementById('mobile-menu').addEventListener('click', function() {
             var nav = document.getElementById('main-nav');
-            nav.classList.toggle('active'); // Use toggle for cleaner activation/deactivation
+            nav.classList.toggle('active');
         });
 
-        // Add event listener to close menu when a link is clicked
+        // Close mobile menu when a link is clicked
         var navLinks = document.querySelectorAll('#main-nav a');
         navLinks.forEach(function(link) {
             link.addEventListener('click', function() {
                 var nav = document.getElementById('main-nav');
-                nav.classList.remove('active'); // Remove 'active' class to close the menu
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                }
             });
         });
     </script>
