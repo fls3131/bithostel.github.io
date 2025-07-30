@@ -195,6 +195,13 @@
             font-weight: 700;
             letter-spacing: -0.5px;
         }
+        h4 {
+            color: #8be9fd;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
 
         .grid-container {
             display: grid;
@@ -247,6 +254,37 @@
             top: 0;
             font-weight: bold;
             font-size: 1.1em;
+        }
+        .text-block {
+            background-color: #1a202c;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border: 1px solid #2d3748;
+            margin-bottom: 30px;
+        }
+        .text-block p {
+            font-size: 1.1em;
+            color: #c9d1d9;
+            margin-bottom: 15px;
+        }
+        .text-block h3 {
+            color: #66b3ff;
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .text-block ul {
+            list-style: disc; /* Use disc for general lists */
+            margin-left: 20px;
+        }
+        .text-block ul li {
+            margin-bottom: 8px;
+            color: #e0e6ed;
+            font-size: 1em;
+            background: none; /* Override card li style */
+            box-shadow: none; /* Override card li style */
+            padding: 0; /* Override card li style */
         }
 
         /* --- AnyDesk Section --- */
@@ -593,12 +631,28 @@
     </style>
 </head>
 <body>
+	    <nav>
+        <div class="container">
+            <div class="nav-title">Navegação</div>
+            <div class="menu-toggle" id="mobile-menu">
+                &#9776; </div>
+            <ul id="main-nav">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="index.html">Website</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#quando-possivel">Podemos Ajudar?</a></li>
+                <li><a href="#anydesk">Iniciar Acesso</a></li>
+                <li><a href="#contato">Contato 24h</a></li>
+            </ul>
+        </div>
+    </nav>
     <header id="inicio">
         <div class="container">
             <img src="logo.png" alt="Logo bithostel TI" class="logo">
+            <p>bithostel TI - cnpj - 14.406.585/0001-59</p>
             <h1>🚨 Suporte Remoto & <br> Emergência 📱💻<br> 24h</h1>
-            
-            <p>Problemas críticos com seu computador ou smartphone Android? A **bithostel TI** oferece **suporte remoto 24 horas por dia**, pronto para atender suas emergências de TI.</p>
+            <p>Problemas críticos com seu computador ou smartphone Android? A **bithostel TI** oferece **suporte remoto 24 horas por dia**, pronta para atender suas emergências de TI.</p>
 
             <div class="urgent-alert">
                 <span>✨</span> **Nosso técnico está disponível AGORA para suporte remoto!** <span>✨</span>
@@ -610,23 +664,22 @@
         </div>
     </header>
 
-    <nav>
-        <div class="container">
-            <div class="nav-title">Navegação</div>
-            <div class="menu-toggle" id="mobile-menu">
-                &#9776; </div>
-            <ul id="main-nav">
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="index.html">Website Principal</a></li>
-                <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#quando-possivel">Quando Podemos Ajudar?</a></li>
-                <li><a href="#anydesk">Acesso Remoto</a></li>
-                <li><a href="#contato">Contato 24h</a></li>
-            </ul>
-        </div>
-    </nav>
+
 
     <main class="container">
+        ---
+        <section id="sobre" class="section-padding">
+            <h2>A Trajetória da bithostel TI: Desde 2011</h2>
+            <div class="text-block">
+                <p>A **bithostel TI**, fundada em **2011 em Santos, Brasil**, construiu uma sólida trajetória no mercado de tecnologia da informação, expandindo constantemente seu portfólio de serviços.</p>
+                <p>Desde o seu início, a empresa se especializou em soluções **Open Source**, oferecendo expertise em Linux para desktops e servidores, além de consultoria em segurança digital. Ao longo dos anos, a bithostel TI ampliou sua atuação, incorporando assistência técnica especializada para computadores e smartphones Android, atendendo às crescentes demandas do mercado.</p>
+                <p>Além disso, a empresa se destacou na venda e implementação de softwares antivírus, reforçando seu compromisso com a segurança digital de seus clientes. Com uma visão completa para a presença digital de seus clientes, a bithostel TI também se consolidou no **desenvolvimento de websites**, criando soluções personalizadas que abrangem desde sites institucionais e portfólios até plataformas de e-commerce e blogs, garantindo uma presença online eficaz e profissional.</p>
+                <p>Com foco em provisionamento, implantação e administração de hardware e software de rede, a bithostel TI gerencia firewalls, roteadores, switches e VPNs, garantindo a segurança e eficiência da infraestrutura de tecnologia da informação de seus clientes, com um serviço abrangente que vai da infraestrutura ao suporte final ao usuário e à presença digital.</p>
+            </div>
+        </section>
+
+        ---
+
         <section id="servicos" class="section-padding">
             <h2>Serviços de Suporte Remoto que Oferecemos:</h2>
             <div class="grid-container">
@@ -655,8 +708,7 @@
             </div>
         </section>
 
-        ---
-
+        
         <section id="quando-possivel" class="section-padding">
             <h2>Quando o Suporte Remoto é a Solução Ideal?</h2>
             <p style="text-align: center; font-size: 1.15em; color: #c9d1d9; max-width: 800px; margin: 0 auto 30px;">
@@ -682,7 +734,7 @@
                     <h3>Acesso Remoto</h3>
                     <ul>
                         <li>Você consegue baixar e executar o programa **AnyDesk** (ou similar).</li>
-                        <li>Precisão de **orientação imediata** para restaurar a funcionalidade.</li>
+                        <li>Precisa de **orientação imediata** para restaurar a funcionalidade.</li>
                     </ul>
                 </div>
             </div>
