@@ -61,6 +61,22 @@
      <ror:resourceOf>sitemap</ror:resourceOf>
 </item>
 <item>
+     <link>https://bithostel.com.br/remote.html</link>
+     <title>Suporte Remoto 24h e Emergência - bithostel TI</title>
+     <description>Suporte Remoto 24h e Emergência - bithostel TI</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://bithostel.com.br/android.html</link>
+     <title>Backup e Formatação de Smartphone Android - bithostel TI</title>
+     <description>Backup e Formatação de Smartphone Android - bithostel TI</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
      <link>https://bithostel.com.br/VPN.html</link>
      <title>bithostel TI - Segurança Digital - Firewall + VPN no Brasil</title>
      <description>bithostel TI - Segurança Digital - Firewall + VPN no Brasil</description>
