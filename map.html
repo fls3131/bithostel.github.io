@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte Remoto 24h e Emergência - bithostel TI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="icon" type="image/png" href="assets/logo/favicon.png">
+
+    <style>
+        /* Base Styles & Reset */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #0e1217; /* Very dark blue-gray */
+            color: #e0e6ed; /* Light text for readability */
+            line-height: 1.7;
+            scroll-behavior: smooth;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+
+        .container {
+            max-width: 1000px; /* Wider container */
+            margin: 0 auto; /* Full width on smaller screens */
+            padding: 0 20px;
+        }
+
+        /* --- Header & Hero Section --- */
+        header {
+            background-color: #1a202c; /* Darker blue for header background */
+            padding: 40px 0 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden; /* For background effects */
+            border-bottom: 5px solid #007bff; /* Strong accent line */
+        }
+
+        header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        header .logo {
+            max-width: 250px; /* Larger logo */
+            height: auto;
+            margin-bottom: 30px;
+            filter: drop-shadow(0 0 10px rgba(0, 123, 255, 0.6));
+        }
+
+        header h1 {
+            color: #66b3ff; /* Bright blue for main title */
+            font-size: 1.2em; /* Much larger title */
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+        }
+
+        header p {
+            font-size: 1.2em;
+            color: #c9d1d9;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        .urgent-alert {
+            background-color: #e63946; /* Vibrant red */
+            color: white;
+            padding: 18px 30px;
+            border-radius: 10px;
+            margin: 30px auto;
+            max-width: 600px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.4em;
+            box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4);
+            animation: pulse-pro 2s infinite ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        @keyframes pulse-pro {
+            0% { transform: scale(1); box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4); }
+            50% { transform: scale(1.02); box-shadow: 0 12px 25px rgba(230, 57, 70, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 8px 20px rgba(230, 57, 70, 0.4); }
+        }
+
+        .header-main-btn {
+            background-color: #25D366; /* WhatsApp Green */
+            color: white;
+            padding: 20px 45px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 1.6em;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+            margin-top: 20px;
+        }
+
+        .header-main-btn:hover {
+            background-color: #1DA851;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+        }
+
+        /* --- Navigation --- */
+        nav {
+            background-color: #0d1217; /* Matches body background */
+            padding: 15px 0;
+            border-bottom: 1px solid #0056b3;
+            position: sticky; /* Sticky nav */
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: flex-start; /* Align menu to the left */
+            align-items: center;
+            gap: 30px; /* Space between items */
+        }
+
+        nav .nav-title {
+            color: #66b3ff;
+            font-size: 1.3em;
+            font-weight: 600;
+            display: none; /* Hidden on desktop, shown on mobile */
+        }
+
+        nav .menu-toggle {
+            display: none; /* Hidden on desktop */
+            font-size: 2.2em;
+            color: #66b3ff;
+            cursor: pointer;
+            margin-left: auto; /* Push to the right */
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap; /* Allow wrapping on smaller desktop screens */
+            gap: 25px;
+        }
+
+        nav ul li a {
+            color: #e0e6ed;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 15px;
+            transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #007bff;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            transform: scaleX(1);
+        }
+
+        nav ul li a:hover {
+            color: #ffffff;
+            background-color: rgba(0, 123, 255, 0.15); /* Subtle hover background */
+        }
+
+        /* --- Section Styling (Card-based) --- */
+        .section-padding {
+            padding: 60px 0;
+        }
+
+        h2 {
+            color: #66b3ff;
+            font-size: 2.8em;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        h4 {
+            color: #8be9fd;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+            gap: 30px;
+            padding-bottom: 40px;
+        }
+
+        .card {
+            background-color: #1a202c; /* Card background */
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            padding: 25px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid #2d3748;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            border-color: #007bff; /* Highlight on hover */
+        }
+
+        .card h3 {
+            color: #8be9fd; /* Light blue for card titles */
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .card ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+            color: #e0e6ed;
+            font-size: 1.05em;
+        }
+
+        .card ul li::before {
+            content: '✓'; /* Checkmark icon */
+            color: #25D366; /* Green checkmark */
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .text-block {
+            background-color: #1a202c;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            padding: 30px;
+            border: 1px solid #2d3748;
+            margin-bottom: 30px;
+        }
+        .text-block p {
+            font-size: 1.1em;
+            color: #c9d1d9;
+            margin-bottom: 15px;
+        }
+        .text-block h3 {
+            color: #66b3ff;
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        .text-block ul {
+            list-style: disc; /* Use disc for general lists */
+            margin-left: 20px;
+        }
+        .text-block ul li {
+            margin-bottom: 8px;
+            color: #e0e6ed;
+            font-size: 1em;
+            background: none; /* Override card li style */
+            box-shadow: none; /* Override card li style */
+            padding: 0; /* Override card li style */
+        }
+
+        /* --- AnyDesk Section --- */
+        .anydesk-section {
+            background-color: #1a202c;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            margin-top: 40px;
+            border: 1px solid #2d3748;
+        }
+
+        .anydesk-section h3 {
+            color: #66b3ff;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .anydesk-section p {
+            font-size: 1.1em;
+            color: #c9d1d9;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .anydesk-download-btn {
+            background-color: #ff6b6b; /* Soft red for download */
+            color: white;
+            padding: 18px 40px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1.5em;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 6px 15px rgba(255, 107, 107, 0.4);
+            margin-bottom: 20px;
+        }
+
+        .anydesk-download-btn:hover {
+            background-color: #e55a5a;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.6);
+        }
+
+        .anydesk-steps ol {
+            list-style: none;
+            padding: 0;
+            margin: 40px auto 0;
+            max-width: 700px;
+            text-align: left;
+            counter-reset: anydesk-counter; /* Reset counter */
+        }
+
+        .anydesk-steps ol li {
+            background-color: #2d3748; /* Darker background for steps */
+            padding: 20px 25px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            padding-left: 60px; /* Space for step number */
+        }
+        
+        .anydesk-steps ol li::before {
+            counter-increment: anydesk-counter; /* Increment counter */
+            content: counter(anydesk-counter); /* Display counter */
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #007bff;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .anydesk-steps ol li strong {
+            color: #8be9fd;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 1.1em;
+        }
+
+        /* --- Contact Section --- */
+        .contact-section {
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .contact-section p {
+            font-size: 1.2em;
+            color: #c9d1d9;
+            margin-bottom: 30px;
+        }
+
+        .main-whatsapp-cta {
+            background-color: #25D366;
+            color: white;
+            padding: 22px 50px;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 1.8em;
+            font-weight: 700;
+            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+            display: inline-flex; /* Use flex for icon alignment */
+            align-items: center;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
+        }
+
+        .main-whatsapp-cta:hover {
+            background-color: #1DA851;
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.7);
+        }
+
+        .main-whatsapp-cta span.icon {
+            font-size: 1.2em; /* Adjust icon size relative to text */
+        }
+
+        /* --- Disclaimer & Footer --- */
+        .disclaimer {
+            font-size: 0.9em;
+            color: #8b949e;
+            text-align: center;
+            padding: 30px 0;
+            border-top: 1px solid #2d3748;
+            margin-top: 40px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px 0;
+            color: #6e7681;
+            font-size: 0.85em;
+            border-top: 1px solid #2d3748;
+        }
+
+        /* --- Floating WhatsApp Button --- */
+        .whatsapp-float-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3em;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+            z-index: 1000;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        }
+
+        .whatsapp-float-btn:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.8);
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 992px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            .urgent-alert {
+                font-size: 1.2em;
+                padding: 15px 20px;
+            }
+            .header-main-btn {
+                font-size: 1.4em;
+                padding: 18px 35px;
+            }
+            nav ul {
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 15px;
+            }
+            header {
+                padding: 30px 0 50px;
+            }
+            header .logo {
+                max-width: 200px;
+            }
+            header h1 {
+                font-size: 1.4em;
+            }
+            header p {
+                font-size: 1.1em;
+            }
+            .urgent-alert {
+                font-size: 1.1em;
+                padding: 12px 15px;
+            }
+            .header-main-btn {
+                font-size: 1.2em;
+                padding: 15px 30px;
+            }
+
+            nav .container {
+                flex-wrap: wrap; /* Allow title and toggle to wrap if needed */
+                justify-content: space-between;
+            }
+            nav .nav-title {
+                display: block; /* Show menu title on mobile */
+                margin-right: auto; /* Push toggle to right */
+            }
+            nav .menu-toggle {
+                display: block; /* Show hamburger icon */
+            }
+            nav ul {
+                flex-direction: column; /* Stack vertically for mobile dropdown */
+                width: 100%;
+                background-color: #1a202c; /* Background for dropdown */
+                border-top: 1px solid #0056b3;
+                box-shadow: 0 8px 15px rgba(0,0,0,0.4);
+                position: absolute;
+                top: 100%; /* Position below nav bar */
+                left: 0;
+                padding: 10px 0;
+                display: none; /* Hidden by default */
+                border-radius: 0 0 8px 8px;
+            }
+            nav ul.active {
+                display: flex; /* Show when active */
+            }
+            nav ul li {
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid rgba(45, 55, 72, 0.5); /* Separator */
+            }
+            nav ul li:last-child {
+                border-bottom: none;
+            }
+            nav ul li a {
+                padding: 15px 0; /* Larger clickable area */
+            }
+
+            h2 {
+                font-size: 2.2em;
+                margin-bottom: 30px;
+            }
+            .card {
+                padding: 20px;
+            }
+            .card h3 {
+                font-size: 1.6em;
+            }
+            .card ul li {
+                font-size: 1em;
+            }
+            .anydesk-section {
+                padding: 30px;
+            }
+            .anydesk-section h3 {
+                font-size: 1.8em;
+            }
+            .anydesk-section p {
+                font-size: 1em;
+            }
+            .anydesk-download-btn {
+                font-size: 1.3em;
+                padding: 15px 30px;
+            }
+            .anydesk-steps ol li {
+                padding: 15px 20px 15px 50px;
+            }
+            .whatsapp-float-btn {
+                width: 60px;
+                height: 60px;
+                font-size: 2.5em;
+                bottom: 20px;
+                left: 20px;
+            }
+            .main-whatsapp-cta {
+                font-size: 1.5em;
+                padding: 18px 35px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.9em;
+            }
+            header p {
+                font-size: 0.95em;
+            }
+            .urgent-alert {
+                font-size: 0.95em;
+                padding: 10px;
+            }
+            .header-main-btn {
+                font-size: 1.1em;
+                padding: 12px 25px;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .card h3 {
+                font-size: 1.4em;
+            }
+            .anydesk-section h3 {
+                font-size: 1.6em;
+            }
+            .anydesk-download-btn {
+                font-size: 1.1em;
+                padding: 12px 25px;
+            }
+            .anydesk-steps ol li {
+                font-size: 0.95em;
+            }
+            .main-whatsapp-cta {
+                font-size: 1.3em;
+                padding: 15px 25px;
+                width: 90%; /* Make it almost full width */
+                box-sizing: border-box;
+            }
+            .whatsapp-float-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 2.2em;
+                bottom: 15px;
+                left: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+	    <nav>
+        <div class="container">
+            <div class="nav-title">bithostel TI</div>
+            <div class="menu-toggle" id="mobile-menu">
+                &#9776; </div>
+            <ul id="main-nav">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#website">Websites</a></li>
+            </ul>
+        </div>
+    </nav>
+    <header id="inicio">
+        <div class="container">
+			<img src="logo.png" alt="Logo bithostel TI" class="logo">
+            <p>bithostel TI - cnpj - 14.406.585/0001-59</p>
+            </a>
+        </div>
+    </header>
+
+
+
+    <main class="container">
+		---
+        <section id="website" class="section-padding">
+            <h2>bithostel TI: Websites</h2>
+            <div class="text-block">
+                <p>A **bithostel TI**, tem seu website principal com as políticas, informações e demais websites com serviços, produtos que podem ser acessados em:</p>
+                                		<ul class="level-0">           
+<li class="lpage"><a href="https://bithostel.com.br/" class="header-main-btn" title="bithostel TI - Serviços de Informática e Tecnologia da Informação ">bithostel TI - Serviços de Informática e Tecnologia da Informação </a></li>
+<li class="lpage"><a href="https://bithostel.com.br/suporte.html" class="header-main-btn" title="bithostel TI - Assistência Técnica de Informática">bithostel TI - Assistência Técnica de Informática</a></li>
+<li class="lpage"><a href="https://bithostel.com.br/website.html" class="header-main-btn" title="bithostel TI - Venda de Websites e Registro de Domínio .br">bithostel TI - Venda de Websites e Registro de Domínio .br</a></li>
+<li class="lpage"><a href="https://bithostel.com.br/curso02.html" class="header-main-btn" title="Curso Linux: Do Básico ao Avançado">Curso Linux: Do Básico ao Avançado</a></li>
+<li class="lpage"><a href="https://bithostel.com.br/cloud.html" class="header-main-btn" title="Seu Novo Computador na Nuvem">Seu Novo Computador na Nuvem</a></li>
+<li class="lpage"><a href="https://bithostel.com.br/remote.html" class="header-main-btn" title="Suporte Remoto 24h e Emergência - bithostel TI">Suporte Remoto 24h e Emergência - bithostel TI</a></li>
+<li class="lpage"><a href="https://bithostel.com.br/android.html" class="header-main-btn" title="Backup e Formatação de Smartphone Android - bithostel TI">Backup e Formatação de Smartphone Android - bithostel TI</a></li>
+<li class="lpage"><a href="https://bithostel.com.br/VPN.html" class="header-main-btn" title="bithostel TI - Segurança Digital - Firewall + VPN no Brasil">bithostel TI - Segurança Digital - Firewall + VPN no Brasil</a></li>
+<li class="lpage"><a href="https://bithostel.com.br/smadav.html" class="header-main-btn" title="Smadav Antivírus - Proteção Leve e Eficaz">Smadav Antivírus - Proteção Leve e Eficaz</a></li>
+</ul>
+            </div>
+        </section>
+       ---
+      
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 bithostel TI. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5513997853113?text=Ol%C3%A1!%20Preciso%20de%20suporte%20remoto%20de%20emerg%C3%AAncia." class="whatsapp-float-btn" target="_blank" rel="noopener noreferrer">
+        <span>&#x1F4AC;</span>
+    </a>
+
+    <script>
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            var nav = document.getElementById('main-nav');
+            nav.classList.toggle('active');
+        });
+
+        // Close mobile menu when a link is clicked
+        var navLinks = document.querySelectorAll('#main-nav a');
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                var nav = document.getElementById('main-nav');
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>
