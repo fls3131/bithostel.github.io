@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Antivírus Seguro - Proteja Seu Computador</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: #0078d7;
+      color: white;
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.2rem;
+    }
+
+    header p {
+      font-size: 1.1rem;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem 1rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .hero img {
+      max-width: 100%;
+      max-height: 300px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+    }
+
+    .hero h2 {
+      font-size: 1.8rem;
+      color: #0078d7;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+    }
+
+    .features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: space-around;
+      margin-bottom: 2rem;
+    }
+
+    .feature {
+      flex: 1 1 250px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      padding: 1.5rem;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+
+    .feature:hover {
+      transform: translateY(-5px);
+    }
+
+    .feature h3 {
+      color: #0078d7;
+      margin-bottom: 0.8rem;
+    }
+
+    .feature p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .price-card {
+      background: #0078d7;
+      color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      text-align: center;
+      max-width: 400px;
+      margin: 0 auto 2rem;
+      box-shadow: 0 4px 8px rgba(0,120,215,0.3);
+    }
+
+    .price-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .price-card .price {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+
+    .price-card p {
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-buy {
+      background: #ff8c00;
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+      padding: 0.75rem 2rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-buy:hover {
+      background: #e67e00;
+    }
+
+    footer {
+      background: #222;
+      color: #aaa;
+      text-align: center;
+      padding: 1rem 1rem;
+      font-size: 0.9rem;
+    }
+
+    /* Responsividade */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+
+      .features {
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      .price-card {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+	   <img src="logo.png" alt="Logo bithostel TI" class="logo">
+	<h1>Kit Segurança Máxima - 2 Antivírus<br>(Proteção Principal + Adicional de Segunda Camada)</h1>
+    <p>Proteção completa para seu computador com dois antivírus, um principal(Kaspersky ou Dr.Web) e uma proteção adicional de segunda camada com outro antivírus(smadav) + proteção USB e Mídias Portáteis.</p>
+    <p>A maioria dos antivírus não permite a instalação de outros produtos de segurança, pois são projetados para serem a proteção principal do seu PC. O Smadav, no entanto, é diferente. Ele foi desenvolvido como uma **camada de proteção adicional (segunda camada)*</p>
+  </header>
+
+  <main>
+    <section class="hero">
+      <img src="avs.png" alt="Ícone de antivírus" />
+      <img src="smadav.png" alt="Ícone de antivírus" />
+      
+
+      <h2>Segurança máxima contra vírus, ransomware, malwares, USB e ameaças online.</h2>
+      <p>Nossos antivírus mantém seus dispositivos protegidos em tempo real, com atualizações automáticas e suporte dedicado.</p>
+      <p>Na aquisição deste Kit, gratuitamente instalamos em seu computador, com a comodidade do nosso <a href="remote.html" target="__blank">Suporte Remoto.</a></p>
+    </section>
+
+    <section class="features">
+      <article class="feature">
+        <h3>Proteção em Tempo Real</h3>
+        <p>Bloqueie ameaças instantaneamente conforme elas aparecem, garantindo segurança contínua.</p>
+      </article>
+       <article class="feature">
+        <h3>Proteção Adicional</h3>
+        <p>Uma proteção de segunda camada garantindo mais segurança.</p>
+      </article>
+      <article class="feature">
+        <h3>Proteção USB</h3>
+        <p>Uma proteção contra infecção via dispositivos de armazenamento USB.</p>
+      </article>
+      <article class="feature">
+        <h3>Atualizações Automáticas</h3>
+        <p>Mantenha seu antivírus sempre atualizado contra as últimas ameaças, sem esforço.</p>
+      </article>
+      <article class="feature">
+        <h3>Suporte 24/7</h3>
+        <p>Equipe pronta para ajudar sempre que precisar, com atendimento rápido e eficiente.</p>
+      </article>
+    </section>
+
+    <section class="price-card">
+      <h3>Plano Anual</h3>
+      <div class="price">R$ 119,90</div>
+      <p>Proteja 1 dispositivo com licença válida por 12 meses</p>
+      <a href= <a href="https://wa.me/5513997853113?text=kIT%20de%20Segurança%20Máxima." target="_blank" rel="noopener noreferrer" class="main-whatsapp-cta">" class="btn-buy">Comprar Agora</a>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Antivírus Seguro - Todos os direitos reservados
+  </footer>
+</body>
+</html>
