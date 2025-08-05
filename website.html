@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="assets/logo/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
     <style>
         /* Estilos Gerais */
         body {
@@ -89,12 +88,10 @@
             right: 20px;
             z-index: 100;
         }
-
         /* Dropdown Menu Styles */
         .has-dropdown {
             position: relative; /* Essential for positioning the dropdown */
         }
-
         .dropdown-menu {
             display: none; /* Hidden by default */
             position: absolute;
@@ -109,11 +106,9 @@
             top: 100%; /* Position below the parent link */
             left: 0;
         }
-
         .dropdown-menu li {
             margin: 0; /* Override parent margin */
         }
-
         .dropdown-menu li a {
             color: #fff;
             padding: 12px 20px;
@@ -123,30 +118,25 @@
             transition: background-color 0.3s ease;
             white-space: nowrap; /* Prevent text wrapping */
         }
-
         .dropdown-menu li a:hover {
             background-color: #004085; /* Darker blue for hover */
             border-radius: 5px; /* Maintain rounded corners */
         }
-
         /* Show dropdown on hover for desktop */
         @media (min-width: 769px) {
             .has-dropdown:hover .dropdown-menu {
                 display: block;
             }
         }
-
         /* Styles for the dropdown arrow */
         .dropdown-arrow {
             margin-left: 8px;
             transition: transform 0.3s ease;
         }
-
         /* Rotate arrow when dropdown is active (mobile) */
         .has-dropdown.active .dropdown-arrow {
             transform: rotate(180deg);
         }
-
         /* Seções */
         section {
             padding: 40px 0;
@@ -220,6 +210,7 @@
         }
         /* Botão para download (azul) */
         .btn-main-action {
+            display: inline-block;
             background-color: #007bff; /* Azul principal */
             color: #fff;
             padding: 15px 30px;
@@ -530,7 +521,6 @@
                 text-align: left; /* Align text to left for mobile */
                 padding: 10px 20px; /* Adjust padding */
             }
-
             /* Mobile dropdown specific styles */
             .dropdown-menu {
                 position: static; /* Stack dropdown items normally */
@@ -541,11 +531,9 @@
                 border-radius: 0; /* Remove rounded corners for stacked menu */
                 display: none; /* Hide by default, controlled by JS */
             }
-
             .dropdown-menu li a {
                 padding: 10px 20px; /* Adjust padding for mobile sub-items */
             }
-
             .has-dropdown.active .dropdown-menu {
                 display: block; /* Show dropdown when parent has 'active' class */
             }
@@ -668,8 +656,7 @@
                     </div>
                     <div class="feature-item" id="features-hosting">
                         <h3><i class="fa-solid fa-server" style="color:#007bff;"></i> Hospedagem de Alta Performance</h3>
-                        <p>Garanta que seu site esteja sempre online e rápido com nossas soluções de hospedagem seguras.</p>
-                    </div>
+                        <p>Garanta que seu site esteja sempre online e rápido com nossas soluções de hospedagem seguras.</p>                    </div>
                     <div class="feature-item" id="features-rescue-web">
                         <h3><i class="fa-solid fa-arrows-rotate" style="color:#007bff;"></i> Resgate e Migração de Websites</h3>
                         <p>Recupere o acesso e a administração do seu domínio e site, mesmo sem contato com o desenvolvedor anterior.</p>
@@ -715,7 +702,7 @@
                     <p>Entenda as diferenças entre os tipos de website que oferecemos:</p>
                     <ul>
                         <li><i class="fa-solid fa-building"></i> <strong>Website Institucional:</strong> Ideal para apresentar sua empresa, serviços, portfólio e informações de contato. Foco em branding e comunicação.</li>
-                        <li><i class="fa-solid fa-store"></i> <strong>E-commerce (Loja Virtual):</strong> Perfeito para vender produtos e serviços online. Inclui catálogo de produtos, carrinho de compras, integração de pagamentos e gestão de pedidos.</li>
+                        <li><i class="fa-solid fa-store"></i> <strong>E-commerce (Loja Virtual):</strong> Perfeito para vender produtos e serviços online. Inclui catálogo de produtos, carrinho de compras, integração de pagamentos, integração com os principais marketplaces e gestão de pedidos</li>
                         <li><i class="fa-solid fa-blog"></i> <strong>Blog:</strong> Para criação e gestão de conteúdo, ideal para marketing de conteúdo, educação e engajamento com sua audiência.</li>
                     </ul>
                 </div>
@@ -747,7 +734,7 @@
                 <div class="pricing-table" id="plans-website">
                     <div class="price-card">
                         <h3><i class="fa-solid fa-file-alt"></i> Plano Essencial (Website)</h3>
-                        <div class="price">R$ 399,00</div>
+                        <div class="price">R$ 799,00</div>
                         <ul>
                             <li><i class="fa-solid fa-check"></i> Website Institucional (até 5 páginas)</li>
                             <li><i class="fa-solid fa-check"></i> Design Responsivo</li>
@@ -759,7 +746,7 @@
                     </div>
                     <div class="price-card">
                         <h3><i class="fa-solid fa-laptop"></i> Plano Profissional (Website)</h3>
-                        <div class="price">R$ 899,00</div>
+                        <div class="price">R$ 1.200,00</div>
                         <ul>
                             <li><i class="fa-solid fa-check"></i> Website Institucional Completo (até 10 páginas)</li>
                             <li><i class="fa-solid fa-check"></i> Design Responsivo Premium</li>
@@ -779,6 +766,7 @@
                             <li><i class="fa-solid fa-check"></i> Otimização SEO para E-commerce</li>
                             <li><i class="fa-solid fa-check"></i> Integração com Meios de Pagamento</li>
                             <li><i class="fa-solid fa-check"></i> Gestão de Estoque e Pedidos</li>
+                            <li><i class="fa-solid fa-check"></i> Emissão de Fatura e Nota Fiscal</li>
                             <li><i class="fa-solid fa-check"></i> Suporte Dedicado</li>
                         </ul>
                         <a href="https://wa.me/5513997853113?text=Olá! Gostaria de uma consultoria sobre o Plano E-commerce." class="btn"><i class="fa-brands fa-whatsapp"></i> Solicitar Orçamento</a>
@@ -823,7 +811,28 @@
                 </div>
             </div>
         </section>
+
+        <section id="integration">
+            <div class="container">
+                <h2><i class="fa-solid fa-shopping-cart"></i> Integração com Marketplaces</h2>
+                <p>Potencialize suas vendas online com a nossa solução de integração B2B. Conecte sua loja virtual aos principais marketplaces do Brasil de forma simples e eficiente, centralizando a gestão de produtos, estoque e pedidos.</p>
+                <div class="integration-content">
+                    <img src="integrab2b.jpg" alt="Serviço de integração B2B com marketplaces" style="max-width: 100%; height: auto; margin-top: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);">
+                    <div class="integration-list" style="text-align: left; margin-top: 30px;">
+                        <h3><i class="fa-solid fa-link"></i> Vantagens da Integração:</h3>
+                        <ul>
+                            <li><i class="fa-solid fa-check-circle" style="color:#007bff;"></i> <strong>Alcance Aumentado:</strong> Venda para milhões de clientes em diferentes plataformas.</li>
+                            <li><i class="fa-solid fa-check-circle" style="color:#007bff;"></i> <strong>Gestão Centralizada:</strong> Controle produtos e estoque a partir de um único painel.</li>
+                            <li><i class="fa-solid fa-check-circle" style="color:#007bff;"></i> <strong>Sincronização Automática:</strong> Evite a venda de produtos sem estoque com a atualização em tempo real.</li>
+                            <li><i class="fa-solid fa-check-circle" style="color:#007bff;"></i> <strong>Otimização de Processos:</strong> Simplifique a emissão de notas fiscais e a logística de envio.</li>
+                        </ul>
+                    </div>
+                    <a href="https://wa.me/5513997853113?text=Olá! Gostaria de uma consultoria sobre a Integração B2B com marketplaces." class="btn-main-action" style="margin-top: 30px;"><i class="fa-brands fa-whatsapp"></i> Fale Conosco sobre Integração</a>
+                </div>
+            </div>
+        </section>
         ---
+
         <section id="domain-check">
             <div class="container">
                 <h2><i class="fa-solid fa-search"></i> Verifique e Registre Seu Domínio .br</h2>
@@ -895,12 +904,10 @@
             const menuToggle = document.querySelector('.menu-toggle');
             const mainNav = document.getElementById('main-nav');
             const backToTopButton = document.getElementById('back-to-top');
-
             // Funcionalidade do menu hamburguer
             menuToggle.addEventListener('click', function() {
                 mainNav.classList.toggle('active');
             });
-
             // Fechar o menu ao clicar em um link (para mobile)
             mainNav.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
@@ -918,17 +925,14 @@
                     }
                 });
             });
-
             // Dropdown functionality for mobile
             const dropdownToggles = document.querySelectorAll('.has-dropdown > a');
-
             dropdownToggles.forEach(toggle => {
                 toggle.addEventListener('click', function(e) {
                     // Only prevent default and toggle on mobile
                     if (window.innerWidth <= 768) {
                         e.preventDefault(); // Prevent navigating immediately
                         const parentLi = this.parentElement;
-
                         // Close other open dropdowns in mobile view
                         document.querySelectorAll('.has-dropdown.active').forEach(openDropdown => {
                             if (openDropdown !== parentLi) { // Don't close the current one being clicked
@@ -939,7 +943,6 @@
                                 }
                             }
                         });
-
                         parentLi.classList.toggle('active'); // Toggle 'active' class on parent LI
                         const dropdownMenu = this.nextElementSibling;
                         if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
@@ -949,7 +952,6 @@
                     }
                 });
             });
-
             // Funcionalidade do botão Voltar ao Topo
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 300) {
