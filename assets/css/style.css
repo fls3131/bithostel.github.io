@@ -710,4 +710,74 @@ nav.navbar.bootsnav .navbar-toggle i{color: #4e4ffa;}
     0%   {bottom:0px;}
     100%  {bottom:7px;}
 }
+.social-chat-container {
+    position: fixed;
+    bottom: 25px; /* Posição inferior */
+    left: 25px;  /* Posição direita */
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.social-chat-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-top: 10px; /* Espaço entre os botões */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 28px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.social-chat-container {
+    position: fixed;
+    bottom: 25px; /* Mantém a posição inferior */
+    left: 25px;  /* Move para o canto esquerdo */
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.social-chat-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 28px;
+    text-decoration: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+}
+
+.social-chat-button:hover {
+    transform: scale(1.1);
+}
+
+.whatsapp-button {
+    background-color: #25d366;
+}
+
+.facebook-button {
+    background-color: #3b5998;
+}
+
+.shopee-button {
+    background-color: #ee4d2d;
+}
+
+.shopee-button img {
+    width: 32px;
+    height: 32px;
+}
 /*========================Thank you=================
