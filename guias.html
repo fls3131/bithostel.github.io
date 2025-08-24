@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bithostel TI - Guias de Uso Proton</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/logo/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <style>
+        /* Estilos Gerais */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f7f6;
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth; /* Rolagem suave ao clicar nos links internos */
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        /* Cabeçalho */
+        header {
+            background-color: #007bff; /* Azul Bithostel */
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            font-weight: 700;
+        }
+        header p {
+            font-size: 1.2em;
+            margin-top: 5px;
+            font-weight: 300;
+        }
+        header img {
+            max-width: 80px; /* Tamanho do logo */
+            margin-bottom: 10px;
+        }
+        /* Navegação */
+        nav {
+            background-color: #0056b3; /* Azul mais escuro para a navegação */
+            padding: 10px 0;
+            margin-top: 15px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        nav ul li a:hover {
+            background-color: #004085; /* Tom de azul para hover */
+        }
+        /* Botão Hamburguer para Mobile */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 2em;
+            color: #fff;
+            cursor: pointer;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+
+        /* Dropdown Menu Styles */
+        .has-dropdown {
+            position: relative; /* Essential for positioning the dropdown */
+        }
+
+        .dropdown-menu {
+            display: none; /* Hidden by default */
+            position: absolute;
+            background-color: #0056b3; /* Same as nav background */
+            min-width: 220px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 100; /* Ensure it appears above other content */
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-radius: 5px;
+            top: 100%; /* Position below the parent link */
+            left: 0;
+        }
+
+        .dropdown-menu li {
+            margin: 0; /* Override parent margin */
+        }
+
+        .dropdown-menu li a {
+            color: #fff;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            text-align: left;
+            transition: background-color 0.3s ease;
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+
+        .dropdown-menu li a:hover {
+            background-color: #004085; /* Darker blue for hover */
+            border-radius: 5px; /* Maintain rounded corners */
+        }
+        /* Show dropdown on hover for desktop */
+        @media (min-width: 769px) {
+            .has-dropdown:hover .dropdown-menu {
+                display: block;
+            }
+        }
+        /* Styles for the dropdown arrow */
+        .dropdown-arrow {
+            margin-left: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Rotate arrow when dropdown is active (mobile) */
+        .has-dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+        /* Seções */
+        section {
+            padding: 40px 0;
+            text-align: center;
+        }
+        section:nth-of-type(even) {
+            background-color: #e6f0fa; /* Cor de fundo suave para seções alternadas */
+        }
+        h2 {
+            font-size: 2em;
+            color: #007bff; /* Azul principal para títulos */
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        h2 .fa-solid, h2 .fa-regular, h2 .fa-brands { /* Estilo para ícones nos títulos H2 */
+            margin-right: 10px;
+            color: #007bff; /* Garante que o ícone mantenha a cor do título */
+        }
+        /* Destaque / Call to Action */
+        .hero {
+            background: linear-gradient(to right, #007bff, #0056b3); /* Gradiente de azul */
+            color: #fff;
+            padding: 80px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://via.placeholder.com/1500x500/0056b3/ffffff?text=Fundo+Bithostel') no-repeat center center/cover; /* Substitua por uma imagem real de fundo azul */
+            opacity: 0.1;
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        .hero h2 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 700;
+        }
+        .hero p {
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        .btn {
+            display: inline-block;
+            background-color: #28a745; /* Verde para botões de ação secundários ou para contrastar */
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin: 5px;
+        }
+        .btn:hover {
+            background-color: #218838; /* Verde mais escuro para hover */
+        }
+        .btn .fa-solid, .btn .fa-brands { /* Estilo para ícones dentro de botões */
+            margin-right: 8px;
+        }
+        /* Botão para download (azul) */
+        .btn-main-action {
+            background-color: #007bff; /* Azul principal */
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.3em;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+        .btn-main-action:hover {
+            background-color: #0056b3; /* Azul mais escuro no hover */
+        }
+        /* Recursos */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .feature-item {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.12);
+        }
+        .feature-item h3 {
+            color: #007bff; /* Azul para títulos de features */
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        .feature-item h3 .fa-solid { /* Estilo para ícones nos títulos H3 de features */
+            margin-right: 10px;
+        }
+        .feature-item p {
+            font-size: 1em;
+            color: #555;
+        }
+        /* Depoimentos */
+        .testimonials {
+            background-color: #f8f9fa;
+        }
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .testimonial-item {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .testimonial-item p {
+            font-style: italic;
+            margin-bottom: 15px;
+            color: #666;
+        }
+        .testimonial-item span {
+            font-weight: 600;
+            color: #333;
+        }
+        /* Preço */
+        .pricing-table {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        .price-card {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            text-align: center;
+            flex: 1 1 300px;
+            max-width: 350px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .price-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        .price-card h3 {
+            color: #007bff; /* Azul para títulos de preço */
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        .price-card h3 .fa-solid { /* Estilo para ícones nos títulos H3 de price-card */
+            margin-right: 10px;
+        }
+        .price-card .price {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #28a745; /* Verde para o preço, criando contraste */
+            margin-bottom: 20px;
+        }
+        .price-card ul {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 30px;
+        }
+        .price-card ul li {
+            margin-bottom: 10px;
+            color: #555;
+            font-size: 1.1em;
+        }
+        .price-card ul li .fa-solid { /* Estilo para ícones nas listas de price-card */
+            margin-right: 10px;
+            color: #007bff; /* Azul para os checks */
+        }
+        /* Histórico de Versões */
+        .version-history {
+            text-align: left;
+        }
+        .version-item {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .version-item h3 {
+            color: #007bff; /* Azul para títulos de versão */
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+        .version-item h3 .fa-solid { /* Estilo para ícones nos títulos H3 de version-item */
+            margin-right: 10px;
+        }
+        .version-item ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .version-item ul li {
+            margin-bottom: 5px;
+            color: #555;
+        }
+        .version-item ul li .fa-solid { /* Estilo para ícones nas listas de version-item */
+            margin-right: 8px;
+            color: #007bff; /* Azul para marcadores de lista */
+        }
+        /* Seções de Conteúdo Expandido (Funções e Comparação) */
+        .content-section {
+            text-align: left;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+        }
+        .content-section h3 {
+            color: #007bff; /* Azul para títulos de funções */
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+        .content-section h3 .fa-solid { /* Estilo para ícones nos títulos H3 de content-section */
+            margin-right: 10px;
+        }
+        .content-section p, .content-section ul {
+            margin-bottom: 15px;
+            color: #555;
+        }
+        .content-section ul {
+            list-style: none; /* Remove o estilo padrão da lista para adicionar ícones personalizados */
+            padding-left: 0;
+        }
+        .content-section ul li {
+            margin-bottom: 8px;
+        }
+        .content-section ul li .fa-solid { /* Estilo para ícones nas listas de content-section */
+            margin-right: 10px;
+            color: #007bff; /* Cor dos ícones de lista */
+        }
+        .comparison-table {
+            margin-top: 20px;
+            background-color: #e6f0fa; /* Fundo suave para comparação */
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #d4dcef;
+        }
+        .comparison-table h4 {
+            color: #007bff; /* Azul para título da comparação */
+            font-size: 1.4em;
+            margin-bottom: 15px;
+        }
+        .comparison-table h4 .fa-solid { /* Estilo para ícones nos títulos H4 da tabela de comparação */
+            margin-right: 10px;
+        }
+        .comparison-table ul {
+            list-style: none;
+            padding: 0;
+        }
+        .comparison-table ul li {
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #444;
+        }
+        .comparison-table ul li .fa-solid { /* Estilo para ícones nas listas da tabela de comparação */
+            margin-right: 10px;
+            color: #007bff; /* Cor dos ícones de lista */
+        }
+        .comparison-table ul li strong {
+            color: #28a745; /* Verde para destacar "Pro" */
+        }
+        /* Botão Voltar ao Topo */
+        #back-to-top {
+            display: none; /* Escondido por padrão */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff; /* Azul */
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 2em;
+            text-align: center;
+            line-height: 50px; /* Centraliza o ícone */
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+            z-index: 1000;
+        }
+        #back-to-top:hover {
+            background-color: #0056b3; /* Azul mais escuro no hover */
+        }
+        /* Rodapé */
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        footer p {
+            margin: 0;
+        }
+        footer a {
+            color: #007bff; /* Azul para links no rodapé */
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2em;
+            }
+            .hero h2 {
+                font-size: 2.2em;
+            }
+            .hero p {
+                font-size: 1.2em;
+            }
+            .btn, .btn-main-action {
+                padding: 12px 25px;
+                font-size: 1.1em;
+            }
+            .features-grid, .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+            .price-card {
+                max-width: 100%;
+            }
+            .content-section {
+                padding: 20px;
+            }
+            /* Menu Responsivo */
+            .menu-toggle {
+                display: block;
+            }
+            nav ul {
+                display: none;
+                flex-direction: column;
+                align-items: flex-start; /* Align dropdowns to the left */
+                background-color: #0056b3;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+                z-index: 99;
+                padding: 10px 0;
+            }
+            nav ul.active {
+                display: flex;
+            }
+            nav ul li {
+                margin: 10px 0;
+                width: 100%; /* Take full width in mobile menu */
+            }
+            nav ul li a {
+                display: block;
+                width: 100%;
+                text-align: left; /* Align text to left for mobile */
+                padding: 10px 20px; /* Adjust padding */
+            }
+
+            /* Mobile dropdown specific styles */
+            .dropdown-menu {
+                position: static; /* Stack dropdown items normally */
+                background-color: #004085; /* Slightly different background for sub-menu */
+                box-shadow: none;
+                width: 100%;
+                padding-left: 20px; /* Indent sub-items */
+                border-radius: 0; /* Remove rounded corners for stacked menu */
+                display: none; /* Hide by default, controlled by JS */
+            }
+
+            .dropdown-menu li a {
+                padding: 10px 20px; /* Adjust padding for mobile sub-items */
+            }
+
+            .has-dropdown.active .dropdown-menu {
+                display: block; /* Show dropdown when parent has 'active' class */
+            }
+        }
+        @media (max-width: 480px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            .hero {
+                padding: 50px 15px;
+            }
+            .hero h2 {
+                font-size: 1.8em;
+            }
+            .hero p {
+                font-size: 1em;
+            }
+            h2 {
+                font-size: 1.8em;
+            }
+            .feature-item h3 {
+                font-size: 1.3em;
+            }
+            .price-card .price {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <img src="logo.png" alt="Logo bithostel TI"><br>
+            <h1>bithostel TI</h1>
+            <p>Guias de Utilização para sua Segurança Digital com Proton</p>
+            <button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>
+        </div>
+        <nav>
+            <ul id="main-nav">
+                <li class="has-dropdown">
+                    <a href="#guias"><i class="fa-solid fa-book-open"></i> Guias de Uso <i class="fa-solid fa-caret-down dropdown-arrow"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#guia-vpn">Proton VPN</a></li>
+                        <li><a href="#guia-mail">Proton Mail</a></li>
+                        <li><a href="#guia-drive">Proton Drive</a></li>
+                        <li><a href="#guia-calendar">Proton Calendar</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#kit-essencial"><i class="fa-solid fa-cube"></i> Voltar ao Kit Essencial</a></li>
+                <li><a href="https://wa.me/5513997853113?text=Olá! Preciso de ajuda com a instalação de serviços Proton." target="_blank"><i class="fa-brands fa-whatsapp"></i> Suporte</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Aprenda a Usar as Ferramentas Proton para Máxima Segurança e Privacidade!</h2>
+                <p>Navegue pelos nossos guias passo a passo para configurar e aproveitar ao máximo o Proton VPN, Mail, Drive e Calendar.</p>
+                <a href="#guias" class="btn"><i class="fa-solid fa-arrow-down"></i> Ver Guias Agora</a>
+            </div>
+        </section>
+
+        ---
+
+        <section id="guias">
+            <div class="container">
+                <h2><i class="fa-solid fa-book-reader"></i> Guias de Utilização Proton</h2>
+
+                <div class="content-section" id="guia-vpn">
+                    <h3><i class="fa-solid fa-shield-halved"></i> Guia de Uso do Proton VPN</h3>
+                    <p>O Proton VPN garante que sua conexão à internet seja segura e privada, ocultando seu IP e criptografando seu tráfego. Siga estes passos para começar:</p>
+                    <ul>
+                        <li><i class="fa-solid fa-circle-right"></i> **1. Download e Instalação:** Baixe o aplicativo Proton VPN no site oficial (<a href="https://protonvpn.com/download" target="_blank">protonvpn.com/download</a>) para seu dispositivo (Windows, macOS, Android, iOS, Linux). Siga as instruções de instalação.</li>
+                        <li><i class="fa-solid fa-circle-right"></i> **2. Crie Sua Conta Gratuita:** Abra o aplicativo e clique em "Criar Conta Grátis" ou faça login se já tiver uma conta Proton.</li>
+                        <li><i class="fa-solid fa-circle-right"></i> **3. Conecte-se a um Servidor:** Na interface do aplicativo, escolha um país com servidor gratuito (indicado) e clique no botão de "Conectar".</li>
+                        <li><i class="fa-solid fa-circle-right"></i> **4. Verifique a Conexão:** Após a conexão, o aplicativo mostrará que você está protegido. Sua navegação agora é anônima e segura.</li>
+                    </ul>
+                    <p>Para configurações avançadas, como **Kill Switch** ou **DNS seguro**, consulte a documentação oficial.</p>
+                    <a href="https://protonvpn.com/support/getting-started/" target="_blank" class="btn-main-action"><i class="fa-solid fa-book"></i> Ver Guia Completo do Proton VPN</a>
+                </div>
+
+                <div class="content-section" id="guia-mail">
+                    <h3><i class="fa-solid fa-envelope"></i> Guia de Uso do Proton Mail</h3>
+                    <p>Proton Mail oferece email criptografado de ponta a ponta, protegendo suas comunicações de privacidade. Veja como usá-lo:</p>
+                    <ul>
+                        <li><i class="fa-solid fa-circle-right"></i> **1. Acesse e Crie Sua Conta:** Vá para o site do Proton Mail (<a href="https://proton.me/mail" target="_blank">proton.me/mail</a>) e clique em "Criar Conta Grátis". Escolha seu nome de usuário e defina uma senha forte.</li>
+                        <li><i class="fa-solid fa-circle-right"></i> **2. Caixa de Entrada Segura:** Ao fazer login, você verá sua caixa de entrada familiar, mas com a segurança adicional da criptografia.</li>
+                        <li><i class="fa-solid fa-circle-right"></i> **3. Enviar Emails Criptografados:** Para enviar um email criptografado, basta clicar em "Compor". Se o destinatário também usa Proton Mail, a criptografia é automática. Se não, você pode definir uma senha para o email.</li>
+                        <li><i class="fa-solid fa-circle-right"></i> **4. Recursos de Privacidade:** Explore recursos como pastas, filtros e a opção de definir um tempo de expiração para seus emails.</li>
+                    </ul>
+                    <p>Para mais detalhes sobre como gerenciar contatos ou configurar chaves PGP, acesse o guia oficial.</p>
+                    <a href="https://proton.me/support/protonmail-getting-started" target="_blank" class="btn-main-action"><i class="fa-solid fa-book-open"></i> Ver Guia Completo do Proton Mail</a>
+                </div>
+
+                <div class="content-section" id="guia-drive">
+                    <h3><i class="fa-solid fa-cloud"></i> Guia de Uso do Proton Drive</h3>
+                    <p>Com o Proton Drive, você pode armazenar seus arquivos de forma segura na nuvem, com criptografia de conhecimento zero. Comece a proteger seus documentos:</p>
+                    <ul>
+                        <li><i class="fa-solid fa-circle-right"></i> **1. Acesso e Armazenamento:** Acesse o Proton Drive através da sua conta Proton (<a href="https://proton.me/drive" target="_blank">proton.me/drive</a>). Você pode arrastar e soltar arquivos ou usar o botão "Upload" para adicionar documentos, fotos e vídeos.</li>
+                        <li><i class="fa-solid fa-circle-right"></i> **2. Organização de Arquivos:** Crie pastas para organizar seus arquivos de forma eficiente.</li>
+                        <li><i class="fa-solid fa-circle-right"></i> **3. Compartilhamento Seguro:** Compartilhe arquivos e pastas com segurança, definindo senhas ou datas de expiração para os links de compartilhamento.</li>
+                        <li><i class="fa-solid fa-circle-right"></i> **4. Acesso em Dispositivos Móveis:** Baixe o aplicativo Proton Drive para iOS ou Android para acessar seus arquivos de qualquer lugar.</li>
+                    </ul>
+                    <p>O plano gratuito do Proton Drive oferece **5 GB de armazenamento**. Para mais espaço, considere um plano pago.</p>
+                    <a href="https://proton.me/support/proton-drive-getting-started" target="_blank" class="btn-main-action"><i class="fa-solid fa-file-export"></i> Ver Guia Completo do Proton Drive</a>
+                </div>
+
+                <div class="content-section" id="guia-calendar">
+                    <h3><i class="fa-solid fa-calendar-alt"></i> Guia de Uso do Proton Calendar</h3>
+                    <p>O Proton Calendar oferece uma agenda privada e criptografada para gerenciar seus eventos e compromissos com segurança. Veja como utilizá-lo:</p>
+                    <ul>
+                        <li><i class="fa-solid fa-circle-right"></i> **1. Acesse Seu Calendário:** Faça login na sua conta Proton e acesse o Proton Calendar (<a href="https://proton.me/calendar" target="_blank">proton.me/calendar</a>).</li>
+                        <li><i class="fa-solid fa-circle-right"></i> **2. Crie Eventos:** Clique em um horário na agenda ou no botão "Criar evento" para adicionar compromissos. Você pode incluir título, localização, descrição e convidados.</li>
+                        <li><i class="fa-solid fa-circle-right"></i> **3. Compartilhe Calendários:** Compartilhe calendários inteiros com outros usuários Proton de forma segura.</li>
+                        <li><i class="fa-solid fa-circle-right"></i> **4. Sincronização:** O Proton Calendar sincroniza automaticamente seus eventos em todos os seus dispositivos (via web ou aplicativos móveis).</li>
+                    </ul>
+                    <p>Para importar eventos de outras agendas ou gerenciar múltiplos calendários, consulte o guia oficial.</p>
+                    <a href="https://proton.me/support/proton-calendar-getting-started" target="_blank" class="btn-main-action"><i class="fa-solid fa-calendar-check"></i> Ver Guia Completo do Proton Calendar</a>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <button id="back-to-top" title="Voltar ao Topo">&#x2191;</button>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 bithostel TI. Todos os direitos reservados. | <a href="#">Política de Privacidade</a> | <a href="#">Termos de Uso</a></p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const mainNav = document.getElementById('main-nav');
+            const backToTopButton = document.getElementById('back-to-top');
+
+            // Funcionalidade do menu hamburguer
+            menuToggle.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+            });
+
+            // Fechar o menu ao clicar em um link (para mobile)
+            mainNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    // Check if the clicked link is not a dropdown toggle and the menu is active
+                    if (!link.parentElement.classList.contains('has-dropdown') && mainNav.classList.contains('active')) {
+                        mainNav.classList.remove('active');
+                        // Also hide any open dropdowns if the main menu closes
+                        document.querySelectorAll('.has-dropdown.active').forEach(dropdown => {
+                            dropdown.classList.remove('active');
+                            const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                            if (dropdownMenu) {
+                                dropdownMenu.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+
+            // Dropdown functionality for mobile
+            const dropdownToggles = document.querySelectorAll('.has-dropdown > a');
+
+            dropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    // Only prevent default and toggle on mobile
+                    if (window.innerWidth <= 768) {
+                        e.preventDefault(); // Prevent navigating immediately
+                        const parentLi = this.parentElement;
+
+                        // Close other open dropdowns in mobile view
+                        document.querySelectorAll('.has-dropdown.active').forEach(openDropdown => {
+                            if (openDropdown !== parentLi) { // Don't close the current one being clicked
+                                openDropdown.classList.remove('active');
+                                const openDropdownMenu = openDropdown.querySelector('.dropdown-menu');
+                                if (openDropdownMenu) {
+                                    openDropdownMenu.style.display = 'none';
+                                }
+                            }
+                        });
+
+                        parentLi.classList.toggle('active'); // Toggle 'active' class on parent LI
+                        const dropdownMenu = this.nextElementSibling;
+                        if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+                            // Toggle display for the dropdown menu
+                            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+                        }
+                    }
+                });
+            });
+
+            // Funcionalidade do botão Voltar ao Topo
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopButton.style.display = 'block';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            });
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
