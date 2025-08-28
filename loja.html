@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sua Loja Online Pronta com bithostel TI & Nuvemshop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="assets/logo/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Variáveis de Cores */
+        :root {
+            --dark-bg: #0f172a; /* Azul escuro quase preto */
+            --mid-dark-bg: #1e293b; /* Azul escuro médio */
+            --light-text: #e2e8f0; /* Cinza claro para texto */
+            --accent-blue: #3b82f6; /* Azul vibrante da bithostel (primário) */
+            --accent-orange: #f97316; /* Laranja da Nuvemshop (secundário) */
+            --light-blue-glow: rgba(59, 130, 246, 0.4);
+            --orange-glow: rgba(249, 115, 22, 0.4);
+            --green-success: #22c55e; /* Verde para sucesso */
+        }
+
+        /* Base Styles & Reset */
+        body {
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px; /* Mais largo para um visual moderno */
+            margin: 0 auto;
+            padding: 0 25px;
+        }
+
+        /* Typografia */
+        h1, h2, h3, h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--light-text);
+            font-weight: 700;
+        }
+        h1 { font-size: 3.5em; line-height: 1.1; margin-bottom: 20px; }
+        h2 { font-size: 2.8em; margin-bottom: 40px; text-align: center; color: var(--accent-blue); }
+        h3 { font-size: 1.8em; margin-bottom: 15px; color: var(--accent-orange); }
+        h4 { font-size: 1.4em; margin-bottom: 20px; color: var(--accent-blue); }
+        p { font-size: 1.1em; }
+
+        /* --- Header & Hero Section --- */
+        header {
+            background: linear-gradient(135deg, var(--mid-dark-bg) 0%, #0f172a 100%);
+            padding: 80px 0 100px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 6px solid var(--accent-blue);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+        }
+        header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+        }
+        header .logo-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            gap: 20px;
+        }
+        header .logo-group img {
+            max-width: 180px;
+            height: auto;
+            filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.4));
+        }
+        header .logo-group .plus-icon {
+            font-size: 2.5em;
+            color: var(--light-text);
+            font-weight: 800;
+        }
+        header h1 {
+            color: var(--light-text);
+            font-size: 3.8em;
+            margin-bottom: 25px;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+        }
+        header .subtitle {
+            font-size: 1.4em;
+            color: var(--light-text);
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-weight: 400;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .main-btn {
+            background-color: var(--accent-blue);
+            color: white;
+            padding: 20px 45px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1.6em;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px var(--light-blue-glow);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            border: none;
+            cursor: pointer;
+        }
+        .main-btn:hover {
+            background-color: #2563eb;
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 35px var(--light-blue-glow);
+        }
+        .secondary-btn {
+            background-color: transparent;
+            color: var(--accent-orange);
+            border: 2px solid var(--accent-orange);
+            padding: 18px 40px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 1.5em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px var(--orange-glow);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .secondary-btn:hover {
+            background-color: var(--accent-orange);
+            color: white;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px var(--orange-glow);
+        }
+
+        /* --- Navigation --- */
+        nav {
+            background-color: var(--mid-dark-bg);
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.4);
+        }
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        nav .nav-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6em;
+            font-weight: 700;
+            color: var(--light-text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        nav .nav-brand img {
+            height: 35px;
+            margin-right: 10px;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 30px;
+        }
+        nav ul li a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -5px;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent-orange);
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+        nav ul li a:hover {
+            color: var(--accent-orange);
+        }
+        .menu-toggle {
+            display: none; /* Hidden on desktop */
+            font-size: 2.2em;
+            color: var(--accent-blue);
+            cursor: pointer;
+        }
+
+        /* --- Section Styling (Modular Cards) --- */
+        .section-padding {
+            padding: 80px 0;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 35px;
+            padding-bottom: 40px;
+        }
+        .card {
+            background-color: var(--mid-dark-bg);
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            padding: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            border-color: var(--accent-blue);
+        }
+        .card .icon-wrapper {
+            background-color: var(--accent-orange);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 2.2em;
+            color: white;
+            box-shadow: 0 4px 15px var(--orange-glow);
+        }
+        .card h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.9em;
+            color: var(--accent-blue);
+        }
+        .card p {
+            font-size: 1em;
+            color: var(--light-text);
+            flex-grow: 1;
+        }
+        .card ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 20px;
+        }
+        .card ul li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 12px;
+            color: var(--light-text);
+            font-size: 1.05em;
+        }
+        .card ul li::before {
+            content: '✓';
+            color: var(--green-success);
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        /* --- Feature Section with Image --- */
+        .feature-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+        .feature-content {
+            flex: 1;
+            min-width: 400px;
+        }
+        .feature-content h2 {
+            text-align: left;
+            margin-bottom: 25px;
+            font-size: 3em;
+            color: var(--light-text);
+        }
+        .feature-content p {
+            font-size: 1.15em;
+            margin-bottom: 25px;
+            color: var(--e2e8f0);
+        }
+        .feature-image {
+            flex: 1;
+            min-width: 400px;
+            text-align: center;
+        }
+        .feature-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border: 2px solid var(--accent-blue);
+        }
+
+        /* --- Testimonials / Success Stories --- */
+        .testimonial-section {
+            background-color: var(--mid-dark-bg);
+            padding: 80px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .testimonial-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 30px;
+            padding: 20px 0;
+            justify-content: flex-start; /* Alinhar ao início */
+        }
+        .testimonial-item {
+            flex: 0 0 450px; /* Largura fixa para cada depoimento */
+            scroll-snap-align: start;
+            background-color: var(--dark-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            border: 1px solid var(--accent-orange);
+            text-align: left;
+        }
+        .testimonial-item blockquote {
+            font-style: italic;
+            margin: 0 0 20px;
+            color: var(--light-text);
+            font-size: 1.1em;
+            line-height: 1.7;
+        }
+        .testimonial-item .author {
+            font-weight: 600;
+            color: var(--accent-blue);
+            font-size: 1.1em;
+        }
+        .testimonial-item .author-title {
+            font-size: 0.9em;
+            color: #94a3b8;
+        }
+
+        /* --- Call to Action Section --- */
+        .cta-banner {
+            background: linear-gradient(45deg, var(--accent-blue) 0%, var(--accent-orange) 100%);
+            padding: 80px 0;
+            text-align: center;
+            border-radius: 15px;
+            margin: 80px auto;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+        }
+        .cta-banner h2 {
+            color: white;
+            font-size: 3em;
+            margin-bottom: 25px;
+        }
+        .cta-banner p {
+            color: white;
+            font-size: 1.4em;
+            max-width: 800px;
+            margin: 0 auto 40px;
+        }
+
+        /* --- Disclaimer & Footer --- */
+        .disclaimer {
+            font-size: 0.9em;
+            color: #94a3b8;
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+        }
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            color: #64748b;
+            font-size: 0.85em;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- Floating WhatsApp Button --- */
+        .whatsapp-float-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px; /* Mudança para o lado direito */
+            background-color: #25D366; /* Verde WhatsApp */
+            color: white;
+            border-radius: 50%;
+            width: 65px;
+            height: 65px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            text-decoration: none;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
+            z-index: 1000;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+        }
+        .whatsapp-float-btn:hover {
+            transform: scale(1.15) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.8);
+        }
+
+        /* --- Responsive Adjustments --- */
+        @media (max-width: 1024px) {
+            h1 { font-size: 3em; }
+            h2 { font-size: 2.4em; }
+            .feature-section {
+                flex-direction: column;
+                gap: 40px;
+                text-align: center;
+            }
+            .feature-content, .feature-image { min-width: unset; width: 100%; }
+            .feature-content h2 { text-align: center; }
+            .testimonial-item { flex: 0 0 90%; } /* Mais espaço para rolagem em telas menores */
+        }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 15px; }
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 2em; }
+            h3 { font-size: 1.6em; }
+            .subtitle { font-size: 1.2em; }
+            .logo-group { flex-direction: column; gap: 15px; }
+            .logo-group img { max-width: 150px; }
+
+            /* Mobile Navigation */
+            nav .nav-brand { font-size: 1.4em; }
+            nav ul { display: none; flex-direction: column; width: 100%; background-color: var(--mid-dark-bg); position: absolute; top: 100%; left: 0; padding: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.3); border-top: 1px solid rgba(255, 255, 255, 0.1); }
+            nav ul.active { display: flex; }
+            nav ul li { text-align: center; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+            nav ul li:last-child { border-bottom: none; }
+            nav ul li a { padding: 10px 0; display: block; }
+            nav ul li a::after { display: none; } /* Remover linha de hover no mobile */
+            .menu-toggle { display: block; }
+
+            .main-btn, .secondary-btn {
+                width: 100%;
+                font-size: 1.3em;
+                padding: 15px 25px;
+            }
+            .cta-buttons { flex-direction: column; gap: 15px; }
+            .card { padding: 25px; }
+            .card .icon-wrapper { font-size: 1.8em; padding: 12px; }
+            .testimonial-carousel { justify-content: flex-start; } /* Manter alinhamento para rolagem */
+            .testimonial-item { flex: 0 0 95%; margin: 0 auto; } /* Mais largo e centralizado para rolagem */
+            .whatsapp-float-btn { width: 55px; height: 55px; font-size: 2.2em; bottom: 20px; right: 20px; }
+            .cta-banner h2 { font-size: 2.5em; }
+            .cta-banner p { font-size: 1.2em; }
+        }
+
+        @media (max-width: 480px) {
+            h1 { font-size: 2em; }
+            h2 { font-size: 1.8em; }
+            .subtitle { font-size: 1em; }
+            header { padding: 60px 0 80px; }
+            .cta-buttons { gap: 10px; }
+            .main-btn, .secondary-btn { font-size: 1.1em; padding: 12px 20px; }
+            .card h3 { font-size: 1.4em; }
+            .card .icon-wrapper { font-size: 1.5em; padding: 10px; }
+            .feature-content h2 { font-size: 2.2em; }
+            .feature-content p { font-size: 1em; }
+            .cta-banner h2 { font-size: 2em; }
+            .cta-banner p { font-size: 1em; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <a href="#inicio" class="nav-brand">
+                <img src="logo.png" alt="Logo bithostel TI">
+                 </a>
+            
+            <div class="menu-toggle" id="mobile-menu">&#9776;</div>
+            <ul id="main-nav">
+                <li><a href="#inicio">Início</a></li>
+                <li><a href="#solucao">Nossa Solução</a></li>
+                <li><a href="#recursos">Recursos Essenciais</a></li>
+                <li><a href="#passos">Comece Já!</a></li>
+                <li><a href="#casos-sucesso">Casos de Sucesso</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header id="inicio">
+        <div class="container">
+            <div class="logo-group">
+                <img src="logo.png" alt="Logo bithostel TI">
+                <span class="plus-icon">+</span>
+                <img src="nuvemshop.png" alt="Logo Nuvemshop">
+            </div>
+            <h1>Sua Loja Online Profissional: Criada e Gerenciada pela bithostel TI na Nuvemshop</h1>
+            <p class="subtitle">Transforme sua paixão em vendas! A bithostel TI é sua parceira completa para lançar, personalizar e otimizar sua loja virtual na plataforma líder da América Latina.</p>
+            <div class="cta-buttons">
+                <a href="https://agenda.bithostel.com.br/index.php/?service=7" target="_blank" rel="noopener noreferrer" class="main-btn">
+                   Agendar reunião sobre Minha Loja!
+                </a>
+                <a href="#solucao" class="secondary-btn">
+                    <i class="fas fa-arrow-down"></i> Saiba Mais
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="solucao" class="section-padding">
+            <div class="container">
+                <h2>A Solução Completa para Seu E-commerce</h2>
+                <div class="feature-section">
+                    <div class="feature-content">
+                        <h4>Descomplique a Venda Online</h4>
+                        <p>Chega de burocracia e dificuldades técnicas! Com a parceria bithostel TI & Nuvemshop, você tem acesso a uma plataforma robusta e um suporte especializado para criar uma loja que realmente vende, sem dores de cabeça.</p>
+                        <p>Nós cuidamos de todo o processo, desde a configuração inicial, design personalizado, até a integração de pagamentos e a gestão de produtos. Sua única preocupação será com seus clientes e produtos.</p>
+                        <a href="#passos" class="main-btn small-btn" style="background-color: var(--accent-orange);">
+                            Ver Como Funciona <i class="fas fa-chevron-right"></i>
+                        </a>
+                    </div>
+                    <div class="feature-image">
+                        <img src="lojacap.png" alt="Crie sua loja online facilmente" width="600" height="400">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="recursos" class="section-padding" style="background-color: var(--mid-dark-bg);">
+            <div class="container">
+                <h2>Recursos Essenciais para o Sucesso da Sua Loja</h2>
+                <div class="grid-container">
+                    <div class="card">
+                        <div class="icon-wrapper"><i class="fas fa-paint-brush"></i></div>
+                        <h3>Design Personalizado</h3>
+                        <p>Sua loja com a identidade da sua marca. Escolha entre templates profissionais e personalize cores, fontes e layout para uma experiência única.</p>
+                        <ul>
+                            <li>Layouts modernos e responsivos</li>
+                            <li>Personalização ilimitada</li>
+                            <li>Otimizado para mobile</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="icon-wrapper"><i class="fas fa-shopping-cart"></i></div>
+                        <h3>Gestão de Produtos Fácil</h3>
+                        <p>Cadastre seus produtos, organize categorias, adicione fotos e descrições com facilidade. Tudo pensado para você ter total controle.</p>
+                        <ul>
+                            <li>Controle de estoque inteligente</li>
+                            <li>Variações de produtos (cor, tamanho)</li>
+                            <li>Importação/exportação de produtos</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="icon-wrapper"><i class="fas fa-credit-card"></i></div>
+                        <h3>Meios de Pagamento Integrados</h3>
+                        <p>Ofereça diversas opções de pagamento aos seus clientes: cartão de crédito, boleto, Pix. Tudo integrado e seguro.</p>
+                        <ul>
+                            <li>Gateways de pagamento renomados</li>
+                            <li>Opções de parcelamento</li>
+                            <li>Segurança nas transações</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="icon-wrapper"><i class="fas fa-truck"></i></div>
+                        <h3>Envios e Logística Descomplicados</h3>
+                        <p>Integre com as principais transportadoras e métodos de envio. Calcule frete automaticamente e gerencie seus pedidos.</p>
+                        <ul>
+                            <li>Cálculo automático de frete</li>
+                            <li>Integração com Correios e transportadoras</li>
+                            <li>Rastreamento de pedidos</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="icon-wrapper"><i class="fas fa-chart-line"></i></div>
+                        <h3>Marketing e Vendas</h3>
+                        <p>Ferramentas para promover sua loja e aumentar suas vendas: cupons de desconto, SEO, integração com redes sociais e mais.</p>
+                        <ul>
+                            <li>SEO para Google</li>
+                            <li>Cupons e promoções</li>
+                            <li>Marketing por e-mail</li>
+                        </ul>
+                    </div>
+                    <div class="card">
+                        <div class="icon-wrapper"><i class="fas fa-headset"></i></div>
+                        <h3>Suporte bithostel TI</h3>
+                        <p>Além da plataforma, você conta com o suporte e consultoria da bithostel TI para qualquer dúvida ou otimização necessária.</p>
+                        <ul>
+                            <li>Consultoria especializada</li>
+                            <li>Ajuda na configuração</li>
+                            <li>Otimização contínua</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="passos" class="section-padding">
+            <div class="container">
+                <h2>Como Começar Sua Loja com a bithostel TI & Nuvemshop?</h2>
+                <div class="grid-container">
+                    <div class="card" style="align-items: center; text-align: center;">
+                        <div class="icon-wrapper" style="background-color: var(--accent-blue);"><i class="fas fa-1"></i></div>
+                        <h3>Fale Conosco</h3>
+                        <p>Entre em contato com a bithostel TI. Vamos entender seu projeto, produtos e objetivos.</p>
+                    </div>
+                    <div class="card" style="align-items: center; text-align: center;">
+                        <div class="icon-wrapper" style="background-color: var(--accent-orange);"><i class="fas fa-2"></i></div>
+                        <h3>Planejamento & Setup</h3>
+                        <p>Escolhemos o plano ideal da Nuvemshop e configuramos sua loja, design e produtos iniciais.</p>
+                    </div>
+                    <div class="card" style="align-items: center; text-align: center;">
+                        <div class="icon-wrapper" style="background-color: var(--accent-blue);"><i class="fas fa-3"></i></div>
+                        <h3>Lançamento & Vendas</h3>
+                        <p>Sua loja está pronta para receber clientes! Comece a vender e conte com nosso suporte contínuo.</p>
+                    </div>
+                </div>
+                <div class="cta-banner" style="margin-top: 60px; padding: 60px 30px;">
+                    <h2>Pronto para Ter Seu E-commerce de Sucesso?</h2>
+                    <p>Milhares de empreendedores já estão vendendo online. Seja o próximo a transformar seu negócio!</p>
+                    <a href="https://agenda.bithostel.com.br/index.php/?service=7" target="_blank" rel="noopener noreferrer" class="main-btn" style="background-color: white; color: var(--accent-orange);">
+                        <i class="fab fa-whatsapp"></i> Criar Minha Loja Agora!
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="casos-sucesso" class="testimonial-section">
+            <div class="container">
+                <h2>O que Nossos Clientes Dizem</h2>
+                <div class="testimonial-carousel">
+                    <div class="testimonial-item">
+                        <blockquote>"A bithostel TI me ajudou a tirar o projeto da minha loja do papel de forma muito rápida e profissional. A Nuvemshop é excelente!"</blockquote>
+                        <div class="author">Maria S.</div>
+                        <div class="author-title">Dona da "Doce Encanto Artesanato"</div>
+                    </div>
+                    <div class="testimonial-item">
+                        <blockquote>"Eu não sabia por onde começar, mas a equipe da bithostel TI me deu todo o suporte para configurar minha loja e começar a vender meus produtos de tecnologia. Recomendo!"</blockquote>
+                        <div class="author">João P.</div>
+                        <div class="author-title">Fundador da "Tech Solutions JP"</div>
+                    </div>
+                    <div class="testimonial-item">
+                        <blockquote>"Minha loja de roupas estava travada e a bithostel TI otimizou tudo na Nuvemshop. Em poucas semanas, minhas vendas aumentaram em 30%!"</blockquote>
+                        <div class="author">Ana C.</div>
+                        <div class="author-title">Criadora da "Moda & Estilo"</div>
+                    </div>
+                     <div class="testimonial-item">
+                        <blockquote>"Atendimento impecável! Tivemos todas as dúvidas sanadas e nossa loja de produtos para pets ficou linda e super funcional."</blockquote>
+                        <div class="author">Carlos R.</div>
+                        <div class="author-title">Proprietário da "Pet Feliz Online"</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="section-padding">
+            <div class="container" style="text-align: center;">
+                <h2>Vamos Transformar Sua Ideia em Vendas!</h2>
+                <p style="max-width: 700px; margin: 0 auto 40px;">Não espere mais para ter sua loja online. Entre em contato com a bithostel TI e descubra como podemos impulsionar seu negócio na Nuvemshop.</p>
+                <a href="https://wa.me/5513997853113?text=Ol%C3%A1!%20Tenho%20interesse%20na%20parceria%20bithostel%20TI%20e%20Nuvemshop." target="_blank" rel="noopener noreferrer" class="main-btn">
+                    <i class="fab fa-whatsapp"></i> Falar com um Especialista
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <div class="disclaimer">
+        <div class="container">
+            <p><strong>bithostel TI - CNPJ: 14.406.585/0001-59</strong></p>
+            <p><strong>Importante:</strong> A bithostel TI é parceira e implementadora de lojas na plataforma Nuvemshop. Os custos de assinatura da plataforma Nuvemshop são cobrados diretamente pela Nuvemshop ao cliente. Nossos serviços incluem consultoria, setup, design e suporte para a criação e otimização da sua loja.</p>
+            <p>Para mais informações sobre a Nuvemshop e nossos serviços, entre em contato.</p>
+        </div>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 bithostel TI. Todos os direitos reservados. Parceria Oficial Nuvemshop.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5513997853113?text=Ol%C3%A1!%20Quero%20montar%20minha%20loja%20online%20com%20a%20Nuvemshop." class="whatsapp-float-btn" target="_blank" rel="noopener noreferrer">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        document.getElementById('mobile-menu').addEventListener('click', function() {
+            var nav = document.getElementById('main-nav');
+            nav.classList.toggle('active');
+        });
+        var navLinks = document.querySelectorAll('#main-nav a');
+        navLinks.forEach(function(link) {
+            link.addEventListener('click', function() {
+                var nav = document.getElementById('main-nav');
+                if (nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                }
+            });
+        });
+
+        // Optional: Scroll to top when opening nav on mobile
+        window.addEventListener('scroll', function() {
+            var nav = document.getElementById('main-nav');
+            if (nav.classList.contains('active')) {
+                nav.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
