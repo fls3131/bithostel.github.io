@@ -5,682 +5,609 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>bithostel TI - Soluções de Backup Duplicati</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="assets/logo/favicon.png">
+  <link rel="icon" type="image/png" href="assets/logo//favicon.png"/>
     <style>
-        /* Base Styles & Reset */
+        /* Estilos básicos para o corpo da página */
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #0e1217; /* Very dark blue-gray */
-            color: #e0e6ed; /* Light text for readability */
-            line-height: 1.7;
-            scroll-behavior: smooth;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            background-color: #1a1a2e; /* Dark background */
+            color: #e0e0e0; /* Light text */
+            line-height: 1.6;
         }
+        /* Contêiner principal para centralizar o conteúdo */
         .container {
-            max-width: 1000px; /* Wider container */
-            margin: 0 auto; /* Full width on smaller screens */
+            max-width: 1200px;
+            margin: 20px auto;
             padding: 0 20px;
         }
-        /* --- Header & Hero Section --- */
-        header {
-            background-color: #1a202c; /* Darker blue for header background */
-            padding: 40px 0 60px;
-            text-align: center;
-            position: relative;
-            overflow: hidden; /* For background effects */
-            border-bottom: 5px solid #ff9900; /* Strong accent line - Orange */
+        /* Top bar styles */
+        .top-bar {
+            background-color: #0f0f1a; /* Even darker top bar */
+            color: white;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9em;
+            position: relative; /* Needed for hamburger icon positioning */
         }
-        header .container {
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            width: 100%;
+        }
+        .top-bar .logo {
+            font-weight: bold;
+            font-size: 1.1em;
+            flex-shrink: 0; /* Prevent logo from shrinking */
+        }
+        .top-bar .logo a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .top-bar .logo img {
+            height: 30px; /* Adjust logo height as needed */
+            margin-right: 10px;
+        }
+        .top-bar nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+        .top-bar nav ul li {
+            margin-left: 20px;
+        }
+        .top-bar nav ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .top-bar nav ul li a:hover {
+            color: #6495ed; /* Lighter blue for hover */
+        }
+        /* Hamburger menu icon for mobile */
+        .menu-toggle {
+            display: none; /* Hidden by default, shown on mobile */
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+            z-index: 1000; /* Ensure it's above other content */
+        }
+        .menu-toggle .bar {
+            width: 100%;
+            height: 3px;
+            background-color: white;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        /* Styles for when menu is active */
+        .top-bar nav.active ul {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            z-index: 2;
+            position: absolute;
+            top: 100%; /* Position below the top bar */
+            left: 0;
+            width: 100%;
+            background-color: #2e2e4e; /* Slightly darker background for menu */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+            padding: 10px 0;
+            border-top: 1px solid #555;
         }
-        header .logo {
-            max-width: 250px; /* Larger logo */
-            height: auto;
-            margin-bottom: 30px;
-            filter: drop-shadow(0 0 10px rgba(255, 153, 0, 0.6));
+        .top-bar nav.active ul li {
+            margin: 10px 20px;
+            text-align: center;
+        }
+        /* Cabeçalho da página */
+        header {
+            background-color: #16213e; /* Darker blue header */
+            color: white;
+            padding: 40px 0;
+            text-align: center;
         }
         header h1 {
-            color: #ff9900; /* Bright orange for main title */
-            font-size: 1.2em; /* Much larger title */
-            margin-bottom: 15px;
-            font-weight: 700;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+            margin: 0;
+            font-size: 2.8em;
         }
         header p {
             font-size: 1.2em;
-            color: #c9d1d9;
-            max-width: 700px;
-            margin: 0 auto 30px;
+            margin-top: 10px;
         }
-        .header-main-btn {
-            background-color: #25D366; /* WhatsApp Green */
-            color: white;
-            padding: 20px 45px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-size: 1.6em;
-            font-weight: 700;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            display: inline-block;
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
-            margin-top: 20px;
+        header img {
+            height: 100px; /* Adjust as needed for better visual balance */
+            width: auto; /* Maintain aspect ratio */
+            margin: 0 10px; /* Space between logos */
+            vertical-align: middle; /* Align images nicely with text */
         }
-        .header-main-btn:hover {
-            background-color: #1DA851;
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
-        }
-        /* --- Navigation --- */
-        nav {
-            background-color: #0d1217; /* Matches body background */
-            padding: 15px 0;
-            border-bottom: 1px solid #ff9900;
-            position: sticky; /* Sticky nav */
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-        }
-        nav .container {
-            display: flex;
-            justify-content: flex-start; /* Align menu to the left */
-            align-items: center;
-            gap: 30px; /* Space between items */
-        }
-        nav .nav-title {
-            color: #ff9900;
-            font-size: 1.3em;
-            font-weight: 600;
-            display: none; /* Hidden on desktop, shown on mobile */
-        }
-        nav .menu-toggle {
-            display: none; /* Hidden on desktop */
-            font-size: 2.2em;
-            color: #ff9900;
-            cursor: pointer;
-            margin-left: auto; /* Push to the right */
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            flex-wrap: wrap; /* Allow wrapping on smaller desktop screens */
-            gap: 25px;
-        }
-        nav ul li a {
-            color: #e0e6ed;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 10px 15px;
-            transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
-            border-radius: 6px;
-            position: relative;
-        }
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #ff9900;
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        nav ul li a:hover::after {
-            transform: scaleX(1);
-        }
-        nav ul li a:hover {
-            color: #ffffff;
-            background-color: rgba(255, 153, 0, 0.15); /* Subtle hover background */
-        }
-        /* --- Section Styling (Card-based) --- */
-        .section-padding {
-            padding: 60px 0;
-        }
-        h2 {
-            color: #ff9900;
-            font-size: 2.8em;
-            margin-bottom: 40px;
+        /* Seção de introdução ao produto */
+        .hero-section {
+            background-color: #1a1a2e; /* Dark background */
+            padding: 50px 20px;
             text-align: center;
-            font-weight: 700;
-            letter-spacing: -0.5px;
+            border-bottom: 1px solid #3f3f5f; /* Darker border */
         }
-        h4 {
-            color: #8be9fd;
-            font-size: 1.5em;
+        .hero-section h2 {
+            color: #6495ed; /* Lighter blue heading */
+            font-size: 2.2em;
             margin-bottom: 20px;
-            font-weight: 600;
         }
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+        .hero-section p {
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            color: #c0c0c0; /* Slightly lighter text for readability */
+        }
+        .hero-section .cta-button {
+            display: inline-block;
+            background-color: #28a745; /* Green button remains */
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            transition: background-color 0.3s ease;
+            margin: 10px; /* Add margin for spacing between buttons on small screens */
+        }
+        .hero-section .cta-button:hover {
+            background-color: #218838; /* Darker green on hover */
+        }
+        /* What is Cloud Computer Section */
+        .what-is-cloud-section {
+            background-color: #22223b; /* Slightly lighter dark background */
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 1px solid #3f3f5f; /* Darker border */
+        }
+        .what-is-cloud-section h2 {
+            color: #6495ed; /* Lighter blue heading */
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+        .what-is-cloud-section p {
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.8;
+            color: #c0c0c0; /* Slightly lighter text for readability */
+        }
+        /* Seção de recursos e sistemas operacionais (cards removed as per original structure, but styles kept for reference if added back) */
+        .features-os-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 30px;
-            padding-bottom: 40px;
+            padding: 50px 20px;
+            text-align: center;
+            background-color: #1a1a2e; /* Dark background */
         }
-        .card {
-            background-color: #1a202c; /* Card background */
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            padding: 25px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #2d3748;
+        .feature-card, .os-card {
+            background-color: #22223b; /* Dark card background */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4); /* Darker shadow */
+            flex: 1;
+            min-width: 280px;
+            max-width: 45%;
+            box-sizing: border-box;
+            color: #e0e0e0;
         }
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-            border-color: #ff9900; /* Highlight on hover */
-        }
-        .card h3 {
-            color: #8be9fd; /* Light blue for card titles */
+        .feature-card h3, .os-card h3 {
+            color: #6495ed; /* Lighter blue heading */
             font-size: 1.8em;
             margin-bottom: 15px;
-            font-weight: 600;
         }
-        .card ul {
+        .feature-card p, .os-card p {
+            font-size: 1em;
+        }
+        .os-card img {
+            width: 80px;
+            height: auto;
+            margin-bottom: 15px;
+        }
+        /* Raspberry Pi Section */
+        .raspberry-pi-section {
+            background-color: #1a1a2e; /* Dark background */
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 1px solid #3f3f5f; /* Darker border */
+        }
+        .raspberry-pi-section h2 {
+            color: #6495ed; /* Lighter blue heading */
+            font-size: 2.2em;
+            margin-bottom: 20px;
+        }
+        .raspberry-pi-section p {
+            font-size: 1.1em;
+            max-width: 800px;
+            margin: 0 auto 30px auto;
+            color: #c0c0c0; /* Slightly lighter text for readability */
+        }
+        .raspberry-pi-section ul {
             list-style: none;
             padding: 0;
-            margin: 0;
+            max-width: 600px;
+            margin: 20px auto;
+            text-align: left;
+            color: #c0c0c0;
         }
-        .card ul li {
+        .raspberry-pi-section ul li {
+            margin-bottom: 10px;
+            font-size: 1em;
             position: relative;
             padding-left: 25px;
-            margin-bottom: 10px;
-            color: #e0e6ed;
-            font-size: 1.05em;
         }
-        .card ul li::before {
-            content: '✓'; /* Checkmark icon */
-            color: #25D366; /* Green checkmark */
+        .raspberry-pi-section ul li::before {
+            content: '•';
+            color: #28a745;
             position: absolute;
             left: 0;
-            top: 0;
-            font-weight: bold;
-            font-size: 1.1em;
+            font-size: 1.2em;
+            line-height: 1;
         }
-        .text-block {
-            background-color: #1a202c;
-            border-radius: 12px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        .raspberry-pi-section img {
+            max-width: 100%;
+            height: auto;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+        /* Raspberry Pi Grid for Products */
+        .raspberry-pi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 40px auto 0 auto; /* Added margin-top */
+        }
+        .raspberry-pi-card {
+            background-color: #22223b; /* Dark card background */
             padding: 30px;
-            border: 1px solid #2d3748;
-            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4); /* Darker shadow */
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #e0e0e0;
         }
-        .text-block p {
-            font-size: 1.1em;
-            color: #c9d1d9;
+        .raspberry-pi-card h3 {
+            color: #6495ed; /* Lighter blue heading */
+            font-size: 1.6em;
+            margin-top: 0;
             margin-bottom: 15px;
         }
-        .text-block h3 {
-            color: #ff9900;
-            font-size: 2em;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        .text-block ul {
-            list-style: disc; /* Use disc for general lists */
-            margin-left: 20px;
-        }
-        .text-block ul li {
-            margin-bottom: 8px;
-            color: #e0e6ed;
-            font-size: 1em;
-            background: none; /* Override card li style */
-            box-shadow: none; /* Override card li style */
-            padding: 0; /* Override card li style */
-        }
-        .anydesk-section {
-            background-color: #1a202c;
-            border-radius: 12px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            margin-top: 40px;
-            border: 1px solid #2d3748;
-        }
-        .anydesk-section h3 {
-            color: #ff9900;
-            font-size: 2.2em;
-            margin-bottom: 20px;
-            font-weight: 700;
-        }
-        .anydesk-section p {
-            font-size: 1.1em;
-            color: #c9d1d9;
-            margin-bottom: 30px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .anydesk-download-btn {
-            background-color: #ff9900; /* Orange for download */
-            color: white;
-            padding: 18px 40px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-size: 1.5em;
-            font-weight: 600;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            display: inline-block;
-            box-shadow: 0 6px 15px rgba(255, 153, 0, 0.4);
-            margin-bottom: 20px;
-        }
-        .anydesk-download-btn:hover {
-            background-color: #e58a00;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 153, 0, 0.6);
-        }
-        .anydesk-steps ol {
+        .raspberry-pi-card .product-details ul {
             list-style: none;
             padding: 0;
-            margin: 40px auto 0;
-            max-width: 700px;
-            text-align: left;
-            counter-reset: anydesk-counter; /* Reset counter */
+            margin: 0 0 20px 0;
         }
-        .anydesk-steps ol li {
-            background-color: #2d3748; /* Darker background for steps */
-            padding: 20px 25px;
-            margin-bottom: 15px;
-            border-radius: 8px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-            position: relative;
-            padding-left: 60px; /* Space for step number */
-        }
-        .anydesk-steps ol li::before {
-            counter-increment: anydesk-counter; /* Increment counter */
-            content: counter(anydesk-counter); /* Display counter */
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: #ff9900;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+        .raspberry-pi-card .product-details ul li {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            color: #c0c0c0;
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 1.1em;
         }
-        .anydesk-steps ol li strong {
-            color: #8be9fd;
+        .raspberry-pi-card .product-details ul li::before {
+            content: '✔️';
+            margin-right: 10px;
+            color: #28a745;
+        }
+        .raspberry-pi-card .product-price {
+            font-size: 2em;
+            color: #3cb371;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .raspberry-pi-card .buy-button {
             display: block;
-            margin-bottom: 5px;
-            font-size: 1.1em;
-        }
-        /* --- Contact Section --- */
-        .contact-section {
-            padding: 60px 0;
-            text-align: center;
-        }
-        .contact-section p {
-            font-size: 1.2em;
-            color: #c9d1d9;
-            margin-bottom: 30px;
-        }
-        .main-whatsapp-cta {
-            background-color: #25D366;
+            background-color: #007bff;
             color: white;
-            padding: 22px 50px;
-            border-radius: 15px;
+            padding: 12px 20px;
             text-decoration: none;
-            font-size: 1.8em;
-            font-weight: 700;
-            transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-            display: inline-flex; /* Use flex for icon alignment */
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.5);
-        }
-        .main-whatsapp-cta:hover {
-            background-color: #1DA851;
-            transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.7);
-        }
-        .main-whatsapp-cta span.icon {
-            font-size: 1.2em; /* Adjust icon size relative to text */
-        }
-        /* --- Disclaimer & Footer --- */
-        .disclaimer {
-            font-size: 0.9em;
-            color: #8b949e;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
             text-align: center;
-            padding: 30px 0;
-            border-top: 1px solid #2d3748;
-            margin-top: 40px;
+            width: 100%;
+            box-sizing: border-box;
         }
-        footer {
+        .raspberry-pi-card .buy-button:hover {
+            background-color: #0056b3;
+        }
+        /* Seção de Planos */
+        .plans-section {
+            padding: 50px 20px;
             text-align: center;
-            padding: 25px 0;
-            color: #6e7681;
-            font-size: 0.85em;
-            border-top: 1px solid #2d3748;
+            background-color: #1a1a2e; /* Dark background */
         }
-        /* --- Floating WhatsApp Button --- */
-        .whatsapp-float-btn {
-            position: fixed;
-            bottom: 30px;
-            left: 30px;
-            background-color: #25D366;
-            color: white;
-            border-radius: 50%;
-            width: 70px;
-            height: 70px;
+        .plans-section h2 {
+            color: #6495ed; /* Lighter blue heading */
+            font-size: 2.2em;
+            margin-bottom: 40px;
+        }
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            justify-content: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .plan-card {
+            background-color: #22223b; /* Dark card background */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4); /* Darker shadow */
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #e0e0e0; /* Light text for card */
+        }
+        .plan-card h3 {
+            color: #6495ed; /* Lighter blue heading */
+            font-size: 1.6em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .plan-card .plan-details ul {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 20px 0;
+        }
+        .plan-card .plan-details ul li {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            color: #c0c0c0; /* Slightly lighter text for list items */
             display: flex;
             align-items: center;
-            justify-content: center;
-            font-size: 3em;
+        }
+        .plan-card .plan-details ul li::before {
+            content: '✔️'; /* Ícone de check */
+            margin-right: 10px;
+            color: #28a745; /* Green checkmark */
+        }
+        .plan-card .plan-price {
+            font-size: 2em;
+            color: #3cb371; /* Medium sea green for price */
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .plan-card .buy-button {
+            display: block;
+            background-color: #007bff; /* Blue button remains */
+            color: white;
+            padding: 12px 20px;
             text-decoration: none;
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.6);
-            z-index: 1000;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box; /* Garante que padding não aumente a largura */
         }
-        .whatsapp-float-btn:hover {
-            transform: scale(1.15) rotate(5deg);
-            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.8);
+        .plan-card .buy-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
         }
-        /* --- Responsive Adjustments --- */
-        @media (max-width: 992px) {
+        /* Políticas Section Styles */
+        .policy-section {
+            background-color: #22223b; /* Slightly lighter dark background */
+            padding: 50px 20px;
+            text-align: left;
+            border-bottom: 1px solid #3f3f5f; /* Darker border */
+        }
+        .policy-section h2 {
+            color: #6495ed; /* Lighter blue heading */
+            font-size: 2.2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .policy-section h3 {
+            color: #6495ed; /* Lighter blue heading */
+            font-size: 1.6em;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #3f3f5f; /* Darker separator */
+            padding-bottom: 5px;
+        }
+        .policy-section p {
+            font-size: 1em;
+            margin-bottom: 15px;
+            color: #c0c0c0; /* Slightly lighter text for readability */
+        }
+        .policy-section ul {
+            list-style: disc;
+            margin-left: 20px;
+            margin-bottom: 15px;
+            padding-left: 0;
+        }
+        .policy-section ul li {
+            margin-bottom: 8px;
+            font-size: 0.95em;
+            color: #c0c0c0; /* Slightly lighter text for list items */
+        }
+        /* Rodapé da página */
+        footer {
+            background-color: #0f0f1a; /* Even darker footer */
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+
+        /* Styles for Shipping Info Section */
+        .shipping-info-section {
+            background-color: #22223b; /* Slightly lighter dark background */
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid #3f3f5f; /* Darker border */
+            margin-top: 30px; /* Space from products grid */
+        }
+        .shipping-info-section h3 {
+            color: #6495ed; /* Lighter blue heading */
+            font-size: 1.8em;
+            margin-bottom: 20px;
+        }
+        .shipping-info-section p {
+            font-size: 1em;
+            color: #c0c0c0;
+            max-width: 800px;
+            margin: 0 auto 15px auto;
+            line-height: 1.6;
+        }
+        .shipping-info-section a {
+            color: #28a745; /* Green link for consistency */
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        .shipping-info-section a:hover {
+            color: #3cb371;
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 768px) {
+            .top-bar .container {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .top-bar nav {
+                display: none;
+                width: 100%;
+                order: 1;
+            }
+            .menu-toggle {
+                display: flex;
+                margin-left: auto;
+            }
+            .top-bar nav.active {
+                display: block;
+            }
+            .top-bar nav ul {
+                flex-direction: column;
+                align-items: center;
+                margin-top: 0;
+            }
+            .top-bar nav ul li {
+                margin: 10px 0;
+            }
+            .hero-section .cta-button {
+                display: block;
+                width: 80%;
+                margin: 10px auto;
+            }
             header h1 {
+                font-size: 2em;
+            }
+            .hero-section h2 {
                 font-size: 1.8em;
             }
-            .header-main-btn {
-                font-size: 1.4em;
-                padding: 18px 35px;
+            .features-os-section {
+                flex-direction: column;
+                align-items: center;
             }
-            nav ul {
-                gap: 15px;
+            .feature-card, .os-card {
+                max-width: 90%;
+                margin-bottom: 20px;
             }
-        }
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 15px;
+            .plans-grid, .raspberry-pi-grid { /* Apply to both grids */
+                grid-template-columns: 1fr;
             }
-            header {
-                padding: 30px 0 50px;
+            header img {
+                height: 80px;
+                margin: 5px;
             }
-            header .logo {
-                max-width: 200px;
+            .what-is-cloud-section {
+                padding: 30px 15px;
             }
-            header h1 {
-                font-size: 1.4em;
+            .shipping-info-section {
+                padding: 30px 15px;
             }
-            header p {
-                font-size: 1.1em;
-            }
-            .header-main-btn {
-                font-size: 1.2em;
-                padding: 15px 30px;
-            }
-            nav .container {
-                flex-wrap: wrap; /* Allow title and toggle to wrap if needed */
-                justify-content: space-between;
-            }
-            nav .nav-title {
-                display: block; /* Show menu title on mobile */
-                margin-right: auto; /* Push toggle to right */
-            }
-            nav .menu-toggle {
-                display: block; /* Show hamburger icon */
-            }
-            nav ul {
-                flex-direction: column; /* Stack vertically for mobile dropdown */
-                width: 100%;
-                background-color: #1a202c; /* Background for dropdown */
-                border-top: 1px solid #ff9900;
-                box-shadow: 0 8px 15px rgba(0,0,0,0.4);
-                position: absolute;
-                top: 100%; /* Position below nav bar */
-                left: 0;
-                padding: 10px 0;
-                display: none; /* Hidden by default */
-                border-radius: 0 0 8px 8px;
-            }
-            nav ul.active {
-                display: flex; /* Show when active */
-            }
-            nav ul li {
-                width: 100%;
-                text-align: center;
-                border-bottom: 1px solid rgba(45, 55, 72, 0.5); /* Separator */
-            }
-            nav ul li:last-child {
-                border-bottom: none;
-            }
-            nav ul li a {
-                padding: 15px 0; /* Larger clickable area */
-            }
-            h2 {
-                font-size: 2.2em;
-                margin-bottom: 30px;
-            }
-            .card {
-                padding: 20px;
-            }
-            .card h3 {
+            .shipping-info-section h3 {
                 font-size: 1.6em;
-            }
-            .card ul li {
-                font-size: 1em;
-            }
-            .main-whatsapp-cta {
-                font-size: 1.5em;
-                padding: 18px 35px;
             }
         }
         @media (max-width: 480px) {
+            header {
+                padding: 30px 0;
+            }
             header h1 {
-                font-size: 1.9em;
-            }
-            header p {
-                font-size: 0.95em;
-            }
-            .header-main-btn {
-                font-size: 1.1em;
-                padding: 12px 25px;
-            }
-            h2 {
                 font-size: 1.8em;
             }
-            .card h3 {
+            header p {
+                font-size: 1em;
+            }
+            .hero-section {
+                padding: 30px 15px;
+            }
+            .hero-section h2 {
+                font-size: 1.6em;
+            }
+            .hero-section .cta-button {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+            .features-os-section {
+                padding: 30px 15px;
+            }
+            .feature-card, .os-card {
+                padding: 20px;
+            }
+            .feature-card h3, .os-card h3 {
+                font-size: 1.5em;
+            }
+            .plans-section {
+                padding: 30px 15px;
+            }
+            .plan-card, .raspberry-pi-card { /* Apply to both card types */
+                padding: 25px;
+            }
+            .plan-card h3, .raspberry-pi-card h3 { /* Apply to both card types */
                 font-size: 1.4em;
             }
-            .main-whatsapp-cta {
-                font-size: 1.3em;
-                padding: 15px 25px;
-                width: 90%; /* Make it almost full width */
-                box-sizing: border-box;
+            .plan-card .plan-price, .raspberry-pi-card .product-price { /* Apply to both card types */
+                font-size: 1.8em;
             }
-            .whatsapp-float-btn {
-                width: 50px;
-                height: 50px;
-                font-size: 2.2em;
-                bottom: 15px;
-                left: 15px;
+            header img {
+                height: 60px;
+            }
+            .policy-section {
+                padding: 30px 15px;
+            }
+            .policy-section h2 {
+                font-size: 1.8em;
+            }
+            .policy-section h3 {
+                font-size: 1.4em;
+            }
+            .shipping-info-section {
+                padding: 25px 15px;
+            }
+            .shipping-info-section h3 {
+                font-size: 1.4em;
             }
         }
     </style>
 </head>
 <body>
-    <nav>
-        <div class="container">
-            <div class="nav-title">bithostel TI</div>
-            <div class="menu-toggle" id="mobile-menu">
-                &#9776;
-            </div>
-            <ul id="main-nav">
-                <li><a href="#inicio">Início</a></li>
-                <li><a href="#solucao">Solução Duplicati</a></li>
-                <li><a href="#diferenciais">Diferenciais</a></li>
-                <li><a href="#planos">Planos</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </div>
-    </nav>
-    <header id="inicio">
-        <div class="container">
-            <img src="duplicati.png" alt="Logo Duplicati" class="logo"><br>
-            <h1>☁️ Backup em Nuvem com Duplicati: Seus Dados Seguros e Criptografados! 🔐</h1>
-            <img src="logo.png" alt="Logo bithostel" class="logo">
-            <p>bithostel TI - cnpj - 14.406.585/0001-59</p>
-            <p>Não perca mais seus arquivos importantes. A **bithostel TI** oferece a instalação e configuração de um sistema de backup em nuvem robusto, seguro e com criptografia de ponta usando **Duplicati**.</p>
-            <a href="#contato" class="header-main-btn">
-                Quero Proteger Meus Dados!
-            </a>
-        </div>
-    </header>
-    <main class="container">
-        ---
-        <section id="solucao" class="section-padding">
-            <h2>Por que fazer Backup com Duplicati?</h2>
-            <div class="text-block">
-                <p>O **Duplicati** é a solução ideal para quem busca flexibilidade, segurança e controle sobre seus backups. Ele armazena seus arquivos de forma **criptografada**, compactada e incremental, economizando espaço e garantindo que apenas você possa acessar seus dados. A **bithostel TI** vai além: nós cuidamos da instalação e configuração completa, sincronizando tudo com seu **Google Drive** ou um **Servidor VPS** privado para máxima segurança e conveniência.</p>
-                <p>Nós da **bithostel TI** entendemos que a perda de dados pode ser catastrófica, e é por isso que oferecemos um serviço completo de implementação e suporte para que você não precise se preocupar com nada.</p>
-                <div align="center">
-                    <img src="01.png" alt="Duplicati and Google Drive" style="max-width: 100%; height: auto; margin-top: 20px;">
-                </div>
-            </div>
-        </section>
-        ---
-        <section id="diferenciais" class="section-padding">
-            <h2>Principais Diferenciais da Nossa Solução:</h2>
-            <div class="grid-container">
-                <div class="card">
-                    <h3>Criptografia Forte</h3>
-                    <ul>
-                        <li>Seus arquivos são criptografados antes de serem enviados para a nuvem.</li>
-                        <li>Utiliza o padrão AES-256 para máxima segurança.</li>
-                        <li>Apenas você tem acesso à chave de criptografia.</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>Armazenamento Otimizado</h3>
-                    <ul>
-                        <li>Compactação de dados para economizar espaço de armazenamento.</li>
-                        <li>Backups incrementais: apenas as alterações são salvas.</li>
-                        <li>Restauração fácil de versões anteriores de arquivos.</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>Flexibilidade de Armazenamento</h3>
-                    <ul>
-                        <li>Sincronize com seu próprio **Google Drive** (planos pessoais/corporativos).</li>
-                        <li>Opção para servidores privados **VPS** para total controle.</li>
-                        <li>Compatibilidade com diversos serviços de armazenamento em nuvem.</li>
-                    </ul>
-                </div>
-                <div class="card">
-                    <h3>Suporte Completo</h3>
-                    <ul>
-                        <li>**Instalação e configuração completa** do Duplicati.</li>
-                        <li>Criação de rotinas de backup automáticas e personalizadas.</li>
-                        <li>Suporte técnico para dúvidas e restauração de dados.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-        ---
-        <section id="planos" class="section-padding anydesk-section">
-            <div align="center">
-                <img src="02.png" alt="Cloud Backup Solutions" style="max-width: 100%; height: auto; margin-bottom: 20px;">
-            </div>
-            <h3>Escolha o Plano Ideal para Você!</h3>
-            <p>Oferecemos a instalação e configuração do Duplicati em todos os nossos planos, adaptados à sua necessidade. Se você já tem um Google Drive, nós integramos a solução para você. Se preferir um ambiente mais isolado e seguro, configure um servidor VPS privado.</p>
-            <p>Entre em contato conosco para discutirmos a melhor estratégia de backup para o seu negócio ou uso pessoal. Oferecemos soluções personalizadas e acessíveis.</p>
-            <p style="font-size: 0.95em; color: #a0a8b3; margin-top: 20px;">
-                Seus dados, sua segurança, seu controle.
-            </p>
-              <div class="grid-container">
-                <div class="card">
-                    <h3>Plano Pessoal</h3>
-				<p>Ideal para freelancers, estudantes ou qualquer pessoa que precise proteger seus arquivos mais importantes, como documentos, fotos e vídeos.</p>
-                    <ul>
-						<li>Instalação e Configuração: Realizamos a instalação completa do Duplicati no seu computador.</li>
-
-<li>Armazenamento Personalizado: O backup é feito diretamente na sua conta de Google Drive, utilizando o espaço que você já possui.</li>
-
-<li>Agendamento Automático: Configuramos rotinas de backup diárias ou semanais para que você nunca mais se preocupe em perder um arquivo.</li>
-
-<li>Criptografia Total: Seus dados são criptografados antes de sair do seu computador, garantindo que a privacidade é 100% sua.</li>
-                        
-                    </ul>
-                    <br><br>
-                      <a href="https://loja.bithostel.com.br/produtos/plano-pessoal-de-configuracao-e-implementacao-de-sistema-de-backup-automaticoduplicati-na-cloud-google-drive-lite-basico-padrao-premium/" target="_blank" rel="noopener noreferrer" class="anydesk-download-btn">
-                R$ 149,35
-            </a>
-                </div>
-                  
-                <div class="card">
-                    <h3>Plano Corporativo</h3>
-<p>Projetado para empresas que precisam de uma solução de backup robusta, centralizada e com total controle sobre os dados.</p>
-
-                    <ul>
-                        <li>Instalação e Configuração: Implementação completa da solução Duplicati em múltiplos computadores ou servidores da sua empresa.</li>
-                        <li>Servidor VPS Privado: Recomendamos e configuramos o backup para um Servidor VPS (Virtual Private Server) privado, oferecendo um ambiente isolado e de alta performance.</li>
-                        <li>Gerenciamento Centralizado: Criamos um sistema de gerenciamento para que você ou sua equipe de TI possam monitorar todos os backups de forma eficiente.</li>
-                        <li>Segurança Avançada: Além da criptografia AES-256 padrão do Duplicati, o servidor VPS privado adiciona uma camada extra de segurança e controle.</li>
-                        <li>Suporte Prioritário: Oferecemos suporte técnico contínuo para qualquer necessidade de restauração de dados ou otimizações.</li>
-                    </ul>
-                        <a href="https://loja.bithostel.com.br/produtos/plano-corporativo-de-configuracao-e-implementacao-de-sistema-de-backup-automaticoduplicati-na-cloud-para-servidor-proprio-vps-privado-ou-google-drive/" target="_blank" rel="noopener noreferrer" class="anydesk-download-btn">
-                R$ 449,90
-            </a>
-                </div>
-                </div>
-          
-        
-            
-            
-        </section>
-        ---
-        <section id="contato" class="section-padding contact-section">
-            <h2>Pronto para Proteger Seus Dados?</h2>
-            <p>Fale conosco para tirar suas dúvidas e agendar a implementação da sua solução de backup em nuvem.</p>
-            <a href="https://wa.me/5513997853113?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20a%20solu%C3%A7%C3%A3o%20de%20Backup%20Duplicati." target="_blank" rel="noopener noreferrer" class="main-whatsapp-cta">
-                <span class="icon">&#x1F4AC;</span> Fale com a bithostel TI
-            </a>
-            <p style="font-size: 1.1em; color: #ff9900; font-weight: 500; margin-top: 30px;">
-                Sua tranquilidade digital é a nossa prioridade.
-            </p>
-        </section>
-    </main>
-    <div class="disclaimer">
-        <div class="container">
-            <p><strong>Informação Importante:</strong> A bithostel TI oferece o serviço de instalação e configuração do software Duplicati, um software de código aberto. O cliente é responsável por fornecer a conta de armazenamento em nuvem (ex: Google Drive, servidor VPS) onde os backups serão armazenados.</p>
-        </div>
-        <script type="text/javascript" src="https://www.free-counters.org/count/ifkh"></script><br> <a href='https://www.versicherungen.at/lebensversicherung/'>Lebensversicherung</a> <script type='text/javascript' src='https://whomania.com/ctr?id=5d30bd7af10ec8d94f6cf89042520870fa7a3117'></script>
+   <div align="center">
+			<img src="off.png">
+            <h1>Desculpe, conteúdo indisponível. Estamos trabalhando nisso...</h1>
     </div>
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 bithostel TI. Todos os direitos reservados.</p>
-        </div>
-    </footer>
-    <a href="https://wa.me/5513997853113?text=Ol%C3%A1!%20Gostaria%20de%20saber%20mais%20sobre%20a%20solu%C3%A7%C3%A3o%20de%20Backup%20Duplicati." class="whatsapp-float-btn" target="_blank" rel="noopener noreferrer">
-        <span>&#x1F4AC;</span>
-    </a>
-    <script>
-        document.getElementById('mobile-menu').addEventListener('click', function() {
-            var nav = document.getElementById('main-nav');
-            nav.classList.toggle('active');
-        });
-        var navLinks = document.querySelectorAll('#main-nav a');
-        navLinks.forEach(function(link) {
-            link.addEventListener('click', function() {
-                var nav = document.getElementById('main-nav');
-                if (nav.classList.contains('active')) {
-                    nav.classList.remove('active');
-                }
-            });
-        });
-    </script>
 </body>
 </html>
