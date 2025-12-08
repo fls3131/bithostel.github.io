@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Alerta de Segurança #010013 - Roteador TG1692A da Claro Net</title>
+    <title>Security Alert #010013 - TG1692A Router by Claro Net</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,7 +11,7 @@
             margin: 0;
             padding: 20px;
             line-height: 1.6;
-            font-size: 18px; /* Fonte aumentada aqui */
+            font-size: 18px;
         }
         header {
             background-color: #d9534f;
@@ -40,24 +40,84 @@
             margin-top: 30px;
             text-align: center;
             color: #555;
-            font-size: 14px; /* Opcionalmente, menor que o resto */
+            font-size: 14px;
         }
         .important {
             color: #d9534f;
             font-weight: bold;
         }
+        /* Estilo para o botão de idioma */
+        #language-button {
+            margin: 10px auto;
+            display: block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        #language-button:hover {
+            background-color: #0056b3;
+        }
     </style>
+    <script>
+        function switchLanguage() {
+            const currentLang = document.documentElement.lang;
+            if (currentLang === 'pt-br') {
+                // Mudar para inglês
+                document.documentElement.lang = 'en';
+                document.title = "Security Alert #010013 - TG1692A Router by Claro Net";
+                document.querySelector('header h1').innerText = "Security Alert #010013(07/12/2025) - TG1692A Router by Claro Net";
+                document.querySelector('section:nth-of-type(1) h2').innerText = "Vulnerability Description";
+                document.querySelector('section:nth-of-type(1) p:nth-of-type(1)').innerHTML = "A vulnerability has been identified in the <strong>TG1692A</strong> model by Claro Net that, when configured with WPS enabled, can allow attackers to invade the Wi-Fi network using the known <em>Pixie Dust</em> method.";
+                document.querySelector('section:nth-of-type(1) p:nth-of-type(2)').innerHTML = "This attack exploits a flaw in WPS, making it possible to invade the network without needing a password, as the key and pin are captured in seconds, allowing connection to your Wi-Fi network and putting your data and devices at risk.";
+                document.querySelector('section:nth-of-type(2) h2').innerText = "Security Recommendations";
+                document.querySelector('section:nth-of-type(2) ul').innerHTML = `
+                    <li>Disable WPS on your router immediately.</li>
+                    <li>Use a strong, complex password for your Wi-Fi network.</li>
+                    <li>Consider disabling WPS transmission permanently.</li>
+                `;
+                document.querySelector('section:nth-of-type(3) h2').innerText = "Important";
+                document.querySelector('section:nth-of-type(3) p.important').innerHTML = "If you have this router model, contact Claro Net or consult your manual to perform the security configurations recommended above.";
+                document.querySelector('footer p:nth-of-type(1)').innerText = "&copy; 2025 - Security Notice";
+                document.querySelector('footer p:nth-of-type(2)').innerHTML = 'Author/Researcher/Discoverer: Fabio Lipel Schmit | Email: <a href="mailto:fls31@protonmail.ch">fls31@protonmail.ch</a>';
+                document.querySelector('#language-button').innerText = 'Switch to Portuguese';
+            } else {
+                // Mudar para português
+                document.documentElement.lang = 'pt-br';
+                document.title = "Alerta de Segurança #010013 - Roteador TG1692A da Claro Net";
+                document.querySelector('header h1').innerText = "Alerta de Segurança #010013(07/12/2025) - Roteador ARRIS TG1692A da Claro Net";
+                document.querySelector('section:nth-of-type(1) h2').innerText = "Descrição da Vulnerabilidade";
+                document.querySelector('section:nth-of-type(1) p:nth-of-type(1)').innerHTML = "Foi identificada uma vulnerabilidade no modelo <strong>TG1692A</strong> da Claro Net que, quando configurado com WPS ativado, pode permitir que atacantes invadam a rede Wi-Fi utilizando o método conhecido como <em>Pixie Dust</em>.";
+                document.querySelector('section:nth-of-type(1) p:nth-of-type(2)').innerHTML = "Este ataque aproveita uma falha no WPS, tornando possível a invasão da rede sem necessidade de senha, a chave e o pin são capturados em segundos, permitindo assim conectar na rede wifi, colocando seus dados e dispositivos em risco.";
+                document.querySelector('section:nth-of-type(2) h2').innerText = "Recomendações de Segurança";
+                document.querySelector('section:nth-of-type(2) ul').innerHTML = `
+                    <li>Desative o WPS no seu roteador imediatamente.</li>
+                    <li>Utilize uma senha forte e complexa para sua rede Wi-Fi.</li>
+                    <li>Considere desabilitar a transmissão do WPS permanentemente.</li>
+                `;
+                document.querySelector('section:nth-of-type(3) h2').innerText = "Importante";
+                document.querySelector('section:nth-of-type(3) p.important').innerHTML = "Se você possui esse modelo de roteador, entre em contato com a Claro Net ou consulte o manual para realizar as configurações de segurança recomendadas acima.";
+                document.querySelector('footer p:nth-of-type(1)').innerText = "&copy; 2025 - Aviso de Segurança";
+                document.querySelector('footer p:nth-of-type(2)').innerHTML = 'Autor/Pesquisador/Descobridor: Fabio Lipel Schmit | Email: <a href="mailto:fls31@protonmail.ch">fls31@protonmail.ch</a>';
+                document.querySelector('#language-button').innerText = 'Switch to English';
+            }
+        }
+    </script>
 </head>
 <body>
+    <button id="language-button" onclick="switchLanguage()">Switch to English</button>
     <header>
-        <img src="modem.png" width="80" height="110">
+        <img src="modem.png" width="80" height="110" alt="Modem Logo" />
         <h1>Alerta de Segurança #010013(07/12/2025) - Roteador ARRIS TG1692A da Claro Net</h1>
     </header>
     <section>
         <h2>Descrição da Vulnerabilidade</h2>
         <p>Foi identificada uma vulnerabilidade no modelo <strong>TG1692A</strong> da Claro Net que, quando configurado com WPS ativado, pode permitir que atacantes invadam a rede Wi-Fi utilizando o método conhecido como <em>Pixie Dust</em>.</p>
         <p>Este ataque aproveita uma falha no WPS, tornando possível a invasão da rede sem necessidade de senha, a chave e o pin são capturados em segundos, permitindo assim conectar na rede wifi, colocando seus dados e dispositivos em risco.</p>
-       <div align="center"></div> <img src="falha.png"></div>
+        <div align="center"><img src="falha.png" alt="Falha de Segurança"></div>
     </section>
     <section>
         <h2>Recomendações de Segurança</h2>
