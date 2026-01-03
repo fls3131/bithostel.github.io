@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MX Linux Brasil - Performance e Praticidade</title>
+    <style>
+        :root {
+            --primary-color: #003366;
+            --accent-color: #008cba;
+            --success-color: #28a745;
+            --bg-color: #f8f9fa;
+        }
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--bg-color);
+        }
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        section {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        h2 {
+            color: var(--primary-color);
+            border-left: 5px solid var(--accent-color);
+            padding-left: 15px;
+        }
+        .respin-section {
+            background-color: #fff3cd;
+            border: 2px solid #ffeeba;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        .download-card {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .btn {
+            display: inline-block;
+            background-color: var(--success-color);
+            color: white;
+            padding: 18px 30px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            transition: transform 0.2s, background 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .btn:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        .badge {
+            background: #dc3545;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            border-top: 1px solid #ddd;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>MX Linux <span style="color: #ffd700;">Brasil</span></h1>
+    <p>A união perfeita entre estabilidade Debian e ferramentas intuitivas.</p>
+</header>
+
+<div class="container">
+    <section>
+        <h2>Sobre o MX Linux</h2>
+        <p>O <strong>MX Linux</strong> é consistentemente classificado como uma das distribuições mais populares no DistroWatch. Ele foi projetado para combinar uma área de trabalho elegante e eficiente com alta estabilidade e desempenho sólido.</p>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+            <div style="flex: 1; min-width: 250px;">
+                <h3>Por que escolher o MX?</h3>
+                <ul>
+                    <li>Consumo reduzido de RAM.</li>
+                    <li>Reconhecimento de hardware automático de ponta.</li>
+                    <li>Ideal para reviver PCs antigos e voar em PCs novos.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="respin-section">
+        <span class="badge">RECOMENDADO</span>
+        <h2>Download Snapshot Respin PT-BR</h2>
+        <p>Esta versão é um <strong>Snapshot (Respin)</strong> pré-configurado para a nossa região. Ao contrário da ISO padrão, este arquivo já traz:</p>
+        <ul style="list-style: none; padding: 0;">
+            <li>✅ Idioma Português Brasileiro (Sistema e LibreOffice).</li>
+            <li>✅ Teclado ABNT2 configurado por padrão.</li>
+            <li>✅ Repositórios locais otimizados para downloads rápidos.</li>
+            <li>✅ Codecs multimídia e fontes essenciais inclusos.</li>
+        </ul>
+
+        <div class="download-card">
+            <p><strong>Versão:</strong> MX Linux 25 BR Respin (XFCE 64-bit)</p>
+            <a href="https://mega.nz/file/96xj1ZDZ#yC53kyiadheF5tUccj-nbD9EUvvpl2HD8s22vs4tug0" class="btn">Baixar Snapshot PT-BR</a>
+        </div>
+    </section>
+</div>
+
+<footer>
+    <p>Comunidade MX Linux Brasil - 2026</p>
+    <p><em>"O Linux para quem quer que as coisas simplesmente funcionem."</em></p>
+</footer>
+
+</body>
+</html>
