@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual do Usuário - Pen Drive MX Linux BR 25</title>
+    <style>
+        :root {
+            --mx-blue: #003366;
+            --success: #2ecc71;
+            --warning: #f1c40f;
+            --text: #2c3e50;
+        }
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            line-height: 1.8;
+            color: var(--text);
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background-color: var(--mx-blue);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .container {
+            max-width: 800px;
+            margin: -30px auto 50px;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: var(--mx-blue);
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-top: 30px;
+        }
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .step-number {
+            background: var(--mx-blue);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        .alert {
+            background-color: #fff3cd;
+            border-left: 5px solid var(--warning);
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .persistence-card {
+            background-color: #e8f4fd;
+            border: 1px solid #b3d7ff;
+            padding: 20px;
+            border-radius: 8px;
+        }
+        code {
+            background: #eee;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .btn-print {
+            display: block;
+            width: fit-content;
+            margin: 20px auto;
+            background: #666;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+        @media print {
+            .btn-print { display: none; }
+            body { background: white; }
+            .container { box-shadow: none; margin-top: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Guia de Início Rápido</h1>
+    <p>Pen Drive MX Linux BR 25 - Snapshot Respin Proton Edition</p>
+</div>
+
+<div class="container">
+    <a href="#" class="btn-print" onclick="window.print()">🖨️ Imprimir Manual</a>
+
+    <section>
+        <h2>1. Como Iniciar (Boot)</h2>
+        <p>Para usar o sistema sem instalar nada no seu HD, siga estes passos:</p>
+        
+        <div class="step">
+            <div class="step-number">1</div>
+            <div>Insira o pen drive em uma porta USB (preferencialmente USB 3.0/azul).</div>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div>Ligue o computador e pressione repetidamente a <strong>tecla de Boot</strong> do seu PC.</div>
+        </div>
+
+        <div class="alert">
+            <strong>Dica:</strong> As teclas mais comuns são <code>F12</code>, <code>F11</code>, <code>F10</code>, <code>F8</code> ou <code>ESC</code>. Consulte a marca da sua placa-mãe ou notebook.
+        </div>
+
+        <div class="step">
+            <div class="step-number">3</div>
+            <div>Selecione o dispositivo USB na lista e pressione <code>Enter</code>.</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>2. Ativando a Persistência</h2>
+        <p>A persistência permite salvar arquivos e configurações no pen drive.</p>
+        <div class="persistence-card">
+            <p>Ao ver o menu inicial do MX Linux:</p>
+            <ol>
+                <li>Navegue até a opção <strong>"Options"</strong> ou use as teclas de função indicadas na tela.</li>
+                <li>Verifique se a opção <strong>Persist All</strong> (ou Persistência Total) está selecionada.</li>
+                <li>Prossiga com o boot. Na primeira vez, o sistema pode pedir para criar o arquivo de persistência; apenas confirme os valores padrão.</li>
+            </ol>
+        </div>
+    </section>
+
+    <section>
+        <h2>3. Acessando a Suite Proton</h2>
+        <p>O seu sistema já vem com os aplicativos Proton pré-instalados para sua segurança:</p>
+        <ul>
+            <li><strong>Proton VPN:</strong> Localizado no menu <em>Internet</em>. Use para mascarar seu IP em redes públicas.</li>
+            <li><strong>Proton Mail/Drive:</strong> Atalhos disponíveis na barra de favoritos do navegador ou no menu de aplicativos.</li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>4. Idioma e Teclado</h2>
+        <p>Este Respin já está configurado em <strong>Português (Brasil)</strong> e teclado <strong>ABNT2</strong>. Caso precise ajustar:</p>
+        <ul>
+            <li>Vá em <em>Configurações > Teclado > Layout</em> para gerenciar as teclas.</li>
+            <li>O fuso horário está definido para o horário de Brasília.</li>
+        </ul>
+    </section>
+
+    <div class="alert" style="border-left-color: var(--success); background-color: #e9f7ef;">
+        <strong>Importante:</strong> Ao desligar o sistema, sempre use a opção "Encerrar" do menu. Nunca puxe o pen drive com o computador ligado para evitar corromper seus dados salvos.
+    </div>
+
+    <footer style="text-align: center; color: #888; margin-top: 40px; font-size: 0.8rem;">
+        Suporte Técnico: suporte@bithostel.com.br - 13 99785-3113<br>
+        © 2026 MX Linux Brasil - Edição Snapshot Respin - Proton Suite
+    </footer>
+</div>
+
+</body>
+</html>

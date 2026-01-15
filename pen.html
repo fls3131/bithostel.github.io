@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pen Drive MX Linux BR 25 - Edição Snapshot Proton</title>
+    <style>
+        :root {
+            --mx-blue: #003366;
+            --proton-purple: #6d4aff;
+            --accent-gold: #ffcc00;
+            --text-dark: #2d3436;
+            --bg-light: #f4f7f6;
+            --whatsapp-green: #25d366;
+            --install-blue: #008cba;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--mx-blue) 0%, #001a33 100%);
+            color: white;
+            padding: 60px 20px 100px;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0% 100%);
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .logo-container img {
+            height: 50px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .badge {
+            background: var(--accent-gold);
+            color: black;
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-title {
+            font-size: 3rem;
+            margin: 20px 0;
+            font-weight: 800;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-top: -50px;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-proton {
+            border: 2px solid var(--proton-purple);
+            position: relative;
+        }
+
+        .card-proton::before {
+            content: "PRÉ-INSTALADO";
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--proton-purple);
+            color: white;
+            padding: 2px 12px;
+            font-size: 0.7rem;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        /* Seção O Que Você Recebe */
+        .whats-included {
+            background: white;
+            padding: 40px;
+            margin: 40px 0;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .included-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .included-item {
+            text-align: center;
+            padding: 20px;
+            border: 1px dashed #ccc;
+            border-radius: 15px;
+        }
+
+        .included-item i {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .install-section {
+            background: linear-gradient(135deg, #e7f3ff 0%, #ffffff 100%);
+            padding: 40px;
+            margin-top: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--install-blue);
+            text-align: center;
+        }
+
+        .price-section {
+            text-align: center;
+            margin: 60px 0;
+            padding: 40px;
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .price-tag {
+            font-size: 4rem;
+            color: var(--mx-blue);
+            font-weight: 900;
+            margin: 10px 0;
+        }
+
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--whatsapp-green);
+            color: white;
+            padding: 22px 50px;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: bold;
+            border-radius: 50px;
+            box-shadow: 0 10px 20px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            gap: 15px;
+        }
+
+        .btn-whatsapp:hover { transform: scale(1.05); background-color: #1ebd59; }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            background: #1a1a1a;
+            color: #ccc;
+        }
+
+        .badge-install {
+            background: var(--install-blue);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo-container">
+        <img src="mx.svg" alt="MX Linux Logo"> 
+        <img src="proton.svg" alt="Proton Logo">
+        <img src="pen.png" alt="MX Linux Logo">
+    </div>
+    <span class="badge">Kit de Sobrevivência Digital</span>
+    <h1 class="hero-title">Privacidade e Performance no seu Bolso.</h1>
+    <p>MX Linux BR 25 + Suite Proton em Hardware de Alta Velocidade</p>
+</header>
+
+<div class="container">
+    <div class="grid">
+        <div class="card">
+            <span class="feature-icon">🛡️</span>
+            <h3>Sistema Persistente</h3>
+            <p>Leve seus arquivos e configurações para qualquer PC. A persistência de dados permite que suas modificações sejam salvas no próprio pen drive. Tudo isso sem deixar vestígio algum no CPU que usou. </p>
+        </div>
+
+        <div class="card card-proton">
+            <span class="feature-icon">🔒</span>
+            <h3>Foco em Privacidade</h3>
+            <p>Crie sua conta e utilize gratuitamente os recursos. Navegue com VPN ativa e e-mail criptografado. Suite Proton pré-instalada para sua segurança total.</p>
+        </div>
+
+        <div class="card">
+            <span class="feature-icon">🚀</span>
+            <h3>Hardware Premium</h3>
+            <p>Sistema otimizado para extrair o máximo de velocidade do barramento USB 3.2, garantindo fluidez comparável a um SSD interno.</p>
+        </div>
+    </div>
+
+    <section class="whats-included">
+        <h2 style="text-align: center; color: var(--mx-blue);">O Que Você Recebe em Casa</h2>
+        <p style="text-align: center;">Tudo o que você precisa para começar sua jornada de liberdade digital imediatamente.</p>
+        
+        <div class="included-grid">
+            <div class="included-item">
+                <span style="font-size: 3rem;">💾</span>
+                <strong>Hardware 128GB</strong>
+                <p>Pen Drive USB 3.2 Gen 1 de alta performance com ampla capacidade de armazenamento.</p>
+            </div>
+            <div class="included-item">
+                <span style="font-size: 3rem;">🐧</span>
+                <strong>MX Linux BR 25</strong>
+                <p>Snapshot personalizado em português com todos os codecs e Suite Proton pronta para uso.</p>
+            </div>
+            <div class="included-item">
+                <span style="font-size: 3rem;">📖</span>
+                <strong>Manual Digital</strong>
+                <p>Guia passo-a-passo em PDF sobre como dar boot, configurar a persistência e segurança.</p>
+            </div>
+            <div class="included-item">
+                <span style="font-size: 3rem;">⚙️</span>
+                <strong>Suporte à Instalação</strong>
+                <p>Possibilidade de instalar o sistema no seu HD/SSD como sistema principal ou dual-boot.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="install-section">
+        <h2>Pronto para Qualquer Desafio</h2>
+        <p>Use como sistema portátil ou transforme seu computador velho em uma máquina de guerra moderna.</p>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; margin-top: 20px; text-align: left;">
+            <div style="flex: 1; min-width: 250px;">
+                <strong>💻 No Computador</strong>
+                <p>Instalação definitiva via MX Installer em menos de 10 min. Compatível com PCs novos e antigos.</p>
+            </div>
+            <div style="flex: 1; min-width: 250px;">
+                <strong>🏃 No Pen Drive</strong>
+                <p>Modo Live com Persistência Habilitada. Suas senhas e Wi-Fi salvos para o próximo boot.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="price-section">
+        <p style="text-transform: uppercase; letter-spacing: 2px; color: #666;">Envio Imediato para todo o Brasil</p>
+        <div class="price-tag">R$ 119,90</div>
+        <p>Kit Completo: Hardware 128GB + Sistema + Manual</p>
+        <br>
+        <a href="https://wa.me/5500000000000?text=Olá!%20Quero%20meu%20Kit%20Pen%20Drive%20MX%20Linux%20128GB" class="btn-whatsapp" target="_blank">
+            <svg style="width:28px;height:28px" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.66 20.15 9.3 19.8 8.1 19.14L7.81 18.98L4.67 19.8L5.5 16.74L5.32 16.45C4.59 15.28 4.21 13.92 4.21 12.54C4.21 11.24 4.47 9.97 4.97 8.79C5.47 7.6 6.2 6.55 7.12 5.62C8.05 4.7 9.1 3.97 10.28 3.47C11.46 2.97 12.73 2.71 14.03 2.71M9.07 7.39C8.84 7.39 8.46 7.47 8.16 7.81C7.85 8.15 7 8.95 7 10.59C7 12.24 8.19 13.83 8.35 14.05C8.5 14.28 10.63 17.55 13.9 18.96C14.67 19.3 15.27 19.5 15.74 19.65C16.51 19.9 17.2 19.86 17.76 19.78C18.37 19.69 19.66 19 19.93 18.26C20.2 17.5 20.2 16.86 20.12 16.72C20.04 16.58 19.81 16.5 19.47 16.33C19.13 16.16 17.44 15.33 17.13 15.21C16.81 15.1 16.58 15.05 16.35 15.39C16.12 15.73 15.47 16.5 15.27 16.72C15.07 16.94 14.88 16.97 14.54 16.8C14.2 16.63 13.11 16.27 11.81 15.11C10.8 14.21 10.12 13.1 9.92 12.76C9.72 12.42" />
+            </svg>
+            PEDIR PELO WHATSAPP
+        </a>
+        <p style="margin-top: 15px; font-size: 0.85rem; color: #777;">Garantia de hardware de 1 ano contra defeitos de fabricação.</p>
+    </div>
+</div>
+
+<footer>
+    <p><strong>MX Linux Brasil Store 2026</strong></p>
+    <p>Tecnologia Snapshot BR - Pen Drive 128GB USB 3.2<br>
+    <em>Crie sua conta Proton para habilitar os serviços gratuitos de segurança.</em><br>© 2026 MXLinux | Linux® is the registered trademark of Linus Torvalds in the U.S. and other countries.
+</p>
+</footer>
+
+</body>
+</html>
