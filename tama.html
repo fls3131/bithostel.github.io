@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tux Pro - Edição Velocidade</title>
+    <title>Tux Pro - Energy Update</title>
     <style>
         :root {
             --danger: #e74c3c;
@@ -89,7 +89,7 @@
         
     <div class="pet-container" id="container">
         <div id="pet-visual" class="pet-display">
-            <img src="Tux.png" alt="Tux">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Tux.png" alt="Tux">
         </div>
     </div>
         
@@ -159,11 +159,10 @@
                 fome = Math.min(100, fome + 12);
                 felicidade = Math.max(0, felicidade - 10);
                 higiene = Math.max(0, higiene - 8);
-                energia = Math.max(0, energia - 10);
+                energia = Math.max(0, energia - 10); // Queda passiva de energia
                 tempoRestante = tempoAtual;
                 verificarMorte();
                 atualizarInterface();
-                // Pequeno feedback visual na barra de ciclo
                 elCicloBar.style.backgroundColor = "white";
                 setTimeout(() => elCicloBar.style.backgroundColor = "var(--primary)", 100);
             }
@@ -201,20 +200,26 @@
     }
 
     function atualizarInterface() {
-        document.getElementById('fome-bar').style.width = Math.max(0, Math.min(100, fome)) + "%";
-        document.getElementById('felicidade-bar').style.width = Math.max(0, Math.min(100, felicidade)) + "%";
-        document.getElementById('higiene-bar').style.width = Math.max(0, Math.min(100, higiene)) + "%";
-        document.getElementById('energia-bar').style.width = Math.max(0, Math.min(100, energia)) + "%";
+        // Garantindo limites de 0 a 100
+        fome = Math.max(0, Math.min(100, fome));
+        felicidade = Math.max(0, Math.min(100, felicidade));
+        higiene = Math.max(0, Math.min(100, higiene));
+        energia = Math.max(0, Math.min(100, energia));
+
+        document.getElementById('fome-bar').style.width = fome + "%";
+        document.getElementById('felicidade-bar').style.width = felicidade + "%";
+        document.getElementById('higiene-bar').style.width = higiene + "%";
+        document.getElementById('energia-bar').style.width = energia + "%";
         document.getElementById('idade-val').innerText = idade;
         
         const elMsg = document.getElementById('msg');
         if (vivo) {
             if (fome >= 70 || felicidade <= 30 || higiene <= 30 || energia <= 30) {
                 elPet.classList.add('critical');
-                elMsg.innerHTML = `<span style="color: var(--danger)">Cuide do ${nomePet}!</span>`;
+                elMsg.innerHTML = `<span style="color: var(--danger)">Situação Crítica!</span>`;
             } else {
                 elPet.classList.remove('critical');
-                elMsg.innerHTML = `<span style="color: var(--success)">${nomePet} está feliz! ✨</span>`;
+                elMsg.innerHTML = `<span style="color: var(--success)">${nomePet} está indo bem! ✨</span>`;
             }
         }
     }
@@ -225,9 +230,15 @@
         elPet.classList.add('dead');
         elBalao.style.display = 'none';
         elCicloBar.style.width = "0%";
+        
+        let motivo = "de exaustão";
+        if (fome >= 100) motivo = "de fome";
+        if (felicidade <= 0) motivo = "de tristeza";
+        if (higiene <= 0) motivo = "por falta de higiene";
+
         document.getElementById('msg').innerHTML = `
             <div style="color: var(--danger); font-size: 1.5rem; font-weight: bold;">GAME OVER</div>
-            <div style="font-size: 1rem; margin-top: 5px;">${nomePet} não resistiu...</div>
+            <div style="font-size: 1rem; margin-top: 5px;">${nomePet} morreu ${motivo}.</div>
         `;
         document.querySelectorAll('.btn-action').forEach(b => b.disabled = true);
         document.getElementById('speed-slider').disabled = true;
@@ -242,29 +253,30 @@
         switch(tipo) {
             case 'alimentar':
                 fome -= 35;
-                higiene -= 15; // Suja
+                higiene -= 15;
+                energia += 5; // Comer dá um leve ânimo
                 elPet.classList.add('anim-comer');
                 criarParticula('🐟');
                 falar("Nham! 🐟");
                 break;
             case 'carinho':
                 felicidade += 20;
-                fome += 5; // Abre o apetite
+                fome += 5;
                 elPet.classList.add('anim-carinho');
                 criarParticula('💙');
                 falar("Pingu! 💙");
                 break;
             case 'passear':
                 felicidade += 30;
-                energia -= 25; // Cansa
-                higiene -= 10; // Suja um pouco
+                energia -= 35; // Gasta muita energia!
+                higiene -= 15;
                 elPet.classList.add('anim-passear');
-                falar("Escorregando! ❄️");
+                falar("Geeeelo! ❄️");
                 break;
             case 'descansar':
-                energia += 55;
-                fome += 25; // Acorda com fome
-                felicidade -= 15; // Tédio de dormir muito
+                energia += 60; // Recupera muito
+                fome += 25;    // Muita fome ao acordar
+                felicidade -= 15; // Fica entediado
                 elPet.classList.add('anim-dormir');
                 criarParticula('💤');
                 falar("Zzz... 😴");
@@ -272,6 +284,7 @@
             case 'banho':
                 higiene = 100;
                 felicidade -= 10;
+                energia -= 10; // O esforço do banho cansa
                 elPet.classList.add('anim-limpar');
                 criarParticula('🌊');
                 falar("Splash! 🌊");
