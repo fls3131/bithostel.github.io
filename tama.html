@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tamagoshi Pro - Tela Grande</title>
+    <title>Tamagoshi Pro - Cores Customizadas</title>
     <style>
         :root {
             --danger: #e74c3c;
@@ -24,7 +24,6 @@
             overflow: hidden;
         }
 
-        /* Aumentado em 40% (380px -> 532px) */
         .game-card { 
             background: white; 
             padding: 35px; 
@@ -80,7 +79,7 @@
         }
 
         .pet-container {
-            height: 180px; /* Aumentado */
+            height: 180px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -122,13 +121,24 @@
         input[type=range] { width: 100%; cursor: pointer; accent-color: var(--primary); }
 
         .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        button { padding: 12px; border: none; border-radius: 15px; background: var(--primary); color: white; cursor: pointer; font-weight: bold; font-size: 0.9rem; transition: 0.2s; }
+        button { padding: 12px; border: none; border-radius: 15px; color: white; cursor: pointer; font-weight: bold; font-size: 0.9rem; transition: 0.2s; }
         button:active { transform: scale(0.95); }
-        button:disabled { background: #bdc3c7; cursor: not-allowed; opacity: 0.6; }
+        button:disabled { background: #bdc3c7 !important; cursor: not-allowed; opacity: 0.6; }
+
+        /* --- NOVAS CORES DOS BOTÕES --- */
+        .btn-alimentar { background: var(--danger); }
+        .btn-alimentar:hover { background: #c0392b; }
+        
+        .btn-verde { background: var(--success); }
+        .btn-verde:hover { background: #27ae60; }
 
         .btn-higiene { background: var(--higiene); }
+        .btn-higiene:hover { background: #8e44ad; }
+
         .btn-descanso { background: var(--energia); color: #333; }
-        #reset-btn { background: var(--success) !important; opacity: 1 !important; display: none; grid-column: span 2; margin-top: 15px; font-size: 1.1rem; padding: 15px; }
+        .btn-descanso:hover { background: #d4ac0d; }
+
+        #reset-btn { background: #2c3e50 !important; display: none; grid-column: span 2; margin-top: 15px; font-size: 1.1rem; padding: 15px; }
 
         #msg { min-height: 70px; font-weight: bold; margin-top: 10px; font-size: 1.1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .final-score { font-size: 1.4rem; color: #2c3e50; margin-top: 12px; background: #f1c40f; padding: 12px 25px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
@@ -167,9 +177,9 @@
     </div>
 
     <div class="actions">
-        <button class="btn-action" onclick="interagir('alimentar')">Alimentar</button>
-        <button class="btn-action" onclick="interagir('carinho')">Carinho</button>
-        <button class="btn-action" onclick="interagir('passear')">Passear</button>
+        <button class="btn-action btn-alimentar" onclick="interagir('alimentar')">Alimentar</button>
+        <button class="btn-action btn-verde" onclick="interagir('carinho')">Carinho</button>
+        <button class="btn-action btn-verde" onclick="interagir('passear')">Passear</button>
         <button class="btn-action btn-descanso" onclick="interagir('descansar')">Descansar</button>
         <button class="btn-action btn-higiene" onclick="interagir('banho')">Dar Banho</button>
         <button class="btn-action btn-higiene" onclick="interagir('rosto')">Lavar Rosto</button>
@@ -265,17 +275,17 @@
         const elMsg = document.getElementById('msg');
         if (vivo) {
             let avisos = [];
-            if (felicidade <= 40) avisos.push(nomeGatinho + " está carente! 😢");
-            else if (fome >= 75) avisos.push(nomeGatinho + " está faminto! 🍖");
-            else if (higiene <= 30) avisos.push("Banho agora! 🧼");
-            else if (energia <= 30) avisos.push("Sem energia... 💤");
+            if (felicidade <= 40) avisos.push(nomeGatinho + " quer atenção! 😢");
+            else if (fome >= 75) avisos.push(nomeGatinho + " está com fome! 🍖");
+            else if (higiene <= 30) avisos.push("Precisa de limpeza! 🧼");
+            else if (energia <= 30) avisos.push("Bateria fraca... 💤");
 
             if (avisos.length > 0) {
                 elEmoji.classList.add('critical');
                 elMsg.innerHTML = `<span style="color: var(--danger)">${avisos[0]}</span>`;
             } else {
                 elEmoji.classList.remove('critical');
-                elMsg.innerHTML = `<span style="color: var(--success)">${nomeGatinho} está ótimo! ✨</span>`;
+                elMsg.innerHTML = `<span style="color: var(--success)">${nomeGatinho} está feliz! ✨</span>`;
             }
         }
     }
@@ -337,7 +347,7 @@
                 felicidade = Math.max(0, felicidade - 10);
                 elEmoji.classList.add('anim-limpar');
                 criarParticula('🧼');
-                falar("Refrescante! ✨");
+                falar("Banho bom! ✨");
                 break;
             case 'rosto':
                 higiene = Math.min(100, higiene + 30);
