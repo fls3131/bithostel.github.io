@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tux Pro - Energy Update</title>
+    <title>Tux Pro - Historiador Master</title>
     <style>
         :root {
             --danger: #e74c3c;
@@ -21,7 +21,7 @@
         .game-card { 
             background: #ecf0f1; padding: 35px; border-radius: 40px; 
             box-shadow: 0 30px 60px rgba(0,0,0,0.5); text-align: center; 
-            width: 532px; position: relative; transform: scale(0.8); transform-origin: center; 
+            width: 550px; position: relative; transform: scale(0.85); transform-origin: center; 
         }
         .idade-badge { 
             position: absolute; top: 25px; left: 25px; background: var(--primary); 
@@ -31,13 +31,14 @@
         #ciclo-bar { width: 100%; height: 100%; background: var(--primary); transition: width 0.1s linear; }
         
         .speech-bubble { 
-            position: absolute; top: -20px; right: 30px; background: white; 
-            border-radius: 20px; padding: 15px; font-size: 1rem; font-weight: bold; 
-            box-shadow: 2px 2px 15px rgba(0,0,0,0.1); max-width: 160px; display: none; z-index: 10; 
+            position: absolute; top: -75px; left: 50%; transform: translateX(-50%); 
+            background: white; border-radius: 20px; padding: 18px; font-size: 1rem; 
+            font-weight: bold; box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+            width: 320px; display: none; z-index: 100; border: 3px solid var(--primary); color: #2c3e50;
         }
 
         .pet-container { height: 180px; display: flex; justify-content: center; align-items: center; position: relative; }
-        .pet-display { width: 150px; height: 150px; transition: transform 0.4s; display: flex; align-items: center; justify-content: center; }
+        .pet-display { width: 150px; height: 150px; transition: transform 0.4s; }
         .pet-display img { width: 100%; height: auto; display: block; }
         
         /* Animações */
@@ -58,16 +59,16 @@
         .particle { position: absolute; pointer-events: none; animation: float-up 2s forwards; font-size: 35px; z-index: 20; }
         @keyframes float-up { 0% { transform: translateY(0) opacity: 1; } 100% { transform: translateY(-120px) opacity: 0; } }
 
-        .speed-control { margin: 20px 0; background: #dfe6e9; padding: 15px; border-radius: 20px; border: 1px solid #b2bec3; }
+        .speed-control { margin: 15px 0; background: #dfe6e9; padding: 12px; border-radius: 20px; border: 1px solid #b2bec3; }
         input[type=range] { width: 100%; cursor: pointer; accent-color: var(--primary); }
 
         .stats { text-align: left; margin-bottom: 20px; }
-        .bar-label { font-size: 0.85rem; font-weight: bold; display: block; margin-top: 8px; color: #34495e; }
-        .bar-container { background: #ddd; border-radius: 12px; height: 12px; width: 100%; margin: 5px 0 10px; overflow: hidden; }
+        .bar-label { font-size: 0.8rem; font-weight: bold; display: block; margin-top: 6px; color: #34495e; }
+        .bar-container { background: #ddd; border-radius: 12px; height: 10px; width: 100%; margin: 4px 0 8px; overflow: hidden; }
         .bar { height: 100%; transition: width 0.5s ease-in-out; }
 
-        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-        button { padding: 12px; border: none; border-radius: 15px; color: white; cursor: pointer; font-weight: bold; font-size: 0.9rem; transition: 0.2s; }
+        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        button { padding: 10px; border: none; border-radius: 12px; color: white; cursor: pointer; font-weight: bold; font-size: 0.85rem; transition: 0.2s; }
         button:active { transform: scale(0.95); }
         button:disabled { background: #bdc3c7 !important; cursor: not-allowed; opacity: 0.6; }
 
@@ -77,7 +78,7 @@
         .btn-descanso { background: var(--energia); color: #333; }
 
         #reset-btn { background: var(--bg-dark) !important; display: none; grid-column: span 2; margin-top: 15px; font-size: 1.1rem; padding: 15px; }
-        #msg { min-height: 70px; font-weight: bold; margin-top: 10px; font-size: 1.1rem; }
+        #msg { min-height: 50px; font-weight: bold; margin-top: 10px; font-size: 1rem; }
         .dead { filter: grayscale(1) opacity(0.5); transform: rotate(180deg) !important; transition: 2s; }
     </style>
 </head>
@@ -85,7 +86,7 @@
 
 <div class="game-card">
     <div class="idade-badge">IDADE: <span id="idade-val">0</span> dias</div>
-    <div id="balao" class="speech-bubble">Olá!</div>
+    <div id="balao" class="speech-bubble">Carregando história...</div>
         
     <div class="pet-container" id="container">
         <div id="pet-visual" class="pet-display">
@@ -98,13 +99,12 @@
     </div>
 
     <div class="speed-control">
-        <label id="speed-title" style="font-weight: bold; display:block; margin-bottom:5px;">VELOCIDADE: NÍVEL 01</label>
+        <label id="speed-title" style="font-weight: bold; display:block; font-size: 0.8rem;">VELOCIDADE: NÍVEL 01</label>
         <input type="range" id="speed-slider" min="0" max="4" step="1" value="0" oninput="mudarVelocidade(this.value)">
-        <span id="speed-desc" style="font-size:0.8rem; color:var(--primary)">Rápido (20s)</span>
     </div>
         
     <div class="stats">
-        <span class="bar-label">🐟 FOME (PEIXES)</span>
+        <span class="bar-label">🐟 FOME</span>
         <div class="bar-container"><div id="fome-bar" class="bar" style="background:var(--danger)"></div></div>
         <span class="bar-label">😊 FELICIDADE</span>
         <div class="bar-container"><div id="felicidade-bar" class="bar" style="background:var(--success)"></div></div>
@@ -116,10 +116,10 @@
 
     <div class="actions">
         <button class="btn-action btn-alimentar" onclick="interagir('alimentar')">Dar Peixe</button>
-        <button class="btn-action btn-verde" onclick="interagir('carinho')">Fazer Cafuné</button>
-        <button class="btn-action btn-verde" onclick="interagir('passear')">Escorregar no Gelo</button>
+        <button class="btn-action btn-verde" onclick="interagir('carinho')">Cafuné</button>
+        <button class="btn-action btn-verde" onclick="interagir('passear')">Escorregar</button>
         <button class="btn-action btn-descanso" onclick="interagir('descansar')">Cochilar</button>
-        <button class="btn-action btn-higiene" onclick="interagir('banho')">Mergulho Gelado</button>
+        <button class="btn-action btn-higiene" onclick="interagir('banho')">Mergulho</button>
         <button class="btn-action btn-higiene" onclick="interagir('rosto')">Limpar Bico</button>
         <button id="reset-btn" onclick="location.reload()">REANIMAR TUX</button>
     </div>
@@ -131,10 +131,46 @@
     let vivo = true, nomePet = "Tux";
     let gameLoop, visualLoop;
     
+    const fatosHistoricos = [
+        "1969: O homem pisa na Lua pela 1ª vez! 🚀", "1906: Santos Dumont voa com o 14-Bis! ✈️",
+        "1945: Fim da 2ª Guerra Mundial. ☮️", "1500: Brasil é descoberto por Cabral. 🇧🇷",
+        "1989: Queda do Muro de Berlim. 🧱", "1503: Mona Lisa começa a ser pintada. 🎨",
+        "476: Queda do Império Romano do Ocidente. 🏛️", "1905: Einstein cria a Teoria da Relatividade. 🧠",
+        "1789: Início da Revolução Francesa. 🇫🇷", "1969: Nasce a Arpanet (mãe da Internet). 🌐",
+        "1996: Tux vira mascote oficial do Linux! 🐧", "1876: Telefone é patenteado por Bell. 📞",
+        "1929: A quebra da Bolsa de NY inicia a crise. 📉", "1953: DNA tem sua estrutura descoberta. 🧬",
+        "1912: O Titanic naufraga no Atlântico. 🚢", "1964: Martin Luther King ganha o Nobel. 🕊️",
+        "1888: Abolição da escravidão no Brasil. ⛓️", "1889: Proclamação da República no Brasil. 👑",
+        "1947: Gandhi conquista independência da Índia. 🇮🇳", "1985: Rock in Rio acontece pela 1ª vez. 🎸",
+        "1822: Dom Pedro I declara Independência. ⚔️", "1994: Nelson Mandela assume na África do Sul. 🇿🇦",
+        "1977: Lançamento do 1º filme Star Wars. 🌌", "1908: Henry Ford lança o Modelo T. 🚗",
+        "1928: Penicilina é descoberta por Fleming. 💊", "2004: O Facebook é criado por Zuckerberg. 💻",
+        "1957: Sputnik 1 é o 1º satélite no espaço. 📡", "1455: Gutenberg imprime a 1ª Bíblia. 📖",
+        "1990: Nelson Mandela é libertado. 🔓", "1914: Início da 1ª Guerra Mundial. ⚔️",
+        "1932: Mulheres ganham direito ao voto no BR. 🗳️", "1981: Lançamento do primeiro PC da IBM. 🖥️",
+        "2007: Steve Jobs lança o 1º iPhone. 📱", "1972: Atari lança o jogo Pong! 🕹️",
+        "1941: Ataque japonês a Pearl Harbor. ✈️", "1896: 1ª Olimpíada da Era Moderna (Atenas). 🏅",
+        "1666: Newton observa a gravidade (maçã). 🍎", "1939: Início da 2ª Guerra Mundial. 💥",
+        "1997: O robô Deep Blue vence Kasparov. ♟️", "1962: Crise dos Mísseis em Cuba. ☢️",
+        "1986: Desastre nuclear em Chernobyl. ☣️", "1955: Rosa Parks recusa ceder lugar no ônibus. 🚌",
+        "1961: Yuri Gagarin é o 1º homem no espaço. 👨‍🚀", "1901: 1º Prêmio Nobel é entregue. 🏆",
+        "1808: Família Real Portuguesa chega ao BR. 🚢", "1948: Criação do Estado de Israel. 🇮🇱",
+        "1973: 1ª chamada de celular da história. 📞", "1991: Dissolução da União Soviética. 🇷🇺",
+        "2001: Ataque às Torres Gêmeas (11/09). 🗽", "1922: Semana de Arte Moderna em SP. 🎨",
+        "1968: O ano que não terminou (protestos). 📢", "1946: Criado o ENIAC (1º computador). 💾",
+        "1839: Invenção do Daguerreótipo (Foto). 📸", "1954: Fundação da cidade de Brasília. 🏗️",
+        "1971: Enviado o 1º e-mail do mundo. 📧", "1995: Lançamento do Windows 95. 💿",
+        "1347: Peste Negra devasta a Europa. 🐁", "1517: Lutero inicia a Reforma Protestante. 📜",
+        "1760: Início da Revolução Industrial. 🏭", "1859: Darwin publica 'Origem das Espécies'. 🦍",
+        "1949: Proclamação da República na China. 🇨🇳", "1960: Beatles começam a tocar em Hamburgo. 🎸",
+        "1992: Rio-92 debate o meio ambiente. 🌎", "1984: Apple lança o computador Macintosh. 🍎",
+        "1903: Irmãos Wright voam nos EUA. 🛩️", "1519: Fernão de Magalhães inicia volta ao mundo. ⛵",
+        "1865: Fim da Guerra Civil Americana. 🇺🇸", "1950: 1ª Copa do Mundo no Brasil. ⚽",
+        "1994: Ayrton Senna falece em Ímola. 🏎️", "2000: O temido Bug do Milênio não ocorreu. 👾",
+        "1844: 1ª mensagem de código Morse enviada. 📟", "1963: Martin Luther King: 'I have a dream'. 🗣️"
+    ];
+
     const tempos = [20000, 30000, 40000, 50000, 60000];
-    const nomesNivel = ["NÍVEL 01", "NÍVEL 02", "NÍVEL 03", "NÍVEL 04", "NÍVEL 05"];
-    const descNivel = ["Rápido (20s)", "Normal (30s)", "Devagar (40s)", "Lento (50s)", "Muito Lento (01 min)"];
-    
     let tempoAtual = tempos[0];
     let tempoRestante = tempoAtual;
     
@@ -145,8 +181,7 @@
     function mudarVelocidade(index) {
         tempoAtual = tempos[index];
         tempoRestante = tempoAtual;
-        document.getElementById('speed-title').innerText = "VELOCIDADE: " + nomesNivel[index];
-        document.getElementById('speed-desc').innerText = descNivel[index];
+        document.getElementById('speed-title').innerText = "VELOCIDADE: " + (parseInt(index)+1);
         if (vivo) iniciarLoops();
     }
 
@@ -159,8 +194,12 @@
                 fome = Math.min(100, fome + 12);
                 felicidade = Math.max(0, felicidade - 10);
                 higiene = Math.max(0, higiene - 8);
-                energia = Math.max(0, energia - 10); // Queda passiva de energia
+                energia = Math.max(0, energia - 10);
                 tempoRestante = tempoAtual;
+
+                const fatoAleatorio = fatosHistoricos[Math.floor(Math.random() * fatosHistoricos.length)];
+                falar(fatoAleatorio, 12000); // Exibe por 12 segundos
+
                 verificarMorte();
                 atualizarInterface();
                 elCicloBar.style.backgroundColor = "white";
@@ -200,7 +239,6 @@
     }
 
     function atualizarInterface() {
-        // Garantindo limites de 0 a 100
         fome = Math.max(0, Math.min(100, fome));
         felicidade = Math.max(0, Math.min(100, felicidade));
         higiene = Math.max(0, Math.min(100, higiene));
@@ -214,12 +252,12 @@
         
         const elMsg = document.getElementById('msg');
         if (vivo) {
-            if (fome >= 70 || felicidade <= 30 || higiene <= 30 || energia <= 30) {
+            if (fome >= 75 || felicidade <= 30 || higiene <= 30 || energia <= 30) {
                 elPet.classList.add('critical');
                 elMsg.innerHTML = `<span style="color: var(--danger)">Situação Crítica!</span>`;
             } else {
                 elPet.classList.remove('critical');
-                elMsg.innerHTML = `<span style="color: var(--success)">${nomePet} está indo bem! ✨</span>`;
+                elMsg.innerHTML = `<span style="color: var(--success)">Aprenda com ${nomePet}! 📚</span>`;
             }
         }
     }
@@ -230,15 +268,9 @@
         elPet.classList.add('dead');
         elBalao.style.display = 'none';
         elCicloBar.style.width = "0%";
-        
-        let motivo = "de exaustão";
-        if (fome >= 100) motivo = "de fome";
-        if (felicidade <= 0) motivo = "de tristeza";
-        if (higiene <= 0) motivo = "por falta de higiene";
-
         document.getElementById('msg').innerHTML = `
-            <div style="color: var(--danger); font-size: 1.5rem; font-weight: bold;">GAME OVER</div>
-            <div style="font-size: 1rem; margin-top: 5px;">${nomePet} morreu ${motivo}.</div>
+            <div style="color: var(--danger); font-size: 1.5rem; font-weight: bold;">FIM DA HISTÓRIA</div>
+            <div style="font-size: 0.9rem;">${nomePet} partiu após ${idade} anos de conhecimento.</div>
         `;
         document.querySelectorAll('.btn-action').forEach(b => b.disabled = true);
         document.getElementById('speed-slider').disabled = true;
@@ -252,42 +284,28 @@
 
         switch(tipo) {
             case 'alimentar':
-                fome -= 35;
-                higiene -= 15;
-                energia += 5; // Comer dá um leve ânimo
+                fome -= 35; higiene -= 15; energia += 5;
                 elPet.classList.add('anim-comer');
                 criarParticula('🐟');
-                falar("Nham! 🐟");
                 break;
             case 'carinho':
-                felicidade += 20;
-                fome += 5;
+                felicidade += 20; fome += 5;
                 elPet.classList.add('anim-carinho');
                 criarParticula('💙');
-                falar("Pingu! 💙");
                 break;
             case 'passear':
-                felicidade += 30;
-                energia -= 35; // Gasta muita energia!
-                higiene -= 15;
+                felicidade += 30; energia -= 35; higiene -= 15;
                 elPet.classList.add('anim-passear');
-                falar("Geeeelo! ❄️");
                 break;
             case 'descansar':
-                energia += 60; // Recupera muito
-                fome += 25;    // Muita fome ao acordar
-                felicidade -= 15; // Fica entediado
+                energia += 60; fome += 25; felicidade -= 15;
                 elPet.classList.add('anim-dormir');
                 criarParticula('💤');
-                falar("Zzz... 😴");
                 break;
             case 'banho':
-                higiene = 100;
-                felicidade -= 10;
-                energia -= 10; // O esforço do banho cansa
+                higiene = 100; felicidade -= 10; energia -= 10;
                 elPet.classList.add('anim-limpar');
                 criarParticula('🌊');
-                falar("Splash! 🌊");
                 break;
             case 'rosto':
                 higiene += 25;
@@ -300,7 +318,7 @@
     }
 
     window.onload = () => {
-        let n = prompt("Nome do Pinguim:", "Tux");
+        let n = prompt("Nome do seu Pinguim Historiador:", "Tux");
         if(n) nomePet = n;
         atualizarInterface();
         iniciarLoops();
