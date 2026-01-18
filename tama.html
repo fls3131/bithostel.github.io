@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tamagoshi Pro - Personalizado</title>
+    <title>Tamagoshi Pro - Controle de Ritmo</title>
     <style>
         :root {
             --danger: #e74c3c;
@@ -56,7 +56,7 @@
             font-size: 0.8rem;
             font-weight: bold;
             box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-            max-width: 120px;
+            max-width: 140px;
             display: none;
             z-index: 10;
         }
@@ -71,7 +71,7 @@
 
         .pet-display { font-size: 90px; display: inline-block; transition: transform 0.4s; }
 
-        /* --- ANIMAÇÕES --- */
+        /* Animações */
         .anim-comer { animation: eating 1s ease-in-out; }
         .anim-carinho { animation: heart-beat 1.2s ease-in-out; }
         .anim-passear { animation: walking 1s infinite linear; }
@@ -89,7 +89,7 @@
         .particle { position: absolute; pointer-events: none; animation: float-up 2s forwards; font-size: 24px; }
         @keyframes float-up { 0% { transform: translateY(0) opacity: 1; } 100% { transform: translateY(-100px) opacity: 0; } }
 
-        /* --- STATUS E BARRAS --- */
+        /* Status */
         .stats { text-align: left; margin-bottom: 15px; }
         .bar-label { font-size: 0.65rem; font-weight: bold; display: block; margin-top: 4px; }
         .bar-container { background: #eee; border-radius: 10px; height: 7px; width: 100%; margin: 2px 0 6px; overflow: hidden; }
@@ -99,8 +99,10 @@
         .higiene-bar { background: var(--higiene); }
         .energia-bar { background: var(--energia); }
 
+        /* Seletor de Velocidade Customizado */
         .speed-control { margin: 15px 0; background: #f8f9fa; padding: 12px; border-radius: 15px; border: 1px solid #ddd; }
         .speed-control label { font-size: 0.8rem; font-weight: bold; display: block; margin-bottom: 8px; color: #2c3e50; }
+        #speed-desc { color: var(--primary); font-size: 0.75rem; display: block; margin-top: 5px; }
         input[type=range] { width: 100%; cursor: pointer; accent-color: var(--primary); }
 
         .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -111,8 +113,8 @@
         .btn-higiene { background: var(--higiene); }
         .btn-descanso { background: var(--energia); color: #333; }
 
-        #msg { min-height: 40px; font-weight: bold; margin-top: 5px; font-size: 0.85rem; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .final-score { font-size: 1.2rem; color: #2c3e50; margin-top: 5px; background: #f1c40f; padding: 5px 15px; border-radius: 10px; }
+        #msg { min-height: 50px; font-weight: bold; margin-top: 5px; font-size: 0.85rem; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .final-score { font-size: 1.2rem; color: #2c3e50; margin-top: 8px; background: #f1c40f; padding: 8px 20px; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         .dead { filter: grayscale(1); transform: rotate(180deg) !important; transition: 2s; }
     </style>
 </head>
@@ -129,6 +131,7 @@
     <div class="speed-control">
         <label id="speed-title">VELOCIDADE: NÍVEL 01</label>
         <input type="range" id="speed-slider" min="0" max="4" step="1" value="0" oninput="mudarVelocidade(this.value)">
+        <span id="speed-desc">Rápido (20s)</span>
     </div>
     
     <div class="stats">
@@ -165,7 +168,9 @@
     let gameLoop;
     
     const tempos = [20000, 30000, 40000, 50000, 60000];
-    const labels = ["NÍVEL 01", "NÍVEL 02", "NÍVEL 03", "NÍVEL 04", "NÍVEL 05"];
+    const nomesNivel = ["NÍVEL 01", "NÍVEL 02", "NÍVEL 03", "NÍVEL 04", "NÍVEL 05"];
+    const descNivel = ["Rápido (20s)", "Normal (30s)", "Devagar (40s)", "Lento (50s)", "Muito Lento (01 min)"];
+    
     let tempoAtual = tempos[0];
 
     const elEmoji = document.getElementById('pet-emoji');
@@ -173,7 +178,8 @@
 
     function mudarVelocidade(index) {
         tempoAtual = tempos[index];
-        document.getElementById('speed-title').innerText = "VELOCIDADE: " + labels[index];
+        document.getElementById('speed-title').innerText = "VELOCIDADE: " + nomesNivel[index];
+        document.getElementById('speed-desc').innerText = descNivel[index];
         if (vivo) iniciarLoop();
     }
 
@@ -237,14 +243,13 @@
             falar("Adeus... 🪦");
             
             elMsg.innerHTML = `
-                <div style="color: var(--danger); font-size: 1.1rem;">GAME OVER</div>
-                <div class="final-score">Idade Alcançada: ${idade} dias</div>
+                <div style="color: var(--danger); font-size: 1.1rem; font-weight: bold;">FIM DE JOGO</div>
+                <div class="final-score"><b>${nomeGatinho}</b> viveu <b>${idade}</b> dias!</div>
             `;
             
             document.querySelectorAll('.actions button').forEach(b => b.disabled = true);
             document.getElementById('speed-slider').disabled = true;
             document.getElementById('reset-btn').style.display = 'block';
-            document.getElementById('reset-btn').disabled = false;
         }
     }
 
@@ -304,7 +309,7 @@
     }
 
     window.onload = () => {
-        let inputNome = prompt("Como se chamará seu gatinho?", "Gatinho");
+        let inputNome = prompt("Qual o nome do seu gatinho?", "Frajola");
         if(inputNome) nomeGatinho = inputNome;
         
         atualizarInterface();
