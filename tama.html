@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tux Pro - Historiador Master</title>
+    <title>Tux Pro - Mega Historiador Sincronizado</title>
     <style>
         :root {
             --danger: #e74c3c;
@@ -21,20 +21,25 @@
         .game-card { 
             background: #ecf0f1; padding: 35px; border-radius: 40px; 
             box-shadow: 0 30px 60px rgba(0,0,0,0.5); text-align: center; 
-            width: 550px; position: relative; transform: scale(0.85); transform-origin: center; 
+            width: 580px; position: relative; transform: scale(0.8); transform-origin: center; 
         }
         .idade-badge { 
             position: absolute; top: 25px; left: 25px; background: var(--primary); 
+            color: white; padding: 8px 18px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; z-index: 11; 
+        }
+        .fatos-badge { 
+            position: absolute; top: 25px; right: 25px; background: #8e44ad; 
             color: white; padding: 8px 18px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; z-index: 11; 
         }
         .ciclo-container { width: 100%; height: 10px; background: #bdc3c7; border-radius: 5px; margin: 15px 0; overflow: hidden; }
         #ciclo-bar { width: 100%; height: 100%; background: var(--primary); transition: width 0.1s linear; }
         
         .speech-bubble { 
-            position: absolute; top: -75px; left: 50%; transform: translateX(-50%); 
-            background: white; border-radius: 20px; padding: 18px; font-size: 1rem; 
-            font-weight: bold; box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
-            width: 320px; display: none; z-index: 100; border: 3px solid var(--primary); color: #2c3e50;
+            position: absolute; top: -100px; left: 50%; transform: translateX(-50%); 
+            background: white; border-radius: 20px; padding: 18px; font-size: 0.95rem; 
+            font-weight: bold; box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+            width: 400px; display: none; z-index: 100; border: 3px solid var(--primary); color: #2c3e50;
+            line-height: 1.4;
         }
 
         .pet-container { height: 180px; display: flex; justify-content: center; align-items: center; position: relative; }
@@ -63,12 +68,12 @@
         input[type=range] { width: 100%; cursor: pointer; accent-color: var(--primary); }
 
         .stats { text-align: left; margin-bottom: 20px; }
-        .bar-label { font-size: 0.8rem; font-weight: bold; display: block; margin-top: 6px; color: #34495e; }
-        .bar-container { background: #ddd; border-radius: 12px; height: 10px; width: 100%; margin: 4px 0 8px; overflow: hidden; }
+        .bar-label { font-size: 0.75rem; font-weight: bold; display: block; margin-top: 5px; color: #34495e; }
+        .bar-container { background: #ddd; border-radius: 12px; height: 10px; width: 100%; margin: 3px 0 7px; overflow: hidden; }
         .bar { height: 100%; transition: width 0.5s ease-in-out; }
 
-        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        button { padding: 10px; border: none; border-radius: 12px; color: white; cursor: pointer; font-weight: bold; font-size: 0.85rem; transition: 0.2s; }
+        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        button { padding: 10px; border: none; border-radius: 12px; color: white; cursor: pointer; font-weight: bold; font-size: 0.8rem; transition: 0.2s; }
         button:active { transform: scale(0.95); }
         button:disabled { background: #bdc3c7 !important; cursor: not-allowed; opacity: 0.6; }
 
@@ -78,7 +83,7 @@
         .btn-descanso { background: var(--energia); color: #333; }
 
         #reset-btn { background: var(--bg-dark) !important; display: none; grid-column: span 2; margin-top: 15px; font-size: 1.1rem; padding: 15px; }
-        #msg { min-height: 50px; font-weight: bold; margin-top: 10px; font-size: 1rem; }
+        #msg { min-height: 45px; font-weight: bold; margin-top: 10px; font-size: 0.9rem; }
         .dead { filter: grayscale(1) opacity(0.5); transform: rotate(180deg) !important; transition: 2s; }
     </style>
 </head>
@@ -86,7 +91,8 @@
 
 <div class="game-card">
     <div class="idade-badge">IDADE: <span id="idade-val">0</span> dias</div>
-    <div id="balao" class="speech-bubble">Carregando história...</div>
+    <div class="fatos-badge">FATOS: <span id="fatos-val">0</span></div>
+    <div id="balao" class="speech-bubble">Aguardando novo ciclo...</div>
         
     <div class="pet-container" id="container">
         <div id="pet-visual" class="pet-display">
@@ -99,7 +105,7 @@
     </div>
 
     <div class="speed-control">
-        <label id="speed-title" style="font-weight: bold; display:block; font-size: 0.8rem;">VELOCIDADE: NÍVEL 01</label>
+        <label id="speed-title" style="font-weight: bold; display:block; font-size: 0.75rem;">VELOCIDADE DO TEMPO</label>
         <input type="range" id="speed-slider" min="0" max="4" step="1" value="0" oninput="mudarVelocidade(this.value)">
     </div>
         
@@ -127,47 +133,117 @@
 </div>
 
 <script>
-    let fome = 20, felicidade = 80, higiene = 100, energia = 100, idade = 0;
+    let fome = 20, felicidade = 80, higiene = 100, energia = 100, idade = 0, fatosLidos = 0;
     let vivo = true, nomePet = "Tux";
-    let gameLoop, visualLoop;
+    let gameLoop, visualLoop, falaTimeout;
     
+    // Lista de fatos (abreviada aqui, use a lista completa anterior)
     const fatosHistoricos = [
-        "1969: O homem pisa na Lua pela 1ª vez! 🚀", "1906: Santos Dumont voa com o 14-Bis! ✈️",
-        "1945: Fim da 2ª Guerra Mundial. ☮️", "1500: Brasil é descoberto por Cabral. 🇧🇷",
-        "1989: Queda do Muro de Berlim. 🧱", "1503: Mona Lisa começa a ser pintada. 🎨",
-        "476: Queda do Império Romano do Ocidente. 🏛️", "1905: Einstein cria a Teoria da Relatividade. 🧠",
-        "1789: Início da Revolução Francesa. 🇫🇷", "1969: Nasce a Arpanet (mãe da Internet). 🌐",
-        "1996: Tux vira mascote oficial do Linux! 🐧", "1876: Telefone é patenteado por Bell. 📞",
-        "1929: A quebra da Bolsa de NY inicia a crise. 📉", "1953: DNA tem sua estrutura descoberta. 🧬",
-        "1912: O Titanic naufraga no Atlântico. 🚢", "1964: Martin Luther King ganha o Nobel. 🕊️",
-        "1888: Abolição da escravidão no Brasil. ⛓️", "1889: Proclamação da República no Brasil. 👑",
-        "1947: Gandhi conquista independência da Índia. 🇮🇳", "1985: Rock in Rio acontece pela 1ª vez. 🎸",
-        "1822: Dom Pedro I declara Independência. ⚔️", "1994: Nelson Mandela assume na África do Sul. 🇿🇦",
-        "1977: Lançamento do 1º filme Star Wars. 🌌", "1908: Henry Ford lança o Modelo T. 🚗",
-        "1928: Penicilina é descoberta por Fleming. 💊", "2004: O Facebook é criado por Zuckerberg. 💻",
-        "1957: Sputnik 1 é o 1º satélite no espaço. 📡", "1455: Gutenberg imprime a 1ª Bíblia. 📖",
-        "1990: Nelson Mandela é libertado. 🔓", "1914: Início da 1ª Guerra Mundial. ⚔️",
-        "1932: Mulheres ganham direito ao voto no BR. 🗳️", "1981: Lançamento do primeiro PC da IBM. 🖥️",
-        "2007: Steve Jobs lança o 1º iPhone. 📱", "1972: Atari lança o jogo Pong! 🕹️",
-        "1941: Ataque japonês a Pearl Harbor. ✈️", "1896: 1ª Olimpíada da Era Moderna (Atenas). 🏅",
-        "1666: Newton observa a gravidade (maçã). 🍎", "1939: Início da 2ª Guerra Mundial. 💥",
-        "1997: O robô Deep Blue vence Kasparov. ♟️", "1962: Crise dos Mísseis em Cuba. ☢️",
-        "1986: Desastre nuclear em Chernobyl. ☣️", "1955: Rosa Parks recusa ceder lugar no ônibus. 🚌",
-        "1961: Yuri Gagarin é o 1º homem no espaço. 👨‍🚀", "1901: 1º Prêmio Nobel é entregue. 🏆",
-        "1808: Família Real Portuguesa chega ao BR. 🚢", "1948: Criação do Estado de Israel. 🇮🇱",
-        "1973: 1ª chamada de celular da história. 📞", "1991: Dissolução da União Soviética. 🇷🇺",
-        "2001: Ataque às Torres Gêmeas (11/09). 🗽", "1922: Semana de Arte Moderna em SP. 🎨",
-        "1968: O ano que não terminou (protestos). 📢", "1946: Criado o ENIAC (1º computador). 💾",
-        "1839: Invenção do Daguerreótipo (Foto). 📸", "1954: Fundação da cidade de Brasília. 🏗️",
-        "1971: Enviado o 1º e-mail do mundo. 📧", "1995: Lançamento do Windows 95. 💿",
-        "1347: Peste Negra devasta a Europa. 🐁", "1517: Lutero inicia a Reforma Protestante. 📜",
-        "1760: Início da Revolução Industrial. 🏭", "1859: Darwin publica 'Origem das Espécies'. 🦍",
-        "1949: Proclamação da República na China. 🇨🇳", "1960: Beatles começam a tocar em Hamburgo. 🎸",
-        "1992: Rio-92 debate o meio ambiente. 🌎", "1984: Apple lança o computador Macintosh. 🍎",
-        "1903: Irmãos Wright voam nos EUA. 🛩️", "1519: Fernão de Magalhães inicia volta ao mundo. ⛵",
-        "1865: Fim da Guerra Civil Americana. 🇺🇸", "1950: 1ª Copa do Mundo no Brasil. ⚽",
-        "1994: Ayrton Senna falece em Ímola. 🏎️", "2000: O temido Bug do Milênio não ocorreu. 👾",
-        "1844: 1ª mensagem de código Morse enviada. 📟", "1963: Martin Luther King: 'I have a dream'. 🗣️"
+        "1969: O homem pisa na Lua pela primeira vez! 🚀", "1906: Santos Dumont voa com o 14-Bis. ✈️",
+        "1945: Fim da Segunda Guerra Mundial. ☮️", "1500: Pedro Álvares Cabral chega ao Brasil. 🇧🇷",
+        "1989: O Muro de Berlim é derrubado. 🧱", "1503: Da Vinci começa a pintar a Mona Lisa. 🎨",
+        "476: Queda definitiva do Império Romano. 🏛️", "1905: Einstein publica a Relatividade. 🧠",
+        "1789: Início da Revolução Francesa. 🇫🇷", "1969: Criada a Arpanet, precursora da web. 🌐",
+        "1996: Tux torna-se o mascote do Linux! 🐧", "1876: Bell faz a 1ª ligação telefônica. 📞",
+        "1929: A quebra da Bolsa de NY abala o mundo. 📉", "1953: Estrutura do DNA é descoberta. 🧬",
+        "1912: O Titanic afunda no Atlântico Norte. 🚢", "1964: Martin Luther King recebe o Nobel. 🕊️",
+        "1888: Princesa Isabel assina a Lei Áurea. ⛓️", "1889: Brasil deixa de ser Império. 👑",
+        "1947: Índia torna-se livre do Reino Unido. 🇮🇳", "1985: Primeiro festival Rock in Rio. 🎸",
+        "1822: Grito do Ipiranga: Independência! ⚔️", "1994: Nelson Mandela é eleito presidente. 🇿🇦",
+        "1977: Estreia o primeiro Star Wars no cinema. 🌌", "1908: Henry Ford produz o Modelo T. 🚗",
+        "1928: Fleming descobre a penicilina. 💊", "2004: Mark Zuckerberg lança o Facebook. 💻",
+        "1957: Sputnik 1: o 1º objeto humano no espaço. 📡", "1455: Gutenberg termina sua primeira Bíblia. 📖",
+        "1990: Nelson Mandela sai da prisão. 🔓", "1914: Começa a Primeira Guerra Mundial. ⚔️",
+        "1932: Mulheres brasileiras podem votar. 🗳️", "1981: IBM lança seu computador pessoal (PC). 🖥️",
+        "2007: Apple apresenta o primeiro iPhone. 📱", "1972: Pong é lançado pela Atari. 🕹️",
+        "1941: Pearl Harbor é atacada pelo Japão. ✈️", "1896: 1as Olimpíadas Modernas em Atenas. 🏅",
+        "1666: Newton observa a decomposição da luz. 🍎", "1939: Invasão da Polônia inicia a 2ª Guerra. 💥",
+        "1997: IA Deep Blue vence campeão de xadrez. ♟️", "1962: Crise dos Mísseis quase gera guerra. ☢️",
+        "1986: Acidente nuclear em Chernobyl. ☣️", "1955: Rosa Parks desafia segregação em ônibus. 🚌",
+        "1961: Yuri Gagarin diz: 'A Terra é azul'. 👨‍🚀", "1901: Instituído o Prêmio Nobel. 🏆",
+        "1808: A Corte Portuguesa foge para o Brasil. 🚢", "1948: ONU adota Declaração dos Dir. Humanos. 📜",
+        "1973: Motorola faz a 1ª chamada de celular. 📞", "1991: O fim oficial da União Soviética. 🇷🇺",
+        "2001: Atentados do 11 de Setembro nos EUA. 🗽", "1922: Semana de Arte Moderna abala o BR. 🎨",
+        "1968: Grande ano de protestos estudantis. 📢", "1946: ENIAC: 1º computador digital. 💾",
+        "1839: Surgimento oficial da Fotografia. 📸", "1954: Fundação de Brasília, nova capital. 🏗️",
+        "1971: Ray Tomlinson envia o 1º e-mail. 📧", "1995: Microsoft lança o Windows 95. 💿",
+        "1347: A Peste Negra chega à Europa. 🐁", "1517: 95 teses de Lutero iniciam a Reforma. 📜",
+        "1760: Revolução Industrial muda as fábricas. 🏭", "1859: Darwin lança 'A Origem das Espécies'. 🦍",
+        "1949: Fundação da República Popular da China. 🇨🇳", "1960: Brasília é inaugurada em 21 de abril. 🏙️",
+        "1992: Eco-92 debate o clima no RJ. 🌎", "1984: Comercial do Mac vai ao ar no SuperBowl. 🍎",
+        "1903: 1º voo motorizado dos Irmãos Wright. 🛩️", "1519: Magalhães tenta circum-navegação. ⛵",
+        "1865: Abraham Lincoln é assassinado. 🇺🇸", "1950: Brasil sedia a Copa do Maracanazo. ⚽",
+        "1994: Plano Real entra em vigor no Brasil. 💵", "2000: Estação Espacial Internacional recebe tripulação. 🛰️",
+        "1844: Samuel Morse envia mensagem por telégrafo. 📟", "1963: 'I Have a Dream' ecoa em Washington. 🗣️",
+        "1924: Jogos Olímpicos de Inverno estreiam. ❄️", "1998: Larry Page e Sergey Brin fundam o Google. 🔍",
+        "1943: Anne Frank recebe seu diário de presente. 📕", "1911: Machu Picchu é 'redescoberta'. ⛰️",
+        "2009: Bitcoin é lançado por Satoshi Nakamoto. ₿", "1895: 1ª sessão de cinema dos Irmãos Lumière. 📽️",
+        "1215: Assinatura da Magna Carta na Inglaterra. 📜", "1920: Fundação da Sociedade das Nações. 🏳️",
+        "1958: Pelé ganha sua 1ª Copa aos 17 anos. ⚽", "1975: Bill Gates e Paul Allen fundam a Microsoft. 💻",
+        "1990: Lançamento do Telescópio Hubble. 🔭", "2012: O Bóson de Higgs é confirmado no CERN. ⚛️",
+        "1900: Exposição Universal de Paris. 🗼", "1755: Grande terremoto destrói Lisboa. 🏚️",
+        "1940: Invenção do radar moderno. 📡", "1815: Napoleão Bonaparte perde em Waterloo. ⚔️",
+        "1980: Morte de John Lennon em Nova York. 🎸", "2008: Eleição de Barack Obama nos EUA. 🇺🇸",
+        "1930: Uruguai sedia e ganha a 1ª Copa. 🏆", "1967: 1º transplante de coração humano. 🫀",
+        "1927: 1º filme com som: O Cantor de Jazz. 🎬", "1999: O Euro torna-se moeda oficial. 💶",
+        "1898: Madame Curie descobre o rádio. 🧪", "1959: Revolução Cubana toma Havana. 🇨🇺",
+        "1982: Lançamento do CD (Compact Disc). 💿", "1976: Steve Jobs funda a Apple na garagem. 🍎",
+        "1706: Benjamin Franklin nasce em Boston. ⚡", "1917: Revolução Russa muda o mundo. 🚩",
+        "1879: Edison patenteia a lâmpada elétrica. 💡", "1942: Lançado o filme Casablanca. 🎞️",
+        "1952: Elizabeth II assume o trono britânico. 👑", "1993: Fim do Apartheid oficial na África do Sul. 🇿🇦",
+        "1837: Início da Era Vitoriana. 🎩", "1966: Lançamento da série Star Trek. 🖖",
+        "1970: Fim dos Beatles é anunciado. 🎶", "1988: Constituição Brasileira é promulgada. 📖",
+        "1492: Colombo chega à América. ⛵", "1910: Fundação da República Portuguesa. 🇵🇹",
+        "1921: Descoberta da Insulina. 💉", "1944: Dia D: Invasão da Normandia. 🎖️",
+        "1956: JK promete '50 anos em 5'. 🛣️", "1987: Assinado o Protocolo de Montreal. ❄️",
+        "1992: Lançamento do SMS (mensagem de texto). 📱", "2005: YouTube é fundado por 3 amigos. 📹",
+        "1869: Inauguração do Canal de Suez. 🌊", "1904: Lançamento do sorvete de casquinha. 🍦",
+        "1923: Letreio de Hollywood é erguido. 🎬", "1951: Lançamento da TV Tupi no Brasil. 📺",
+        "1983: Internet adota protocolo TCP/IP. 💻", "2015: Acordo de Paris sobre o clima. 🌍",
+        "1891: Invenção do Basquete por Naismith. 🏀", "1915: Teoria da Relatividade Geral concluída. 🌌",
+        "1926: 1ª demonstração pública da Televisão. 📺", "1949: Criação da OTAN. 🛡️",
+        "1965: 1ª caminhada espacial americana. 👩‍🚀", "1978: Nascimento do 1º bebê de proveta. 👶",
+        "1981: Descoberta do vírus HIV. 🔬", "1996: Ovelha Dolly é o 1º clone mamífero. 🐑",
+        "2001: Lançamento da Wikipedia. 📚", "1804: Napoleão torna-se Imperador. ⚔️",
+        "1848: Manifesto Comunista é publicado. 📕", "1919: Assinatura do Tratado de Versalhes. 📜",
+        "1925: Exibição do filme O Couraçado Potemkin. 📽️", "1954: Criação da Organização do Tratado do Atlântico Norte. 🗺️",
+        "1969: Festival de Woodstock atrai multidões. 🎸", "1974: Revolução dos Cravos em Portugal. 🌸",
+        "1985: Super Mario Bros é lançado pela Nintendo. 🍄", "1997: Protocolo de Quioto é assinado. 🌡️",
+        "2006: Plutão deixa de ser planeta. 🪐", "1812: Invasão da Rússia por Napoleão. ❄️",
+        "1861: Início da Guerra Civil Americana. 🇺🇸", "1916: Batalha de Verdun (1ª Guerra). ⚔️",
+        "1931: Inauguração do Cristo Redentor. ⛰️", "1945: Bombas em Hiroshima e Nagasaki. ☢️",
+        "1963: Assassinato de JFK em Dallas. 🚘", "1979: Margaret Thatcher assume no Reino Unido. 🇬🇧",
+        "1984: Diretas Já: povo nas ruas do Brasil. 📢", "1994: Netscape, 1º grande navegador web. 🌐",
+        "2003: Início da Guerra do Iraque. ⚔️", "1883: Vulcão Krakatoa explode na Indonésia. 🌋",
+        "1912: Descoberta do busto de Nefertiti. 🏺", "1928: Mickey Mouse estreia em 'Steamboat Willie'. 🐭",
+        "1950: Começa a Guerra da Coreia. 🇰🇷", "1968: Assassinato de Martin Luther King Jr. 🕊️",
+        "1972: Escândalo de Watergate nos EUA. 🕵️", "1987: Black Monday: crash nas bolsas mundiais. 📉",
+        "1999: População mundial atinge 6 bilhões. 👥", "2011: Morte de Steve Jobs. 🍎",
+        "1799: Descoberta da Pedra de Roseta. 📜", "1850: Eusébio de Queirós proíbe tráfico negreiro. ⛓️",
+        "1911: Roald Amundsen chega ao Polo Sul. ❄️", "1927: Lindbergh atravessa o Atlântico sozinho. ✈️",
+        "1948: Invenção do Transistor (eletrônica). 🔌", "1960: Lançamento da pílula anticoncepcional. 💊",
+        "1977: Lançamento das sondas Voyager. 🛰️", "1989: Tiananmen: protestos na China. 🇨🇳",
+        "1998: França vence sua 1ª Copa em casa. ⚽", "2014: Alemanha faz 7x1 no Brasil. 🇩🇪",
+        "1874: 1ª exposição impressionista em Paris. 🎨", "1918: Fim da Gripe Espanhola. 😷",
+        "1933: Hitler torna-se Chanceler na Alemanha. 🚩", "1947: Plano Marshall ajuda reconstruir Europa. 🏗️",
+        "1961: Construção do Muro de Berlim. 🧱", "1970: Brasil conquista o Tricampeonato no México. 🏆",
+        "1980: Erradicação mundial da Varíola. 💉", "1991: Criação da World Wide Web (WWW). 🌐",
+        "2002: Lançamento do Euro como papel moeda. 💶", "2016: Rio de Janeiro sedia as Olimpíadas. 🏅",
+        "1807: Invenção do Barco a Vapor. 🚢", "1897: Fundação de Belo Horizonte (MG). 🏙️",
+        "1922: Descoberta da tumba de Tutancâmon. ⚰️", "1940: Winston Churchill torna-se Primeiro-Ministro. 🇬🇧",
+        "1957: Fundação da Comunidade Europeia. 🇪🇺", "1964: Golpe Militar no Brasil. 🇧🇷",
+        "1975: Fim da Guerra do Vietnã. 🚁", "1983: Lançamento do Microsoft Word. 📝",
+        "1995: Assassinato de Yitzhak Rabin. 🕊️", "2008: Grande crise financeira global. 📉",
+        "1776: Declaração de Independência dos EUA. 🇺🇸", "1885: Vacina contra a Raiva por Pasteur. 🐕",
+        "1924: Morte de Lênin na URSS. 🚩", "1946: 1ª Assembleia Geral da ONU. 🌏",
+        "1959: Lançamento da boneca Barbie. 👱‍♀️", "1967: 'O Verão do Amor' em San Francisco. 🌸",
+        "1976: Concorde inicia voos comerciais. ✈️", "1990: Lançamento do Game Boy na Europa. 🎮",
+        "1997: Morte da Princesa Diana em Paris. 👑", "2000: Google lança o serviço AdWords. 💰",
+        "1824: 9ª Sinfonia de Beethoven estreia. 🎼", "1863: Abolição da escravidão nos EUA. ⛓️",
+        "1913: Henry Ford cria a Linha de Montagem. 🏭", "1936: Guerra Civil Espanhola começa. 🇪🇸",
+        "1953: 1ª ascensão ao topo do Everest. 🏔️", "1965: Bob Dylan 'fica elétrico' em Newport. 🎸",
+        "1981: Casamento de Charles e Diana. 💍", "1993: Tratado de Maastricht cria a UE. 🇪🇺",
+        "2004: Tsunami no Oceano Índico. 🌊", "2018: Descoberta de água líquida em Marte. 🪐"
     ];
 
     const tempos = [20000, 30000, 40000, 50000, 60000];
@@ -181,13 +257,32 @@
     function mudarVelocidade(index) {
         tempoAtual = tempos[index];
         tempoRestante = tempoAtual;
-        document.getElementById('speed-title').innerText = "VELOCIDADE: " + (parseInt(index)+1);
+        document.getElementById('speed-title').innerText = "VELOCIDADE DO TEMPO: NÍVEL " + (parseInt(index)+1);
         if (vivo) iniciarLoops();
+    }
+
+    function falar(texto, tempo) {
+        if (!vivo) return;
+        elBalao.innerText = texto;
+        elBalao.style.display = 'block';
+        
+        if (falaTimeout) clearTimeout(falaTimeout);
+        
+        falaTimeout = setTimeout(() => { 
+            if(vivo) elBalao.style.display = 'none'; 
+        }, tempo - 100); 
     }
 
     function iniciarLoops() {
         clearInterval(gameLoop);
         clearInterval(visualLoop);
+        
+        // Primeiro fato imediato ao iniciar
+        fatosLidos++;
+        document.getElementById('fatos-val').innerText = fatosLidos;
+        const fatoInicial = fatosHistoricos[Math.floor(Math.random() * fatosHistoricos.length)];
+        falar(fatoInicial, tempoAtual);
+
         gameLoop = setInterval(() => {
             if (vivo) {
                 idade++;
@@ -197,8 +292,10 @@
                 energia = Math.max(0, energia - 10);
                 tempoRestante = tempoAtual;
 
+                fatosLidos++;
+                document.getElementById('fatos-val').innerText = fatosLidos;
                 const fatoAleatorio = fatosHistoricos[Math.floor(Math.random() * fatosHistoricos.length)];
-                falar(fatoAleatorio, 12000); // Exibe por 12 segundos
+                falar(fatoAleatorio, tempoAtual); 
 
                 verificarMorte();
                 atualizarInterface();
@@ -220,13 +317,6 @@
             vivo = false;
             finalizarJogo();
         }
-    }
-
-    function falar(texto, tempo = 3000) {
-        if (!vivo) return;
-        elBalao.innerText = texto;
-        elBalao.style.display = 'block';
-        setTimeout(() => { if(vivo) elBalao.style.display = 'none'; }, tempo);
     }
 
     function criarParticula(emoji) {
@@ -269,8 +359,8 @@
         elBalao.style.display = 'none';
         elCicloBar.style.width = "0%";
         document.getElementById('msg').innerHTML = `
-            <div style="color: var(--danger); font-size: 1.5rem; font-weight: bold;">FIM DA HISTÓRIA</div>
-            <div style="font-size: 0.9rem;">${nomePet} partiu após ${idade} anos de conhecimento.</div>
+            <div style="color: var(--danger); font-size: 1.2rem; font-weight: bold;">FIM DA JORNADA</div>
+            <div style="font-size: 0.8rem;">${nomePet} partiu após ${idade} dias e ensinou ${fatosLidos} lições.</div>
         `;
         document.querySelectorAll('.btn-action').forEach(b => b.disabled = true);
         document.getElementById('speed-slider').disabled = true;
