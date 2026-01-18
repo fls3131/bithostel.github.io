@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tamagoshi Pro - Estratégia Real</title>
+    <title>Tamagoshi Pro - Tela Grande</title>
     <style>
         :root {
             --danger: #e74c3c;
@@ -24,52 +24,70 @@
             overflow: hidden;
         }
 
+        /* Aumentado em 40% (380px -> 532px) */
         .game-card { 
             background: white; 
-            padding: 25px; 
-            border-radius: 30px; 
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3); 
+            padding: 35px; 
+            border-radius: 40px; 
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4); 
             text-align: center; 
-            width: 380px; 
+            width: 532px; 
             position: relative;
         }
 
         .idade-badge {
             position: absolute;
-            top: 20px;
-            left: 20px;
+            top: 25px;
+            left: 25px;
             background: #34495e;
             color: white;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.7rem;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 0.9rem;
             font-weight: bold;
+            z-index: 11;
+        }
+
+        .ciclo-container {
+            width: 100%;
+            height: 10px;
+            background: #eee;
+            border-radius: 5px;
+            margin: 15px 0;
+            overflow: hidden;
+            border: 1px solid #ddd;
+        }
+        #ciclo-bar {
+            width: 100%;
+            height: 100%;
+            background: var(--primary);
+            transition: width 0.1s linear;
         }
 
         .speech-bubble {
             position: absolute;
-            top: -15px;
-            right: 20px;
+            top: -20px;
+            right: 30px;
             background: #f1f1f1;
-            border-radius: 15px;
-            padding: 10px;
-            font-size: 0.8rem;
+            border-radius: 20px;
+            padding: 15px;
+            font-size: 1rem;
             font-weight: bold;
-            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
-            max-width: 120px;
+            box-shadow: 2px 2px 15px rgba(0,0,0,0.1);
+            max-width: 160px;
             display: none;
             z-index: 10;
         }
 
         .pet-container {
-            height: 130px;
+            height: 180px; /* Aumentado */
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
         }
 
-        .pet-display { font-size: 90px; display: inline-block; transition: transform 0.4s; }
+        .pet-display { font-size: 130px; display: inline-block; transition: transform 0.4s; }
 
         /* Animações */
         .anim-comer { animation: eating 1s ease-in-out; }
@@ -81,39 +99,40 @@
 
         @keyframes eating { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2) rotate(5deg); } }
         @keyframes heart-beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
-        @keyframes walking { 0% { transform: translateX(0); } 25% { transform: translateX(10px); } 75% { transform: translateX(-10px); } 100% { transform: translateX(0); } }
+        @keyframes walking { 0% { transform: translateX(0); } 25% { transform: translateX(15px); } 75% { transform: translateX(-15px); } 100% { transform: translateX(0); } }
         @keyframes cleaning { 0% { transform: rotate(0); } 50% { transform: rotate(20deg) scale(1.1); } 100% { transform: rotate(0); } }
         @keyframes sleeping { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.9); opacity: 0.7; } }
-        @keyframes pulse-red { 0% { filter: drop-shadow(0 0 0px red); } 50% { filter: drop-shadow(0 0 15px red); } 100% { filter: drop-shadow(0 0 0px red); } }
+        @keyframes pulse-red { 0% { filter: drop-shadow(0 0 0px red); } 50% { filter: drop-shadow(0 0 20px red); } 100% { filter: drop-shadow(0 0 0px red); } }
 
-        .particle { position: absolute; pointer-events: none; animation: float-up 2s forwards; font-size: 24px; }
-        @keyframes float-up { 0% { transform: translateY(0) opacity: 1; } 100% { transform: translateY(-100px) opacity: 0; } }
+        .particle { position: absolute; pointer-events: none; animation: float-up 2s forwards; font-size: 35px; }
+        @keyframes float-up { 0% { transform: translateY(0) opacity: 1; } 100% { transform: translateY(-120px) opacity: 0; } }
 
-        .stats { text-align: left; margin-bottom: 15px; }
-        .bar-label { font-size: 0.65rem; font-weight: bold; display: block; margin-top: 4px; }
-        .bar-container { background: #eee; border-radius: 10px; height: 7px; width: 100%; margin: 2px 0 6px; overflow: hidden; }
+        .stats { text-align: left; margin-bottom: 20px; }
+        .bar-label { font-size: 0.85rem; font-weight: bold; display: block; margin-top: 8px; }
+        .bar-container { background: #eee; border-radius: 12px; height: 12px; width: 100%; margin: 5px 0 10px; overflow: hidden; }
         .bar { height: 100%; transition: width 0.5s ease-in-out; }
         .fome-bar { background: var(--danger); }
         .felicidade-bar { background: var(--success); }
         .higiene-bar { background: var(--higiene); }
         .energia-bar { background: var(--energia); }
 
-        .speed-control { margin: 15px 0; background: #f8f9fa; padding: 12px; border-radius: 15px; border: 1px solid #ddd; }
-        .speed-control label { font-size: 0.8rem; font-weight: bold; display: block; margin-bottom: 8px; color: #2c3e50; }
-        #speed-desc { color: var(--primary); font-size: 0.75rem; display: block; margin-top: 5px; }
+        .speed-control { margin: 20px 0; background: #f8f9fa; padding: 15px; border-radius: 20px; border: 1px solid #ddd; }
+        .speed-control label { font-size: 1rem; font-weight: bold; display: block; margin-bottom: 10px; color: #2c3e50; }
+        #speed-desc { color: var(--primary); font-size: 0.9rem; display: block; margin-top: 8px; }
         input[type=range] { width: 100%; cursor: pointer; accent-color: var(--primary); }
 
-        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        button { padding: 8px; border: none; border-radius: 10px; background: var(--primary); color: white; cursor: pointer; font-weight: bold; font-size: 0.7rem; transition: 0.2s; }
+        .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        button { padding: 12px; border: none; border-radius: 15px; background: var(--primary); color: white; cursor: pointer; font-weight: bold; font-size: 0.9rem; transition: 0.2s; }
         button:active { transform: scale(0.95); }
         button:disabled { background: #bdc3c7; cursor: not-allowed; opacity: 0.6; }
 
         .btn-higiene { background: var(--higiene); }
         .btn-descanso { background: var(--energia); color: #333; }
-        #reset-btn { background: var(--success) !important; opacity: 1 !important; display: none; grid-column: span 2; margin-top: 10px; font-size: 0.9rem; }
+        #reset-btn { background: var(--success) !important; opacity: 1 !important; display: none; grid-column: span 2; margin-top: 15px; font-size: 1.1rem; padding: 15px; }
 
-        #msg { min-height: 50px; font-weight: bold; margin-top: 5px; font-size: 0.85rem; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        .final-score { font-size: 1.1rem; color: #2c3e50; margin-top: 8px; background: #f1c40f; padding: 8px 15px; border-radius: 15px; }
+        #msg { min-height: 70px; font-weight: bold; margin-top: 10px; font-size: 1.1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .final-score { font-size: 1.4rem; color: #2c3e50; margin-top: 12px; background: #f1c40f; padding: 12px 25px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .dead { filter: grayscale(1); transform: rotate(180deg) !important; transition: 2s; }
     </style>
 </head>
 <body>
@@ -126,6 +145,10 @@
         <div id="pet-emoji" class="pet-display">🐱</div>
     </div>
 
+    <div class="ciclo-container">
+        <div id="ciclo-bar"></div>
+    </div>
+
     <div class="speed-control">
         <label id="speed-title">VELOCIDADE: NÍVEL 01</label>
         <input type="range" id="speed-slider" min="0" max="4" step="1" value="0" oninput="mudarVelocidade(this.value)">
@@ -133,7 +156,7 @@
     </div>
     
     <div class="stats">
-        <span class="bar-label">🍖 FOME (Menos é melhor)</span>
+        <span class="bar-label">🍖 FOME</span>
         <div class="bar-container"><div id="fome-bar" class="bar fome-bar"></div></div>
         <span class="bar-label">😊 FELICIDADE</span>
         <div class="bar-container"><div id="felicidade-bar" class="bar felicidade-bar"></div></div>
@@ -152,7 +175,7 @@
         <button class="btn-action btn-higiene" onclick="interagir('rosto')">Lavar Rosto</button>
         <button class="btn-action btn-higiene" onclick="interagir('maos')" style="grid-column: span 2;">Lavar Mãos</button>
         
-        <button id="reset-btn" onclick="location.reload()">NOVO JOGO</button>
+        <button id="reset-btn" onclick="location.reload()">JOGAR NOVAMENTE</button>
     </div>
     <div id="msg"></div>
 </div>
@@ -160,25 +183,31 @@
 <script>
     let fome = 20, felicidade = 80, higiene = 100, energia = 100, idade = 0;
     let vivo = true, nomeGatinho = "Gatinho";
-    let gameLoop;
+    let gameLoop, visualLoop;
     
     const tempos = [20000, 30000, 40000, 50000, 60000];
     const nomesNivel = ["NÍVEL 01", "NÍVEL 02", "NÍVEL 03", "NÍVEL 04", "NÍVEL 05"];
     const descNivel = ["Rápido (20s)", "Normal (30s)", "Devagar (40s)", "Lento (50s)", "Muito Lento (01 min)"];
+    
     let tempoAtual = tempos[0];
+    let tempoRestante = tempoAtual;
 
     const elEmoji = document.getElementById('pet-emoji');
     const elBalao = document.getElementById('balao');
+    const elCicloBar = document.getElementById('ciclo-bar');
 
     function mudarVelocidade(index) {
         tempoAtual = tempos[index];
+        tempoRestante = tempoAtual;
         document.getElementById('speed-title').innerText = "VELOCIDADE: " + nomesNivel[index];
         document.getElementById('speed-desc').innerText = descNivel[index];
-        if (vivo) iniciarLoop();
+        if (vivo) iniciarLoops();
     }
 
-    function iniciarLoop() {
+    function iniciarLoops() {
         clearInterval(gameLoop);
+        clearInterval(visualLoop);
+
         gameLoop = setInterval(() => {
             if (vivo) {
                 idade++;
@@ -186,10 +215,21 @@
                 felicidade -= 12;
                 higiene -= 10;
                 energia -= 8;
+                tempoRestante = tempoAtual;
                 verificarMorte();
                 atualizarInterface();
+                elCicloBar.style.backgroundColor = "white";
+                setTimeout(() => elCicloBar.style.backgroundColor = "var(--primary)", 100);
             }
         }, tempoAtual);
+
+        visualLoop = setInterval(() => {
+            if (vivo) {
+                tempoRestante -= 100;
+                let porcentagem = (tempoRestante / tempoAtual) * 100;
+                elCicloBar.style.width = Math.max(0, porcentagem) + "%";
+            }
+        }, 100);
     }
 
     function verificarMorte() {
@@ -225,10 +265,10 @@
         const elMsg = document.getElementById('msg');
         if (vivo) {
             let avisos = [];
-            if (felicidade <= 40) avisos.push(nomeGatinho + " está triste! 😢");
-            else if (fome >= 70) avisos.push(nomeGatinho + " tem fome! 🍖");
-            else if (higiene <= 30) avisos.push("Que sujeira! 🧼");
-            else if (energia <= 30) avisos.push(nomeGatinho + " está exausto! 💤");
+            if (felicidade <= 40) avisos.push(nomeGatinho + " está carente! 😢");
+            else if (fome >= 75) avisos.push(nomeGatinho + " está faminto! 🍖");
+            else if (higiene <= 30) avisos.push("Banho agora! 🧼");
+            else if (energia <= 30) avisos.push("Sem energia... 💤");
 
             if (avisos.length > 0) {
                 elEmoji.classList.add('critical');
@@ -242,13 +282,15 @@
 
     function finalizarJogo() {
         clearInterval(gameLoop);
+        clearInterval(visualLoop);
         elEmoji.innerText = "💀";
         elEmoji.classList.add('dead');
         elBalao.style.display = 'none';
+        elCicloBar.style.width = "0%";
         
         document.getElementById('msg').innerHTML = `
-            <div style="color: var(--danger); font-size: 1.2rem; font-weight: bold;">FIM DE JOGO</div>
-            <div class="final-score">${nomeGatinho} viveu ${idade} dias!</div>
+            <div style="color: var(--danger); font-size: 1.5rem; font-weight: bold;">GAME OVER</div>
+            <div class="final-score"><b>${nomeGatinho}</b> viveu ${idade} dias!</div>
         `;
         
         document.querySelectorAll('.btn-action').forEach(b => b.disabled = true);
@@ -264,46 +306,41 @@
         switch(tipo) {
             case 'alimentar':
                 fome = Math.max(0, fome - 30);
-                higiene = Math.max(0, higiene - 15); // Comer suja!
-                felicidade = Math.min(100, felicidade + 5);
+                higiene = Math.max(0, higiene - 12);
                 elEmoji.classList.add('anim-comer');
                 criarParticula('🍎');
                 falar("Nhame! 😋");
                 break;
             case 'carinho':
                 felicidade = Math.min(100, felicidade + 20);
-                fome = Math.min(100, fome + 5); // Fica com fominha
+                fome = Math.min(100, fome + 5);
                 elEmoji.classList.add('anim-carinho');
                 criarParticula('❤️');
-                falar("Miau! ❤️");
+                falar("Ron-ron! ❤️");
                 break;
             case 'passear':
                 felicidade = Math.min(100, felicidade + 30);
-                energia = Math.max(0, energia - 25); // Passear cansa muito!
-                higiene = Math.max(0, higiene - 20); // E suja!
-                fome = Math.min(100, fome + 10);
+                energia = Math.max(0, energia - 20);
+                higiene = Math.max(0, higiene - 15);
                 elEmoji.classList.add('anim-passear');
                 falar("Uhuu! 🌳");
                 break;
             case 'descansar':
-                energia = Math.min(100, energia + 40);
-                fome = Math.min(100, fome + 15); // Acorda com fome
-                felicidade = Math.max(0, felicidade - 5);
+                energia = Math.min(100, energia + 50);
+                fome = Math.min(100, fome + 10);
                 elEmoji.classList.add('anim-dormir');
                 criarParticula('💤');
                 falar("Zzz... 😴");
                 break;
             case 'banho':
                 higiene = 100;
-                felicidade = Math.max(0, felicidade - 10); // Gatos não amam banho
-                energia = Math.max(0, energia - 5);
+                felicidade = Math.max(0, felicidade - 10);
                 elEmoji.classList.add('anim-limpar');
                 criarParticula('🧼');
-                falar("Limpinho! ✨");
+                falar("Refrescante! ✨");
                 break;
             case 'rosto':
                 higiene = Math.min(100, higiene + 30);
-                felicidade = Math.min(100, felicidade + 5);
                 elEmoji.classList.add('anim-limpar');
                 criarParticula('💦');
                 break;
@@ -313,13 +350,6 @@
                 criarParticula('🧼');
                 break;
         }
-        
-        // Garante que os valores não saiam do limite 0-100
-        fome = Math.min(100, Math.max(0, fome));
-        felicidade = Math.min(100, Math.max(0, felicidade));
-        higiene = Math.min(100, Math.max(0, higiene));
-        energia = Math.min(100, Math.max(0, energia));
-
         verificarMorte();
         atualizarInterface();
     }
@@ -328,7 +358,7 @@
         let n = prompt("Qual o nome do seu gatinho?", "Frajola");
         if(n) nomeGatinho = n;
         atualizarInterface();
-        iniciarLoop();
+        iniciarLoops();
         falar("Oi! Eu sou o " + nomeGatinho);
     };
 </script>
