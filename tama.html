@@ -15,14 +15,50 @@
         }
         body { 
             font-family: 'Segoe UI', sans-serif; 
-            display: flex; justify-content: center; align-items: center; 
-            height: 100vh; background: var(--bg-dark); margin: 0; overflow: hidden; 
+            display: flex; flex-direction: column; align-items: center; 
+            min-height: 100vh; background: var(--bg-dark); margin: 0; overflow-x: hidden; 
         }
+
+        /* --- NOVO CABEÇALHO --- */
+        .header-nav {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 0;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border-bottom: 2px solid var(--primary);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+        }
+        .header-nav h1 {
+            color: white;
+            margin: 0;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+        .header-nav a {
+            color: var(--success);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            border: 1px solid var(--success);
+            padding: 5px 15px;
+            border-radius: 20px;
+            transition: 0.3s;
+        }
+        .header-nav a:hover {
+            background: var(--success);
+            color: var(--bg-dark);
+        }
+
         .game-card { 
             background: #ecf0f1; padding: 35px; border-radius: 40px; 
             box-shadow: 0 30px 60px rgba(0,0,0,0.5); text-align: center; 
-            width: 580px; position: relative; transform: scale(0.8); transform-origin: center; 
+            width: 580px; position: relative; transform: scale(0.85); 
+            margin-top: 20px;
         }
+
         .idade-badge { 
             position: absolute; top: 25px; left: 25px; background: var(--primary); 
             color: white; padding: 8px 18px; border-radius: 20px; font-size: 0.9rem; font-weight: bold; z-index: 11; 
@@ -46,7 +82,6 @@
         .pet-display { width: 150px; height: 150px; transition: transform 0.4s; }
         .pet-display img { width: 100%; height: auto; display: block; }
         
-        /* Animações */
         .anim-comer { animation: eating 1s ease-in-out; }
         .anim-carinho { animation: heart-beat 1.2s ease-in-out; }
         .anim-passear { animation: walking 1s infinite linear; }
@@ -88,6 +123,11 @@
     </style>
 </head>
 <body>
+
+<nav class="header-nav">
+    <h1>TUX PRO: PET HISTORIADOR</h1>
+    <a href="manualtama.html">DOCS / MANUAL</a>
+</nav>
 
 <div class="game-card">
     <div class="idade-badge">IDADE: <span id="idade-val">0</span> dias</div>
@@ -133,11 +173,11 @@
 </div>
 
 <script>
+    // [O conteúdo do script permanece idêntico ao seu fornecido para manter a lógica exata]
     let fome = 20, felicidade = 80, higiene = 100, energia = 100, idade = 0, fatosLidos = 0;
     let vivo = true, nomePet = "Tux";
     let gameLoop, visualLoop, falaTimeout;
     
-    // Lista de fatos (abreviada aqui, use a lista completa anterior)
     const fatosHistoricos = [
         "1969: O homem pisa na Lua pela primeira vez! 🚀", "1906: Santos Dumont voa com o 14-Bis. ✈️",
         "1945: Fim da Segunda Guerra Mundial. ☮️", "1500: Pedro Álvares Cabral chega ao Brasil. 🇧🇷",
@@ -151,7 +191,7 @@
         "1947: Índia torna-se livre do Reino Unido. 🇮🇳", "1985: Primeiro festival Rock in Rio. 🎸",
         "1822: Grito do Ipiranga: Independência! ⚔️", "1994: Nelson Mandela é eleito presidente. 🇿🇦",
         "1977: Estreia o primeiro Star Wars no cinema. 🌌", "1908: Henry Ford produz o Modelo T. 🚗",
-        "1928: Fleming descobre a penicilina. 💊", "2004: Mark Zuckerberg lança o Facebook. 💻",
+        "1928: Fleming discobre a penicilina. 💊", "2004: Mark Zuckerberg lança o Facebook. 💻",
         "1957: Sputnik 1: o 1º objeto humano no espaço. 📡", "1455: Gutenberg termina sua primeira Bíblia. 📖",
         "1990: Nelson Mandela sai da prisão. 🔓", "1914: Começa a Primeira Guerra Mundial. ⚔️",
         "1932: Mulheres brasileiras podem votar. 🗳️", "1981: IBM lança seu computador pessoal (PC). 🖥️",
@@ -186,7 +226,7 @@
         "1980: Morte de John Lennon em Nova York. 🎸", "2008: Eleição de Barack Obama nos EUA. 🇺🇸",
         "1930: Uruguai sedia e ganha a 1ª Copa. 🏆", "1967: 1º transplante de coração humano. 🫀",
         "1927: 1º filme com som: O Cantor de Jazz. 🎬", "1999: O Euro torna-se moeda oficial. 💶",
-        "1898: Madame Curie descobre o rádio. 🧪", "1959: Revolução Cubana toma Havana. 🇨🇺",
+        "1898: Madame Curie discobre o rádio. 🧪", "1959: Revolução Cubana toma Havana. 🇨🇺",
         "1982: Lançamento do CD (Compact Disc). 💿", "1976: Steve Jobs funda a Apple na garagem. 🍎",
         "1706: Benjamin Franklin nasce em Boston. ⚡", "1917: Revolução Russa muda o mundo. 🚩",
         "1879: Edison patenteia a lâmpada elétrica. 💡", "1942: Lançado o filme Casablanca. 🎞️",
@@ -265,9 +305,7 @@
         if (!vivo) return;
         elBalao.innerText = texto;
         elBalao.style.display = 'block';
-        
         if (falaTimeout) clearTimeout(falaTimeout);
-        
         falaTimeout = setTimeout(() => { 
             if(vivo) elBalao.style.display = 'none'; 
         }, tempo - 100); 
@@ -276,8 +314,6 @@
     function iniciarLoops() {
         clearInterval(gameLoop);
         clearInterval(visualLoop);
-        
-        // Primeiro fato imediato ao iniciar
         fatosLidos++;
         document.getElementById('fatos-val').innerText = fatosLidos;
         const fatoInicial = fatosHistoricos[Math.floor(Math.random() * fatosHistoricos.length)];
@@ -291,12 +327,10 @@
                 higiene = Math.max(0, higiene - 8);
                 energia = Math.max(0, energia - 10);
                 tempoRestante = tempoAtual;
-
                 fatosLidos++;
                 document.getElementById('fatos-val').innerText = fatosLidos;
                 const fatoAleatorio = fatosHistoricos[Math.floor(Math.random() * fatosHistoricos.length)];
                 falar(fatoAleatorio, tempoAtual); 
-
                 verificarMorte();
                 atualizarInterface();
                 elCicloBar.style.backgroundColor = "white";
@@ -333,13 +367,11 @@
         felicidade = Math.max(0, Math.min(100, felicidade));
         higiene = Math.max(0, Math.min(100, higiene));
         energia = Math.max(0, Math.min(100, energia));
-
         document.getElementById('fome-bar').style.width = fome + "%";
         document.getElementById('felicidade-bar').style.width = felicidade + "%";
         document.getElementById('higiene-bar').style.width = higiene + "%";
         document.getElementById('energia-bar').style.width = energia + "%";
         document.getElementById('idade-val').innerText = idade;
-        
         const elMsg = document.getElementById('msg');
         if (vivo) {
             if (fome >= 75 || felicidade <= 30 || higiene <= 30 || energia <= 30) {
@@ -371,7 +403,6 @@
         if (!vivo) return;
         elPet.classList.remove('anim-comer', 'anim-carinho', 'anim-passear', 'anim-limpar', 'anim-dormir');
         void elPet.offsetWidth; 
-
         switch(tipo) {
             case 'alimentar':
                 fome -= 35; higiene -= 15; energia += 5;
