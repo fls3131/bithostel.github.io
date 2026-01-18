@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tamagoshi Pro - Fixed</title>
+    <title>Tamagoshi Pro - Estratégia Real</title>
     <style>
         :root {
             --danger: #e74c3c;
@@ -92,7 +92,7 @@
         .stats { text-align: left; margin-bottom: 15px; }
         .bar-label { font-size: 0.65rem; font-weight: bold; display: block; margin-top: 4px; }
         .bar-container { background: #eee; border-radius: 10px; height: 7px; width: 100%; margin: 2px 0 6px; overflow: hidden; }
-        .bar { height: 100%; transition: width 0.8s ease-in-out; }
+        .bar { height: 100%; transition: width 0.5s ease-in-out; }
         .fome-bar { background: var(--danger); }
         .felicidade-bar { background: var(--success); }
         .higiene-bar { background: var(--higiene); }
@@ -110,7 +110,7 @@
 
         .btn-higiene { background: var(--higiene); }
         .btn-descanso { background: var(--energia); color: #333; }
-        #reset-btn { background: var(--success) !important; opacity: 1 !important; display: none; grid-column: span 2; margin-top: 10px; }
+        #reset-btn { background: var(--success) !important; opacity: 1 !important; display: none; grid-column: span 2; margin-top: 10px; font-size: 0.9rem; }
 
         #msg { min-height: 50px; font-weight: bold; margin-top: 5px; font-size: 0.85rem; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .final-score { font-size: 1.1rem; color: #2c3e50; margin-top: 8px; background: #f1c40f; padding: 8px 15px; border-radius: 15px; }
@@ -133,9 +133,9 @@
     </div>
     
     <div class="stats">
-        <span class="bar-label">🍖 FOME</span>
+        <span class="bar-label">🍖 FOME (Menos é melhor)</span>
         <div class="bar-container"><div id="fome-bar" class="bar fome-bar"></div></div>
-        <span class="bar-label">😊 FELICIDADE (Drenagem Rápida)</span>
+        <span class="bar-label">😊 FELICIDADE</span>
         <div class="bar-container"><div id="felicidade-bar" class="bar felicidade-bar"></div></div>
         <span class="bar-label">🧼 HIGIENE</span>
         <div class="bar-container"><div id="higiene-bar" class="bar higiene-bar"></div></div>
@@ -182,10 +182,10 @@
         gameLoop = setInterval(() => {
             if (vivo) {
                 idade++;
-                fome += 6;
-                felicidade -= 15;
-                higiene -= 8;
-                energia -= 7;
+                fome += 7;
+                felicidade -= 12;
+                higiene -= 10;
+                energia -= 8;
                 verificarMorte();
                 atualizarInterface();
             }
@@ -206,6 +206,15 @@
         setTimeout(() => { if(vivo) elBalao.style.display = 'none'; }, tempo);
     }
 
+    function criarParticula(emoji) {
+        const p = document.createElement('div');
+        p.className = 'particle';
+        p.innerText = emoji;
+        p.style.left = (Math.random() * 60 + 20) + '%';
+        document.getElementById('container').appendChild(p);
+        setTimeout(() => p.remove(), 2000);
+    }
+
     function atualizarInterface() {
         document.getElementById('fome-bar').style.width = fome + "%";
         document.getElementById('felicidade-bar').style.width = felicidade + "%";
@@ -218,15 +227,15 @@
             let avisos = [];
             if (felicidade <= 40) avisos.push(nomeGatinho + " está triste! 😢");
             else if (fome >= 70) avisos.push(nomeGatinho + " tem fome! 🍖");
-            else if (higiene <= 30) avisos.push(nomeGatinho + " está sujo! 🧼");
-            else if (energia <= 30) avisos.push(nomeGatinho + " tem sono... 💤");
+            else if (higiene <= 30) avisos.push("Que sujeira! 🧼");
+            else if (energia <= 30) avisos.push(nomeGatinho + " está exausto! 💤");
 
             if (avisos.length > 0) {
                 elEmoji.classList.add('critical');
                 elMsg.innerHTML = `<span style="color: var(--danger)">${avisos[0]}</span>`;
             } else {
                 elEmoji.classList.remove('critical');
-                elMsg.innerHTML = `<span style="color: var(--success)">${nomeGatinho} está bem! ✨</span>`;
+                elMsg.innerHTML = `<span style="color: var(--success)">${nomeGatinho} está ótimo! ✨</span>`;
             }
         }
     }
@@ -242,14 +251,9 @@
             <div class="final-score">${nomeGatinho} viveu ${idade} dias!</div>
         `;
         
-        // Bloqueia apenas botões de ação
         document.querySelectorAll('.btn-action').forEach(b => b.disabled = true);
         document.getElementById('speed-slider').disabled = true;
-        
-        // Exibe e habilita o botão de Reset
-        const resetBtn = document.getElementById('reset-btn');
-        resetBtn.style.display = 'block';
-        resetBtn.disabled = false;
+        document.getElementById('reset-btn').style.display = 'block';
     }
 
     function interagir(tipo) {
@@ -258,14 +262,64 @@
         void elEmoji.offsetWidth;
 
         switch(tipo) {
-            case 'alimentar': fome = Math.max(0, fome - 25); elEmoji.classList.add('anim-comer'); falar("Nhame! 😋"); break;
-            case 'carinho': felicidade = Math.min(100, felicidade + 25); elEmoji.classList.add('anim-carinho'); falar("Miau! ❤️"); break;
-            case 'passear': felicidade = Math.min(100, felicidade + 30); energia = Math.max(0, energia - 15); elEmoji.classList.add('anim-passear'); falar("Uhuu! 🌳"); break;
-            case 'descansar': energia = 100; elEmoji.classList.add('anim-dormir'); falar("Zzz... 😴"); break;
-            case 'banho': higiene = 100; elEmoji.classList.add('anim-limpar'); falar("Limpinho! ✨"); break;
-            case 'rosto': higiene = Math.min(100, higiene + 40); elEmoji.classList.add('anim-limpar'); break;
-            case 'maos': higiene = Math.min(100, higiene + 20); elEmoji.classList.add('anim-limpar'); break;
+            case 'alimentar':
+                fome = Math.max(0, fome - 30);
+                higiene = Math.max(0, higiene - 15); // Comer suja!
+                felicidade = Math.min(100, felicidade + 5);
+                elEmoji.classList.add('anim-comer');
+                criarParticula('🍎');
+                falar("Nhame! 😋");
+                break;
+            case 'carinho':
+                felicidade = Math.min(100, felicidade + 20);
+                fome = Math.min(100, fome + 5); // Fica com fominha
+                elEmoji.classList.add('anim-carinho');
+                criarParticula('❤️');
+                falar("Miau! ❤️");
+                break;
+            case 'passear':
+                felicidade = Math.min(100, felicidade + 30);
+                energia = Math.max(0, energia - 25); // Passear cansa muito!
+                higiene = Math.max(0, higiene - 20); // E suja!
+                fome = Math.min(100, fome + 10);
+                elEmoji.classList.add('anim-passear');
+                falar("Uhuu! 🌳");
+                break;
+            case 'descansar':
+                energia = Math.min(100, energia + 40);
+                fome = Math.min(100, fome + 15); // Acorda com fome
+                felicidade = Math.max(0, felicidade - 5);
+                elEmoji.classList.add('anim-dormir');
+                criarParticula('💤');
+                falar("Zzz... 😴");
+                break;
+            case 'banho':
+                higiene = 100;
+                felicidade = Math.max(0, felicidade - 10); // Gatos não amam banho
+                energia = Math.max(0, energia - 5);
+                elEmoji.classList.add('anim-limpar');
+                criarParticula('🧼');
+                falar("Limpinho! ✨");
+                break;
+            case 'rosto':
+                higiene = Math.min(100, higiene + 30);
+                felicidade = Math.min(100, felicidade + 5);
+                elEmoji.classList.add('anim-limpar');
+                criarParticula('💦');
+                break;
+            case 'maos':
+                higiene = Math.min(100, higiene + 15);
+                elEmoji.classList.add('anim-limpar');
+                criarParticula('🧼');
+                break;
         }
+        
+        // Garante que os valores não saiam do limite 0-100
+        fome = Math.min(100, Math.max(0, fome));
+        felicidade = Math.min(100, Math.max(0, felicidade));
+        higiene = Math.min(100, Math.max(0, higiene));
+        energia = Math.min(100, Math.max(0, energia));
+
         verificarMorte();
         atualizarInterface();
     }
