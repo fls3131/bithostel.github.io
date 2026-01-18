@@ -12,7 +12,6 @@
             --higiene: #9b59b6;
             --energia: #f1c40f;
         }
-
         body { 
             font-family: 'Segoe UI', sans-serif; 
             display: flex; 
@@ -23,7 +22,6 @@
             margin: 0; 
             overflow: hidden;
         }
-
         .game-card { 
             background: white; 
             padding: 35px; 
@@ -33,7 +31,6 @@
             width: 532px; 
             position: relative;
         }
-
         .idade-badge {
             position: absolute;
             top: 25px;
@@ -46,7 +43,6 @@
             font-weight: bold;
             z-index: 11;
         }
-
         .ciclo-container {
             width: 100%;
             height: 10px;
@@ -62,7 +58,6 @@
             background: var(--primary);
             transition: width 0.1s linear;
         }
-
         .speech-bubble {
             position: absolute;
             top: -20px;
@@ -77,7 +72,6 @@
             display: none;
             z-index: 10;
         }
-
         .pet-container {
             height: 180px;
             display: flex;
@@ -85,27 +79,21 @@
             align-items: center;
             position: relative;
         }
-
         .pet-display { font-size: 130px; display: inline-block; transition: transform 0.4s; }
-
-        /* Animações */
         .anim-comer { animation: eating 1s ease-in-out; }
         .anim-carinho { animation: heart-beat 1.2s ease-in-out; }
         .anim-passear { animation: walking 1s infinite linear; }
         .anim-limpar { animation: cleaning 1s ease-in-out; }
         .anim-dormir { animation: sleeping 2s ease-in-out; }
         .critical { animation: pulse-red 2s infinite; }
-
         @keyframes eating { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.2) rotate(5deg); } }
         @keyframes heart-beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
         @keyframes walking { 0% { transform: translateX(0); } 25% { transform: translateX(15px); } 75% { transform: translateX(-15px); } 100% { transform: translateX(0); } }
         @keyframes cleaning { 0% { transform: rotate(0); } 50% { transform: rotate(20deg) scale(1.1); } 100% { transform: rotate(0); } }
         @keyframes sleeping { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(0.9); opacity: 0.7; } }
         @keyframes pulse-red { 0% { filter: drop-shadow(0 0 0px red); } 50% { filter: drop-shadow(0 0 20px red); } 100% { filter: drop-shadow(0 0 0px red); } }
-
         .particle { position: absolute; pointer-events: none; animation: float-up 2s forwards; font-size: 35px; }
         @keyframes float-up { 0% { transform: translateY(0) opacity: 1; } 100% { transform: translateY(-120px) opacity: 0; } }
-
         .stats { text-align: left; margin-bottom: 20px; }
         .bar-label { font-size: 0.85rem; font-weight: bold; display: block; margin-top: 8px; }
         .bar-container { background: #eee; border-radius: 12px; height: 12px; width: 100%; margin: 5px 0 10px; overflow: hidden; }
@@ -114,57 +102,43 @@
         .felicidade-bar { background: var(--success); }
         .higiene-bar { background: var(--higiene); }
         .energia-bar { background: var(--energia); }
-
         .speed-control { margin: 20px 0; background: #f8f9fa; padding: 15px; border-radius: 20px; border: 1px solid #ddd; }
         .speed-control label { font-size: 1rem; font-weight: bold; display: block; margin-bottom: 10px; color: #2c3e50; }
         #speed-desc { color: var(--primary); font-size: 0.9rem; display: block; margin-top: 8px; }
         input[type=range] { width: 100%; cursor: pointer; accent-color: var(--primary); }
-
         .actions { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
         button { padding: 12px; border: none; border-radius: 15px; color: white; cursor: pointer; font-weight: bold; font-size: 0.9rem; transition: 0.2s; }
         button:active { transform: scale(0.95); }
         button:disabled { background: #bdc3c7 !important; cursor: not-allowed; opacity: 0.6; }
-
-        /* --- NOVAS CORES DOS BOTÕES --- */
         .btn-alimentar { background: var(--danger); }
         .btn-alimentar:hover { background: #c0392b; }
-        
         .btn-verde { background: var(--success); }
         .btn-verde:hover { background: #27ae60; }
-
         .btn-higiene { background: var(--higiene); }
         .btn-higiene:hover { background: #8e44ad; }
-
         .btn-descanso { background: var(--energia); color: #333; }
         .btn-descanso:hover { background: #d4ac0d; }
-
         #reset-btn { background: #2c3e50 !important; display: none; grid-column: span 2; margin-top: 15px; font-size: 1.1rem; padding: 15px; }
-
         #msg { min-height: 70px; font-weight: bold; margin-top: 10px; font-size: 1.1rem; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         .final-score { font-size: 1.4rem; color: #2c3e50; margin-top: 12px; background: #f1c40f; padding: 12px 25px; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .dead { filter: grayscale(1); transform: rotate(180deg) !important; transition: 2s; }
     </style>
 </head>
 <body>
-
 <div class="game-card">
     <div class="idade-badge">IDADE: <span id="idade-val">0</span> dias</div>
     <div id="balao" class="speech-bubble">Miau!</div>
-    
     <div class="pet-container" id="container">
         <div id="pet-emoji" class="pet-display">🐱</div>
     </div>
-
     <div class="ciclo-container">
         <div id="ciclo-bar"></div>
     </div>
-
     <div class="speed-control">
         <label id="speed-title">VELOCIDADE: NÍVEL 01</label>
         <input type="range" id="speed-slider" min="0" max="4" step="1" value="0" oninput="mudarVelocidade(this.value)">
         <span id="speed-desc">Rápido (20s)</span>
     </div>
-    
     <div class="stats">
         <span class="bar-label">🍖 FOME</span>
         <div class="bar-container"><div id="fome-bar" class="bar fome-bar"></div></div>
@@ -175,7 +149,6 @@
         <span class="bar-label">⚡ ENERGIA</span>
         <div class="bar-container"><div id="energia-bar" class="bar energia-bar"></div></div>
     </div>
-
     <div class="actions">
         <button class="btn-action btn-alimentar" onclick="interagir('alimentar')">Alimentar</button>
         <button class="btn-action btn-verde" onclick="interagir('carinho')">Carinho</button>
@@ -183,29 +156,22 @@
         <button class="btn-action btn-descanso" onclick="interagir('descansar')">Descansar</button>
         <button class="btn-action btn-higiene" onclick="interagir('banho')">Dar Banho</button>
         <button class="btn-action btn-higiene" onclick="interagir('rosto')">Lavar Rosto</button>
-        <button class="btn-action btn-higiene" onclick="interagir('maos')" style="grid-column: span 2;">Lavar Mãos</button>
-        
         <button id="reset-btn" onclick="location.reload()">JOGAR NOVAMENTE</button>
     </div>
     <div id="msg"></div>
 </div>
-
 <script>
     let fome = 20, felicidade = 80, higiene = 100, energia = 100, idade = 0;
     let vivo = true, nomeGatinho = "Gatinho";
     let gameLoop, visualLoop;
-    
     const tempos = [20000, 30000, 40000, 50000, 60000];
     const nomesNivel = ["NÍVEL 01", "NÍVEL 02", "NÍVEL 03", "NÍVEL 04", "NÍVEL 05"];
     const descNivel = ["Rápido (20s)", "Normal (30s)", "Devagar (40s)", "Lento (50s)", "Muito Lento (01 min)"];
-    
     let tempoAtual = tempos[0];
     let tempoRestante = tempoAtual;
-
     const elEmoji = document.getElementById('pet-emoji');
     const elBalao = document.getElementById('balao');
     const elCicloBar = document.getElementById('ciclo-bar');
-
     function mudarVelocidade(index) {
         tempoAtual = tempos[index];
         tempoRestante = tempoAtual;
@@ -213,11 +179,9 @@
         document.getElementById('speed-desc').innerText = descNivel[index];
         if (vivo) iniciarLoops();
     }
-
     function iniciarLoops() {
         clearInterval(gameLoop);
         clearInterval(visualLoop);
-
         gameLoop = setInterval(() => {
             if (vivo) {
                 idade++;
@@ -232,7 +196,6 @@
                 setTimeout(() => elCicloBar.style.backgroundColor = "var(--primary)", 100);
             }
         }, tempoAtual);
-
         visualLoop = setInterval(() => {
             if (vivo) {
                 tempoRestante -= 100;
@@ -241,21 +204,18 @@
             }
         }, 100);
     }
-
     function verificarMorte() {
         if (fome >= 100 || felicidade <= 0 || higiene <= 0 || energia <= 0) {
             vivo = false;
             finalizarJogo();
         }
     }
-
     function falar(texto, tempo = 3000) {
         if (!vivo) return;
         elBalao.innerText = texto;
         elBalao.style.display = 'block';
         setTimeout(() => { if(vivo) elBalao.style.display = 'none'; }, tempo);
     }
-
     function criarParticula(emoji) {
         const p = document.createElement('div');
         p.className = 'particle';
@@ -264,14 +224,12 @@
         document.getElementById('container').appendChild(p);
         setTimeout(() => p.remove(), 2000);
     }
-
     function atualizarInterface() {
         document.getElementById('fome-bar').style.width = fome + "%";
         document.getElementById('felicidade-bar').style.width = felicidade + "%";
         document.getElementById('higiene-bar').style.width = higiene + "%";
         document.getElementById('energia-bar').style.width = energia + "%";
         document.getElementById('idade-val').innerText = idade;
-        
         const elMsg = document.getElementById('msg');
         if (vivo) {
             let avisos = [];
@@ -279,7 +237,6 @@
             else if (fome >= 75) avisos.push(nomeGatinho + " está com fome! 🍖");
             else if (higiene <= 30) avisos.push("Precisa de limpeza! 🧼");
             else if (energia <= 30) avisos.push("Bateria fraca... 💤");
-
             if (avisos.length > 0) {
                 elEmoji.classList.add('critical');
                 elMsg.innerHTML = `<span style="color: var(--danger)">${avisos[0]}</span>`;
@@ -289,7 +246,6 @@
             }
         }
     }
-
     function finalizarJogo() {
         clearInterval(gameLoop);
         clearInterval(visualLoop);
@@ -297,22 +253,18 @@
         elEmoji.classList.add('dead');
         elBalao.style.display = 'none';
         elCicloBar.style.width = "0%";
-        
         document.getElementById('msg').innerHTML = `
             <div style="color: var(--danger); font-size: 1.5rem; font-weight: bold;">GAME OVER</div>
             <div class="final-score"><b>${nomeGatinho}</b> viveu ${idade} dias!</div>
         `;
-        
         document.querySelectorAll('.btn-action').forEach(b => b.disabled = true);
         document.getElementById('speed-slider').disabled = true;
         document.getElementById('reset-btn').style.display = 'block';
     }
-
     function interagir(tipo) {
         if (!vivo) return;
         elEmoji.classList.remove('anim-comer', 'anim-carinho', 'anim-passear', 'anim-limpar', 'anim-dormir');
         void elEmoji.offsetWidth;
-
         switch(tipo) {
             case 'alimentar':
                 fome = Math.max(0, fome - 30);
@@ -354,16 +306,10 @@
                 elEmoji.classList.add('anim-limpar');
                 criarParticula('💦');
                 break;
-            case 'maos':
-                higiene = Math.min(100, higiene + 15);
-                elEmoji.classList.add('anim-limpar');
-                criarParticula('🧼');
-                break;
         }
         verificarMorte();
         atualizarInterface();
     }
-
     window.onload = () => {
         let n = prompt("Qual o nome do seu gatinho?", "Frajola");
         if(n) nomeGatinho = n;
