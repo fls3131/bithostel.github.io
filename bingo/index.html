@@ -2,184 +2,176 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Bingo Arena - Layout Fixo</title>
+    <title>Bingo Arena - Saldo LocalStorage</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --primary: #e94560; --bg: #1a1a2e; --card-bg: #16213e; --win: #2ecc71; --accent: #f1c40f; }
+        :root { --primary: #e94560; --bg: #1a1a2e; --card-bg: #16213e; --win: #2ecc71; --accent: #f1c40f; --gold: #ffd700; --money: #27ae60; --loss: #ff4757; }
         * { box-sizing: border-box; }
         
         body { 
-            font-family: 'Segoe UI', system-ui, sans-serif; 
-            background: var(--bg); 
-            color: white; 
-            margin: 0; 
-            height: 100vh; 
-            overflow: hidden; 
-            display: flex; 
-            flex-direction: column; 
-            padding: 10px;
+            font-family: 'Segoe UI', sans-serif; 
+            background: var(--bg); color: white; margin: 0; 
+            height: 100vh; overflow: hidden; display: flex; flex-direction: column; padding: 5px;
         }
 
-        /* Topo */
-        .header { height: 6vh; display: flex; align-items: center; justify-content: center; }
-        .msg-banner { font-size: 1.3rem; font-weight: 900; color: var(--win); text-transform: uppercase; text-align: center; }
-
-        /* Dashboard Principal */
-        .main-layout { 
-            display: grid; 
-            grid-template-columns: 220px 1fr 200px; 
-            gap: 12px; 
-            height: 90vh; 
+        @keyframes winner-glow {
+            0% { box-shadow: 0 0 5px var(--gold); border-color: var(--gold); transform: scale(1); }
+            50% { box-shadow: 0 0 20px var(--gold); border-color: #fff; transform: scale(1.03); }
+            100% { box-shadow: 0 0 5px var(--gold); border-color: var(--gold); transform: scale(1); }
         }
 
-        .panel { 
-            background: var(--card-bg); 
-            border-radius: 12px; 
-            padding: 12px; 
-            display: flex; 
-            flex-direction: column; 
-            border: 1px solid #333;
-            max-height: 100%; /* Garante que o painel não cresça além da viewport */
+        @keyframes line-pulse {
+            0% { border-color: var(--win); }
+            50% { border-color: #fff; box-shadow: 0 0 15px var(--win); }
+            100% { border-color: var(--win); }
         }
 
-        /* Sorteador e Histórico (O Ajuste Principal) */
-        #ball { font-size: 3.5rem; color: var(--accent); text-align: center; margin: 5px 0; font-weight: 900; }
-        
-        .history-container {
-            flex-grow: 1;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            margin-top: 10px;
-            border-top: 1px solid #333;
-        }
+        .winner-anim { animation: winner-glow 0.8s infinite ease-in-out; z-index: 10; border: 2px solid var(--gold) !important; }
+        .line-anim { animation: line-pulse 0.5s 4 ease-in-out; border: 2px solid var(--win) !important; }
 
-        .history-grid { 
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 5px;
-            overflow-y: auto; 
-            padding: 10px 5px;
-            background: #0f3460; 
-            border-radius: 8px;
-        }
+        .main-layout { display: grid; grid-template-columns: 150px 1fr 150px; gap: 8px; height: 98vh; }
 
-        .history-item {
-            background: rgba(255,255,255,0.1);
-            border-radius: 4px;
-            font-size: 0.75rem;
+        .panel { background: var(--card-bg); border-radius: 8px; padding: 8px; display: flex; flex-direction: column; border: 1px solid #333; }
+
+        .money-display {
+            background: rgba(39, 174, 96, 0.15);
+            border: 1px solid var(--money);
+            border-radius: 5px;
+            padding: 5px;
             text-align: center;
-            padding: 4px 0;
-            border: 1px solid rgba(255,255,255,0.05);
+            margin-bottom: 8px;
         }
-
-        /* Arena Central */
-        .arena { 
-            display: grid; 
-            grid-template-columns: repeat(3, 1fr); 
-            grid-template-rows: repeat(2, 1fr); 
-            gap: 8px; 
-        }
-
-        .bingo-card { 
-            background: var(--card-bg); 
-            padding: 8px; 
-            border-radius: 10px; 
-            border: 1px solid #333; 
-            display: flex; 
-            flex-direction: column;
-        }
-        .bingo-card.player { border: 2px solid var(--primary); box-shadow: 0 0 10px rgba(233, 69, 96, 0.2); }
-        .bingo-card h5 { margin: 0 0 5px 0; font-size: 0.75rem; text-align: center; color: #aaa; }
-
-        .grid { 
-            display: grid; 
-            grid-template-columns: repeat(5, 1fr); 
-            gap: 3px; 
-            flex-grow: 1;
-        }
-        .cell { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            background: #0f3460; 
-            border-radius: 3px; 
-            font-size: 0.85rem; 
-            font-weight: bold; 
-            aspect-ratio: 1/1;
-        }
+        .money-label { font-size: 0.55rem; color: var(--money); text-transform: uppercase; font-weight: bold; }
+        .money-value { font-size: 1.1rem; color: #fff; font-weight: 900; }
         
+        #cost-alert { font-size: 0.5rem; color: var(--loss); margin-top: 2px; font-weight: bold; visibility: hidden; }
+
+        #ball { font-size: 2.5rem; color: var(--accent); text-align: center; font-weight: 900; min-height: 50px; }
+        
+        .btn-group { display: flex; flex-direction: column; gap: 4px; }
+        button { padding: 6px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 0.7rem; color: white; transition: 0.2s; }
+        
+        .btn-manual { background: var(--primary); }
+        .btn-auto { background: #3498db; }
+        .btn-reset { background: #533483; margin-top: auto; border: 1px solid #7c4dff; }
+
+        .history-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; overflow-y: auto; padding: 4px; background: #0f3460; border-radius: 4px; flex-grow: 1; }
+        .history-item { background: rgba(255,255,255,0.1); border-radius: 2px; font-size: 0.65rem; text-align: center; }
+
+        .arena { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr); gap: 6px; }
+
+        .bingo-card { background: var(--card-bg); padding: 4px; border-radius: 6px; border: 1px solid #333; display: flex; flex-direction: column; }
+        .bingo-card.player { border: 1px solid var(--primary); background: #1a1a3a; }
+        .bingo-card h5 { margin: 0 0 3px 0; font-size: 0.6rem; text-align: center; color: #eee; text-transform: uppercase; }
+
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; }
+        .cell { aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; background: #0f3460; border-radius: 2px; font-size: 0.7rem; font-weight: bold; }
         .cell.marked { background: var(--primary); }
         .cell.line-win { background: var(--win) !important; color: #1a1a2e; }
-        .cell.free { background: #533483; color: var(--accent); }
+        .cell.free { background: #533483; color: var(--accent); font-size: 0.8rem; }
 
-        /* Ranking */
-        .leader-item { display: flex; justify-content: space-between; padding: 4px; border-bottom: 1px solid #0f3460; font-size: 0.75rem; }
+        .leader-item { display: flex; justify-content: space-between; padding: 2px; border-bottom: 1px solid #0f3460; font-size: 0.65rem; }
         .leader-item.me { color: var(--primary); font-weight: bold; }
-
-        button { 
-            padding: 10px; 
-            background: var(--primary); 
-            color: white; 
-            border: none; 
-            border-radius: 6px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            font-size: 0.9rem;
-        }
-        button:disabled { background: #444; }
+        
+        #game-msg { font-size: 0.8rem; text-align: center; color: var(--win); font-weight: bold; margin-bottom: 5px; height: 20px; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <div class="msg-banner" id="game-msg">BINGO ARENA</div>
-    </div>
-
     <div class="main-layout">
         <div class="panel">
-            <h3 style="margin:0; font-size: 0.9rem; text-align: center;">SORTEIO</h3>
-            <span id="ball">--</span>
-            <button id="draw-btn" onclick="drawBall()">SORTEAR</button>
-            <div class="history-container">
-                <p style="font-size: 0.7rem; text-align: center; margin: 5px 0;">HISTÓRICO</p>
-                <div class="history-grid" id="history-grid"></div>
+            <div class="money-display">
+                <div class="money-label">CARTEIRA</div>
+                <div class="money-value" id="balance">R$ 50,00</div>
+                <div id="cost-alert">- R$ 5,00 (ENTRADA)</div>
             </div>
+            <div id="game-msg">BINGO ARENA</div>
+            <span id="ball">--</span>
+            <div class="btn-group">
+                <button id="draw-btn" class="btn-manual" onclick="manualDraw()">SORTEAR</button>
+                <button id="auto-btn" class="btn-auto" onclick="toggleAuto()">AUTO</button>
+            </div>
+            <p style="font-size: 0.55rem; text-align: center; margin: 8px 0 3px 0;">HISTÓRICO</p>
+            <div class="history-grid" id="history-grid"></div>
         </div>
 
         <div class="arena" id="arena"></div>
 
         <div class="panel">
-            <h3 style="margin:0; font-size: 0.9rem; text-align: center;">RANKING</h3>
-            <div id="leader-list" style="margin-top: 10px;"></div>
-            <button style="margin-top: auto; background: #533483;" onclick="location.reload()">REINICIAR</button>
+            <h3 style="margin:0; font-size: 0.7rem; text-align: center;">RANKING</h3>
+            <div id="leader-list" style="margin-top: 5px; flex-grow: 1; overflow-y: auto;"></div>
+            <button class="btn-reset" onclick="startNewRound()">RECOMEÇAR</button>
         </div>
     </div>
 
 <script>
-    let drawn = [];
-    let players = [];
-    let firstLineOut = false;
-    let gameOver = false;
+    let drawn = [], players = [], firstLineOut = false, gameOver = false, autoInterval = null;
+    let totalBalance = 50.00;
+    const ROUND_COST = 5.00;
+    const LINE_PRIZE = 20.00;
+    const BINGO_PRIZE = 50.00;
+    const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA"];
+
+    // FUNÇÕES DE PERSISTÊNCIA (LocalStorage)
+    function saveToStorage() {
+        localStorage.setItem('bingo_arena_balance', totalBalance.toString());
+    }
+
+    function loadFromStorage() {
+        const saved = localStorage.getItem('bingo_arena_balance');
+        if (saved !== null) {
+            totalBalance = parseFloat(saved);
+        }
+        updateBalanceDisplay();
+    }
+
+    function updateBalanceDisplay() {
+        document.getElementById('balance').innerText = `R$ ${totalBalance.toFixed(2).replace('.', ',')}`;
+        saveToStorage();
+    }
 
     function genNums() {
         let n = [];
-        while(n.length < 24) {
-            let r = Math.floor(Math.random() * 75) + 1;
-            if(!n.includes(r)) n.push(r);
+        while(n.length < 24) { let r = Math.floor(Math.random() * 75) + 1; if(!n.includes(r)) n.push(r); }
+        n.splice(12, 0, 0); return n;
+    }
+
+    function startNewRound() {
+        if(autoInterval) toggleAuto();
+        if(totalBalance < ROUND_COST) {
+            alert("Saldo insuficiente! Restaurando saldo inicial de R$ 50,00.");
+            totalBalance = 50.00;
         }
-        n.splice(12, 0, 0); 
-        return n;
+        totalBalance -= ROUND_COST;
+        updateBalanceDisplay();
+        
+        const alertBox = document.getElementById('cost-alert');
+        alertBox.style.visibility = 'visible';
+        setTimeout(() => alertBox.style.visibility = 'hidden', 2000);
+        init();
     }
 
     function init() {
-        for(let i=1; i<=6; i++) {
-            let p = { id: i, name: i===1?"VOCÊ":`JOG. 0${i}`, nums: genNums(), marks: 1 };
+        const arena = document.getElementById('arena');
+        arena.innerHTML = "";
+        players = []; drawn = []; firstLineOut = false; gameOver = false;
+        document.getElementById('ball').innerText = "--";
+        document.getElementById('history-grid').innerHTML = "";
+        document.getElementById('game-msg').innerText = "BINGO ARENA";
+        document.getElementById('draw-btn').disabled = false;
+        document.getElementById('auto-btn').disabled = false;
+
+        let listaNomes = [...nomesComuns].sort(() => Math.random() - 0.5);
+
+        for(let i=1; i<=8; i++) {
+            let nomeFinal = i === 1 ? "VOCÊ" : listaNomes[i-2];
+            let p = { id: i, name: nomeFinal, nums: genNums(), marks: 1 };
             players.push(p);
             let card = document.createElement('div');
             card.className = `bingo-card ${i===1?'player':''}`;
+            card.id = `card-p${i}`;
             card.innerHTML = `<h5>${p.name}</h5><div class="grid" id="g-${i}"></div>`;
-            document.getElementById('arena').appendChild(card);
+            arena.appendChild(card);
             
             p.nums.forEach((num, idx) => {
                 let cell = document.createElement('div');
@@ -193,19 +185,29 @@
         updateRank();
     }
 
+    function manualDraw() { if(autoInterval) toggleAuto(); drawBall(); }
+
+    function toggleAuto() {
+        const btn = document.getElementById('auto-btn');
+        if (autoInterval) {
+            clearInterval(autoInterval); autoInterval = null;
+            btn.innerText = "AUTO"; 
+        } else {
+            if (gameOver) return;
+            btn.innerText = "PARAR";
+            autoInterval = setInterval(drawBall, 850);
+        }
+    }
+
     function drawBall() {
         if(gameOver || drawn.length >= 75) return;
-        let b;
-        do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
+        let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
         drawn.push(b);
         document.getElementById('ball').innerText = b;
         
-        // Histórico em Grade
         let h = document.createElement('div');
-        h.className = 'history-item';
-        h.innerText = b;
-        const grid = document.getElementById('history-grid');
-        grid.prepend(h);
+        h.className = 'history-item'; h.innerText = b;
+        document.getElementById('history-grid').prepend(h);
 
         document.querySelectorAll(`[data-num="${b}"]`).forEach(c => c.classList.add('marked'));
         players.forEach(p => { if(p.nums.includes(b)) p.marks++; });
@@ -218,23 +220,37 @@
             if(!firstLineOut) {
                 for(let r=0; r<5; r++) {
                     let win = true, idxs = [];
-                    for(let c=0; c<5; c++) {
-                        let i = r*5+c; idxs.push(i);
-                        if(!document.getElementById(`p${p.id}-c${i}`).classList.contains('marked')) win = false;
+                    for(let c=0; c<5; c++) { 
+                        let i = r*5+c; idxs.push(i); 
+                        if(!document.getElementById(`p${p.id}-c${i}`).classList.contains('marked')) win = false; 
                     }
                     if(win) {
                         firstLineOut = true;
                         document.getElementById('game-msg').innerText = `LINHA: ${p.name}!`;
+                        document.getElementById(`card-p${p.id}`).classList.add('line-anim');
                         idxs.forEach(idx => document.getElementById(`p${p.id}-c${idx}`).classList.add('line-win'));
-                        confetti({ particleCount: 50, origin: {y: 0.8} });
+                        if(p.id === 1) {
+                            totalBalance += LINE_PRIZE;
+                            updateBalanceDisplay();
+                            document.getElementById('game-msg').innerText += " +R$20";
+                        }
+                        confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 }, colors: ['#2ecc71', '#ffffff'] });
                     }
                 }
             }
-            if(p.marks === 25) {
+            if(p.marks === 25 && !gameOver) {
                 gameOver = true;
+                if(autoInterval) toggleAuto();
                 document.getElementById('game-msg').innerText = `BINGO: ${p.name}!`;
+                document.getElementById(`card-p${p.id}`).classList.add('winner-anim');
                 document.getElementById('draw-btn').disabled = true;
-                confetti({ particleCount: 200, spread: 100, origin: {y: 0.5} });
+                document.getElementById('auto-btn').disabled = true;
+                if(p.id === 1) {
+                    totalBalance += BINGO_PRIZE;
+                    updateBalanceDisplay();
+                    document.getElementById('game-msg').innerText += " +R$50";
+                }
+                confetti({ particleCount: 250, spread: 100, origin: { y: 0.5 } });
             }
         });
     }
@@ -248,7 +264,10 @@
         });
     }
 
+    // CARREGAR AO INICIAR
+    loadFromStorage();
     init();
+
 </script>
 </body>
 </html>
