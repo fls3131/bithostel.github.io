@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bingo Arena - Manual & Info</title>
+    <style>
+        :root { --primary: #e94560; --bg: #1a1a2e; --card-bg: #16213e; --win: #2ecc71; --gold: #ffd700; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: white; line-height: 1.6; margin: 0; padding: 0; }
+        .container { max-width: 800px; margin: 40px auto; padding: 20px; }
+        header { text-align: center; border-bottom: 2px solid var(--primary); padding-bottom: 20px; margin-bottom: 40px; }
+        h1 { color: var(--primary); letter-spacing: 2px; margin: 0; }
+        .grid-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px; }
+        .info-card { background: var(--card-bg); padding: 20px; border-radius: 10px; border: 1px solid #333; text-align: center; }
+        .info-card h3 { color: var(--gold); margin-top: 0; }
+        .manual-section { background: var(--card-bg); padding: 30px; border-radius: 10px; border-left: 5px solid var(--primary); }
+        .step { margin-bottom: 20px; }
+        .step b { color: var(--primary); font-size: 1.1rem; }
+        .btn-play { display: block; width: fit-content; margin: 40px auto; padding: 15px 40px; background: var(--win); color: white; text-decoration: none; font-weight: bold; border-radius: 50px; font-size: 1.2rem; transition: transform 0.2s, box-shadow 0.2s; }
+        .btn-play:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(46, 204, 113, 0.4); }
+        footer { text-align: center; color: #555; font-size: 0.8rem; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>BINGO ARENA</h1>
+        <p>A experiência definitiva de Bingo Competitivo</p>
+    </header>
+
+    <div class="grid-info">
+        <div class="info-card">
+            <h3>Custo</h3>
+            <p>R$ 5,00 por cartela</p>
+        </div>
+        <div class="info-card">
+            <h3>Prêmio Linha</h3>
+            <p>R$ 15,00 (Primeiro a completar)</p>
+        </div>
+        <div class="info-card">
+            <h3>Prêmio Bingo</h3>
+            <p>R$ 30,00 (Cartela Cheia)</p>
+        </div>
+    </div>
+
+    <div class="manual-section">
+        <h2>📖 Manual do Jogador</h2>
+        
+        <div class="step">
+            <b>1. Entrada na Arena:</b>
+            <p>Ao carregar o jogo, uma taxa de R$ 5,00 é debitada automaticamente da sua carteira para gerar sua cartela e as dos seus 7 oponentes.</p>
+        </div>
+
+        <div class="step">
+            <b>2. Sorteio das Bolas:</b>
+            <p>Você pode clicar em <b>"SORTEAR"</b> para uma bola por vez ou ativar o modo <b>"AUTO"</b> para que o globo gire automaticamente a cada segundo.</p>
+        </div>
+
+        <div class="step">
+            <b>3. Marcação:</b>
+            <p>O sistema marca automaticamente os números na sua cartela e na dos oponentes. O centro da cartela (★) é um espaço livre gratuito.</p>
+        </div>
+
+        <div class="step">
+            <b>4. Como Ganhar:</b>
+            <p>Existem duas formas de ganhar prêmios em dinheiro:
+                <ul>
+                    <li><b>Linha:</b> Complete 5 números em qualquer linha horizontal antes de todo mundo.</li>
+                    <li><b>Bingo:</b> Seja o primeiro a completar todos os 25 números da cartela.</li>
+                </ul>
+            </p>
+        </div>
+
+        <div class="step">
+            <b>5. Ranking em Tempo Real:</b>
+            <p>Fique de olho na coluna da direita para ver quem está mais próximo de ganhar (Ex: 20/25 indica que faltam 5 números).</p>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Bingo Arena - Jogue com responsabilidade.
+    </footer>
+</div>
+
+</body>
+</html>
