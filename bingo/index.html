@@ -14,10 +14,22 @@
             height: 100vh; overflow: hidden; display: flex; flex-direction: column; padding: 5px;
         }
 
+        /* AJUSTE DO TOAST (AVISO DE DINHEIRO) */
+        #money-toast {
+            position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 10000; /* Valor altíssimo para ficar na frente de tudo */
+            font-size: 5rem; font-weight: 900;
+            pointer-events: none; opacity: 0;
+            text-shadow: 0 0 20px rgba(0,0,0,0.5), 0 0 40px currentColor;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .toast-show { opacity: 1 !important; transform: translate(-50%, -150%) scale(1.2) !important; }
+
         /* Overlay de Segurança */
         #auth-overlay {
             position: fixed; top:0; left:0; width: 100%; height: 100%;
-            background: var(--bg); z-index: 9999;
+            background: var(--bg); z-index: 9998;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
         .auth-card { background: var(--card-bg); padding: 25px; border-radius: 12px; border: 2px solid var(--primary); text-align: center; }
@@ -61,9 +73,11 @@
 </head>
 <body>
 
+    <div id="money-toast"></div>
+
     <div id="auth-overlay">
         <div class="auth-card">
-            <h2>ACESSO RESTRITO</h2>
+            <h2 id="auth-title">ACESSO RESTRITO</h2>
             <p id="auth-desc" style="font-size: 0.7rem; color: #aaa;">Digite sua senha de 4 dígitos</p>
             <input type="password" id="pass-input" class="auth-input" maxlength="4">
             <br>
@@ -90,10 +104,7 @@
         <div class="panel">
             <h3 style="margin:0; font-size: 0.7rem; text-align: center;">RANKING</h3>
             <div id="leader-list" style="margin-top: 5px; flex-grow: 1; overflow-y: auto;"></div>
-            
-            <button class="btn-info" onclick="openManualPopup()">
-                MANUAL <span>&#10064;</span>
-            </button>
+            <button class="btn-info" onclick="openManualPopup()">MANUAL <span>&#10064;</span></button>
         </div>
     </div>
 
@@ -103,31 +114,31 @@
     const ROUND_COST = 5.00, LINE_PRIZE = 15.00, BINGO_PRIZE = 30.00;
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA"];
 
-    // FUNÇÃO PARA ABRIR POPUP CENTRALIZADA
-    function openManualPopup() {
-        const width = 450;
-        const height = 600;
-        const left = (screen.width / 2) - (width / 2);
-        const top = (screen.height / 2) - (height / 2);
-        
-        window.open(
-            'manual.html', 
-            'BingoManual', 
-            `width=${width},height=${height},top=${top},left=${left},scrollbars=yes,resizable=no`
-        );
+    // FUNÇÃO TOAST CORRIGIDA
+    function showToast(text, color) {
+        const toast = document.getElementById('money-toast');
+        toast.innerText = text;
+        toast.style.color = color;
+        toast.classList.remove('toast-show'); // Reseta se já estiver aparecendo
+        void toast.offsetWidth; // Força reflow do navegador
+        toast.classList.add('toast-show');
+        setTimeout(() => toast.classList.remove('toast-show'), 1500);
     }
 
-    // --- SEGURANÇA ---
+    function openManualPopup() {
+        const width = 450, height = 600;
+        const left = (screen.width/2)-(width/2), top = (screen.height/2)-(height/2);
+        window.open('manual.html', 'BingoManual', `width=${width},height=${height},top=${top},left=${left},scrollbars=yes`);
+    }
+
     function initSecurity() {
         const savedPass = localStorage.getItem('bingo_vault_pass');
         const isAuth = sessionStorage.getItem('bingo_authenticated');
         if (isAuth === 'true') {
             document.getElementById('auth-overlay').style.display = 'none';
-            loadFromStorage();
-            init();
-            return;
+            loadFromStorage(); init(); return;
         }
-        if (!savedPass) document.querySelector('.auth-card h2').innerText = "CRIAR SENHA";
+        if (!savedPass) document.getElementById('auth-title').innerText = "CRIAR SENHA";
     }
 
     function checkAuth() {
@@ -158,8 +169,11 @@
         const saved = localStorage.getItem('bingo_arena_balance');
         if (saved !== null) totalBalance = parseFloat(saved);
         if (totalBalance < ROUND_COST) { alert("Saldo insuficiente! Restaurando R$ 50,00."); totalBalance = 50.00; }
+        
         totalBalance -= ROUND_COST;
         updateBalanceDisplay();
+        // Avisar a perda do valor da cartela
+        setTimeout(() => showToast(`-R$ 5,00`, "var(--loss)"), 500);
     }
 
     function startNewRound() { if(confirm("Nova rodada por R$ 5,00?")) location.reload(); }
@@ -227,7 +241,11 @@
                     if(win) {
                         firstLineOut = true;
                         lineCells.forEach(c => c.classList.add('line-win'));
-                        if(p.id === 1) { totalBalance += LINE_PRIZE; updateBalanceDisplay(); }
+                        if(p.id === 1) { 
+                            totalBalance += LINE_PRIZE; 
+                            updateBalanceDisplay();
+                            showToast(`+R$ 15,00`, "var(--win)"); // MOSTRAR TOAST DA LINHA
+                        }
                         confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
                     }
                 }
@@ -235,7 +253,11 @@
             if(p.marks === 25 && !gameOver) {
                 gameOver = true; if(autoInterval) toggleAuto();
                 document.getElementById(`card-p${p.id}`).style.border = "2px solid var(--gold)";
-                if(p.id === 1) { totalBalance += BINGO_PRIZE; updateBalanceDisplay(); }
+                if(p.id === 1) { 
+                    totalBalance += BINGO_PRIZE; 
+                    updateBalanceDisplay();
+                    showToast(`+R$ 30,00`, "var(--gold)"); // MOSTRAR TOAST DO BINGO
+                }
                 confetti({ particleCount: 250, spread: 100, origin: { y: 0.5 } });
             }
         });
