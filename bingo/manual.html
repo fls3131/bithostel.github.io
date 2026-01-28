@@ -5,20 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bingo Arena - Manual & Info</title>
     <style>
-        :root { --primary: #e94560; --bg: #1a1a2e; --card-bg: #16213e; --win: #2ecc71; --gold: #ffd700; }
+        :root { --primary: #e94560; --bg: #1a1a2e; --card-bg: #16213e; --win: #2ecc71; --gold: #ffd700; --accent: #3498db; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: white; line-height: 1.6; margin: 0; padding: 0; }
         .container { max-width: 800px; margin: 40px auto; padding: 20px; }
         header { text-align: center; border-bottom: 2px solid var(--primary); padding-bottom: 20px; margin-bottom: 40px; }
         h1 { color: var(--primary); letter-spacing: 2px; margin: 0; }
+        
         .grid-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 40px; }
         .info-card { background: var(--card-bg); padding: 20px; border-radius: 10px; border: 1px solid #333; text-align: center; }
         .info-card h3 { color: var(--gold); margin-top: 0; }
-        .manual-section { background: var(--card-bg); padding: 30px; border-radius: 10px; border-left: 5px solid var(--primary); }
+        
+        .manual-section { background: var(--card-bg); padding: 30px; border-radius: 10px; border-left: 5px solid var(--primary); margin-bottom: 20px; }
+        .vault-section { background: rgba(52, 152, 219, 0.1); padding: 30px; border-radius: 10px; border-left: 5px solid var(--accent); border: 1px solid var(--accent); }
+        
+        h2 { margin-top: 0; display: flex; align-items: center; gap: 10px; }
         .step { margin-bottom: 20px; }
         .step b { color: var(--primary); font-size: 1.1rem; }
-        .btn-play { display: block; width: fit-content; margin: 40px auto; padding: 15px 40px; background: var(--win); color: white; text-decoration: none; font-weight: bold; border-radius: 50px; font-size: 1.2rem; transition: transform 0.2s, box-shadow 0.2s; }
-        .btn-play:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(46, 204, 113, 0.4); }
+        .vault-section b { color: var(--accent); }
+        
         footer { text-align: center; color: #555; font-size: 0.8rem; margin-top: 50px; }
+        ul { padding-left: 20px; }
     </style>
 </head>
 <body>
@@ -44,6 +50,28 @@
         </div>
     </div>
 
+    <div class="vault-section">
+        <h2>🔒 Cofre da Carteira</h2>
+        <p>Sua segurança é nossa prioridade. O sistema de proteção de saldo funciona da seguinte forma:</p>
+        
+        <div class="step">
+            <b>Criação de Senha:</b>
+            <p>Ao acessar a arena pela primeira vez, você deverá definir um PIN de 4 dígitos. Esta senha será necessária para desbloquear seu saldo em todos os acessos futuros.</p>
+        </div>
+
+        <div class="step">
+            <b>Sessão Ativa:</b>
+            <p>Uma vez desbloqueado, o cofre permanecerá aberto enquanto você mantiver a aba do jogo ativa. Ao fechar o navegador, o cofre tranca automaticamente por segurança.</p>
+        </div>
+
+        <div class="step">
+            <b>Armazenamento Local:</b>
+            <p>Seu saldo e senha ficam vinculados ao seu navegador atual. Limpar os dados do navegador (cache) resultará na perda do acesso ao saldo acumulado.</p>
+        </div>
+    </div>
+
+    <br>
+
     <div class="manual-section">
         <h2>📖 Manual do Jogador</h2>
         
@@ -54,7 +82,7 @@
 
         <div class="step">
             <b>2. Sorteio das Bolas:</b>
-            <p>Você pode clicar em <b>"SORTEAR"</b> para uma bola por vez ou ativar o modo <b>"AUTO"</b> para que o globo gire automaticamente a cada segundo.</p>
+            <p>Você pode clicar em <b>"SORTEAR"</b> para uma bola por vez ou ativar o modo <b>"AUTO"</b> para que o globo gire automaticamente a cada 850ms.</p>
         </div>
 
         <div class="step">
@@ -64,22 +92,17 @@
 
         <div class="step">
             <b>4. Como Ganhar:</b>
-            <p>Existem duas formas de ganhar prêmios em dinheiro:
+            <p>Existem duas formas de ganhar prêmios:
                 <ul>
-                    <li><b>Linha:</b> Complete 5 números em qualquer linha horizontal antes de todo mundo.</li>
+                    <li><b>Linha:</b> Complete 5 números em qualquer linha horizontal antes de todos.</li>
                     <li><b>Bingo:</b> Seja o primeiro a completar todos os 25 números da cartela.</li>
                 </ul>
             </p>
         </div>
-
-        <div class="step">
-            <b>5. Ranking em Tempo Real:</b>
-            <p>Fique de olho na coluna da direita para ver quem está mais próximo de ganhar (Ex: 20/25 indica que faltam 5 números).</p>
-        </div>
     </div>
 
     <footer>
-        &copy; 2026 Bingo Arena - Jogue com responsabilidade.
+        &copy; 2026 Bingo Arena - Proteção de Dados via LocalStorage.
     </footer>
 </div>
 

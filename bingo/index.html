@@ -14,11 +14,11 @@
             height: 100vh; overflow: hidden; display: flex; flex-direction: column; padding: 5px;
         }
 
-        /* AJUSTE DO TOAST (AVISO DE DINHEIRO) */
+        /* Efeito de Saldo no Meio da Tela */
         #money-toast {
             position: fixed; top: 50%; left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            z-index: 10000; /* Valor altíssimo para ficar na frente de tudo */
+            z-index: 10000;
             font-size: 5rem; font-weight: 900;
             pointer-events: none; opacity: 0;
             text-shadow: 0 0 20px rgba(0,0,0,0.5), 0 0 40px currentColor;
@@ -109,18 +109,21 @@
     </div>
 
 <script>
+    // Configurações de Áudio
+    const somSorteio = new Audio('sorteio.mp3');
+    const somDinheiro = new Audio('dinheiro.mp3');
+
     let drawn = [], players = [], firstLineOut = false, gameOver = false, autoInterval = null;
     let totalBalance = 50.00;
     const ROUND_COST = 5.00, LINE_PRIZE = 15.00, BINGO_PRIZE = 30.00;
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA"];
 
-    // FUNÇÃO TOAST CORRIGIDA
     function showToast(text, color) {
         const toast = document.getElementById('money-toast');
         toast.innerText = text;
         toast.style.color = color;
-        toast.classList.remove('toast-show'); // Reseta se já estiver aparecendo
-        void toast.offsetWidth; // Força reflow do navegador
+        toast.classList.remove('toast-show');
+        void toast.offsetWidth; 
         toast.classList.add('toast-show');
         setTimeout(() => toast.classList.remove('toast-show'), 1500);
     }
@@ -144,6 +147,12 @@
     function checkAuth() {
         const input = document.getElementById('pass-input').value;
         const savedPass = localStorage.getItem('bingo_vault_pass');
+        
+        // Habilitar áudios na primeira interação
+        [somSorteio, somDinheiro].forEach(s => {
+            s.play().then(() => { s.pause(); s.currentTime = 0; }).catch(() => {});
+        });
+
         if (!savedPass) {
             if (input.length === 4) {
                 localStorage.setItem('bingo_vault_pass', input);
@@ -172,7 +181,6 @@
         
         totalBalance -= ROUND_COST;
         updateBalanceDisplay();
-        // Avisar a perda do valor da cartela
         setTimeout(() => showToast(`-R$ 5,00`, "var(--loss)"), 500);
     }
 
@@ -216,6 +224,10 @@
 
     function drawBall() {
         if(gameOver || drawn.length >= 75) return;
+        
+        somSorteio.currentTime = 0;
+        somSorteio.play();
+
         let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
         drawn.push(b);
         document.getElementById('ball').innerText = b;
@@ -244,7 +256,9 @@
                         if(p.id === 1) { 
                             totalBalance += LINE_PRIZE; 
                             updateBalanceDisplay();
-                            showToast(`+R$ 15,00`, "var(--win)"); // MOSTRAR TOAST DA LINHA
+                            showToast(`+R$ 15,00`, "var(--win)");
+                            somDinheiro.currentTime = 0;
+                            somDinheiro.play();
                         }
                         confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
                     }
@@ -256,7 +270,9 @@
                 if(p.id === 1) { 
                     totalBalance += BINGO_PRIZE; 
                     updateBalanceDisplay();
-                    showToast(`+R$ 30,00`, "var(--gold)"); // MOSTRAR TOAST DO BINGO
+                    showToast(`+R$ 30,00`, "var(--gold)");
+                    somDinheiro.currentTime = 0;
+                    somDinheiro.play();
                 }
                 confetti({ particleCount: 250, spread: 100, origin: { y: 0.5 } });
             }
