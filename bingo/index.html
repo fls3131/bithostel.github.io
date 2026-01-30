@@ -12,7 +12,7 @@
         .toast-show { opacity: 1 !important; transform: translate(-50%, -150%) scale(1.2) !important; }
         #auth-overlay, #withdraw-modal, #deposit-modal { position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(26, 26, 46, 0.98); z-index: 9998; display: flex; flex-direction: column; align-items: center; justify-content: center; }
         #withdraw-modal, #deposit-modal { z-index: 20000; display: none; background: rgba(0,0,0,0.85); }
-        .auth-card { background: var(--card-bg); padding: 25px; border-radius: 12px; border: 2px solid var(--primary); text-align: center; min-width: 320px; }
+        .auth-card { background: var(--card-bg); padding: 25px; border-radius: 12px; border: 2px solid var(--primary); text-align: center; min-width: 320px; max-width: 400px; }
         .auth-input { background: #0f3460; border: 1px solid var(--primary); color: white; padding: 12px; font-size: 1.2rem; width: 100%; text-align: center; margin: 10px 0; border-radius: 8px; outline: none; }
         .pin-mode { letter-spacing: 8px; font-size: 1.8rem; }
         .main-layout { display: grid; grid-template-columns: 160px 1fr 160px; gap: 8px; height: 98vh; }
@@ -41,6 +41,7 @@
         .stats-box { background: #0f3460; padding: 5px; border-radius: 4px; text-align: center; margin-bottom: 8px; border-bottom: 2px solid var(--accent); }
         .stats-label { font-size: 0.6rem; color: #aaa; text-transform: uppercase; display: block; }
         .stats-value { font-size: 1.2rem; font-weight: 900; color: var(--accent); }
+        .security-info { font-size: 0.65rem; color: #888; margin-top: 10px; line-height: 1.2; }
     </style>
 </head>
 <body>
@@ -73,9 +74,15 @@
 
     <div id="auth-overlay">
         <div class="auth-card">
-            <h2 id="auth-title">ACESSO RESTRITO</h2>
-            <input type="password" id="pass-input" class="auth-input pin-mode" maxlength="4">
-            <button id="btn-unlock" style="background: var(--primary); width: 100%; font-size: 1rem; padding: 12px; margin-top: 10px; border-radius: 4px; font-weight: bold; color:white; cursor:pointer">DESBLOQUEAR</button>
+            <h2 id="auth-title" style="margin-bottom: 5px;">ACESSO À CARTEIRA</h2>
+            <p id="auth-instruction" style="font-size: 0.8rem; color: var(--accent); margin-bottom: 15px;">Defina seu PIN de 4 dígitos para o primeiro acesso</p>
+            <input type="password" id="pass-input" class="auth-input pin-mode" maxlength="4" inputmode="numeric">
+            <button id="btn-unlock" style="background: var(--primary); width: 100%; font-size: 1rem; padding: 12px; margin-top: 10px; border-radius: 4px; font-weight: bold; color:white; cursor:pointer">CONFIRMAR PIN</button>
+            
+            <div class="security-info">
+                <p>🔒 <b>Segurança Local:</b> Sua senha é salva apenas neste dispositivo.<br>
+                ⚠️ <b>Atenção:</b> Se esquecer o PIN, o saldo não poderá ser recuperado.</p>
+            </div>
         </div>
     </div>
 
@@ -100,6 +107,12 @@
             </div>
             <h3 style="margin:0; font-size: 0.7rem; text-align: center;">RANKING</h3>
             <div id="leader-list" style="margin-top: 5px; flex-grow: 1; overflow-y: auto;"></div>
+            
+            <div style="background: rgba(0,0,0,0.3); padding: 5px; border-radius: 4px; margin-top: 5px;">
+                <p style="font-size: 0.55rem; color: #888; margin: 2px 0; text-align: center;">CARTEIRA PROTEGIDA</p>
+                <button id="btn-logout" style="background: #333; width: 100%; font-size: 0.6rem; padding: 4px;">BLOQUEAR AGORA</button>
+            </div>
+
             <button id="manual-btn" class="btn-info">SOBRE(AJUDA) <span>&#10064;</span></button>
             <button id="open-dep" class="btn-info btn-deposit">DEPOSITAR <span>💸</span></button>
             <button id="open-wd" class="btn-info btn-withdraw">SACAR <span>💸</span></button>
@@ -108,13 +121,12 @@
 
 <script>
 (function() {
-    // Inicialização dos áudios
     const somSorteio = new Audio('sorteio.mp3');
     const somDinheiro = new Audio('dinheiro.mp3');
     const somMarca = new Audio('marca.mp3');
     const somBingo = new Audio('bingo.mp3');
     const somLinha = new Audio('linha.mp3');
-    const somGeral = new Audio('geral.mp3'); // Adicionado para vitória dos outros
+    const somGeral = new Audio('geral.mp3');
 
     let drawn = [], players = [], firstLineOut = false, gameOver = false, autoInterval = null;
     let totalBalance = 0;
@@ -122,6 +134,14 @@
     
     const ROUND_COST = 5.00, LINE_PRIZE = 10.00, BINGO_PRIZE = 20.00;
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA"];
+
+    // UI de Autenticação inicial dinâmico
+    const savedPass = localStorage.getItem('bingo_vault_pass');
+    if(savedPass) {
+        document.getElementById('auth-title').innerText = "DESBLOQUEAR CARTEIRA";
+        document.getElementById('auth-instruction').innerText = "Insira seu PIN de 4 dígitos para acessar o saldo";
+        document.getElementById('btn-unlock').innerText = "DESBLOQUEAR";
+    }
 
     function showToast(text, color) {
         const toast = document.getElementById('money-toast');
@@ -176,7 +196,6 @@
         sorted.forEach(p => list.innerHTML += `<div class="leader-item ${p.id===1?'me':''}"><span>${p.name}</span><span>${p.marks}/25</span></div>`);
         
         players.forEach(p => {
-            // Lógica de Linha (Toca linha.mp3 para geral)
             if(!firstLineOut) {
                 for(let r=0; r<5; r++) {
                     let win = true, lCells = [];
@@ -202,21 +221,18 @@
                 }
             }
 
-            // Lógica de Bingo (Cartela Cheia)
             if(p.marks === 25 && !gameOver) {
                 gameOver = true; 
                 if(autoInterval) { clearInterval(autoInterval); autoInterval = null; document.getElementById('auto-btn').innerText = "AUTO"; }
                 document.getElementById(`card-p${p.id}`).style.border = "3px solid var(--gold)";
                 
                 if(p.id === 1) { 
-                    // VOCÊ GANHOU: Toca bingo.mp3
                     totalBalance += BINGO_PRIZE; 
                     updateBalanceDisplay(); 
                     showToast(`BINGO! VOCÊ VENCEU R$ 20,00`, "var(--gold)");
                     somBingo.currentTime = 0;
                     somBingo.play().catch(()=>{});
                 } else {
-                    // BOT GANHOU: Toca geral.mp3
                     showToast(`BINGO! ${p.name} GANHOU`, "var(--loss)");
                     somGeral.currentTime = 0;
                     somGeral.play().catch(()=>{});
@@ -249,16 +265,28 @@
 
     document.getElementById('btn-unlock').onclick = () => {
         const input = document.getElementById('pass-input').value;
-        const savedPass = localStorage.getItem('bingo_vault_pass');
+        const currentSavedPass = localStorage.getItem('bingo_vault_pass');
         
-        // Pré-ativar áudios para navegadores mobile
         [somSorteio, somDinheiro, somMarca, somBingo, somLinha, somGeral].forEach(s => { 
             s.play().then(() => { s.pause(); s.currentTime = 0; }).catch(() => {}); 
         });
 
-        if (!savedPass && input.length === 4) { localStorage.setItem('bingo_vault_pass', input); login(); }
-        else if (input === savedPass) { login(); }
+        if (!currentSavedPass) {
+            if(input.length === 4) {
+                localStorage.setItem('bingo_vault_pass', input);
+                alert("PIN Criado com Sucesso!");
+                login();
+            } else {
+                alert("O PIN deve ter 4 dígitos.");
+            }
+        }
+        else if (input === currentSavedPass) { login(); }
         else { alert("Senha incorreta!"); }
+    };
+
+    document.getElementById('btn-logout').onclick = () => {
+        sessionStorage.removeItem('bingo_authenticated');
+        location.reload();
     };
 
     function login() {
@@ -270,7 +298,6 @@
         initGame();
     }
 
-    // Handlers de botões
     document.getElementById('draw-btn').onclick = () => { if(processPayment()) { if(autoInterval) { clearInterval(autoInterval); autoInterval = null; document.getElementById('auto-btn').innerText = "AUTO"; } drawBall(); } };
     document.getElementById('auto-btn').onclick = function() {
         if (autoInterval) { clearInterval(autoInterval); autoInterval = null; this.innerText = "AUTO"; }
