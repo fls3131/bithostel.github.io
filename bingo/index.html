@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Bingo Arena - Segurança Reforçada</title>
+    <title>Bingo Arena - 10 Jogadores</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root { --primary: #e94560; --bg: #1a1a2e; --card-bg: #16213e; --win: #2ecc71; --accent: #f1c40f; --gold: #ffd700; --money: #27ae60; --loss: #ff4757; }
@@ -15,7 +15,9 @@
         .auth-card { background: var(--card-bg); padding: 25px; border-radius: 12px; border: 2px solid var(--primary); text-align: center; min-width: 320px; max-width: 400px; }
         .auth-input { background: #0f3460; border: 1px solid var(--primary); color: white; padding: 12px; font-size: 1.2rem; width: 100%; text-align: center; margin: 10px 0; border-radius: 8px; outline: none; }
         .pin-mode { letter-spacing: 8px; font-size: 1.8rem; }
-        .main-layout { display: grid; grid-template-columns: 160px 1fr 160px; gap: 8px; height: 98vh; }
+        
+        /* Ajuste do Layout para 10 jogadores */
+        .main-layout { display: grid; grid-template-columns: 150px 1fr 150px; gap: 8px; height: 98vh; }
         .panel { background: var(--card-bg); border-radius: 8px; padding: 8px; display: flex; flex-direction: column; border: 1px solid #333; }
         .money-display { background: rgba(39, 174, 96, 0.15); border: 1px solid var(--money); border-radius: 5px; padding: 5px; text-align: center; margin-bottom: 8px; }
         .money-value { font-size: 1.1rem; color: #fff; font-weight: 900; }
@@ -28,11 +30,14 @@
         .btn-info { background: #444; margin-top: 5px; display: flex; align-items: center; justify-content: center; gap: 5px; }
         .btn-deposit { background: #3498db; }
         .btn-withdraw { background: var(--money); }
-        .arena { display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(2, 1fr); gap: 6px; }
+        
+        /* Arena ajustada para 5 colunas (2 linhas de 5) */
+        .arena { display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(2, 1fr); gap: 6px; align-content: center; }
+        
         .bingo-card { background: var(--card-bg); padding: 4px; border-radius: 6px; border: 1px solid #333; transition: 0.3s; }
-        .bingo-card.player { border: 1px solid var(--primary); }
+        .bingo-card.player { border: 1px solid var(--primary); box-shadow: 0 0 10px rgba(233, 69, 96, 0.3); }
         .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; }
-        .cell { aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; background: #0f3460; border-radius: 2px; font-size: 0.7rem; font-weight: bold; }
+        .cell { aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; background: #0f3460; border-radius: 2px; font-size: 0.65rem; font-weight: bold; }
         .cell.marked { background: var(--primary); }
         .cell.line-win { background-color: var(--win) !important; color: #1a1a2e !important; }
         .cell.free { background: #533483; color: var(--accent); }
@@ -133,9 +138,8 @@
     let costDeducted = false;
     
     const ROUND_COST = 5.00, LINE_PRIZE = 10.00, BINGO_PRIZE = 20.00;
-    const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA"];
+    const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
 
-    // UI de Autenticação inicial dinâmico
     const savedPass = localStorage.getItem('bingo_vault_pass');
     if(savedPass) {
         document.getElementById('auth-title').innerText = "DESBLOQUEAR CARTEIRA";
@@ -245,12 +249,13 @@
     function initGame() {
         const arena = document.getElementById('arena'); arena.innerHTML = ""; players = [];
         let nomes = [...nomesComuns].sort(() => Math.random() - 0.5);
-        for(let i=1; i<=8; i++) {
+        // Atualizado para 10 jogadores
+        for(let i=1; i<=10; i++) {
             let n = []; while(n.length < 24) { let r = Math.floor(Math.random() * 75) + 1; if(!n.includes(r)) n.push(r); } n.splice(12, 0, 0);
             let p = { id: i, name: i === 1 ? "VOCÊ" : nomes[i-2], nums: n, marks: 1 };
             players.push(p);
             let card = document.createElement('div'); card.className = `bingo-card ${i===1?'player':''}`; card.id = `card-p${i}`;
-            card.innerHTML = `<h5 style="margin:2px 0; font-size:0.9rem; text-align:center;">${p.name}</h5><div class="grid" id="g-${i}"></div>`;
+            card.innerHTML = `<h5 style="margin:2px 0; font-size:0.75rem; text-align:center;">${p.name}</h5><div class="grid" id="g-${i}"></div>`;
             arena.appendChild(card);
             p.nums.forEach((num, idx) => {
                 let cell = document.createElement('div');
