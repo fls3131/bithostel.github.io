@@ -42,7 +42,6 @@
 </head>
 <body>
     <div id="money-toast"></div>
-
     <div id="deposit-modal">
         <div class="auth-card" style="border-color: #3498db;">
             <h2 style="color: #3498db; margin: 0;">DEPOSITAR VIA PIX</h2>
@@ -98,10 +97,10 @@
     </div>
 
 <script>
-// IIFE - Protege as variáveis contra manipulação via console
 (function() {
     const somSorteio = new Audio('sorteio.mp3');
     const somDinheiro = new Audio('dinheiro.mp3');
+    const somMarca = new Audio('marca.mp3'); // NOVO ÁUDIO
 
     let drawn = [], players = [], firstLineOut = false, gameOver = false, autoInterval = null;
     let totalBalance = 0;
@@ -140,17 +139,31 @@
         let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
         drawn.push(b);
         document.getElementById('ball').innerText = b;
+        
+        // Histórico
         let h = document.createElement('div'); h.style = "background: rgba(255,255,255,0.1); border-radius: 2px; font-size: 0.65rem; text-align: center;";
         h.innerText = b; document.getElementById('history-grid').prepend(h);
-        document.querySelectorAll(`[data-num="${b}"]`).forEach(c => c.classList.add('marked'));
-        players.forEach(p => { if(p.nums.includes(b)) p.marks++; });
         
-        // Ranking
+        // Marcação visual
+        document.querySelectorAll(`[data-num="${b}"]`).forEach(c => c.classList.add('marked'));
+
+        // Lógica de áudio para marcação na cartela do jogador (Player id: 1)
+        players.forEach(p => { 
+            if(p.nums.includes(b)) {
+                p.marks++; 
+                if(p.id === 1) { // Se o número sorteado estiver na sua cartela
+                    somMarca.currentTime = 0;
+                    somMarca.play().catch(() => {}); 
+                }
+            }
+        });
+        
+        // Atualizar Ranking
         let sorted = [...players].sort((a,b) => b.marks - a.marks);
         let list = document.getElementById('leader-list'); list.innerHTML = "";
         sorted.forEach(p => list.innerHTML += `<div class="leader-item ${p.id===1?'me':''}"><span>${p.name}</span><span>${p.marks}/25</span></div>`);
         
-        // Check Vitoria
+        // Verificar Vitórias
         players.forEach(p => {
             if(!firstLineOut) {
                 for(let r=0; r<5; r++) {
@@ -196,10 +209,11 @@
         }
     }
 
-    // --- EVENTOS (SUBSTITUI O ONCLICK DO HTML) ---
     document.getElementById('btn-unlock').onclick = () => {
         const input = document.getElementById('pass-input').value;
         const savedPass = localStorage.getItem('bingo_vault_pass');
+        // Pré-carregamento dos áudios para mobile
+        [somSorteio, somDinheiro, somMarca].forEach(s => { s.play().then(() => { s.pause(); s.currentTime = 0; }).catch(() => {}); });
         if (!savedPass && input.length === 4) { localStorage.setItem('bingo_vault_pass', input); login(); }
         else if (input === savedPass) { login(); }
         else { alert("Senha incorreta!"); }
@@ -215,22 +229,17 @@
     }
 
     document.getElementById('draw-btn').onclick = () => { if(processPayment()) { if(autoInterval) { clearInterval(autoInterval); autoInterval = null; document.getElementById('auto-btn').innerText = "AUTO"; } drawBall(); } };
-    
     document.getElementById('auto-btn').onclick = function() {
         if (autoInterval) { clearInterval(autoInterval); autoInterval = null; this.innerText = "AUTO"; }
         else if (!gameOver && processPayment()) { this.innerText = "PARAR"; autoInterval = setInterval(drawBall, 850); }
     };
-
     document.getElementById('new-round-btn').onclick = () => { if(!costDeducted || confirm("Nova rodada?")) location.reload(); };
     document.getElementById('manual-btn').onclick = () => { window.open('manual.html', 'BingoManual', 'width=450,height=600'); };
-    
-    // Deposito e Saque
     document.getElementById('open-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'flex';
     document.getElementById('close-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'none';
     document.getElementById('dep-10').onclick = () => { totalBalance += 10; updateBalanceDisplay(); somDinheiro.play(); document.getElementById('deposit-modal').style.display = 'none'; };
     document.getElementById('dep-50').onclick = () => { totalBalance += 50; updateBalanceDisplay(); somDinheiro.play(); document.getElementById('deposit-modal').style.display = 'none'; };
     document.getElementById('dep-100').onclick = () => { totalBalance += 100; updateBalanceDisplay(); somDinheiro.play(); document.getElementById('deposit-modal').style.display = 'none'; };
-
     document.getElementById('open-wd').onclick = () => { 
         document.getElementById('withdraw-modal').style.display = 'flex';
         document.getElementById('wd-balance').innerText = `R$ ${totalBalance.toFixed(2).replace('.', ',')}`;
@@ -242,10 +251,8 @@
         else alert("Erro no valor!");
     };
 
-    // Auto-login se já autenticado
     if (sessionStorage.getItem('bingo_authenticated') === 'true') login();
-
-})(); // Fim da IIFE
+})();
 </script>
 </body>
 </html>
