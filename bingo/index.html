@@ -38,7 +38,6 @@
         .cell.free { background: #533483; color: var(--accent); }
         .leader-item { display: flex; justify-content: space-between; padding: 4px 6px; border-bottom: 1px solid #0f3460; font-size: 0.65rem; }
         .leader-item.me { background: var(--accent); color: var(--bg); font-weight: 900; border-radius: 4px; }
-        
         .stats-box { background: #0f3460; padding: 5px; border-radius: 4px; text-align: center; margin-bottom: 8px; border-bottom: 2px solid var(--accent); }
         .stats-label { font-size: 0.6rem; color: #aaa; text-transform: uppercase; display: block; }
         .stats-value { font-size: 1.2rem; font-weight: 900; color: var(--accent); }
@@ -57,7 +56,6 @@
             <button id="close-dep" style="background: #555; width: 100%; padding: 12px;">VOLTAR</button>
         </div>
     </div>
-
     <div id="withdraw-modal">
         <div class="auth-card">
             <h2 style="color: var(--win); margin: 0;">SAQUE VIA PIX</h2>
@@ -70,7 +68,6 @@
             </div>
         </div>
     </div>
-
     <div id="auth-overlay">
         <div class="auth-card">
             <h2 id="auth-title">ACESSO RESTRITO</h2>
@@ -78,7 +75,6 @@
             <button id="btn-unlock" style="background: var(--primary); width: 100%; font-size: 1rem; padding: 12px; margin-top: 10px; border-radius: 4px; font-weight: bold; color:white; cursor:pointer">DESBLOQUEAR</button>
         </div>
     </div>
-
     <div class="main-layout">
         <div class="panel">
             <div class="money-display"><div class="money-value" id="balance">R$ --,00</div></div>
@@ -90,9 +86,7 @@
             </div>
             <div id="history-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; overflow-y: auto; padding: 4px; background: #0f3460; border-radius: 4px; flex-grow: 1; margin-top: 5px;"></div>
         </div>
-
         <div class="arena" id="arena"></div>
-
         <div class="panel">
             <div class="stats-box">
                 <span class="stats-label">Sorteados</span>
@@ -111,14 +105,14 @@
     const somSorteio = new Audio('sorteio.mp3');
     const somDinheiro = new Audio('dinheiro.mp3');
     const somMarca = new Audio('marca.mp3');
+    const somBingo = new Audio('bingo.mp3');
+    const somLinha = new Audio('linha.mp3'); // Adicionado som de linha
 
     let drawn = [], players = [], firstLineOut = false, gameOver = false, autoInterval = null;
     let totalBalance = 0;
     let costDeducted = false;
     
-    // VALORES ATUALIZADOS AQUI
     const ROUND_COST = 5.00, LINE_PRIZE = 10.00, BINGO_PRIZE = 20.00;
-    
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA"];
 
     function showToast(text, color) {
@@ -148,7 +142,7 @@
 
     function drawBall() {
         if(gameOver || drawn.length >= 75) return;
-        somSorteio.currentTime = 0; somSorteio.play();
+        somSorteio.currentTime = 0; somSorteio.play().catch(()=>{});
         let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
         drawn.push(b);
         document.getElementById('ball').innerText = b;
@@ -182,11 +176,17 @@
                         lCells.push(cell); if(!cell.classList.contains('marked')) win = false;
                     }
                     if(win) {
-                        firstLineOut = true; lCells.forEach(c => c.classList.add('line-win'));
+                        firstLineOut = true; 
+                        lCells.forEach(c => c.classList.add('line-win'));
+                        
+                        // TOCAR LINHA PARA QUALQUER JOGADOR
+                        somLinha.currentTime = 0;
+                        somLinha.play().catch(() => {});
+
                         if(p.id === 1) { 
                             totalBalance += LINE_PRIZE; 
                             updateBalanceDisplay(); 
-                            showToast(`+R$ 10,00`, "var(--win)"); // Toast atualizado
+                            showToast(`+R$ 10,00`, "var(--win)");
                             somDinheiro.play(); 
                         }
                         confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
@@ -194,13 +194,15 @@
                 }
             }
             if(p.marks === 25 && !gameOver) {
-                gameOver = true; if(autoInterval) { clearInterval(autoInterval); autoInterval = null; document.getElementById('auto-btn').innerText = "AUTO"; }
+                gameOver = true; 
+                if(autoInterval) { clearInterval(autoInterval); autoInterval = null; document.getElementById('auto-btn').innerText = "AUTO"; }
                 document.getElementById(`card-p${p.id}`).style.border = "2px solid var(--gold)";
                 if(p.id === 1) { 
                     totalBalance += BINGO_PRIZE; 
                     updateBalanceDisplay(); 
-                    showToast(`+R$ 20,00`, "var(--gold)"); // Toast atualizado
-                    somDinheiro.play(); 
+                    showToast(`+R$ 20,00`, "var(--gold)");
+                    somBingo.currentTime = 0;
+                    somBingo.play().catch(()=>{});
                 }
                 confetti({ particleCount: 250, spread: 100, origin: { y: 0.5 } });
             }
@@ -231,7 +233,10 @@
     document.getElementById('btn-unlock').onclick = () => {
         const input = document.getElementById('pass-input').value;
         const savedPass = localStorage.getItem('bingo_vault_pass');
-        [somSorteio, somDinheiro, somMarca].forEach(s => { s.play().then(() => { s.pause(); s.currentTime = 0; }).catch(() => {}); });
+        // Pré-ativar áudios para mobile
+        [somSorteio, somDinheiro, somMarca, somBingo, somLinha].forEach(s => { 
+            s.play().then(() => { s.pause(); s.currentTime = 0; }).catch(() => {}); 
+        });
         if (!savedPass && input.length === 4) { localStorage.setItem('bingo_vault_pass', input); login(); }
         else if (input === savedPass) { login(); }
         else { alert("Senha incorreta!"); }
