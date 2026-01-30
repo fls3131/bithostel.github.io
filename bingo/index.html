@@ -38,6 +38,10 @@
         .cell.free { background: #533483; color: var(--accent); }
         .leader-item { display: flex; justify-content: space-between; padding: 4px 6px; border-bottom: 1px solid #0f3460; font-size: 0.65rem; }
         .leader-item.me { background: var(--accent); color: var(--bg); font-weight: 900; border-radius: 4px; }
+        
+        .stats-box { background: #0f3460; padding: 5px; border-radius: 4px; text-align: center; margin-bottom: 8px; border-bottom: 2px solid var(--accent); }
+        .stats-label { font-size: 0.6rem; color: #aaa; text-transform: uppercase; display: block; }
+        .stats-value { font-size: 1.2rem; font-weight: 900; color: var(--accent); }
     </style>
 </head>
 <body>
@@ -86,8 +90,14 @@
             </div>
             <div id="history-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; overflow-y: auto; padding: 4px; background: #0f3460; border-radius: 4px; flex-grow: 1; margin-top: 5px;"></div>
         </div>
+
         <div class="arena" id="arena"></div>
+
         <div class="panel">
+            <div class="stats-box">
+                <span class="stats-label">Sorteados</span>
+                <span id="balls-count" class="stats-value">0</span>
+            </div>
             <h3 style="margin:0; font-size: 0.7rem; text-align: center;">RANKING</h3>
             <div id="leader-list" style="margin-top: 5px; flex-grow: 1; overflow-y: auto;"></div>
             <button id="manual-btn" class="btn-info">SOBRE(AJUDA) <span>&#10064;</span></button>
@@ -100,12 +110,15 @@
 (function() {
     const somSorteio = new Audio('sorteio.mp3');
     const somDinheiro = new Audio('dinheiro.mp3');
-    const somMarca = new Audio('marca.mp3'); // NOVO ÁUDIO
+    const somMarca = new Audio('marca.mp3');
 
     let drawn = [], players = [], firstLineOut = false, gameOver = false, autoInterval = null;
     let totalBalance = 0;
     let costDeducted = false;
-    const ROUND_COST = 5.00, LINE_PRIZE = 15.00, BINGO_PRIZE = 30.00;
+    
+    // VALORES ATUALIZADOS AQUI
+    const ROUND_COST = 5.00, LINE_PRIZE = 10.00, BINGO_PRIZE = 20.00;
+    
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA"];
 
     function showToast(text, color) {
@@ -139,31 +152,27 @@
         let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
         drawn.push(b);
         document.getElementById('ball').innerText = b;
+        document.getElementById('balls-count').innerText = drawn.length;
         
-        // Histórico
         let h = document.createElement('div'); h.style = "background: rgba(255,255,255,0.1); border-radius: 2px; font-size: 0.65rem; text-align: center;";
         h.innerText = b; document.getElementById('history-grid').prepend(h);
         
-        // Marcação visual
         document.querySelectorAll(`[data-num="${b}"]`).forEach(c => c.classList.add('marked'));
 
-        // Lógica de áudio para marcação na cartela do jogador (Player id: 1)
         players.forEach(p => { 
             if(p.nums.includes(b)) {
                 p.marks++; 
-                if(p.id === 1) { // Se o número sorteado estiver na sua cartela
+                if(p.id === 1) { 
                     somMarca.currentTime = 0;
                     somMarca.play().catch(() => {}); 
                 }
             }
         });
         
-        // Atualizar Ranking
         let sorted = [...players].sort((a,b) => b.marks - a.marks);
         let list = document.getElementById('leader-list'); list.innerHTML = "";
         sorted.forEach(p => list.innerHTML += `<div class="leader-item ${p.id===1?'me':''}"><span>${p.name}</span><span>${p.marks}/25</span></div>`);
         
-        // Verificar Vitórias
         players.forEach(p => {
             if(!firstLineOut) {
                 for(let r=0; r<5; r++) {
@@ -174,7 +183,12 @@
                     }
                     if(win) {
                         firstLineOut = true; lCells.forEach(c => c.classList.add('line-win'));
-                        if(p.id === 1) { totalBalance += LINE_PRIZE; updateBalanceDisplay(); showToast(`+R$ 15,00`, "var(--win)"); somDinheiro.play(); }
+                        if(p.id === 1) { 
+                            totalBalance += LINE_PRIZE; 
+                            updateBalanceDisplay(); 
+                            showToast(`+R$ 10,00`, "var(--win)"); // Toast atualizado
+                            somDinheiro.play(); 
+                        }
                         confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
                     }
                 }
@@ -182,7 +196,12 @@
             if(p.marks === 25 && !gameOver) {
                 gameOver = true; if(autoInterval) { clearInterval(autoInterval); autoInterval = null; document.getElementById('auto-btn').innerText = "AUTO"; }
                 document.getElementById(`card-p${p.id}`).style.border = "2px solid var(--gold)";
-                if(p.id === 1) { totalBalance += BINGO_PRIZE; updateBalanceDisplay(); showToast(`+R$ 30,00`, "var(--gold)"); somDinheiro.play(); }
+                if(p.id === 1) { 
+                    totalBalance += BINGO_PRIZE; 
+                    updateBalanceDisplay(); 
+                    showToast(`+R$ 20,00`, "var(--gold)"); // Toast atualizado
+                    somDinheiro.play(); 
+                }
                 confetti({ particleCount: 250, spread: 100, origin: { y: 0.5 } });
             }
         });
@@ -212,7 +231,6 @@
     document.getElementById('btn-unlock').onclick = () => {
         const input = document.getElementById('pass-input').value;
         const savedPass = localStorage.getItem('bingo_vault_pass');
-        // Pré-carregamento dos áudios para mobile
         [somSorteio, somDinheiro, somMarca].forEach(s => { s.play().then(() => { s.pause(); s.currentTime = 0; }).catch(() => {}); });
         if (!savedPass && input.length === 4) { localStorage.setItem('bingo_vault_pass', input); login(); }
         else if (input === savedPass) { login(); }
