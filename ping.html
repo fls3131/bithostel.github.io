@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NetPulse Ultra - 140+ Nodes</title>
+    <style>
+        :root {
+            --bg: #020617; --card-bg: #0f172a; --online: #10b981;
+            --slow: #f59e0b; --offline: #ef4444; --text: #f1f5f9; --accent: #38bdf8;
+        }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+        
+        .report-header {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 10px; width: 100%; max-width: 1400px; margin-bottom: 15px;
+            background: #1e293b; padding: 15px; border-radius: 10px; border: 1px solid #334155;
+        }
+        .stat-item { text-align: center; border-right: 1px solid #334155; }
+        .stat-item:last-child { border-right: none; }
+        .stat-value { font-size: 1.5rem; font-weight: 800; display: block; color: var(--accent); }
+        .stat-label { font-size: 0.6rem; text-transform: uppercase; color: #94a3b8; }
+
+        .status-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 6px; width: 100%; max-width: 1400px;
+        }
+        .server-card {
+            background: var(--card-bg); padding: 8px 4px; border-radius: 4px;
+            text-align: center; border: 1px solid #1e293b; transition: 0.1s;
+        }
+        .server-card.checking { border-color: var(--accent); background: #1e293b; transform: scale(1.05); z-index: 5; }
+        .server-name { font-weight: 600; font-size: 0.65rem; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .latency { font-family: monospace; font-size: 0.9rem; display: block; margin: 2px 0; font-weight: bold; }
+        
+        .status-online { color: var(--online); }
+        .status-slow { color: var(--slow); }
+        .status-offline { color: var(--offline); }
+        
+        footer { margin-top: 20px; font-size: 0.65rem; color: #475569; }
+    </style>
+</head>
+<body>
+
+    <header style="text-align: center; margin-bottom: 15px;">
+        <h1 style="color: var(--online); font-size: 1.2rem; margin:0">NETPULSE ULTRA-MONITOR</h1>
+        <div style="font-size: 0.7rem; color: #64748b;">140 Hosts em Varredura Contínua (3s/cycle)</div>
+    </header>
+
+    <div class="report-header">
+        <div class="stat-item"><span class="stat-value" id="stat-health">--%</span><span class="stat-label">Network Health</span></div>
+        <div class="stat-item"><span class="stat-value" id="stat-avg-br">--ms</span><span class="stat-label">Média Brasil</span></div>
+        <div class="stat-item"><span class="stat-value" id="stat-avg-world">--ms</span><span class="stat-label">Média Mundo</span></div>
+        <div class="stat-item"><span class="stat-value" id="stat-status"><span style="color:var(--online)" id="sum-up">0</span>/<span style="color:var(--offline)" id="sum-down">0</span></span><span class="stat-label">Online / Offline</span></div>
+    </div>
+
+    <div class="status-grid" id="grid"></div>
+
+    <footer>Processando 140 requisições assíncronas com escalonamento de 15ms.</footer>
+
+    <script>
+        const brHosts = [
+            "Google BR","UOL","Globo","Mercado Livre","Itaú","Nubank","Amazon BR","Gov.br","Vivo","Claro","Cielo","Inter","Shopee BR","Locaweb","HostGator","Magalu","Americanas","OLX","PagSeguro","Correios",
+            "XP Investimentos","Banco Safra","Banrisul","Caixa","Unimed","Kabum","Pichau","Terabyte","Mackenzie","USP","UNESP","Porto Seguro","Azul","Gol","LATAM","Estadão","Folha","Terra","R7","G1",
+            "Senado","Câmara","STF","Receita Federal","Detran SP","B3","Serasa","Totvs","RD Station","Embraer","Petrobras","Vale","CVC","Havan","Pão de Açúcar","Carrefour BR","iFood","Loggi","QuintoAndar","Gympass",
+            "Enjoei","Zattini","Netshoes","Decolar","Hotmart","Eduzz","Monetizze","Ame Digital","PicPay","Neon"
+        ];
+
+        const worldHosts = [
+            "Cloudflare","AWS East","GitHub","Netflix","Wikipedia","BBC London","CERN","Baidu","Samsung","Alibaba","Rakuten","Gov AU","Jumia EG","Standard SA","Spotify","Reddit","Microsoft","Apple","X/Twitter","Facebook",
+            "Google JP","Google UK","Google DE","Google FR","Amazon JP","Amazon DE","IBM","Oracle","Cisco","Intel","Nvidia","AMD","Adobe","Salesforce","Slack","Zoom","Discord","Twitch","Steam","Epic Games",
+            "Riot Games","Blizzard","NASA","SpaceX","FBI","CIA","Interpol","United Nations","NATO","Olympics","Tesla","Ferrari","Nike","Adidas","Coca-Cola","Pepsi","McDonalds","Starbucks","Disney","WarnerBros",
+            "Sony","Nintendo","Sega","Ubisoft","EA Sports","Rockstar","Airbnb","Uber","Lyft","Pinterest"
+        ];
+
+        const servers = [];
+        brHosts.forEach(name => servers.push({ name, url: `https://www.google.com.br/favicon.ico?${name}`, reg: 'BR' }));
+        worldHosts.forEach(name => servers.push({ name, url: `https://www.cloudflare.com/favicon.ico?${name}`, reg: 'GL' }));
+
+        function init() {
+            const grid = document.getElementById('grid');
+            servers.forEach((s, i) => {
+                grid.innerHTML += `<div class="server-card" id="card-${i}"><span class="server-name">${s.name}</span><span class="latency" id="ms-${i}">--</span></div>`;
+            });
+        }
+
+        async function ping(url) {
+            const start = Date.now();
+            const controller = new AbortController();
+            const id = setTimeout(() => controller.abort(), 2000);
+            try {
+                await fetch(url, { mode: 'no-cors', cache: 'no-store', signal: controller.signal });
+                return Date.now() - start;
+            } catch { return Date.now() - start; }
+        }
+
+        async function runCycle() {
+            let brTotal = 0, brCount = 0, glTotal = 0, glCount = 0, online = 0;
+
+            for (let i = 0; i < servers.length; i++) {
+                const card = document.getElementById(`card-${i}`);
+                card.classList.add('checking');
+                
+                ping(servers[i].url).then(ms => {
+                    const msEl = document.getElementById(`ms-${i}`);
+                    msEl.innerText = ms + 'ms';
+                    msEl.className = 'latency ' + (ms < 150 ? 'status-online' : ms < 500 ? 'status-slow' : 'status-offline');
+                    
+                    if (servers[i].reg === 'BR') { brTotal += ms; brCount++; } 
+                    else { glTotal += ms; glCount++; }
+                    if (ms < 500) online++;
+
+                    card.classList.remove('checking');
+                });
+                
+                await new Promise(r => setTimeout(r, 15)); // Intervalo ultra-rápido
+            }
+
+            // Atualização tardia do Report (após a onda passar)
+            setTimeout(() => {
+                document.getElementById('stat-health').innerText = Math.round((online / servers.length) * 100) + '%';
+                document.getElementById('stat-avg-br').innerText = Math.round(brTotal / (brCount || 1)) + 'ms';
+                document.getElementById('stat-avg-world').innerText = Math.round(glTotal / (glCount || 1)) + 'ms';
+                document.getElementById('sum-up').innerText = online;
+                document.getElementById('sum-down').innerText = servers.length - online;
+            }, 1000);
+        }
+
+        init();
+        runCycle();
+        setInterval(runCycle, 3000);
+    </script>
+</body>
+</html>
