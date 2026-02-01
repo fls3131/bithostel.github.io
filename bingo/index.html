@@ -3,372 +3,404 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Bingo Arena - Mobile & Desktop</title>
+    <title>Bingo Arena Mobile</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
-        :root { --primary: #e94560; --bg: #1a1a2e; --card-bg: #16213e; --win: #2ecc71; --accent: #f1c40f; --gold: #ffd700; --money: #27ae60; --loss: #ff4757; }
-        * { box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); color: white; margin: 0; height: 100vh; overflow: hidden; display: flex; flex-direction: column; padding: 5px; }
-        
-        #money-toast { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); z-index: 30000; font-size: 3rem; font-weight: 900; pointer-events: none; opacity: 0; text-shadow: 0 0 20px rgba(0,0,0,0.5); transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center; width: 80%; }
-        .toast-show { opacity: 1 !important; transform: translate(-50%, -150%) scale(1.2) !important; }
-        
-        #auth-overlay, #withdraw-modal, #deposit-modal { position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(26, 26, 46, 0.98); z-index: 9998; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-        #withdraw-modal, #deposit-modal { z-index: 20000; display: none; background: rgba(0,0,0,0.85); }
-        .auth-card { background: var(--card-bg); padding: 25px; border-radius: 12px; border: 2px solid var(--primary); text-align: center; min-width: 320px; max-width: 400px; }
-        .auth-input { background: #0f3460; border: 1px solid var(--primary); color: white; padding: 12px; font-size: 1.2rem; width: 100%; text-align: center; margin: 10px 0; border-radius: 8px; outline: none; }
-        .pin-mode { letter-spacing: 8px; font-size: 1.8rem; }
-        
-        /* LAYOUT DESKTOP ORIGINAL */
-        .main-layout { display: grid; grid-template-columns: 150px 1fr 150px; gap: 8px; height: 98vh; }
-        .panel { background: var(--card-bg); border-radius: 8px; padding: 8px; display: flex; flex-direction: column; border: 1px solid #333; }
-        .money-display { background: rgba(39, 174, 96, 0.15); border: 1px solid var(--money); border-radius: 5px; padding: 5px; text-align: center; margin-bottom: 8px; }
-        .money-value { font-size: 1.1rem; color: #fff; font-weight: 900; }
-        #ball { font-size: 2.5rem; color: var(--accent); text-align: center; font-weight: 900; min-height: 50px; }
-        .btn-group { display: flex; flex-direction: column; gap: 5px; }
-        button { padding: 8px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 0.7rem; color: white; transition: 0.2s; }
-        .btn-manual { background: var(--primary); }
-        .btn-auto { background: #3498db; }
-        .btn-reset { background: #533483; border: 1px solid #7c4dff; margin-top: 5px; }
-        .btn-info { background: #444; margin-top: 5px; display: flex; align-items: center; justify-content: center; gap: 5px; }
-        .btn-deposit { background: #3498db; }
-        .btn-withdraw { background: var(--money); }
+        :root { 
+            --primary: #e94560; 
+            --bg: #1a1a2e; 
+            --card-bg: #16213e; 
+            --win: #2ecc71; 
+            --accent: #f1c40f; 
+            --money: #27ae60; 
+            --loss: #ff4757; 
+        }
 
-        .arena { display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(2, 1fr); gap: 6px; align-content: center; }
-        .bingo-card { background: var(--card-bg); padding: 4px; border-radius: 6px; border: 1px solid #333; transition: 0.3s; }
-        .bingo-card.player { border: 2px solid var(--primary); box-shadow: 0 0 10px rgba(233, 69, 96, 0.3); }
-        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; }
-        .cell { aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; background: #0f3460; border-radius: 2px; font-size: 0.65rem; font-weight: bold; }
-        .cell.marked { background: var(--primary); }
-        .cell.line-win { background-color: var(--win) !important; color: #1a1a2e !important; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            background: var(--bg); 
+            color: white; 
+            margin: 0; 
+            height: 100vh; 
+            display: flex; 
+            flex-direction: column; 
+            overflow: hidden;
+        }
+
+        /* Modais e Overlays */
+        #auth-overlay, #withdraw-modal, #deposit-modal { 
+            position: fixed; top:0; left:0; width: 100%; height: 100%; 
+            background: rgba(26, 26, 46, 0.98); z-index: 9999; 
+            display: flex; align-items: center; justify-content: center; padding: 20px;
+        }
+        #withdraw-modal, #deposit-modal { display: none; background: rgba(0,0,0,0.9); }
+
+        .auth-card { 
+            background: var(--card-bg); padding: 30px 20px; border-radius: 20px; 
+            border: 2px solid var(--primary); text-align: center; width: 100%; max-width: 400px; 
+        }
+
+        /* Layout Principal */
+        header {
+            padding: 15px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .stat-card {
+            background: #0f3460;
+            padding: 10px;
+            border-radius: 12px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        /* Cartela Mobile */
+        .bingo-card.player {
+            width: 100%;
+            max-width: 380px;
+            background: var(--card-bg);
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .grid { 
+            display: grid; 
+            grid-template-columns: repeat(5, 1fr); 
+            gap: 5px; 
+        }
+
+        .cell { 
+            aspect-ratio: 1/1; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            background: #0f3460; 
+            border-radius: 8px; 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            transition: 0.3s;
+        }
+
+        .cell.marked { background: var(--primary); transform: scale(0.95); }
+        .cell.line-win { background: var(--win) !important; color: #000 !important; }
         .cell.free { background: #533483; color: var(--accent); }
-        .leader-item { display: flex; justify-content: space-between; padding: 4px 6px; border-bottom: 1px solid #0f3460; font-size: 0.65rem; }
-        .leader-item.me { background: var(--accent); color: var(--bg); font-weight: 900; border-radius: 4px; }
-        .stats-box { background: #0f3460; padding: 5px; border-radius: 4px; text-align: center; margin-bottom: 8px; border-bottom: 2px solid var(--accent); }
-        .stats-label { font-size: 0.6rem; color: #aaa; text-transform: uppercase; display: block; }
-        .stats-value { font-size: 1.2rem; font-weight: 900; color: var(--accent); }
-        .security-info { font-size: 0.65rem; color: #888; margin-top: 10px; line-height: 1.2; }
 
-        /* NOVO LAYOUT ALTERNATIVO PARA MOBILE */
-        @media (max-width: 800px) {
-            body { overflow-y: auto; height: auto; }
-            .main-layout { display: flex; flex-direction: column; height: auto; gap: 15px; }
-            
-            /* Deixa o topo (Saldo e Bola) fixo para não perder a informação */
-            .panel:first-child { 
-                position: sticky; 
-                top: 0; 
-                z-index: 1000; 
-                border-radius: 0 0 12px 12px; 
-                background: #1a1a2e; 
-                border-bottom: 2px solid var(--primary);
-            }
+        /* Controles Inferiores */
+        .controls {
+            padding: 15px;
+            background: #16213e;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 10px;
+            border-top: 1px solid #333;
+        }
 
-            .arena { 
-                display: flex; 
-                flex-direction: column; 
-                gap: 20px; 
-                padding: 10px;
-            }
+        button { 
+            border: none; border-radius: 12px; font-weight: bold; 
+            cursor: pointer; font-size: 1rem; color: white; 
+            padding: 15px; transition: 0.2s;
+            text-transform: uppercase;
+        }
 
-            /* Força a sua cartela a ser a primeira e maior */
-            .bingo-card.player {
-                order: -1; 
-                width: 100%;
-                max-width: 400px;
-                margin: 0 auto;
-                transform: scale(1.02);
-            }
-            
-            .bingo-card.player .cell { font-size: 1.2rem; } /* Números maiores na sua cartela */
+        .btn-draw { background: var(--primary); font-size: 1.2rem; }
+        .btn-auto { background: #3498db; }
+        .btn-action { background: #333; padding: 10px; font-size: 0.8rem; }
 
-            /* Cartelas dos oponentes menores e abaixo */
-            .bingo-card:not(.player) {
-                width: 90%;
-                margin: 0 auto;
-                opacity: 0.8;
-            }
+        /* Ranking Lateral/Oculto */
+        #ranking-panel {
+            position: fixed;
+            right: -250px;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background: var(--card-bg);
+            z-index: 100;
+            transition: 0.3s;
+            padding: 20px;
+            border-left: 2px solid var(--primary);
+        }
+        #ranking-panel.open { right: 0; }
 
-            .panel:last-child { order: 10; margin-bottom: 50px; }
-            #history-grid { grid-template-columns: repeat(8, 1fr); max-height: 80px; }
-            .btn-group { flex-direction: row; flex-wrap: wrap; }
-            .btn-group button { flex: 1; min-width: 120px; padding: 12px; }
+        .leader-item { 
+            display: flex; justify-content: space-between; 
+            padding: 10px; border-bottom: 1px solid #0f3460; font-size: 0.9rem; 
+        }
+
+        #money-toast { 
+            position: fixed; top: 20%; left: 50%; transform: translateX(-50%); 
+            z-index: 10000; font-size: 2rem; font-weight: 900; pointer-events: none; 
+            opacity: 0; transition: 0.5s; text-align: center; width: 90%;
+        }
+        .toast-show { opacity: 1 !important; transform: translate(-50%, -20px) scale(1.1) !important; }
+        
+        .auth-input { 
+            background: #0f3460; border: 1px solid var(--primary); color: white; 
+            padding: 15px; font-size: 1.5rem; width: 100%; text-align: center; 
+            margin: 10px 0; border-radius: 12px; 
         }
     </style>
 </head>
 <body>
-    <div id="money-toast"></div>
-    
-    <div id="deposit-modal">
-        <div class="auth-card" style="border-color: #3498db;">
-            <h2 style="color: #3498db; margin: 0;">DEPOSITAR VIA PIX</h2>
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 15px 0;">
-                <button id="dep-10" style="background:#3498db; padding:15px;">R$ 10</button>
-                <button id="dep-50" style="background:#3498db; padding:15px;">R$ 50</button>
-                <button id="dep-100" style="background:#3498db; padding:15px;">R$ 100</button>
-            </div>
-            <button id="close-dep" style="background: #555; width: 100%; padding: 12px;">VOLTAR</button>
-        </div>
-    </div>
 
-    <div id="withdraw-modal">
+    <div id="money-toast"></div>
+
+    <div id="deposit-modal">
         <div class="auth-card">
-            <h2 style="color: var(--win); margin: 0;">SAQUE VIA PIX</h2>
-            <p style="font-size: 0.8rem; color: #ccc;">Saldo: <span id="wd-balance" style="color:white">R$ 0,00</span></p>
-            <input type="text" id="pix-key" placeholder="Chave Pix" class="auth-input">
-            <input type="number" id="withdraw-amount" placeholder="Valor (Min: R$ 20)" class="auth-input">
-            <div style="display: flex; gap: 10px; margin-top: 10px;">
-                <button id="close-wd" style="background: #555; flex: 1; padding: 12px;">VOLTAR</button>
-                <button id="confirm-wd" style="background: var(--money); flex: 1; padding: 12px;">SACAR</button>
+            <h2 style="color: #3498db;">DEPOSITAR PIX</h2>
+            <div style="display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 15px;">
+                <button onclick="addMoney(10)" style="background:#3498db">R$ 10,00</button>
+                <button onclick="addMoney(50)" style="background:#3498db">R$ 50,00</button>
+                <button onclick="addMoney(100)" style="background:#3498db">R$ 100,00</button>
             </div>
+            <button onclick="closeModal('deposit-modal')" style="background:#555; width:100%">VOLTAR</button>
         </div>
     </div>
 
     <div id="auth-overlay">
         <div class="auth-card">
-            <h2 id="auth-title" style="margin-bottom: 5px;">ACESSO À CARTEIRA</h2>
-            <p id="auth-instruction" style="font-size: 0.8rem; color: var(--accent); margin-bottom: 15px;">Defina seu PIN de 4 dígitos para o primeiro acesso</p>
-            <input type="password" id="pass-input" class="auth-input pin-mode" maxlength="4" inputmode="numeric">
-            <button id="btn-unlock" style="background: var(--primary); width: 100%; font-size: 1rem; padding: 12px; margin-top: 10px; border-radius: 4px; font-weight: bold; color:white; cursor:pointer">CONFIRMAR PIN</button>
-            <div class="security-info">
-                <p>🔒 <b>Segurança Local:</b> Sua senha é salva apenas neste dispositivo.<br>
-                ⚠️ <b>Atenção:</b> Se esquecer o PIN, o saldo não poderá ser recuperado.</p>
-            </div>
+            <h2 id="auth-title">BINGO ARENA</h2>
+            <p id="auth-instruction">Crie um PIN de 4 dígitos</p>
+            <input type="password" id="pass-input" class="auth-input" maxlength="4" inputmode="numeric">
+            <button id="btn-unlock" style="background: var(--primary); width: 100%; padding: 20px; border-radius: 12px;">ENTRAR</button>
         </div>
     </div>
 
-    <div class="main-layout">
-        <div class="panel">
-            <div class="money-display"><div class="money-value" id="balance">R$ --,00</div></div>
-            <span id="ball">--</span>
-            <div class="btn-group">
-                <button id="draw-btn" class="btn-manual">SORTEAR</button>
-                <button id="auto-btn" class="btn-auto">AUTO</button>
-                <button id="new-round-btn" class="btn-reset">NOVA RODADA (R$ 5)</button>
-            </div>
-            <div id="history-grid"></div>
+    <header>
+        <div class="stat-card">
+            <small style="color: var(--accent)">SALDO</small><br>
+            <span id="balance" style="font-weight: 900; font-size: 1.2rem;">R$ 0,00</span>
         </div>
+        <div class="stat-card">
+            <small style="color: var(--accent)">SORTEADA</small><br>
+            <span id="ball" style="font-weight: 900; font-size: 1.2rem;">--</span>
+        </div>
+    </header>
 
-        <div class="arena" id="arena"></div>
-
-        <div class="panel">
-            <div class="stats-box">
-                <span class="stats-label">Sorteados</span>
-                <span id="balls-count" class="stats-value">0</span>
+    <div class="main-content">
+        <div id="player-arena">
             </div>
-            <h3 style="margin:0; font-size: 0.7rem; text-align: center;">RANKING</h3>
-            <div id="leader-list" style="margin-top: 5px; flex-grow: 1; overflow-y: auto;"></div>
-            <div style="background: rgba(0,0,0,0.3); padding: 5px; border-radius: 4px; margin-top: 5px;">
-                <p style="font-size: 0.55rem; color: #888; margin: 2px 0; text-align: center;">CARTEIRA PROTEGIDA</p>
-                <button id="btn-logout" style="background: #333; width: 100%; font-size: 0.6rem; padding: 4px;">BLOQUEAR AGORA</button>
-            </div>
-            <button id="manual-btn" class="btn-info">SOBRE(AJUDA) <span>&#10064;</span></button>
-            <button id="open-dep" class="btn-info btn-deposit">DEPOSITAR <span>💸</span></button>
-            <button id="open-wd" class="btn-info btn-withdraw">SACAR <span>💸</span></button>
+        
+        <div style="margin-top: 20px; width: 100%; max-width: 380px;">
+            <button onclick="toggleRanking()" class="btn-action" style="width: 100%;">Ver Ranking da Arena (10 Jogadores)</button>
         </div>
     </div>
+
+    <div id="ranking-panel">
+        <button onclick="toggleRanking()" style="background: var(--loss); width: 100%; margin-bottom: 15px;">FECHAR</button>
+        <h3>RANKING</h3>
+        <div id="leader-list"></div>
+    </div>
+
+    <footer class="controls">
+        <button id="draw-btn" class="btn-draw">SORTEAR</button>
+        <button id="auto-btn" class="btn-auto">AUTO</button>
+        <button onclick="location.reload()" class="btn-action" style="grid-column: span 2; background: #533483;">NOVA RODADA (R$ 5,00)</button>
+        <button onclick="openModal('deposit-modal')" class="btn-action">DEPOSITAR</button>
+        <button onclick="logout()" class="btn-action">SAIR</button>
+    </footer>
 
 <script>
-    // Toda a lógica Javascript foi mantida EXATAMENTE como no seu código original
-    // (O script que você forneceu continua aqui sem alterações nas regras de negócio)
-    (function() {
-        const somSorteio = new Audio('sorteio.mp3');
-        const somDinheiro = new Audio('dinheiro.mp3');
-        const somMarca = new Audio('marca.mp3');
-        const somBingo = new Audio('bingo.mp3');
-        const somLinha = new Audio('linha.mp3');
-        const somGeral = new Audio('geral.mp3');
+(function() {
+    // Configurações e Áudios
+    const sounds = {
+        draw: new Audio('sorteio.mp3'),
+        money: new Audio('dinheiro.mp3'),
+        mark: new Audio('marca.mp3'),
+        bingo: new Audio('bingo.mp3')
+    };
 
-        let drawn = [], players = [], firstLineOut = false, gameOver = false, autoInterval = null;
-        let totalBalance = 0;
-        let costDeducted = false;
-        const ROUND_COST = 5.00, LINE_PRIZE = 10.00, BINGO_PRIZE = 20.00;
-        const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
+    let drawn = [], players = [], gameOver = false, autoInterval = null;
+    let totalBalance = 0;
+    const ROUND_COST = 5.0, LINE_PRIZE = 10.0, BINGO_PRIZE = 20.0;
 
-        const savedPass = localStorage.getItem('bingo_vault_pass');
-        if(savedPass) {
-            document.getElementById('auth-title').innerText = "DESBLOQUEAR CARTEIRA";
-            document.getElementById('auth-instruction').innerText = "Insira seu PIN de 4 dígitos para acessar o saldo";
-            document.getElementById('btn-unlock').innerText = "DESBLOQUEAR";
-        }
+    // Inicialização de Segurança
+    const savedPass = localStorage.getItem('bingo_vault_pass');
+    if(savedPass) {
+        document.getElementById('auth-title').innerText = "ACESSO PIN";
+        document.getElementById('auth-instruction').innerText = "Insira seu código secreto";
+    }
 
-        function showToast(text, color) {
-            const toast = document.getElementById('money-toast');
-            toast.innerText = text; toast.style.color = color;
-            toast.classList.remove('toast-show');
-            void toast.offsetWidth; toast.classList.add('toast-show');
-            setTimeout(() => toast.classList.remove('toast-show'), 2000);
-        }
+    function updateBalance() {
+        document.getElementById('balance').innerText = `R$ ${totalBalance.toFixed(2).replace('.', ',')}`;
+        localStorage.setItem('bingo_arena_balance', totalBalance);
+    }
 
-        function updateBalanceDisplay() {
-            document.getElementById('balance').innerText = `R$ ${totalBalance.toFixed(2).replace('.', ',')}`;
-            localStorage.setItem('bingo_arena_balance', totalBalance.toString());
-        }
+    window.addMoney = (val) => {
+        totalBalance += val;
+        updateBalance();
+        sounds.money.play().catch(()=>{});
+        closeModal('deposit-modal');
+    };
 
-        function processPayment() {
-            if (!costDeducted && !gameOver) {
-                if (totalBalance < ROUND_COST) { alert("Saldo insuficiente!"); return false; }
-                totalBalance -= ROUND_COST;
-                costDeducted = true;
-                updateBalanceDisplay();
-                showToast(`-R$ 5,00`, "var(--loss)");
-                return true;
-            }
-            return true;
-        }
+    window.openModal = (id) => document.getElementById(id).style.display = 'flex';
+    window.closeModal = (id) => document.getElementById(id).style.display = 'none';
+    window.toggleRanking = () => document.getElementById('ranking-panel').classList.toggle('open');
+    window.logout = () => { sessionStorage.clear(); location.reload(); };
 
-        function drawBall() {
-            if(gameOver || drawn.length >= 75) return;
-            somSorteio.currentTime = 0; somSorteio.play().catch(()=>{});
-            let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
-            drawn.push(b);
-            document.getElementById('ball').innerText = b;
-            document.getElementById('balls-count').innerText = drawn.length;
-            
-            let h = document.createElement('div'); h.style = "background: rgba(255,255,255,0.1); border-radius: 2px; font-size: 0.65rem; text-align: center;";
-            h.innerText = b; document.getElementById('history-grid').prepend(h);
-            document.querySelectorAll(`[data-num="${b}"]`).forEach(c => c.classList.add('marked'));
+    function showToast(text, color) {
+        const t = document.getElementById('money-toast');
+        t.innerText = text; t.style.color = color;
+        t.classList.add('toast-show');
+        setTimeout(() => t.classList.remove('toast-show'), 2000);
+    }
 
-            players.forEach(p => { 
-                if(p.nums.includes(b)) {
-                    p.marks++; 
-                    if(p.id === 1) { 
-                        somMarca.currentTime = 0;
-                        somMarca.play().catch(() => {}); 
-                    }
-                }
-            });
+    function initGame() {
+        const arena = document.getElementById('player-arena');
+        players = [];
+        const names = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
 
-            let sorted = [...players].sort((a,b) => b.marks - a.marks);
-            let list = document.getElementById('leader-list'); list.innerHTML = "";
-            sorted.forEach(p => list.innerHTML += `<div class="leader-item ${p.id===1?'me':''}"><span>${p.name}</span><span>${p.marks}/25</span></div>`);
+        for(let i=1; i<=10; i++) {
+            let n = []; while(n.length < 24) { let r = Math.floor(Math.random() * 75) + 1; if(!n.includes(r)) n.push(r); } 
+            n.splice(12, 0, 0); // Free space
+            let p = { id: i, name: i === 1 ? "VOCÊ" : names[i-1], nums: n, marks: 1, hasLine: false };
+            players.push(p);
 
-            players.forEach(p => {
-                if(!firstLineOut) {
-                    for(let r=0; r<5; r++) {
-                        let win = true, lCells = [];
-                        for(let c=0; c<5; c++) { 
-                            let cell = document.getElementById(`p${p.id}-c${r*5+c}`);
-                            lCells.push(cell); if(!cell.classList.contains('marked')) win = false;
-                        }
-                        if(win) {
-                            firstLineOut = true; 
-                            lCells.forEach(c => c.classList.add('line-win'));
-                            somLinha.currentTime = 0;
-                            somLinha.play().catch(() => {});
-                            if(p.id === 1) { 
-                                totalBalance += LINE_PRIZE; 
-                                updateBalanceDisplay(); 
-                                showToast(`LINHA! +R$ 10,00`, "var(--win)");
-                                somDinheiro.play(); 
-                            } else {
-                                showToast(`LINHA: ${p.name}`, "white");
-                            }
-                            confetti({ particleCount: 50, spread: 60, origin: { y: 0.8 } });
-                        }
-                    }
-                }
-
-                if(p.marks === 25 && !gameOver) {
-                    gameOver = true; 
-                    if(autoInterval) { clearInterval(autoInterval); autoInterval = null; document.getElementById('auto-btn').innerText = "AUTO"; }
-                    document.getElementById(`card-p${p.id}`).style.border = "3px solid var(--gold)";
-                    if(p.id === 1) { 
-                        totalBalance += BINGO_PRIZE; 
-                        updateBalanceDisplay(); 
-                        showToast(`BINGO! VOCÊ VENCEU R$ 20,00`, "var(--gold)");
-                        somBingo.currentTime = 0;
-                        somBingo.play().catch(()=>{});
-                    } else {
-                        showToast(`BINGO! ${p.name} GANHOU`, "var(--loss)");
-                        somGeral.currentTime = 0;
-                        somGeral.play().catch(()=>{});
-                    }
-                    confetti({ particleCount: 250, spread: 100, origin: { y: 0.5 } });
-                }
-            });
-        }
-
-        function initGame() {
-            const arena = document.getElementById('arena'); arena.innerHTML = ""; players = [];
-            let nomes = [...nomesComuns].sort(() => Math.random() - 0.5);
-            for(let i=1; i<=10; i++) {
-                let n = []; while(n.length < 24) { let r = Math.floor(Math.random() * 75) + 1; if(!n.includes(r)) n.push(r); } n.splice(12, 0, 0);
-                let p = { id: i, name: i === 1 ? "VOCÊ" : nomes[i-2], nums: n, marks: 1 };
-                players.push(p);
-                let card = document.createElement('div'); card.className = `bingo-card ${i===1?'player':''}`; card.id = `card-p${i}`;
-                card.innerHTML = `<h5 style="margin:2px 0; font-size:0.75rem; text-align:center;">${p.name}</h5><div class="grid" id="g-${i}"></div>`;
+            if(i === 1) { // Só renderiza a cartela do jogador
+                let card = document.createElement('div');
+                card.className = "bingo-card player";
+                card.innerHTML = `<h3 style="text-align:center; margin-top:0;">SUA CARTELA</h3><div class="grid" id="p1-grid"></div>`;
                 arena.appendChild(card);
+                
                 p.nums.forEach((num, idx) => {
                     let cell = document.createElement('div');
                     cell.className = 'cell' + (num === 0 ? ' marked free' : '');
                     cell.innerText = num === 0 ? '★' : num;
-                    cell.id = `p${i}-c${idx}`;
+                    cell.id = `p1-c${idx}`;
                     if(num !== 0) cell.setAttribute('data-num', num);
-                    document.getElementById(`g-${i}`).appendChild(cell);
+                    document.getElementById('p1-grid').appendChild(cell);
                 });
             }
         }
+    }
 
-        document.getElementById('btn-unlock').onclick = () => {
-            const input = document.getElementById('pass-input').value;
-            const currentSavedPass = localStorage.getItem('bingo_vault_pass');
-            [somSorteio, somDinheiro, somMarca, somBingo, somLinha, somGeral].forEach(s => { 
-                s.play().then(() => { s.pause(); s.currentTime = 0; }).catch(() => {}); 
-            });
-
-            if (!currentSavedPass) {
-                if(input.length === 4) {
-                    localStorage.setItem('bingo_vault_pass', input);
-                    alert("PIN Criado com Sucesso!");
-                    login();
-                } else { alert("O PIN deve ter 4 dígitos."); }
-            }
-            else if (input === currentSavedPass) { login(); }
-            else { alert("Senha incorreta!"); }
-        };
-
-        document.getElementById('btn-logout').onclick = () => {
-            sessionStorage.removeItem('bingo_authenticated');
-            location.reload();
-        };
-
-        function login() {
-            sessionStorage.setItem('bingo_authenticated', 'true');
-            document.getElementById('auth-overlay').style.display = 'none';
-            const saved = localStorage.getItem('bingo_arena_balance');
-            totalBalance = saved ? parseFloat(saved) : 50.00;
-            updateBalanceDisplay();
-            initGame();
-        }
-
-        document.getElementById('draw-btn').onclick = () => { if(processPayment()) { if(autoInterval) { clearInterval(autoInterval); autoInterval = null; document.getElementById('auto-btn').innerText = "AUTO"; } drawBall(); } };
+    function drawBall() {
+        if(gameOver || drawn.length >= 75) return;
         
-        document.getElementById('auto-btn').onclick = function() {
-            if (autoInterval) { clearInterval(autoInterval); autoInterval = null; this.innerText = "AUTO"; }
-            else if (!gameOver && processPayment()) { this.innerText = "PARAR"; autoInterval = setInterval(drawBall, 500); }
-        };
+        let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
+        drawn.push(b);
+        document.getElementById('ball').innerText = b;
 
-        document.getElementById('new-round-btn').onclick = () => { if(!costDeducted || confirm("Nova rodada?")) location.reload(); };
-        document.getElementById('manual-btn').onclick = () => { window.open('manual.html', 'BingoManual', 'width=450,height=600'); };
-        document.getElementById('open-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'flex';
-        document.getElementById('close-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'none';
-        document.getElementById('dep-10').onclick = () => { totalBalance += 10; updateBalanceDisplay(); somDinheiro.play(); document.getElementById('deposit-modal').style.display = 'none'; };
-        document.getElementById('dep-50').onclick = () => { totalBalance += 50; updateBalanceDisplay(); somDinheiro.play(); document.getElementById('deposit-modal').style.display = 'none'; };
-        document.getElementById('dep-100').onclick = () => { totalBalance += 100; updateBalanceDisplay(); somDinheiro.play(); document.getElementById('deposit-modal').style.display = 'none'; };
-        document.getElementById('open-wd').onclick = () => { 
-            document.getElementById('withdraw-modal').style.display = 'flex';
-            document.getElementById('wd-balance').innerText = `R$ ${totalBalance.toFixed(2).replace('.', ',')}`;
-        };
-        document.getElementById('close-wd').onclick = () => document.getElementById('withdraw-modal').style.display = 'none';
-        document.getElementById('confirm-wd').onclick = () => {
-            const val = parseFloat(document.getElementById('withdraw-amount').value);
-            if(val >= 20 && val <= totalBalance) { totalBalance -= val; updateBalanceDisplay(); alert("Solicitado!"); document.getElementById('withdraw-modal').style.display = 'none'; }
-            else alert("Erro no valor!");
-        };
+        // Marcar na cartela visual
+        document.querySelectorAll(`[data-num="${b}"]`).forEach(c => {
+            c.classList.add('marked');
+            sounds.mark.play().catch(()=>{});
+        });
 
-        if (sessionStorage.getItem('bingo_authenticated') === 'true') login();
-    })();
+        // Lógica de Premiação
+        players.forEach(p => {
+            if(p.nums.includes(b)) p.marks++;
+
+            // Checar Linha (apenas 1 vez)
+            if(!p.hasLine) {
+                for(let r=0; r<5; r++) {
+                    let rowWin = true;
+                    for(let c=0; c<5; c++) {
+                        let idx = r*5+c;
+                        let val = p.nums[idx];
+                        if(val !== 0 && !drawn.includes(val)) rowWin = false;
+                    }
+                    if(rowWin) {
+                        p.hasLine = true;
+                        if(p.id === 1) {
+                            totalBalance += LINE_PRIZE;
+                            showToast("+ R$ 10,00 (LINHA)", "var(--win)");
+                            updateBalance();
+                            document.querySelectorAll('#p1-grid .marked').forEach(el => el.classList.add('line-win'));
+                        }
+                    }
+                }
+            }
+
+            // Checar Bingo
+            if(p.marks === 25 && !gameOver) {
+                gameOver = true;
+                if(autoInterval) clearInterval(autoInterval);
+                
+                if(p.id === 1) {
+                    totalBalance += BINGO_PRIZE;
+                    showToast("BINGO! + R$ 20,00", "var(--accent)");
+                    confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+                } else {
+                    showToast(`BINGO: ${p.name} VENCEU`, "var(--loss)");
+                }
+                updateBalance();
+            }
+        });
+
+        updateRanking();
+    }
+
+    function updateRanking() {
+        const list = document.getElementById('leader-list');
+        const sorted = [...players].sort((a,b) => b.marks - a.marks);
+        list.innerHTML = sorted.map(p => `
+            <div class="leader-item" style="${p.id===1?'color:var(--accent); font-weight:bold':''}">
+                <span>${p.name}</span>
+                <span>${p.marks}/25</span>
+            </div>
+        `).join('');
+    }
+
+    // Eventos de Botão
+    document.getElementById('btn-unlock').onclick = () => {
+        const val = document.getElementById('pass-input').value;
+        if(val.length < 4) return alert("PIN de 4 dígitos");
+        
+        if(!savedPass) localStorage.setItem('bingo_vault_pass', val);
+        else if(val !== savedPass) return alert("PIN Incorreto");
+
+        sessionStorage.setItem('bingo_auth', 'true');
+        document.getElementById('auth-overlay').style.display = 'none';
+        
+        const b = localStorage.getItem('bingo_arena_balance');
+        totalBalance = b ? parseFloat(b) : 50.0;
+        updateBalance();
+        initGame();
+    };
+
+    document.getElementById('draw-btn').onclick = () => {
+        if(totalBalance < ROUND_COST && drawn.length === 0) return alert("Saldo insuficiente");
+        if(drawn.length === 0) { totalBalance -= ROUND_COST; updateBalance(); showToast("- R$ 5,00", "var(--loss)"); }
+        drawBall();
+    };
+
+    document.getElementById('auto-btn').onclick = function() {
+        if(autoInterval) {
+            clearInterval(autoInterval);
+            autoInterval = null;
+            this.innerText = "AUTO";
+        } else {
+            if(totalBalance < ROUND_COST && drawn.length === 0) return alert("Saldo insuficiente");
+            if(drawn.length === 0) { totalBalance -= ROUND_COST; updateBalance(); }
+            this.innerText = "PARAR";
+            autoInterval = setInterval(drawBall, 600);
+        }
+    };
+
+    if(sessionStorage.getItem('bingo_auth')) {
+        document.getElementById('auth-overlay').style.display = 'none';
+        totalBalance = parseFloat(localStorage.getItem('bingo_arena_balance')) || 50.0;
+        updateBalance();
+        initGame();
+    }
+})();
 </script>
 </body>
 </html>
