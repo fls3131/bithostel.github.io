@@ -144,11 +144,14 @@
         /* Painel Inferior: Ranking e Ações */
         .bottom-panel { 
             background: var(--card-bg); 
-            padding: 10px; 
+            /* ALTERADO: Aumentado o padding inferior para subir os botões em celulares */
+            padding: 10px 10px 35px 10px; 
             border-top: 1px solid #333; 
             flex-shrink: 0;
-            max-height: 40vh;
+            max-height: 45vh;
             overflow-y: auto;
+            /* Suporte para áreas de recorte de tela (notches) */
+            padding-bottom: calc(35px + env(safe-area-inset-bottom));
         }
 
         .action-grid {
