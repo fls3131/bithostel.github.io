@@ -24,6 +24,34 @@
             overflow: hidden; 
         }
 
+
+/* Estilos para o Ranking Retrátil */
+.ranking-container {
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    max-height: 300px; /* Altura quando expandido */
+}
+
+.ranking-collapsed {
+    max-height: 0px !important;
+}
+
+.ranking-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(0,0,0,0.2);
+    padding: 8px 15px;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+}
+
+#toggle-ranking-btn {
+    background: var(--primary);
+    padding: 4px 10px;
+    font-size: 0.6rem;
+    height: auto;
+}
         /* Modais */
         #auth-overlay, #withdraw-modal, #deposit-modal { 
             position: fixed; top:0; left:0; width: 100%; height: 100%; 
@@ -207,17 +235,23 @@
 
         <div class="arena" id="arena"></div>
 
-        <div class="bottom-panel">
-            <h4 style="margin: 0 0 10px 0; text-align: center; color: var(--accent);">RANKING EM TEMPO REAL</h4>
-            <div id="leader-list"></div>
-            
-            <div class="action-grid">
-                <button id="open-dep" class="btn-util" style="background: #3498db;">DEPOSITAR 💸</button>
-                <button id="open-wd" class="btn-util" style="background: var(--money);">SACAR 💸</button>
-                <button id="manual-btn" class="btn-util" style="grid-column: span 1;">AJUDA ❓</button>
-                <button id="btn-logout" class="btn-util" style="background: #333;">BLOQUEAR 🔒</button>
-            </div>
-        </div>
+    <div class="bottom-panel">
+    <div class="ranking-header" id="header-ranking">
+        <h4 style="margin: 0; color: var(--accent); font-size: 0.8rem;">RANKING AO VIVO</h4>
+        <button id="toggle-ranking-btn">ESCONDER</button>
+    </div>
+
+    <div id="ranking-body" class="ranking-container">
+        <div id="leader-list"></div>
+    </div>
+    
+    <div class="action-grid">
+        <button id="open-dep" class="btn-util" style="background: #3498db;">DEPOSITAR 💸</button>
+        <button id="open-wd" class="btn-util" style="background: var(--money);">SACAR 💸</button>
+        <button id="manual-btn" class="btn-util" style="grid-column: span 1;">AJUDA ❓</button>
+        <button id="btn-logout" class="btn-util" style="background: #333;">BLOQUEAR 🔒</button>
+    </div>
+</div>
     </div>
 
 <script>
@@ -377,6 +411,16 @@
 
     if (sessionStorage.getItem('bingo_authenticated') === 'true') login();
 })();
+// Lógica para esconder/mostrar ranking
+    const rankingHeader = document.getElementById('header-ranking');
+    const rankingBody = document.getElementById('ranking-body');
+    const toggleBtn = document.getElementById('toggle-ranking-btn');
+
+    rankingHeader.onclick = () => {
+        const isCollapsed = rankingBody.classList.toggle('ranking-collapsed');
+        toggleBtn.innerText = isCollapsed ? "MOSTRAR" : "ESCONDER";
+        toggleBtn.style.background = isCollapsed ? "var(--win)" : "var(--primary)";
+    };
 </script>
 </body>
 </html>
