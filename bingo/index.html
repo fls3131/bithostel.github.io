@@ -229,8 +229,8 @@
                 </div>
             </div>
             <div class="btn-group-main">
-                <button id="draw-btn" class="btn-manual">SORTEAR</button>
-                <button id="auto-btn" class="btn-auto">INICIAR</button>
+                <button id="draw-btn" class="btn-manual">SORTEAR UMA PEDRA</button>
+                <button id="auto-btn" class="btn-auto">INICIAR AUTO</button>
                 <button id="new-round-btn" class="btn-reset">NOVA RODADA (R$ 5,00)</button>
             </div>
             <div id="history-grid"></div>
@@ -322,7 +322,7 @@
 
         let sorted = [...players].sort((a,b) => b.marks - a.marks);
         let list = document.getElementById('leader-list'); list.innerHTML = "";
-        // ALTERADO: slice(0, 3) para exibir apenas os 3 primeiros
+        // Exibe apenas os 3 primeiros colocados
         sorted.slice(0, 3).forEach(p => list.innerHTML += `<div class="leader-item ${p.id===1?'me':''}"><span>${p.name}</span><span>${p.marks}/25</span></div>`);
 
         players.forEach(p => {
@@ -413,7 +413,13 @@
         else if (!gameOver && processPayment()) { this.innerText = "PAUSAR"; autoInterval = setInterval(drawBall, 500); }
     };
 
-    document.getElementById('new-round-btn').onclick = () => location.reload();
+    // NOVA LÓGICA: Confirmar antes de reiniciar
+    document.getElementById('new-round-btn').onclick = () => {
+        if (confirm("Deseja iniciar uma nova rodada? Isso custará R$ 5,00 do seu saldo.")) {
+            location.reload();
+        }
+    };
+
     document.getElementById('open-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'flex';
     document.getElementById('close-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'none';
     
