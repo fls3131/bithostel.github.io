@@ -405,8 +405,8 @@
 
     document.getElementById('draw-btn').onclick = () => { if(processPayment()) drawBall(); };
     document.getElementById('auto-btn').onclick = function() {
-        if (autoInterval) { clearInterval(autoInterval); autoInterval = null; this.innerText = "AUTO"; }
-        else if (!gameOver && processPayment()) { this.innerText = "PARAR"; autoInterval = setInterval(drawBall, 500); }
+        if (autoInterval) { clearInterval(autoInterval); autoInterval = null; this.innerText = "INICIAR"; }
+        else if (!gameOver && processPayment()) { this.innerText = "PAUSAR"; autoInterval = setInterval(drawBall, 500); }
     };
 
     document.getElementById('new-round-btn').onclick = () => location.reload();
