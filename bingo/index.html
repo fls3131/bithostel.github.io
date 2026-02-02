@@ -138,9 +138,15 @@
 
         .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
         .cell { 
-            aspect-ratio: 1/1; display: flex; align-items: center; justify-content: center; 
-            background: #0f3460; border-radius: 6px; font-size: 1.1rem; font-weight: bold; 
-        }
+    aspect-ratio: 0.9 / 1; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    background: #0f3460; 
+    border-radius: 6px; 
+    font-size: 1.1rem; 
+    font-weight: bold; 
+}
         .cell.marked { background: var(--primary); }
         .cell.line-win { background-color: var(--win) !important; color: #ffffff !important; box-shadow: 0 0 10px var(--win); transform: scale(1.05); transition: 0.3s; }
         .cell.free { background: #533483; color: var(--accent); }
