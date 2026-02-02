@@ -28,7 +28,7 @@
 .ranking-container {
     transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     overflow: hidden;
-    max-height: 300px; /* Altura quando expandido */
+    max-height: 300px; 
 }
 
 .ranking-collapsed {
@@ -137,21 +137,20 @@
             background: #0f3460; border-radius: 6px; font-size: 1.1rem; font-weight: bold; 
         }
         .cell.marked { background: var(--primary); }
-        /* ALTERADO: Letra branca para maior visibilidade na comemoração */
         .cell.line-win { background-color: var(--win) !important; color: #ffffff !important; box-shadow: 0 0 10px var(--win); transform: scale(1.05); transition: 0.3s; }
         .cell.free { background: #533483; color: var(--accent); }
 
         /* Painel Inferior: Ranking e Ações */
         .bottom-panel { 
             background: var(--card-bg); 
-            /* ALTERADO: Aumentado o padding inferior para subir os botões em celulares */
-            padding: 10px 10px 35px 10px; 
+            /* ALTERADO: Espaçamento inferior dobrado para subir bem os botões */
+            padding: 10px 10px 70px 10px; 
             border-top: 1px solid #333; 
             flex-shrink: 0;
-            max-height: 45vh;
+            max-height: 50vh;
             overflow-y: auto;
-            /* Suporte para áreas de recorte de tela (notches) */
-            padding-bottom: calc(35px + env(safe-area-inset-bottom));
+            /* Garante que suba o dobro mesmo com áreas de recorte (notch) */
+            padding-bottom: calc(70px + env(safe-area-inset-bottom));
         }
 
         .action-grid {
@@ -282,7 +281,6 @@
         const toast = document.getElementById('money-toast');
         toast.innerText = text; toast.style.color = color;
         toast.classList.add('toast-show');
-        // ALTERADO: Mantém por 5 segundos na tela (5000ms)
         setTimeout(() => toast.classList.remove('toast-show'), 5000);
     }
 
@@ -297,7 +295,7 @@
             totalBalance -= ROUND_COST;
             costDeducted = true;
             updateBalanceDisplay();
-            showToast(`-R$ 5,00`, "#ffffff"); // Cor branca
+            showToast(`-R$ 5,00`, "#ffffff");
             return true;
         }
         return true;
@@ -329,7 +327,7 @@
             if(!firstLineOut) {
                 for(let r=0; r<5; r++) {
                     let win = true;
-                    let lineCells = []; // Armazena as células da linha atual
+                    let lineCells = [];
                     for(let c=0; c<5; c++) { 
                         let cell = document.getElementById(`p${p.id}-c${r*5+c}`);
                         lineCells.push(cell);
@@ -338,21 +336,16 @@
                     if(win) {
                         firstLineOut = true; 
                         somLinha.play().catch(() => {});
-                        
-                        // DESTAQUE DA LINHA NA CARTEIRA
                         lineCells.forEach(cell => cell.classList.add('line-win'));
-
-                        // ALTERADO: Soltar confetes na Linha
                         confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
 
                         if(p.id === 1) { 
                             totalBalance += LINE_PRIZE; 
                             updateBalanceDisplay(); 
-                            // ALTERADO: Toque do dinheiro no aumento de saldo
                             somDinheiro.play().catch(()=>{});
-                            showToast(`LINHA: VOCÊ! +R$ 10,00`, "#ffffff"); // Fonte branca
+                            showToast(`LINHA: VOCÊ! +R$ 10,00`, "#ffffff");
                         } else {
-                            showToast(`LINHA: ${p.name}!`, "#ffffff"); // Fonte branca
+                            showToast(`LINHA: ${p.name}!`, "#ffffff");
                         }
                     }
                 }
@@ -363,14 +356,12 @@
                 if(p.id === 1) { 
                     totalBalance += BINGO_PRIZE; 
                     updateBalanceDisplay(); 
-                    // ALTERADO: Toque do dinheiro no aumento de saldo
                     somDinheiro.play().catch(()=>{});
-                    showToast(`BINGO! VOCÊ GANHOU R$ 20,00`, "#ffffff"); // Fonte branca
+                    showToast(`BINGO! VOCÊ GANHOU R$ 20,00`, "#ffffff");
                     somBingo.play().catch(()=>{});
                 } else {
-                    showToast(`BINGO: ${p.name}!`, "#ffffff"); // Fonte branca
+                    showToast(`BINGO: ${p.name}!`, "#ffffff");
                 }
-                // Confetes no Bingo
                 confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
             }
         });
@@ -397,7 +388,6 @@
         }
     }
 
-    // Handlers
     document.getElementById('btn-unlock').onclick = () => {
         const input = document.getElementById('pass-input').value;
         const currentSavedPass = localStorage.getItem('bingo_vault_pass');
@@ -425,7 +415,6 @@
     document.getElementById('open-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'flex';
     document.getElementById('close-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'none';
     
-    // Funções de depósito atualizadas com som de dinheiro
     document.getElementById('dep-10').onclick = () => { totalBalance += 10; updateBalanceDisplay(); somDinheiro.play().catch(()=>{}); document.getElementById('deposit-modal').style.display = 'none'; };
     document.getElementById('dep-50').onclick = () => { totalBalance += 50; updateBalanceDisplay(); somDinheiro.play().catch(()=>{}); document.getElementById('deposit-modal').style.display = 'none'; };
     document.getElementById('dep-100').onclick = () => { totalBalance += 100; updateBalanceDisplay(); somDinheiro.play().catch(()=>{}); document.getElementById('deposit-modal').style.display = 'none'; };
@@ -437,7 +426,6 @@
     if (sessionStorage.getItem('bingo_authenticated') === 'true') login();
 })();
 
-// Lógica para esconder/mostrar ranking
     const rankingHeader = document.getElementById('header-ranking');
     const rankingBody = document.getElementById('ranking-body');
     const toggleBtn = document.getElementById('toggle-ranking-btn');
