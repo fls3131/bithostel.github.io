@@ -24,7 +24,6 @@
             overflow: hidden; 
         }
 
-
 /* Estilos para o Ranking Retrátil */
 .ranking-container {
     transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -138,7 +137,8 @@
             background: #0f3460; border-radius: 6px; font-size: 1.1rem; font-weight: bold; 
         }
         .cell.marked { background: var(--primary); }
-        .cell.line-win { background-color: var(--win) !important; color: #1a1a2e !important; }
+        /* ALTERADO: Letra branca para maior visibilidade na comemoração */
+        .cell.line-win { background-color: var(--win) !important; color: #ffffff !important; box-shadow: 0 0 10px var(--win); transform: scale(1.05); transition: 0.3s; }
         .cell.free { background: #533483; color: var(--accent); }
 
         /* Painel Inferior: Ranking e Ações */
@@ -173,7 +173,7 @@
         #history-grid { display: flex; gap: 5px; overflow-x: auto; padding: 5px; background: #0f3460; border-radius: 4px; margin-top: 8px; }
         .hist-ball { min-width: 30px; height: 30px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
         
-        #money-toast { position: fixed; top: 20%; left: 50%; transform: translate(-50%, -50%); z-index: 30000; font-size: 2.5rem; font-weight: 900; pointer-events: none; opacity: 0; transition: 0.4s; text-align: center; width: 100%; }
+        #money-toast { position: fixed; top: 20%; left: 50%; transform: translate(-50%, -50%); z-index: 30000; font-size: 2rem; font-weight: 900; pointer-events: none; opacity: 0; transition: 0.4s; text-align: center; width: 100%; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
         .toast-show { opacity: 1 !important; transform: translate(-50%, -40%) scale(1.1) !important; }
     </style>
 </head>
@@ -293,7 +293,7 @@
             totalBalance -= ROUND_COST;
             costDeducted = true;
             updateBalanceDisplay();
-            showToast(`-R$ 5,00`, "var(--loss)");
+            showToast(`-R$ 5,00`, "#ffffff"); // Cor branca
             return true;
         }
         return true;
@@ -325,17 +325,25 @@
             if(!firstLineOut) {
                 for(let r=0; r<5; r++) {
                     let win = true;
+                    let lineCells = []; // Armazena as células da linha atual
                     for(let c=0; c<5; c++) { 
                         let cell = document.getElementById(`p${p.id}-c${r*5+c}`);
+                        lineCells.push(cell);
                         if(!cell.classList.contains('marked')) win = false;
                     }
                     if(win) {
                         firstLineOut = true; 
                         somLinha.play().catch(() => {});
+                        
+                        // DESTAQUE DA LINHA NA CARTEIRA
+                        lineCells.forEach(cell => cell.classList.add('line-win'));
+
                         if(p.id === 1) { 
                             totalBalance += LINE_PRIZE; 
                             updateBalanceDisplay(); 
-                            showToast(`LINHA! +R$ 10,00`, "var(--win)");
+                            showToast(`LINHA: VOCÊ! +R$ 10,00`, "#ffffff"); // Fonte branca
+                        } else {
+                            showToast(`LINHA: ${p.name}!`, "#ffffff"); // Fonte branca
                         }
                     }
                 }
@@ -346,10 +354,10 @@
                 if(p.id === 1) { 
                     totalBalance += BINGO_PRIZE; 
                     updateBalanceDisplay(); 
-                    showToast(`BINGO! +R$ 20,00`, "var(--gold)");
+                    showToast(`BINGO! VOCÊ GANHOU R$ 20,00`, "#ffffff"); // Fonte branca
                     somBingo.play().catch(()=>{});
                 } else {
-                    showToast(`BINGO: ${p.name}`, "var(--loss)");
+                    showToast(`BINGO: ${p.name}!`, "#ffffff"); // Fonte branca
                 }
                 confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
             }
