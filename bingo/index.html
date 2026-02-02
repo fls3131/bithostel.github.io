@@ -251,8 +251,9 @@
             <div class="action-grid">
                 <button id="open-dep" class="btn-util" style="background: #3498db;">DEPOSITAR 💸</button>
                 <button id="open-wd" class="btn-util" style="background: var(--money);">SACAR 💸</button>
+                <button id="toggle-sound" class="btn-util" style="background: #9b59b6;">SOM: ON 🔊</button>
                 <button id="manual-btn" class="btn-util">AJUDA ❓</button>
-                <button id="btn-logout" class="btn-util" style="background: #333;">BLOQUEAR 🔒</button>
+                <button id="btn-logout" class="btn-util" style="background: #333; grid-column: span 2;">BLOQUEAR 🔒</button>
             </div>
         </div>
     </div>
@@ -270,6 +271,8 @@
     let drawn = [], players = [], firstLineOut = false, gameOver = false, autoInterval = null;
     let totalBalance = 0;
     let costDeducted = false;
+    let soundEnabled = true; // Controle de som
+
     const ROUND_COST = 5.00, LINE_PRIZE = 10.00, BINGO_PRIZE = 20.00;
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
 
@@ -277,6 +280,14 @@
     if(savedPass) {
         document.getElementById('auth-title').innerText = "BLOQUEADO";
         document.getElementById('auth-instruction').innerText = "Insira seu PIN";
+    }
+
+    // Função auxiliar para tocar som respeitando o estado liga/desliga
+    function playSound(audio) {
+        if (soundEnabled) {
+            audio.currentTime = 0;
+            audio.play().catch(() => {});
+        }
     }
 
     function showToast(text, color) {
@@ -305,7 +316,7 @@
 
     function drawBall() {
         if(gameOver || drawn.length >= 75) return;
-        somSorteio.currentTime = 0; somSorteio.play().catch(()=>{});
+        playSound(somSorteio);
         let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
         drawn.push(b);
         document.getElementById('ball').innerText = b;
@@ -317,13 +328,12 @@
         players.forEach(p => { 
             if(p.nums.includes(b)) {
                 p.marks++; 
-                if(p.id === 1) { somMarca.currentTime = 0; somMarca.play().catch(() => {}); }
+                if(p.id === 1) { playSound(somMarca); }
             }
         });
 
         let sorted = [...players].sort((a,b) => b.marks - a.marks);
         let list = document.getElementById('leader-list'); list.innerHTML = "";
-        // Exibe apenas os 3 primeiros colocados
         sorted.slice(0, 3).forEach(p => list.innerHTML += `<div class="leader-item ${p.id===1?'me':''}"><span>${p.name}</span><span>${p.marks}/25</span></div>`);
 
         players.forEach(p => {
@@ -338,14 +348,14 @@
                     }
                     if(win) {
                         firstLineOut = true; 
-                        somLinha.play().catch(() => {});
+                        playSound(somLinha);
                         lineCells.forEach(cell => cell.classList.add('line-win'));
                         confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
 
                         if(p.id === 1) { 
                             totalBalance += LINE_PRIZE; 
                             updateBalanceDisplay(); 
-                            somDinheiro.play().catch(()=>{});
+                            playSound(somDinheiro);
                             showToast(`LINHA: VOCÊ! +R$ 10,00`, "#ffffff");
                         } else {
                             showToast(`LINHA: ${p.name}!`, "#ffffff");
@@ -359,9 +369,9 @@
                 if(p.id === 1) { 
                     totalBalance += BINGO_PRIZE; 
                     updateBalanceDisplay(); 
-                    somDinheiro.play().catch(()=>{});
+                    playSound(somDinheiro);
                     showToast(`BINGO! VOCÊ GANHOU R$ 20,00`, "#ffffff");
-                    somBingo.play().catch(()=>{});
+                    playSound(somBingo);
                 } else {
                     showToast(`BINGO: ${p.name}!`, "#ffffff");
                 }
@@ -410,23 +420,29 @@
 
     document.getElementById('draw-btn').onclick = () => { if(processPayment()) drawBall(); };
     document.getElementById('auto-btn').onclick = function() {
-        if (autoInterval) { clearInterval(autoInterval); autoInterval = null; this.innerText = "INICIAR"; }
-        else if (!gameOver && processPayment()) { this.innerText = "PAUSAR"; autoInterval = setInterval(drawBall, 500); }
+        if (autoInterval) { clearInterval(autoInterval); autoInterval = null; this.innerText = "INICIAR AUTO"; }
+        else if (!gameOver && processPayment()) { this.innerText = "PAUSAR AUTO"; autoInterval = setInterval(drawBall, 500); }
     };
 
-    // NOVA LÓGICA: Confirmar antes de reiniciar
     document.getElementById('new-round-btn').onclick = () => {
         if (confirm("Deseja iniciar uma nova rodada? Isso custará R$ 5,00 do seu saldo.")) {
             location.reload();
         }
     };
 
+    // Lógica do Botão de Som
+    document.getElementById('toggle-sound').onclick = function() {
+        soundEnabled = !soundEnabled;
+        this.innerText = soundEnabled ? "SOM: ON 🔊" : "SOM: OFF 🔇";
+        this.style.background = soundEnabled ? "#9b59b6" : "#666";
+    };
+
     document.getElementById('open-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'flex';
     document.getElementById('close-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'none';
     
-    document.getElementById('dep-10').onclick = () => { totalBalance += 10; updateBalanceDisplay(); somDinheiro.play().catch(()=>{}); document.getElementById('deposit-modal').style.display = 'none'; };
-    document.getElementById('dep-50').onclick = () => { totalBalance += 50; updateBalanceDisplay(); somDinheiro.play().catch(()=>{}); document.getElementById('deposit-modal').style.display = 'none'; };
-    document.getElementById('dep-100').onclick = () => { totalBalance += 100; updateBalanceDisplay(); somDinheiro.play().catch(()=>{}); document.getElementById('deposit-modal').style.display = 'none'; };
+    document.getElementById('dep-10').onclick = () => { totalBalance += 10; updateBalanceDisplay(); playSound(somDinheiro); document.getElementById('deposit-modal').style.display = 'none'; };
+    document.getElementById('dep-50').onclick = () => { totalBalance += 50; updateBalanceDisplay(); playSound(somDinheiro); document.getElementById('deposit-modal').style.display = 'none'; };
+    document.getElementById('dep-100').onclick = () => { totalBalance += 100; updateBalanceDisplay(); playSound(somDinheiro); document.getElementById('deposit-modal').style.display = 'none'; };
     
     document.getElementById('open-wd').onclick = () => { document.getElementById('withdraw-modal').style.display = 'flex'; document.getElementById('wd-balance').innerText = `Saldo: R$ ${totalBalance}`; };
     document.getElementById('close-wd').onclick = () => document.getElementById('withdraw-modal').style.display = 'none';
