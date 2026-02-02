@@ -227,7 +227,7 @@
             </div>
             <div class="btn-group-main">
                 <button id="draw-btn" class="btn-manual">SORTEAR</button>
-                <button id="auto-btn" class="btn-auto">AUTO</button>
+                <button id="auto-btn" class="btn-auto">INICIAR</button>
                 <button id="new-round-btn" class="btn-reset">NOVA RODADA (R$ 5,00)</button>
             </div>
             <div id="history-grid"></div>
@@ -279,7 +279,8 @@
         const toast = document.getElementById('money-toast');
         toast.innerText = text; toast.style.color = color;
         toast.classList.add('toast-show');
-        setTimeout(() => toast.classList.remove('toast-show'), 2000);
+        // ALTERADO: Mantém por 5 segundos na tela (5000ms)
+        setTimeout(() => toast.classList.remove('toast-show'), 5000);
     }
 
     function updateBalanceDisplay() {
@@ -338,9 +339,14 @@
                         // DESTAQUE DA LINHA NA CARTEIRA
                         lineCells.forEach(cell => cell.classList.add('line-win'));
 
+                        // ALTERADO: Soltar confetes na Linha
+                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+
                         if(p.id === 1) { 
                             totalBalance += LINE_PRIZE; 
                             updateBalanceDisplay(); 
+                            // ALTERADO: Toque do dinheiro no aumento de saldo
+                            somDinheiro.play().catch(()=>{});
                             showToast(`LINHA: VOCÊ! +R$ 10,00`, "#ffffff"); // Fonte branca
                         } else {
                             showToast(`LINHA: ${p.name}!`, "#ffffff"); // Fonte branca
@@ -354,11 +360,14 @@
                 if(p.id === 1) { 
                     totalBalance += BINGO_PRIZE; 
                     updateBalanceDisplay(); 
+                    // ALTERADO: Toque do dinheiro no aumento de saldo
+                    somDinheiro.play().catch(()=>{});
                     showToast(`BINGO! VOCÊ GANHOU R$ 20,00`, "#ffffff"); // Fonte branca
                     somBingo.play().catch(()=>{});
                 } else {
                     showToast(`BINGO: ${p.name}!`, "#ffffff"); // Fonte branca
                 }
+                // Confetes no Bingo
                 confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
             }
         });
@@ -412,13 +421,19 @@
     document.getElementById('new-round-btn').onclick = () => location.reload();
     document.getElementById('open-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'flex';
     document.getElementById('close-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'none';
-    document.getElementById('dep-10').onclick = () => { totalBalance += 10; updateBalanceDisplay(); somDinheiro.play(); document.getElementById('deposit-modal').style.display = 'none'; };
+    
+    // Funções de depósito atualizadas com som de dinheiro
+    document.getElementById('dep-10').onclick = () => { totalBalance += 10; updateBalanceDisplay(); somDinheiro.play().catch(()=>{}); document.getElementById('deposit-modal').style.display = 'none'; };
+    document.getElementById('dep-50').onclick = () => { totalBalance += 50; updateBalanceDisplay(); somDinheiro.play().catch(()=>{}); document.getElementById('deposit-modal').style.display = 'none'; };
+    document.getElementById('dep-100').onclick = () => { totalBalance += 100; updateBalanceDisplay(); somDinheiro.play().catch(()=>{}); document.getElementById('deposit-modal').style.display = 'none'; };
+    
     document.getElementById('open-wd').onclick = () => { document.getElementById('withdraw-modal').style.display = 'flex'; document.getElementById('wd-balance').innerText = `Saldo: R$ ${totalBalance}`; };
     document.getElementById('close-wd').onclick = () => document.getElementById('withdraw-modal').style.display = 'none';
     document.getElementById('btn-logout').onclick = () => { sessionStorage.removeItem('bingo_authenticated'); location.reload(); };
 
     if (sessionStorage.getItem('bingo_authenticated') === 'true') login();
 })();
+
 // Lógica para esconder/mostrar ranking
     const rankingHeader = document.getElementById('header-ranking');
     const rankingBody = document.getElementById('ranking-body');
