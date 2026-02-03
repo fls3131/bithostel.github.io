@@ -369,14 +369,7 @@
 
     function processPayment() {
         if (!costDeducted && !gameOver) {
-            // VERIFICAÇÃO DE SALDO E RECARGA AUTOMÁTICA
-            if (totalBalance < ROUND_COST) { 
-                totalBalance += 50.00;
-                saveTransaction("Recarga Automática", 50.00);
-                playSound(somDinheiro);
-                showToast("Saldo Insuficiente! Recarga de R$ 50,00 realizada.", "#f1c40f");
-            }
-            
+            if (totalBalance < ROUND_COST) { alert("Saldo insuficiente!"); return false; }
             totalBalance -= ROUND_COST;
             saveTransaction("Entrada Rodada", -5.00);
             costDeducted = true;
