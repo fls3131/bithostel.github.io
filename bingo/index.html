@@ -280,7 +280,7 @@
             <div class="btn-group-main">
                 <button id="draw-btn" class="btn-manual">SORTEAR</button>
                 <button id="auto-btn" class="btn-auto">AUTO</button>
-                <button id="new-round-btn" class="btn-reset">NOVA RODADA (R$ 5,00)</button>
+                <button id="new-round-btn" class="btn-reset">NOVA RODADA (R$ 6,00)</button>
             </div>
             <div id="history-grid"></div>
         </div>
@@ -309,7 +309,7 @@
 
 <script>
 (function() {
-    // Sons emulados (Prevenir erro se não existirem)
+    // Sons emulados
     const somSorteio = new Audio('sorteio.mp3');
     const somDinheiro = new Audio('dinheiro.mp3');
     const somMarca = new Audio('marca.mp3');
@@ -323,17 +323,16 @@
     
     let walletHistory = JSON.parse(localStorage.getItem('bingo_wallet_history') || '[]');
 
-    const ROUND_COST = 5.00, LINE_PRIZE = 12.00, BINGO_PRIZE = 22.00;
+    // ALTERADO: Preço para R$ 6.00
+    const ROUND_COST = 6.00, LINE_PRIZE = 12.00, BINGO_PRIZE = 22.00;
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
 
-    // Configuração inicial do Auth
     const savedPass = localStorage.getItem('bingo_vault_pass');
     if(savedPass) {
         document.getElementById('auth-title').innerText = "ACESSO RESTRITO";
         document.getElementById('auth-instruction').innerText = "Insira seu PIN de 8 dígitos:";
     }
 
-    // ALTERAÇÃO: Filtro para aceitar apenas números no PIN
     document.getElementById('pass-input').oninput = function() {
         this.value = this.value.replace(/[^0-9]/g, '');
     };
@@ -372,14 +371,14 @@
         if (!costDeducted && !gameOver) {
             if (totalBalance < ROUND_COST) { 
                 alert("Saldo insuficiente! Deposite para jogar."); 
-                if(autoInterval) stopAuto(); // ALTERAÇÃO: Para o auto se o saldo acabar
+                if(autoInterval) stopAuto();
                 return false; 
             }
             totalBalance -= ROUND_COST;
             saveTransaction("Entrada Rodada", -ROUND_COST);
             costDeducted = true;
             updateBalanceDisplay();
-            showToast(`-R$ 5,00`, "#ffffff");
+            showToast(`-R$ 6,00`, "#ffffff"); // Atualizado toast visual
             return true;
         }
         return true;
@@ -397,11 +396,10 @@
         let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
         drawn.push(b);
 
-        // ALTERAÇÃO: Efeito visual na bola sorteada
         const ballEl = document.getElementById('ball');
         ballEl.innerText = b;
         ballEl.classList.remove('ball-pop');
-        void ballEl.offsetWidth; // Trigger reflow
+        void ballEl.offsetWidth; 
         ballEl.classList.add('ball-pop');
         
         let h = document.createElement('div'); h.className = "hist-ball";
@@ -431,7 +429,6 @@
 
     function checkWinners() {
         players.forEach(p => {
-            // Check Linha
             if(!firstLineOut) {
                 for(let r=0; r<5; r++) {
                     let win = true;
@@ -458,7 +455,6 @@
                     }
                 }
             }
-            // Check Bingo
             if(p.marks === 25 && !gameOver) {
                 gameOver = true; 
                 stopAuto();
@@ -504,7 +500,6 @@
         updateRanking();
     }
 
-    // --- Eventos ---
     document.getElementById('btn-unlock').onclick = () => {
         const input = document.getElementById('pass-input').value;
         if (!savedPass) {
@@ -537,10 +532,9 @@
     };
 
     document.getElementById('new-round-btn').onclick = () => {
-        if (confirm("Deseja iniciar nova rodada por R$ 5,00?")) location.reload();
+        if (confirm("Deseja iniciar nova rodada por R$ 6,00?")) location.reload();
     };
 
-    // Auxiliares
     window.addFunds = (val) => {
         totalBalance += val;
         saveTransaction("Depósito PIX", val);
@@ -588,7 +582,9 @@
     };
     document.getElementById('close-history').onclick = () => document.getElementById('history-modal').style.display = 'none';
     document.getElementById('btn-logout').onclick = () => { sessionStorage.removeItem('bingo_authenticated'); location.reload(); };
-    document.getElementById('help-btn').onclick = () => alert("Bingo Arena:\n1. Cada rodada custa R$ 5,00.\n2. Complete uma linha horizontal para ganhar R$ 12,00.\n3. Complete a cartela (BINGO) para ganhar R$ 22,00.\n4. O sorteio para assim que alguém fizer BINGO.");
+    
+    // Atualizado no Help
+    document.getElementById('help-btn').onclick = () => alert("Bingo Arena:\n1. Cada rodada custa R$ 6,00.\n2. Complete uma linha horizontal para ganhar R$ 12,00.\n3. Complete a cartela (BINGO) para ganhar R$ 22,00.\n4. O sorteio para assim que alguém fizer BINGO.");
 
     document.getElementById('toggle-sound').onclick = function() {
         soundEnabled = !soundEnabled;
