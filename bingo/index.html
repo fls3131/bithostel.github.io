@@ -25,6 +25,17 @@
             overflow: hidden; 
         }
 
+        /* --- NOVOS ESTILOS DO HISTÓRICO --- */
+        #history-modal { display: none; position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center; padding: 20px; }
+        .history-card { background: var(--card-bg); width: 100%; max-width: 400px; border-radius: 12px; border: 1px solid var(--accent); display: flex; flex-direction: column; max-height: 80vh; }
+        .history-list { overflow-y: auto; padding: 15px; flex-grow: 1; }
+        .history-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #0f3460; font-size: 0.85rem; }
+        .hist-pos { color: var(--win); }
+        .hist-neg { color: var(--loss); }
+        .money-display { cursor: pointer; transition: 0.2s; }
+        .money-display:active { transform: scale(0.95); background: rgba(39, 174, 96, 0.3); }
+        /* --------------------------------- */
+
         .ranking-container {
             transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             overflow: hidden;
@@ -183,6 +194,16 @@
 <body>
     <div id="money-toast"></div>
 
+    <div id="history-modal">
+        <div class="history-card">
+            <div style="padding: 15px; border-bottom: 1px solid var(--accent); display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="margin:0; color: var(--accent);">EXTRATO DA CARTEIRA</h3>
+                <button id="close-history" style="background: #444; padding: 5px 10px;">X</button>
+            </div>
+            <div id="wallet-history-list" class="history-list"></div>
+        </div>
+    </div>
+
     <div id="deposit-modal">
         <div class="auth-card" style="border-color: #3498db;">
             <h2 style="color: #3498db; margin: 0 0 15px 0;">DEPOSITAR PIX</h2>
@@ -220,8 +241,8 @@
     <div class="main-layout">
         <div class="top-panel">
             <div class="header-grid">
-                <div class="money-display">
-                    <div style="font-size:0.6rem; color:var(--accent)">MEU SALDO</div>
+                <div class="money-display" id="open-history-trigger">
+                    <div style="font-size:0.6rem; color:var(--accent)">MEU SALDO (Clique p/ Ver)</div>
                     <div class="money-value" id="balance">R$ 0,00</div>
                 </div>
                 <div class="ball-display">
@@ -272,8 +293,12 @@
     let totalBalance = 0;
     let costDeducted = false;
     let soundEnabled = true; 
+    
+    // VARIÁVEL DE HISTÓRICO
+    let walletHistory = JSON.parse(localStorage.getItem('bingo_wallet_history') || '[]');
 
-    const ROUND_COST = 5.00, LINE_PRIZE = 10.00, BINGO_PRIZE = 20.00;
+    // ALTERAÇÕES DOS PRÊMIOS AQUI
+    const ROUND_COST = 5.00, LINE_PRIZE = 15.00, BINGO_PRIZE = 25.00;
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
 
     const savedPass = localStorage.getItem('bingo_vault_pass');
@@ -287,6 +312,18 @@
             audio.currentTime = 0;
             audio.play().catch(() => {});
         }
+    }
+
+    // FUNÇÃO PARA SALVAR TRANSAÇÃO
+    function saveTransaction(desc, value) {
+        const transaction = {
+            date: new Date().toLocaleString('pt-BR'),
+            desc: desc,
+            value: value
+        };
+        walletHistory.unshift(transaction);
+        if(walletHistory.length > 50) walletHistory.pop();
+        localStorage.setItem('bingo_wallet_history', JSON.stringify(walletHistory));
     }
 
     function showToast(text, color) {
@@ -305,6 +342,7 @@
         if (!costDeducted && !gameOver) {
             if (totalBalance < ROUND_COST) { alert("Saldo insuficiente!"); return false; }
             totalBalance -= ROUND_COST;
+            saveTransaction("Entrada Rodada", -5.00);
             costDeducted = true;
             updateBalanceDisplay();
             showToast(`-R$ 5,00`, "#ffffff");
@@ -353,9 +391,10 @@
 
                         if(p.id === 1) { 
                             totalBalance += LINE_PRIZE; 
+                            saveTransaction("Prêmio Linha", LINE_PRIZE);
                             updateBalanceDisplay(); 
                             playSound(somDinheiro);
-                            showToast(`LINHA: VOCÊ! +R$ 10,00`, "#ffffff");
+                            showToast(`LINHA: VOCÊ! +R$ ${LINE_PRIZE.toFixed(2).replace('.', ',')}`, "#ffffff");
                         } else {
                             showToast(`LINHA: ${p.name}!`, "#ffffff");
                         }
@@ -367,9 +406,10 @@
                 if(autoInterval) { clearInterval(autoInterval); autoInterval = null; }
                 if(p.id === 1) { 
                     totalBalance += BINGO_PRIZE; 
+                    saveTransaction("Prêmio BINGO", BINGO_PRIZE);
                     updateBalanceDisplay(); 
                     playSound(somDinheiro);
-                    showToast(`BINGO! VOCÊ GANHOU R$ 20,00`, "#ffffff");
+                    showToast(`BINGO! VOCÊ GANHOU R$ ${BINGO_PRIZE.toFixed(2).replace('.', ',')}`, "#ffffff");
                     playSound(somBingo);
                 } else {
                     showToast(`BINGO: ${p.name}!`, "#ffffff");
@@ -400,7 +440,6 @@
         }
     }
 
-    // --- ALTERAÇÃO: PROTEÇÃO CONTRA FORÇA BRUTA ---
     document.getElementById('btn-unlock').onclick = () => {
         const agora = Date.now();
         const bloqueadoAte = parseInt(localStorage.getItem('bingo_lockout_until') || 0);
@@ -427,7 +466,7 @@
         } else {
             let falhas = parseInt(localStorage.getItem('bingo_failed_attempts') || 0) + 1;
             if (falhas >= 3) {
-                localStorage.setItem('bingo_lockout_until', agora + 60000); // 1 minuto
+                localStorage.setItem('bingo_lockout_until', agora + 60000);
                 localStorage.removeItem('bingo_failed_attempts');
                 alert("Muitas tentativas incorretas. Bloqueado por 1 minuto.");
             } else {
@@ -436,7 +475,6 @@
             }
         }
     };
-    // ----------------------------------------------
 
     function login() {
         sessionStorage.setItem('bingo_authenticated', 'true');
@@ -467,12 +505,45 @@
     document.getElementById('open-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'flex';
     document.getElementById('close-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'none';
     
-    document.getElementById('dep-10').onclick = () => { totalBalance += 10; updateBalanceDisplay(); playSound(somDinheiro); document.getElementById('deposit-modal').style.display = 'none'; };
-    document.getElementById('dep-50').onclick = () => { totalBalance += 50; updateBalanceDisplay(); playSound(somDinheiro); document.getElementById('deposit-modal').style.display = 'none'; };
-    document.getElementById('dep-100').onclick = () => { totalBalance += 100; updateBalanceDisplay(); playSound(somDinheiro); document.getElementById('deposit-modal').style.display = 'none'; };
+    document.getElementById('dep-10').onclick = () => { totalBalance += 10; saveTransaction("Depósito PIX", 10); updateBalanceDisplay(); playSound(somDinheiro); document.getElementById('deposit-modal').style.display = 'none'; };
+    document.getElementById('dep-50').onclick = () => { totalBalance += 50; saveTransaction("Depósito PIX", 50); updateBalanceDisplay(); playSound(somDinheiro); document.getElementById('deposit-modal').style.display = 'none'; };
+    document.getElementById('dep-100').onclick = () => { totalBalance += 100; saveTransaction("Depósito PIX", 100); updateBalanceDisplay(); playSound(somDinheiro); document.getElementById('deposit-modal').style.display = 'none'; };
     
     document.getElementById('open-wd').onclick = () => { document.getElementById('withdraw-modal').style.display = 'flex'; document.getElementById('wd-balance').innerText = `Saldo: R$ ${totalBalance}`; };
     document.getElementById('close-wd').onclick = () => document.getElementById('withdraw-modal').style.display = 'none';
+    
+    document.getElementById('confirm-wd').onclick = () => {
+        const val = parseFloat(document.getElementById('withdraw-amount').value);
+        if(val >= 20 && totalBalance >= val) {
+            totalBalance -= val;
+            saveTransaction("Saque PIX", -val);
+            updateBalanceDisplay();
+            alert("Saque solicitado!");
+            document.getElementById('withdraw-modal').style.display = 'none';
+        } else { alert("Valor inválido ou saldo insuficiente."); }
+    };
+
+    // LÓGICA DO MODAL DE HISTÓRICO
+    document.getElementById('open-history-trigger').onclick = () => {
+        const list = document.getElementById('wallet-history-list');
+        list.innerHTML = walletHistory.length === 0 ? '<p style="text-align:center">Sem movimentações.</p>' : '';
+        walletHistory.forEach(item => {
+            const isPos = item.value > 0;
+            list.innerHTML += `
+                <div class="history-item">
+                    <div>
+                        <div style="font-weight:bold">${item.desc}</div>
+                        <div style="font-size:0.7rem; color:#aaa">${item.date}</div>
+                    </div>
+                    <div class="${isPos ? 'hist-pos' : 'hist-neg'}">
+                        ${isPos ? '+' : ''}R$ ${Math.abs(item.value).toFixed(2).replace('.', ',')}
+                    </div>
+                </div>`;
+        });
+        document.getElementById('history-modal').style.display = 'flex';
+    };
+    document.getElementById('close-history').onclick = () => document.getElementById('history-modal').style.display = 'none';
+
     document.getElementById('btn-logout').onclick = () => { sessionStorage.removeItem('bingo_authenticated'); location.reload(); };
 
     if (sessionStorage.getItem('bingo_authenticated') === 'true') login();
