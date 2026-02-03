@@ -79,9 +79,10 @@
             height: 100dvh; 
         }
 
+        /* --- BARRA SUPERIOR (Reduzida 10%) --- */
         .top-panel { 
             background: var(--card-bg); 
-            padding: 4px; 
+            padding: 3.6px; /* Reduzido de 4px */
             border-bottom: 2px solid var(--primary); 
             flex-shrink: 0;
             z-index: 10;
@@ -90,18 +91,18 @@
         .header-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px; 
-            margin-bottom: 6px; 
+            gap: 7.2px; /* Reduzido de 8px */
+            margin-bottom: 5.4px; /* Reduzido de 6px */
         }
 
         .money-display { 
             background: rgba(39, 174, 96, 0.15); 
             border: 1px solid var(--money); 
-            border-radius: 8px; padding: 6px; 
+            border-radius: 8px; padding: 5.4px; /* Reduzido de 6px */
             text-align: center; 
             cursor: pointer;
         }
-        .money-value { font-size: 1.1rem; font-weight: 900; color: #fff; }
+        .money-value { font-size: 1rem; font-weight: 900; color: #fff; } /* Reduzido de 1.1rem */
 
         .ball-display {
             background: #0f3460;
@@ -112,17 +113,17 @@
             border: 1px solid var(--accent);
             overflow: hidden;
         }
-        #ball { font-size: 2.2rem; color: var(--accent); font-weight: 900; transition: transform 0.2s; }
+        #ball { font-size: 1.98rem; color: var(--accent); font-weight: 900; transition: transform 0.2s; } /* Reduzido de 2.2rem */
         .ball-pop { transform: scale(1.2); }
 
         .btn-group-main { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
-            gap: 6px; 
+            gap: 5.4px; /* Reduzido de 6px */
         }
 
-        .btn-manual, .btn-auto { height: 42px !important; } 
-        .btn-reset { grid-column: span 2; height: 42px !important; } 
+        .btn-manual, .btn-auto { height: 38px !important; } /* Reduzido de 42px */
+        .btn-reset { grid-column: span 2; height: 38px !important; } /* Reduzido de 42px */
 
         .arena { 
             flex-grow: 1; 
@@ -130,30 +131,31 @@
             padding: 15px 10px; 
             display: flex; 
             flex-direction: column; 
-            gap: 20px; 
+            gap: 15px; /* Reduzido de 20px */
             align-items: center;
             background: rgba(0,0,0,0.2);
         }
 
+        /* --- CARTELAS (Reduzidas 15%) --- */
         .bingo-card { 
             background: var(--card-bg); 
-            padding: 10px; 
+            padding: 8.5px; /* Reduzido de 10px */
             border-radius: 12px; 
             border: 1px solid #333; 
             width: 100%; 
-            max-width: 380px; 
+            max-width: 323px; /* Reduzido de 380px */
         }
         .bingo-card.player { border: 2px solid var(--primary); box-shadow: 0 0 15px rgba(233,69,96,0.3); }
 
-        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3.4px; } /* Reduzido de 4px */
         .cell { 
             aspect-ratio: 1 / 1; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             background: #0f3460; 
-            border-radius: 6px; 
-            font-size: 1.1rem; 
+            border-radius: 5px; 
+            font-size: 0.95rem; /* Reduzido de 1.1rem */
             font-weight: bold; 
         }
         .cell.marked { background: var(--primary); color: white; }
@@ -188,8 +190,8 @@
         .leader-item { display: flex; justify-content: space-between; padding: 8px; border-bottom: 1px solid #0f3460; font-size: 0.85rem; }
         .leader-item.me { background: var(--accent); color: var(--bg); font-weight: 900; border-radius: 4px; }
 
-        #history-grid { display: flex; gap: 5px; overflow-x: auto; padding: 5px; background: #0f3460; border-radius: 4px; margin-top: 6px; min-height: 38px; }
-        .hist-ball { min-width: 28px; height: 28px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; }
+        #history-grid { display: flex; gap: 5px; overflow-x: auto; padding: 5px; background: #0f3460; border-radius: 4px; margin-top: 6px; min-height: 34px; }
+        .hist-ball { min-width: 25px; height: 25px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; flex-shrink: 0; }
         
         #money-toast { 
             position: fixed; top: 30%; left: 50%; transform: translate(-50%, -50%); 
@@ -323,7 +325,6 @@
     
     let walletHistory = JSON.parse(localStorage.getItem('bingo_wallet_history') || '[]');
 
-    // ALTERADO: Preço para R$ 6.00
     const ROUND_COST = 6.00, LINE_PRIZE = 12.00, BINGO_PRIZE = 22.00;
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
 
@@ -378,7 +379,7 @@
             saveTransaction("Entrada Rodada", -ROUND_COST);
             costDeducted = true;
             updateBalanceDisplay();
-            showToast(`-R$ 6,00`, "#ffffff"); // Atualizado toast visual
+            showToast(`-R$ 6,00`, "#ffffff");
             return true;
         }
         return true;
@@ -583,7 +584,6 @@
     document.getElementById('close-history').onclick = () => document.getElementById('history-modal').style.display = 'none';
     document.getElementById('btn-logout').onclick = () => { sessionStorage.removeItem('bingo_authenticated'); location.reload(); };
     
-    // Atualizado no Help
     document.getElementById('help-btn').onclick = () => alert("Bingo Arena:\n1. Cada rodada custa R$ 6,00.\n2. Complete uma linha horizontal para ganhar R$ 12,00.\n3. Complete a cartela (BINGO) para ganhar R$ 22,00.\n4. O sorteio para assim que alguém fizer BINGO.");
 
     document.getElementById('toggle-sound').onclick = function() {
