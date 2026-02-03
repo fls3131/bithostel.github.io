@@ -187,8 +187,25 @@
         #history-grid { display: flex; gap: 5px; overflow-x: auto; padding: 5px; background: #0f3460; border-radius: 4px; margin-top: 8px; }
         .hist-ball { min-width: 30px; height: 30px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
         
-        #money-toast { position: fixed; top: 20%; left: 50%; transform: translate(-50%, -50%); z-index: 30000; font-size: 2rem; font-weight: 900; pointer-events: none; opacity: 0; transition: 0.4s; text-align: center; width: 100%; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); }
-        .toast-show { opacity: 1 !important; transform: translate(-50%, -40%) scale(1.1) !important; }
+        #money-toast { 
+            position: fixed; top: 30%; left: 50%; transform: translate(-50%, -50%); 
+            z-index: 30000; font-size: 1.5rem; font-weight: 900; pointer-events: none; 
+            opacity: 0; transition: 0.4s; text-align: center; width: 90%; 
+            background: rgba(0,0,0,0.9); padding: 20px; border-radius: 15px;
+            border: 2px solid var(--accent); box-shadow: 0 0 20px rgba(0,0,0,0.8);
+        }
+        .toast-show { opacity: 1 !important; transform: translate(-50%, -40%) scale(1) !important; }
+
+        /* Estilos específicos para a tela de PIN */
+        .info-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+            text-align: left;
+            border-left: 3px solid var(--accent);
+        }
     </style>
 </head>
 <body>
@@ -231,10 +248,22 @@
 
     <div id="auth-overlay">
         <div class="auth-card">
-            <h2 id="auth-title">ACESSO</h2>
-            <p id="auth-instruction">Crie seu PIN de 4 dígitos</p>
-            <input type="password" id="pass-input" maxlength="4" inputmode="numeric" style="letter-spacing:15px; font-size:2rem; width:100%; text-align:center; padding:10px; margin:15px 0; border-radius:8px;">
-            <button id="btn-unlock" style="background: var(--primary); width: 100%; font-size: 1.2rem;">ENTRAR</button>
+            <h2 id="auth-title" style="color: var(--primary); margin-bottom: 10px;">PRIMEIRO ACESSO</h2>
+            
+            <div id="auth-info" class="info-box">
+                <strong>🔒 Segurança da Conta</strong><br>
+                Este PIN de 4 dígitos protege seu saldo e progresso. Não o compartilhe com ninguém.
+            </div>
+
+            <p id="auth-instruction" style="font-size: 0.9rem; margin-bottom: 10px;">Crie seu PIN de 4 dígitos numéricos:</p>
+            
+            <input type="password" id="pass-input" maxlength="4" inputmode="numeric" placeholder="****" style="letter-spacing:15px; font-size:2rem; width:100%; text-align:center; padding:10px; margin-bottom:15px; border-radius:8px; border: 2px solid #333; background: #0f3460; color: white;">
+            
+            <button id="btn-unlock" style="background: var(--primary); width: 100%; font-size: 1.2rem; margin-bottom: 15px;">CONFIRMAR E ENTRAR</button>
+            
+            <div style="font-size: 0.7rem; color: #888;">
+                Ao clicar em entrar, você concorda com as regras da Arena.
+            </div>
         </div>
     </div>
 
@@ -278,7 +307,6 @@
             </div>
         </div>
     </div>
-    
 
 <script>
 (function() {
@@ -294,17 +322,19 @@
     let costDeducted = false;
     let soundEnabled = true; 
     
-    // VARIÁVEL DE HISTÓRICO
     let walletHistory = JSON.parse(localStorage.getItem('bingo_wallet_history') || '[]');
 
-    // ALTERAÇÕES DOS PRÊMIOS AQUI
     const ROUND_COST = 5.00, LINE_PRIZE = 15.00, BINGO_PRIZE = 25.00;
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
 
+    // Ajuste inicial de interface baseado na existência de PIN
     const savedPass = localStorage.getItem('bingo_vault_pass');
     if(savedPass) {
-        document.getElementById('auth-title').innerText = "BLOQUEADO";
-        document.getElementById('auth-instruction').innerText = "Insira seu PIN";
+        document.getElementById('auth-title').innerText = "ACESSO RESTRITO";
+        document.getElementById('auth-title').style.color = "var(--win)";
+        document.getElementById('auth-instruction').innerText = "Insira seu PIN cadastrado para entrar:";
+        document.getElementById('btn-unlock').innerText = "ENTRAR NA ARENA";
+        document.getElementById('auth-info').innerHTML = "<strong>🔓 Bem-vindo de volta!</strong><br>Digite seu PIN de 4 dígitos para acessar sua carteira e o Bingo Arena.";
     }
 
     function playSound(audio) {
@@ -314,7 +344,6 @@
         }
     }
 
-    // FUNÇÃO PARA SALVAR TRANSAÇÃO
     function saveTransaction(desc, value) {
         const transaction = {
             date: new Date().toLocaleString('pt-BR'),
@@ -394,7 +423,7 @@
                             saveTransaction("Prêmio Linha", LINE_PRIZE);
                             updateBalanceDisplay(); 
                             playSound(somDinheiro);
-                            showToast(`LINHA: VOCÊ! +R$ ${LINE_PRIZE.toFixed(2).replace('.', ',')}`, "#ffffff");
+                            showToast(`LINHA: VOCÊ! +R$ ${LINE_PRIZE.toFixed(2).replace('.', ',')}`, "#2ecc71");
                         } else {
                             showToast(`LINHA: ${p.name}!`, "#ffffff");
                         }
@@ -409,7 +438,7 @@
                     saveTransaction("Prêmio BINGO", BINGO_PRIZE);
                     updateBalanceDisplay(); 
                     playSound(somDinheiro);
-                    showToast(`BINGO! VOCÊ GANHOU R$ ${BINGO_PRIZE.toFixed(2).replace('.', ',')}`, "#ffffff");
+                    showToast(`BINGO! VOCÊ GANHOU R$ ${BINGO_PRIZE.toFixed(2).replace('.', ',')}`, "#ffd700");
                     playSound(somBingo);
                 } else {
                     showToast(`BINGO: ${p.name}!`, "#ffffff");
@@ -457,7 +486,10 @@
             if(input.length === 4) { 
                 localStorage.setItem('bingo_vault_pass', input); 
                 localStorage.removeItem('bingo_failed_attempts');
+                alert("PIN criado com sucesso! Guarde-o bem.");
                 login(); 
+            } else {
+                alert("O PIN deve conter exatamente 4 números.");
             }
         } else if (input === currentSavedPass) {
             localStorage.removeItem('bingo_failed_attempts');
@@ -523,7 +555,6 @@
         } else { alert("Valor inválido ou saldo insuficiente."); }
     };
 
-    // LÓGICA DO MODAL DE HISTÓRICO
     document.getElementById('open-history-trigger').onclick = () => {
         const list = document.getElementById('wallet-history-list');
         list.innerHTML = walletHistory.length === 0 ? '<p style="text-align:center">Sem movimentações.</p>' : '';
