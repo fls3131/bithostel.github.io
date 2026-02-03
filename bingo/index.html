@@ -81,10 +81,9 @@
             height: 100dvh; 
         }
 
-        /* --- ALTERAÇÃO SOLICITADA: REDUÇÃO DE ALTURA --- */
         .top-panel { 
             background: var(--card-bg); 
-            padding: 4px; /* Reduzido de 8.5px */
+            padding: 4px; 
             border-bottom: 2px solid var(--primary); 
             flex-shrink: 0;
             z-index: 10;
@@ -93,17 +92,17 @@
         .header-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 8px; /* Reduzido de 10px */
-            margin-bottom: 6px; /* Reduzido de 10px */
+            gap: 8px; 
+            margin-bottom: 6px; 
         }
 
         .money-display { 
             background: rgba(39, 174, 96, 0.15); 
             border: 1px solid var(--money); 
-            border-radius: 8px; padding: 6px; /* Reduzido de 10px */
+            border-radius: 8px; padding: 6px; 
             text-align: center; 
         }
-        .money-value { font-size: 1.1rem; /* Reduzido de 1.3rem */ font-weight: 900; color: #fff; }
+        .money-value { font-size: 1.1rem; font-weight: 900; color: #fff; }
 
         .ball-display {
             background: #0f3460;
@@ -113,7 +112,7 @@
             justify-content: center;
             border: 1px solid var(--accent);
         }
-        #ball { font-size: 2rem; /* Reduzido de 2.5rem */ color: var(--accent); font-weight: 900; }
+        #ball { font-size: 2rem; color: var(--accent); font-weight: 900; }
 
         .btn-group-main { 
             display: grid; 
@@ -121,9 +120,8 @@
             gap: 6px; 
         }
 
-        .btn-manual, .btn-auto { height: 42px !important; } /* Reduzido de 50px */
-        .btn-reset { grid-column: span 2; height: 42px !important; } /* Reduzido de 50px */
-        /* ----------------------------------------------- */
+        .btn-manual, .btn-auto { height: 42px !important; } 
+        .btn-reset { grid-column: span 2; height: 42px !important; } 
 
         .arena { 
             flex-grow: 1; 
@@ -256,12 +254,12 @@
             
             <div id="auth-info" class="info-box">
                 <strong>🔒 Segurança da Conta</strong><br>
-                Este PIN de 4 dígitos protege seu saldo e progresso. Não o compartilhe com ninguém.
+                Este PIN de 8 dígitos protege seu saldo e progresso. Não o compartilhe com ninguém.
             </div>
 
-            <p id="auth-instruction" style="font-size: 0.9rem; margin-bottom: 10px;">Crie seu PIN de 4 dígitos numéricos:</p>
+            <p id="auth-instruction" style="font-size: 0.9rem; margin-bottom: 10px;">Crie seu PIN de 8 dígitos numéricos:</p>
             
-            <input type="password" id="pass-input" maxlength="4" inputmode="numeric" placeholder="****" style="letter-spacing:15px; font-size:2rem; width:100%; text-align:center; padding:10px; margin-bottom:15px; border-radius:8px; border: 2px solid #333; background: #0f3460; color: white;">
+            <input type="password" id="pass-input" maxlength="8" inputmode="numeric" placeholder="********" style="letter-spacing:8px; font-size:1.8rem; width:100%; text-align:center; padding:10px; margin-bottom:15px; border-radius:8px; border: 2px solid #333; background: #0f3460; color: white;">
             
             <button id="btn-unlock" style="background: var(--primary); width: 100%; font-size: 1.2rem; margin-bottom: 15px;">CONFIRMAR E ENTRAR</button>
             
@@ -328,16 +326,17 @@
     
     let walletHistory = JSON.parse(localStorage.getItem('bingo_wallet_history') || '[]');
 
-    const ROUND_COST = 5.00, LINE_PRIZE = 15.00, BINGO_PRIZE = 25.00;
+    const ROUND_COST = 5.00, LINE_PRIZE = 12.00, BINGO_PRIZE = 22.00;
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
 
     const savedPass = localStorage.getItem('bingo_vault_pass');
     if(savedPass) {
         document.getElementById('auth-title').innerText = "ACESSO RESTRITO";
         document.getElementById('auth-title').style.color = "var(--win)";
-        document.getElementById('auth-instruction').innerText = "Insira seu PIN cadastrado para entrar:";
+        // ALTERADO: Texto de instrução para 8 dígitos
+        document.getElementById('auth-instruction').innerText = "Insira seu PIN de 8 dígitos cadastrado:";
         document.getElementById('btn-unlock').innerText = "ENTRAR NA ARENA";
-        document.getElementById('auth-info').innerHTML = "<strong>🔓 Bem-vindo de volta!</strong><br>Digite seu PIN de 4 dígitos para acessar sua carteira.";
+        document.getElementById('auth-info').innerHTML = "<strong>🔓 Bem-vindo de volta!</strong><br>Digite seu PIN de 8 dígitos para acessar sua carteira.";
     }
 
     function playSound(audio) {
@@ -484,10 +483,11 @@
         const currentSavedPass = localStorage.getItem('bingo_vault_pass');
 
         if (!currentSavedPass) {
-            if(input.length === 4) { 
+            // ALTERADO: Verificação de 8 dígitos no cadastro
+            if(input.length === 8) { 
                 localStorage.setItem('bingo_vault_pass', input); 
                 login(); 
-            } else { alert("PIN de 4 números."); }
+            } else { alert("Crie um PIN de exatos 8 números."); }
         } else if (input === currentSavedPass) {
             login();
         } else {
