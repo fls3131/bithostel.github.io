@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>Bingo Arena Mobile</title>
+    <title>Bingo Arena Mobile Pro</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root { 
@@ -32,8 +32,6 @@
         .history-item { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #0f3460; font-size: 0.85rem; }
         .hist-pos { color: var(--win); }
         .hist-neg { color: var(--loss); }
-        .money-display { cursor: pointer; transition: 0.2s; }
-        .money-display:active { transform: scale(0.95); background: rgba(39, 174, 96, 0.3); }
 
         .ranking-container {
             transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -101,6 +99,7 @@
             border: 1px solid var(--money); 
             border-radius: 8px; padding: 6px; 
             text-align: center; 
+            cursor: pointer;
         }
         .money-value { font-size: 1.1rem; font-weight: 900; color: #fff; }
 
@@ -111,8 +110,10 @@
             align-items: center;
             justify-content: center;
             border: 1px solid var(--accent);
+            overflow: hidden;
         }
-        #ball { font-size: 2rem; color: var(--accent); font-weight: 900; }
+        #ball { font-size: 2.2rem; color: var(--accent); font-weight: 900; transition: transform 0.2s; }
+        .ball-pop { transform: scale(1.2); }
 
         .btn-group-main { 
             display: grid; 
@@ -146,7 +147,7 @@
 
         .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
         .cell { 
-            aspect-ratio: 0.9 / 1; 
+            aspect-ratio: 1 / 1; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
@@ -155,7 +156,7 @@
             font-size: 1.1rem; 
             font-weight: bold; 
         }
-        .cell.marked { background: var(--primary); }
+        .cell.marked { background: var(--primary); color: white; }
         .cell.line-win { background-color: var(--win) !important; color: #ffffff !important; box-shadow: 0 0 10px var(--win); transform: scale(1.05); transition: 0.3s; }
         .cell.free { background: #533483; color: var(--accent); }
 
@@ -187,8 +188,8 @@
         .leader-item { display: flex; justify-content: space-between; padding: 8px; border-bottom: 1px solid #0f3460; font-size: 0.85rem; }
         .leader-item.me { background: var(--accent); color: var(--bg); font-weight: 900; border-radius: 4px; }
 
-        #history-grid { display: flex; gap: 5px; overflow-x: auto; padding: 5px; background: #0f3460; border-radius: 4px; margin-top: 6px; }
-        .hist-ball { min-width: 28px; height: 28px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
+        #history-grid { display: flex; gap: 5px; overflow-x: auto; padding: 5px; background: #0f3460; border-radius: 4px; margin-top: 6px; min-height: 38px; }
+        .hist-ball { min-width: 28px; height: 28px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; flex-shrink: 0; }
         
         #money-toast { 
             position: fixed; top: 30%; left: 50%; transform: translate(-50%, -50%); 
@@ -227,9 +228,9 @@
         <div class="auth-card" style="border-color: #3498db;">
             <h2 style="color: #3498db; margin: 0 0 15px 0;">DEPOSITAR PIX</h2>
             <div style="display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 15px;">
-                <button id="dep-10" style="background:#3498db">R$ 10,00</button>
-                <button id="dep-50" style="background:#3498db">R$ 50,00</button>
-                <button id="dep-100" style="background:#3498db">R$ 100,00</button>
+                <button onclick="addFunds(10)" style="background:#3498db">R$ 10,00</button>
+                <button onclick="addFunds(50)" style="background:#3498db">R$ 50,00</button>
+                <button onclick="addFunds(100)" style="background:#3498db">R$ 100,00</button>
             </div>
             <button id="close-dep" style="background: #555; width: 100%;">VOLTAR</button>
         </div>
@@ -254,18 +255,14 @@
             
             <div id="auth-info" class="info-box">
                 <strong>🔒 Segurança da Conta</strong><br>
-                Este PIN de 8 dígitos protege seu saldo e progresso. Não o compartilhe com ninguém.
+                Crie um PIN de 8 números para proteger seu saldo.
             </div>
 
-            <p id="auth-instruction" style="font-size: 0.9rem; margin-bottom: 10px;">Crie seu PIN de 8 dígitos numéricos:</p>
+            <p id="auth-instruction" style="font-size: 0.9rem; margin-bottom: 10px;">Crie seu PIN de 8 dígitos:</p>
             
-            <input type="password" id="pass-input" maxlength="8" inputmode="numeric" placeholder="********" style="letter-spacing:8px; font-size:1.8rem; width:100%; text-align:center; padding:10px; margin-bottom:15px; border-radius:8px; border: 2px solid #333; background: #0f3460; color: white;">
+            <input type="tel" id="pass-input" maxlength="8" placeholder="********" style="letter-spacing:8px; font-size:1.8rem; width:100%; text-align:center; padding:10px; margin-bottom:15px; border-radius:8px; border: 2px solid #333; background: #0f3460; color: white;">
             
             <button id="btn-unlock" style="background: var(--primary); width: 100%; font-size: 1.2rem; margin-bottom: 15px;">CONFIRMAR E ENTRAR</button>
-            
-            <div style="font-size: 0.7rem; color: #888;">
-                Ao clicar em entrar, você concorda com as regras da Arena.
-            </div>
         </div>
     </div>
 
@@ -273,7 +270,7 @@
         <div class="top-panel">
             <div class="header-grid">
                 <div class="money-display" id="open-history-trigger">
-                    <div style="font-size:0.5rem; color:var(--accent)">MEU SALDO</div>
+                    <div style="font-size:0.5rem; color:var(--accent)">MEU SALDO (CLIQUE AQUI)</div>
                     <div class="money-value" id="balance">R$ 0,00</div>
                 </div>
                 <div class="ball-display">
@@ -304,7 +301,7 @@
                 <button id="open-dep" class="btn-util" style="background: #3498db;">DEPOSITAR 💸</button>
                 <button id="open-wd" class="btn-util" style="background: var(--money);">SACAR 💸</button>
                 <button id="toggle-sound" class="btn-util" style="background: #9b59b6;">SOM: ON 🔊</button>
-                <button id="manual-btn" class="btn-util">AJUDA ❓</button>
+                <button id="help-btn" class="btn-util">AJUDA ❓</button>
                 <button id="btn-logout" class="btn-util" style="background: #333; grid-column: span 2;">BLOQUEAR 🔒</button>
             </div>
         </div>
@@ -312,12 +309,12 @@
 
 <script>
 (function() {
+    // Sons emulados (Prevenir erro se não existirem)
     const somSorteio = new Audio('sorteio.mp3');
     const somDinheiro = new Audio('dinheiro.mp3');
     const somMarca = new Audio('marca.mp3');
     const somBingo = new Audio('bingo.mp3');
     const somLinha = new Audio('linha.mp3');
-    const somGeral = new Audio('geral.mp3');
 
     let drawn = [], players = [], firstLineOut = false, gameOver = false, autoInterval = null;
     let totalBalance = 0;
@@ -329,15 +326,17 @@
     const ROUND_COST = 5.00, LINE_PRIZE = 12.00, BINGO_PRIZE = 22.00;
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
 
+    // Configuração inicial do Auth
     const savedPass = localStorage.getItem('bingo_vault_pass');
     if(savedPass) {
         document.getElementById('auth-title').innerText = "ACESSO RESTRITO";
-        document.getElementById('auth-title').style.color = "var(--win)";
-        // ALTERADO: Texto de instrução para 8 dígitos
-        document.getElementById('auth-instruction').innerText = "Insira seu PIN de 8 dígitos cadastrado:";
-        document.getElementById('btn-unlock').innerText = "ENTRAR NA ARENA";
-        document.getElementById('auth-info').innerHTML = "<strong>🔓 Bem-vindo de volta!</strong><br>Digite seu PIN de 8 dígitos para acessar sua carteira.";
+        document.getElementById('auth-instruction').innerText = "Insira seu PIN de 8 dígitos:";
     }
+
+    // ALTERAÇÃO: Filtro para aceitar apenas números no PIN
+    document.getElementById('pass-input').oninput = function() {
+        this.value = this.value.replace(/[^0-9]/g, '');
+    };
 
     function playSound(audio) {
         if (soundEnabled) {
@@ -361,7 +360,7 @@
         const toast = document.getElementById('money-toast');
         toast.innerText = text; toast.style.color = color;
         toast.classList.add('toast-show');
-        setTimeout(() => toast.classList.remove('toast-show'), 5000);
+        setTimeout(() => toast.classList.remove('toast-show'), 3000);
     }
 
     function updateBalanceDisplay() {
@@ -371,9 +370,13 @@
 
     function processPayment() {
         if (!costDeducted && !gameOver) {
-            if (totalBalance < ROUND_COST) { alert("Saldo insuficiente!"); return false; }
+            if (totalBalance < ROUND_COST) { 
+                alert("Saldo insuficiente! Deposite para jogar."); 
+                if(autoInterval) stopAuto(); // ALTERAÇÃO: Para o auto se o saldo acabar
+                return false; 
+            }
             totalBalance -= ROUND_COST;
-            saveTransaction("Entrada Rodada", -5.00);
+            saveTransaction("Entrada Rodada", -ROUND_COST);
             costDeducted = true;
             updateBalanceDisplay();
             showToast(`-R$ 5,00`, "#ffffff");
@@ -383,28 +386,52 @@
     }
 
     function drawBall() {
-        if(gameOver || drawn.length >= 75) return;
+        if(gameOver || drawn.length >= 75) {
+            if(autoInterval) stopAuto();
+            return;
+        }
+
+        if(!processPayment()) return;
+
         playSound(somSorteio);
         let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
         drawn.push(b);
-        document.getElementById('ball').innerText = b;
+
+        // ALTERAÇÃO: Efeito visual na bola sorteada
+        const ballEl = document.getElementById('ball');
+        ballEl.innerText = b;
+        ballEl.classList.remove('ball-pop');
+        void ballEl.offsetWidth; // Trigger reflow
+        ballEl.classList.add('ball-pop');
         
         let h = document.createElement('div'); h.className = "hist-ball";
         h.innerText = b; document.getElementById('history-grid').prepend(h);
+        
         document.querySelectorAll(`[data-num="${b}"]`).forEach(c => c.classList.add('marked'));
 
         players.forEach(p => { 
             if(p.nums.includes(b)) {
                 p.marks++; 
-                if(p.id === 1) { playSound(somMarca); }
+                if(p.id === 1) playSound(somMarca);
             }
         });
 
-        let sorted = [...players].sort((a,b) => b.marks - a.marks);
-        let list = document.getElementById('leader-list'); list.innerHTML = "";
-        sorted.slice(0, 3).forEach(p => list.innerHTML += `<div class="leader-item ${p.id===1?'me':''}"><span>${p.name}</span><span>${p.marks}/25</span></div>`);
+        updateRanking();
+        checkWinners();
+    }
 
+    function updateRanking() {
+        let sorted = [...players].sort((a,b) => b.marks - a.marks);
+        let list = document.getElementById('leader-list'); 
+        list.innerHTML = "";
+        sorted.slice(0, 3).forEach(p => {
+            list.innerHTML += `<div class="leader-item ${p.id===1?'me':''}"><span>${p.name}</span><span>${p.marks}/25</span></div>`;
+        });
+    }
+
+    function checkWinners() {
         players.forEach(p => {
+            // Check Linha
             if(!firstLineOut) {
                 for(let r=0; r<5; r++) {
                     let win = true;
@@ -424,30 +451,35 @@
                             totalBalance += LINE_PRIZE; 
                             saveTransaction("Prêmio Linha", LINE_PRIZE);
                             updateBalanceDisplay(); 
-                            playSound(somDinheiro);
-                            showToast(`LINHA: VOCÊ! +R$ ${LINE_PRIZE.toFixed(2).replace('.', ',')}`, "#2ecc71");
+                            showToast(`LINHA! +R$ ${LINE_PRIZE}`, "#2ecc71");
                         } else {
                             showToast(`LINHA: ${p.name}!`, "#ffffff");
                         }
                     }
                 }
             }
+            // Check Bingo
             if(p.marks === 25 && !gameOver) {
                 gameOver = true; 
-                if(autoInterval) { clearInterval(autoInterval); autoInterval = null; }
+                stopAuto();
                 if(p.id === 1) { 
                     totalBalance += BINGO_PRIZE; 
                     saveTransaction("Prêmio BINGO", BINGO_PRIZE);
                     updateBalanceDisplay(); 
-                    playSound(somDinheiro);
-                    showToast(`BINGO! VOCÊ GANHOU R$ ${BINGO_PRIZE.toFixed(2).replace('.', ',')}`, "#ffd700");
                     playSound(somBingo);
+                    showToast(`BINGO! VOCÊ GANHOU R$ ${BINGO_PRIZE}`, "#ffd700");
                 } else {
                     showToast(`BINGO: ${p.name}!`, "#ffffff");
                 }
                 confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
             }
         });
+    }
+
+    function stopAuto() {
+        clearInterval(autoInterval); 
+        autoInterval = null; 
+        document.getElementById('auto-btn').innerText = "AUTO";
     }
 
     function initGame() {
@@ -469,37 +501,20 @@
                 document.getElementById(`g-${i}`).appendChild(cell);
             });
         }
+        updateRanking();
     }
 
+    // --- Eventos ---
     document.getElementById('btn-unlock').onclick = () => {
-        const agora = Date.now();
-        const bloqueadoAte = parseInt(localStorage.getItem('bingo_lockout_until') || 0);
-        if (agora < bloqueadoAte) {
-            const restantes = Math.ceil((bloqueadoAte - agora) / 1000);
-            alert(`Tente novamente em ${restantes}s.`);
-            return;
-        }
         const input = document.getElementById('pass-input').value;
-        const currentSavedPass = localStorage.getItem('bingo_vault_pass');
-
-        if (!currentSavedPass) {
-            // ALTERADO: Verificação de 8 dígitos no cadastro
+        if (!savedPass) {
             if(input.length === 8) { 
                 localStorage.setItem('bingo_vault_pass', input); 
                 login(); 
-            } else { alert("Crie um PIN de exatos 8 números."); }
-        } else if (input === currentSavedPass) {
-            login();
+            } else { alert("O PIN deve ter 8 números."); }
         } else {
-            let falhas = parseInt(localStorage.getItem('bingo_failed_attempts') || 0) + 1;
-            if (falhas >= 3) {
-                localStorage.setItem('bingo_lockout_until', agora + 60000);
-                localStorage.removeItem('bingo_failed_attempts');
-                alert("Bloqueado por 1 min.");
-            } else {
-                localStorage.setItem('bingo_failed_attempts', falhas);
-                alert(`PIN incorreto (${falhas}/3).`);
-            }
+            if (input === savedPass) login();
+            else alert("PIN Incorreto!");
         }
     };
 
@@ -511,30 +526,35 @@
         initGame();
     }
 
-    document.getElementById('draw-btn').onclick = () => { if(processPayment()) drawBall(); };
+    document.getElementById('draw-btn').onclick = drawBall;
+    
     document.getElementById('auto-btn').onclick = function() {
-        if (autoInterval) { clearInterval(autoInterval); autoInterval = null; this.innerText = "AUTO"; }
-        else if (!gameOver && processPayment()) { this.innerText = "PAUSAR"; autoInterval = setInterval(drawBall, 500); }
+        if (autoInterval) stopAuto();
+        else {
+            this.innerText = "PAUSAR";
+            autoInterval = setInterval(drawBall, 800);
+        }
     };
 
     document.getElementById('new-round-btn').onclick = () => {
-        if (confirm("Nova rodada? (R$ 5,00)")) location.reload();
+        if (confirm("Deseja iniciar nova rodada por R$ 5,00?")) location.reload();
     };
 
-    document.getElementById('toggle-sound').onclick = function() {
-        soundEnabled = !soundEnabled;
-        this.innerText = soundEnabled ? "SOM: ON 🔊" : "SOM: OFF 🔇";
-        this.style.background = soundEnabled ? "#9b59b6" : "#666";
+    // Auxiliares
+    window.addFunds = (val) => {
+        totalBalance += val;
+        saveTransaction("Depósito PIX", val);
+        updateBalanceDisplay();
+        document.getElementById('deposit-modal').style.display = 'none';
+        showToast(`+R$ ${val} Adicionados!`, "#2ecc71");
     };
 
     document.getElementById('open-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'flex';
     document.getElementById('close-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'none';
-    
-    document.getElementById('dep-10').onclick = () => { totalBalance += 10; saveTransaction("Depósito PIX", 10); updateBalanceDisplay(); playSound(somDinheiro); document.getElementById('deposit-modal').style.display = 'none'; };
-    document.getElementById('dep-50').onclick = () => { totalBalance += 50; saveTransaction("Depósito PIX", 50); updateBalanceDisplay(); playSound(somDinheiro); document.getElementById('deposit-modal').style.display = 'none'; };
-    document.getElementById('dep-100').onclick = () => { totalBalance += 100; saveTransaction("Depósito PIX", 100); updateBalanceDisplay(); playSound(somDinheiro); document.getElementById('deposit-modal').style.display = 'none'; };
-    
-    document.getElementById('open-wd').onclick = () => { document.getElementById('withdraw-modal').style.display = 'flex'; document.getElementById('wd-balance').innerText = `Saldo: R$ ${totalBalance}`; };
+    document.getElementById('open-wd').onclick = () => {
+        document.getElementById('withdraw-modal').style.display = 'flex';
+        document.getElementById('wd-balance').innerText = `Saldo disponível: R$ ${totalBalance.toFixed(2)}`;
+    };
     document.getElementById('close-wd').onclick = () => document.getElementById('withdraw-modal').style.display = 'none';
     
     document.getElementById('confirm-wd').onclick = () => {
@@ -543,9 +563,9 @@
             totalBalance -= val;
             saveTransaction("Saque PIX", -val);
             updateBalanceDisplay();
-            alert("Saque solicitado!");
+            alert("Saque de R$ " + val + " solicitado com sucesso!");
             document.getElementById('withdraw-modal').style.display = 'none';
-        } else { alert("Valor inválido."); }
+        } else { alert("Valor mínimo R$ 20 ou saldo insuficiente."); }
     };
 
     document.getElementById('open-history-trigger').onclick = () => {
@@ -567,21 +587,23 @@
         document.getElementById('history-modal').style.display = 'flex';
     };
     document.getElementById('close-history').onclick = () => document.getElementById('history-modal').style.display = 'none';
-
     document.getElementById('btn-logout').onclick = () => { sessionStorage.removeItem('bingo_authenticated'); location.reload(); };
+    document.getElementById('help-btn').onclick = () => alert("Bingo Arena:\n1. Cada rodada custa R$ 5,00.\n2. Complete uma linha horizontal para ganhar R$ 12,00.\n3. Complete a cartela (BINGO) para ganhar R$ 22,00.\n4. O sorteio para assim que alguém fizer BINGO.");
+
+    document.getElementById('toggle-sound').onclick = function() {
+        soundEnabled = !soundEnabled;
+        this.innerText = soundEnabled ? "SOM: ON 🔊" : "SOM: OFF 🔇";
+        this.style.background = soundEnabled ? "#9b59b6" : "#666";
+    };
+
+    const rankingHeader = document.getElementById('header-ranking');
+    rankingHeader.onclick = () => {
+        const isCollapsed = document.getElementById('ranking-body').classList.toggle('ranking-collapsed');
+        document.getElementById('toggle-ranking-btn').innerText = isCollapsed ? "MOSTRAR" : "ESCONDER";
+    };
 
     if (sessionStorage.getItem('bingo_authenticated') === 'true') login();
 })();
-
-    const rankingHeader = document.getElementById('header-ranking');
-    const rankingBody = document.getElementById('ranking-body');
-    const toggleBtn = document.getElementById('toggle-ranking-btn');
-
-    rankingHeader.onclick = () => {
-        const isCollapsed = rankingBody.classList.toggle('ranking-collapsed');
-        toggleBtn.innerText = isCollapsed ? "MOSTRAR" : "ESCONDER";
-        toggleBtn.style.background = isCollapsed ? "var(--win)" : "var(--primary)";
-    };
 </script>
 </body>
 </html>
