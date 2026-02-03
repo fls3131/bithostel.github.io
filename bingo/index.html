@@ -281,7 +281,7 @@
             </div>
             <div class="btn-group-main">
                 <button id="draw-btn" class="btn-manual">SORTEAR um Número</button>
-                <button id="auto-btn" class="btn-auto">INICIAR (AUTO)</button>
+                <button id="auto-btn" class="btn-auto">AUTO</button>
                 <button id="new-round-btn" class="btn-reset">NOVA RODADA (R$ 6,00)</button>
             </div>
             <div id="history-grid"></div>
@@ -476,7 +476,7 @@
     function stopAuto() {
         clearInterval(autoInterval); 
         autoInterval = null; 
-        document.getElementById('auto-btn').innerText = "INICIAR (AUTO)";
+        document.getElementById('auto-btn').innerText = "AUTO";
     }
 
     function initGame() {
