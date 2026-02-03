@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Bingo Arena Mobile Pro</title>
-    <script src="zzzzzzzxconfetti.browser.min.js"></script>
+    <script src="confetti.browser.min.js"></script>
     <style>
         :root { 
             --primary: #e94560; --bg: #1a1a2e; --card-bg: #16213e; 
@@ -608,7 +608,7 @@
     document.getElementById('close-history').onclick = () => document.getElementById('history-modal').style.display = 'none';
     document.getElementById('btn-logout').onclick = () => { sessionStorage.removeItem('bingo_authenticated'); location.reload(); };
     
-    document.getElementById('help-btn').onclick = () => alert("Bingo Arena:\nSão 10 jogadores.\n1. Cada rodada custa R$ 6,00.\n2. Complete uma linha horizontal para ganhar R$ 12,00.\n3. Complete a cartela (BINGO) para ganhar R$ 22,00.\n4. O sorteio para assim que alguém fizer BINGO.");
+    document.getElementById('help-btn').onclick = () => alert("Bingo Arena:\n1. Cada rodada custa R$ 6,00.\n2. Complete uma linha horizontal para ganhar R$ 12,00.\n3. Complete a cartela (BINGO) para ganhar R$ 22,00.\n4. O sorteio para assim que alguém fizer BINGO.");
 
     document.getElementById('toggle-sound').onclick = function() {
         soundEnabled = !soundEnabled;
