@@ -271,7 +271,7 @@
     let drawn = [], players = [], firstLineOut = false, gameOver = false, autoInterval = null;
     let totalBalance = 0;
     let costDeducted = false;
-    let soundEnabled = true; // Controle de som
+    let soundEnabled = true; 
 
     const ROUND_COST = 5.00, LINE_PRIZE = 10.00, BINGO_PRIZE = 20.00;
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
@@ -282,7 +282,6 @@
         document.getElementById('auth-instruction').innerText = "Insira seu PIN";
     }
 
-    // Função auxiliar para tocar som respeitando o estado liga/desliga
     function playSound(audio) {
         if (soundEnabled) {
             audio.currentTime = 0;
@@ -401,14 +400,43 @@
         }
     }
 
+    // --- ALTERAÇÃO: PROTEÇÃO CONTRA FORÇA BRUTA ---
     document.getElementById('btn-unlock').onclick = () => {
+        const agora = Date.now();
+        const bloqueadoAte = parseInt(localStorage.getItem('bingo_lockout_until') || 0);
+
+        if (agora < bloqueadoAte) {
+            const restantes = Math.ceil((bloqueadoAte - agora) / 1000);
+            alert(`Acesso bloqueado. Tente novamente em ${restantes} segundos.`);
+            return;
+        }
+
         const input = document.getElementById('pass-input').value;
         const currentSavedPass = localStorage.getItem('bingo_vault_pass');
+
         if (!currentSavedPass) {
-            if(input.length === 4) { localStorage.setItem('bingo_vault_pass', input); login(); }
-        } else if (input === currentSavedPass) { login(); }
-        else { alert("PIN incorreto"); }
+            if(input.length === 4) { 
+                localStorage.setItem('bingo_vault_pass', input); 
+                localStorage.removeItem('bingo_failed_attempts');
+                login(); 
+            }
+        } else if (input === currentSavedPass) {
+            localStorage.removeItem('bingo_failed_attempts');
+            localStorage.removeItem('bingo_lockout_until');
+            login();
+        } else {
+            let falhas = parseInt(localStorage.getItem('bingo_failed_attempts') || 0) + 1;
+            if (falhas >= 3) {
+                localStorage.setItem('bingo_lockout_until', agora + 60000); // 1 minuto
+                localStorage.removeItem('bingo_failed_attempts');
+                alert("Muitas tentativas incorretas. Bloqueado por 1 minuto.");
+            } else {
+                localStorage.setItem('bingo_failed_attempts', falhas);
+                alert(`PIN incorreto. Tentativa ${falhas} de 3.`);
+            }
+        }
     };
+    // ----------------------------------------------
 
     function login() {
         sessionStorage.setItem('bingo_authenticated', 'true');
@@ -430,7 +458,6 @@
         }
     };
 
-    // Lógica do Botão de Som
     document.getElementById('toggle-sound').onclick = function() {
         soundEnabled = !soundEnabled;
         this.innerText = soundEnabled ? "SOM: ON 🔊" : "SOM: OFF 🔇";
