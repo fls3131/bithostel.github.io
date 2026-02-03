@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Bingo Arena Mobile Pro</title>
-    <script src="confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root { 
             --primary: #e94560; --bg: #1a1a2e; --card-bg: #16213e; 
@@ -533,32 +533,8 @@
     };
 
     document.getElementById('new-round-btn').onclick = () => {
-    if (confirm("Deseja iniciar nova rodada por R$ 6,00?")) {
-        // 1. Resetar variáveis de estado do jogo
-        drawn = [];
-        firstLineOut = false;
-        gameOver = false;
-        costDeducted = false;
-
-        // 2. Limpar interface visual
-        document.getElementById('history-grid').innerHTML = "";
-        document.getElementById('ball').innerText = "--";
-        
-        // 3. Parar qualquer intervalo automático anterior antes de começar o novo
-        if (autoInterval) clearInterval(autoInterval);
-
-        // 4. Inicializar novas cartelas
-        initGame();
-
-        // 5. Iniciar sorteio automático imediatamente
-        const autoBtn = document.getElementById('auto-btn');
-        autoBtn.innerText = "PAUSAR";
-        autoInterval = setInterval(drawBall, 800);
-        
-        // Rolar para o topo para ver o sorteio se necessário
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-};
+        if (confirm("Deseja iniciar nova rodada por R$ 6,00?")) location.reload();
+    };
 
     window.addFunds = (val) => {
         totalBalance += val;
