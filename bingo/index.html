@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Bingo Arena Mobile Pro</title>
-    <script src="confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root { 
             --primary: #e94560; --bg: #1a1a2e; --card-bg: #16213e; 
@@ -25,7 +25,6 @@
             overflow: hidden; 
         }
 
-        /* --- HISTÓRICO --- */
         #history-modal { display: none; position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 10000; justify-content: center; align-items: center; padding: 20px; }
         .history-card { background: var(--card-bg); width: 100%; max-width: 400px; border-radius: 12px; border: 1px solid var(--accent); display: flex; flex-direction: column; max-height: 80vh; }
         .history-list { overflow-y: auto; padding: 15px; flex-grow: 1; }
@@ -33,238 +32,71 @@
         .hist-pos { color: var(--win); }
         .hist-neg { color: var(--loss); }
 
-        .ranking-container {
-            transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            overflow: hidden;
-            max-height: 200px; 
-        }
+        .ranking-container { transition: max-height 0.4s ease; overflow: hidden; max-height: 200px; }
+        .ranking-collapsed { max-height: 0px !important; }
+        .ranking-header { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2); padding: 8px 15px; border-radius: 8px 8px 0 0; cursor: pointer; }
+        #toggle-ranking-btn { background: var(--primary); padding: 4px 10px; font-size: 0.6rem; height: auto; }
 
-        .ranking-collapsed {
-            max-height: 0px !important;
-        }
-
-        .ranking-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: rgba(0,0,0,0.2);
-            padding: 8px 15px;
-            border-radius: 8px 8px 0 0;
-            cursor: pointer;
-        }
-
-        #toggle-ranking-btn {
-            background: var(--primary);
-            padding: 4px 10px;
-            font-size: 0.6rem;
-            height: auto;
-        }
-
-        #auth-overlay, #withdraw-modal, #deposit-modal { 
-            position: fixed; top:0; left:0; width: 100%; height: 100%; 
-            background: rgba(26, 26, 46, 0.98); z-index: 9999; 
-            display: flex; flex-direction: column; align-items: center; justify-content: center; 
-            padding: 20px;
-        }
+        #auth-overlay, #withdraw-modal, #deposit-modal { position: fixed; top:0; left:0; width: 100%; height: 100%; background: rgba(26, 26, 46, 0.98); z-index: 9999; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; }
         #withdraw-modal, #deposit-modal { display: none; background: rgba(0,0,0,0.9); }
-        .auth-card { 
-            background: var(--card-bg); padding: 25px; border-radius: 12px; 
-            border: 2px solid var(--primary); text-align: center; width: 100%; max-width: 400px; 
-        }
+        .auth-card { background: var(--card-bg); padding: 25px; border-radius: 12px; border: 2px solid var(--primary); text-align: center; width: 100%; max-width: 400px; }
 
-        .main-layout { 
-            display: flex; 
-            flex-direction: column; 
-            height: 100vh;
-            height: 100dvh; 
-        }
+        .main-layout { display: flex; flex-direction: column; height: 100dvh; }
+        .top-panel { background: var(--card-bg); padding: 4px; border-bottom: 2px solid var(--primary); flex-shrink: 0; z-index: 10; }
+        .header-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 6px; }
 
-        /* --- BARRA SUPERIOR (Reduzida 10%) --- */
-        .top-panel { 
-            background: var(--card-bg); 
-            padding: 3.6px; /* Reduzido de 4px */
-            border-bottom: 2px solid var(--primary); 
-            flex-shrink: 0;
-            z-index: 10;
-        }
+        .money-display { background: rgba(39, 174, 96, 0.15); border: 1px solid var(--money); border-radius: 8px; padding: 6px; text-align: center; cursor: pointer; }
+        .money-value { font-size: 1rem; font-weight: 900; color: #fff; }
 
-        .header-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 7.2px; /* Reduzido de 8px */
-            margin-bottom: 5.4px; /* Reduzido de 6px */
-        }
+        .ball-display { background: #0f3460; border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--accent); }
+        #ball { font-size: 2rem; color: var(--accent); font-weight: 900; }
+        .ball-pop { animation: pop 0.3s ease; }
+        @keyframes pop { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
 
-        .money-display { 
-            background: rgba(39, 174, 96, 0.15); 
-            border: 1px solid var(--money); 
-            border-radius: 8px; padding: 5.4px; /* Reduzido de 6px */
-            text-align: center; 
-            cursor: pointer;
-        }
-        .money-value { font-size: 1rem; font-weight: 900; color: #fff; } /* Reduzido de 1.1rem */
+        .btn-group-main { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+        .btn-manual, .btn-auto { height: 40px; }
+        .btn-reset { grid-column: span 2; height: 40px; }
 
-        .ball-display {
-            background: #0f3460;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--accent);
-            overflow: hidden;
-        }
-        #ball { font-size: 1.98rem; color: var(--accent); font-weight: 900; transition: transform 0.2s; } /* Reduzido de 2.2rem */
-        .ball-pop { transform: scale(1.2); }
-
-        .btn-group-main { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 5.4px; /* Reduzido de 6px */
-        }
-
-        .btn-manual, .btn-auto { height: 38px !important; } /* Reduzido de 42px */
-        .btn-reset { grid-column: span 2; height: 38px !important; } /* Reduzido de 42px */
-
-        .arena { 
-            flex-grow: 1; 
-            overflow-y: auto; 
-            padding: 15px 10px; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 15px; /* Reduzido de 20px */
-            align-items: center;
-            background: rgba(0,0,0,0.2);
-        }
-
-        /* --- CARTELAS (Reduzidas 15%) --- */
-        .bingo-card { 
-            background: var(--card-bg); 
-            padding: 8.5px; /* Reduzido de 10px */
-            border-radius: 12px; 
-            border: 1px solid #333; 
-            width: 100%; 
-            max-width: 323px; /* Reduzido de 380px */
-        }
+        .arena { flex-grow: 1; overflow-y: auto; padding: 15px 10px; display: flex; flex-direction: column; gap: 15px; align-items: center; background: rgba(0,0,0,0.2); }
+        .bingo-card { background: var(--card-bg); padding: 10px; border-radius: 12px; border: 1px solid #333; width: 100%; max-width: 320px; }
         .bingo-card.player { border: 2px solid var(--primary); box-shadow: 0 0 15px rgba(233,69,96,0.3); }
 
-        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3.4px; } /* Reduzido de 4px */
-        .cell { 
-            aspect-ratio: 1 / 1; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            background: #0f3460; 
-            border-radius: 5px; 
-            font-size: 0.95rem; /* Reduzido de 1.1rem */
-            font-weight: bold; 
-        }
+        .grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4px; }
+        .cell { aspect-ratio: 1 / 1; display: flex; align-items: center; justify-content: center; background: #0f3460; border-radius: 5px; font-size: 1rem; font-weight: bold; }
         .cell.marked { background: var(--primary); color: white; }
-        .cell.line-win { background-color: var(--win) !important; color: #ffffff !important; box-shadow: 0 0 10px var(--win); transform: scale(1.05); transition: 0.3s; }
+        .cell.line-win { background: var(--win) !important; color: white !important; box-shadow: 0 0 10px var(--win); z-index: 1; }
         .cell.free { background: #533483; color: var(--accent); }
 
-        .bottom-panel { 
-            background: var(--card-bg); 
-            padding: 10px 10px; 
-            border-top: 2px solid #333; 
-            flex-shrink: 0;
-            padding-bottom: calc(40px + env(safe-area-inset-bottom));
-            z-index: 100;
-        }
-
-        .action-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            margin-top: 10px;
-        }
-
-        button { 
-            padding: 12px; border: none; border-radius: 8px; 
-            font-weight: bold; cursor: pointer; font-size: 0.85rem; color: white; 
-        }
-        .btn-manual { background: var(--primary); }
-        .btn-auto { background: #3498db; }
-        .btn-reset { background: #533483; }
+        .bottom-panel { background: var(--card-bg); padding: 10px; border-top: 2px solid #333; padding-bottom: env(safe-area-inset-bottom); }
+        .action-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+        button { padding: 12px; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; color: white; }
         .btn-util { background: #444; font-size: 0.7rem; }
 
-        .leader-item { display: flex; justify-content: space-between; padding: 8px; border-bottom: 1px solid #0f3460; font-size: 0.85rem; }
-        .leader-item.me { background: var(--accent); color: var(--bg); font-weight: 900; border-radius: 4px; }
-
-        #history-grid { display: flex; gap: 5px; overflow-x: auto; padding: 5px; background: #0f3460; border-radius: 4px; margin-top: 6px; min-height: 34px; }
-        .hist-ball { min-width: 25px; height: 25px; background: rgba(255,255,255,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; flex-shrink: 0; }
+        #history-grid { display: flex; gap: 5px; overflow-x: auto; padding: 5px; background: #0f3460; border-radius: 4px; margin-top: 6px; min-height: 35px; }
+        .hist-ball { min-width: 25px; height: 25px; background: rgba(255,255,255,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; }
         
-        #money-toast { 
-            position: fixed; top: 30%; left: 50%; transform: translate(-50%, -50%); 
-            z-index: 30000; font-size: 1.5rem; font-weight: 900; pointer-events: none; 
-            opacity: 0; transition: 0.4s; text-align: center; width: 90%; 
-            background: rgba(0,0,0,0.9); padding: 20px; border-radius: 15px;
-            border: 2px solid var(--accent); box-shadow: 0 0 20px rgba(0,0,0,0.8);
-        }
-        .toast-show { opacity: 1 !important; transform: translate(-50%, -40%) scale(1) !important; }
-
-        .info-box {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 10px;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            margin-bottom: 15px;
-            text-align: left;
-            border-left: 3px solid var(--accent);
-        }
+        #money-toast { position: fixed; top: 30%; left: 50%; transform: translate(-50%, -50%); z-index: 30000; font-size: 1.5rem; font-weight: 900; opacity: 0; transition: 0.4s; background: rgba(0,0,0,0.9); padding: 20px; border-radius: 15px; border: 2px solid var(--accent); }
+        .toast-show { opacity: 1 !important; transform: translate(-50%, -40%) scale(1.1) !important; }
     </style>
 </head>
 <body>
     <div id="money-toast"></div>
 
-    <div id="history-modal">
-        <div class="history-card">
-            <div style="padding: 15px; border-bottom: 1px solid var(--accent); display: flex; justify-content: space-between; align-items: center;">
-                <h3 style="margin:0; color: var(--accent);">EXTRATO DA CARTEIRA</h3>
-                <button id="close-history" style="background: #444; padding: 5px 10px;">X</button>
-            </div>
-            <div id="wallet-history-list" class="history-list"></div>
+    <div id="auth-overlay">
+        <div class="auth-card">
+            <h2 id="auth-title">PRIMEIRO ACESSO</h2>
+            <p id="auth-instruction">Crie seu PIN de 8 dígitos:</p>
+            <input type="tel" id="pass-input" maxlength="8" placeholder="********" style="letter-spacing:8px; font-size:1.8rem; width:100%; text-align:center; padding:10px; margin-bottom:15px; background:#0f3460; color:white; border:none; border-radius:8px;">
+            <button id="btn-unlock" style="background:var(--primary); width:100%;">ENTRAR</button>
         </div>
     </div>
 
     <div id="deposit-modal">
-        <div class="auth-card" style="border-color: #3498db;">
-            <h2 style="color: #3498db; margin: 0 0 15px 0;">DEPOSITAR PIX</h2>
-            <div style="display: grid; grid-template-columns: 1fr; gap: 10px; margin-bottom: 15px;">
-                <button onclick="addFunds(10)" style="background:#3498db">R$ 10,00</button>
-                <button onclick="addFunds(50)" style="background:#3498db">R$ 50,00</button>
-                <button onclick="addFunds(100)" style="background:#3498db">R$ 100,00</button>
-            </div>
-            <button id="close-dep" style="background: #555; width: 100%;">VOLTAR</button>
-        </div>
-    </div>
-
-    <div id="withdraw-modal">
         <div class="auth-card">
-            <h2 style="color: var(--win); margin: 0 0 10px 0;">SAQUE PIX</h2>
-            <p id="wd-balance">R$ 0,00</p>
-            <input type="text" id="pix-key" placeholder="Chave Pix" style="width:100%; padding:12px; margin:5px 0; border-radius:8px; border:none;">
-            <input type="number" id="withdraw-amount" placeholder="Valor Mín: 20" style="width:100%; padding:12px; margin:5px 0; border-radius:8px; border:none;">
-            <div style="display: flex; gap: 10px; margin-top: 10px;">
-                <button id="close-wd" style="background: #555; flex: 1;">VOLTAR</button>
-                <button id="confirm-wd" style="background: var(--money); flex: 1;">SACAR</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="auth-overlay">
-        <div class="auth-card">
-            <h2 id="auth-title" style="color: var(--primary); margin-bottom: 10px;">PRIMEIRO ACESSO</h2>
-            
-            <div id="auth-info" class="info-box">
-                <strong>🔒 Segurança da Conta</strong><br>
-                Crie um PIN de 8 números para proteger seu saldo.
-            </div>
-
-            <p id="auth-instruction" style="font-size: 0.9rem; margin-bottom: 10px;">Crie seu PIN de 8 dígitos:</p>
-            
-            <input type="tel" id="pass-input" maxlength="8" placeholder="********" style="letter-spacing:8px; font-size:1.8rem; width:100%; text-align:center; padding:10px; margin-bottom:15px; border-radius:8px; border: 2px solid #333; background: #0f3460; color: white;">
-            
-            <button id="btn-unlock" style="background: var(--primary); width: 100%; font-size: 1.2rem; margin-bottom: 15px;">CONFIRMAR E ENTRAR</button>
+            <h2>DEPOSITAR</h2>
+            <button onclick="addFunds(10)" style="background:#3498db; width:100%; margin:5px 0;">R$ 10,00</button>
+            <button onclick="addFunds(50)" style="background:#3498db; width:100%; margin:5px 0;">R$ 50,00</button>
+            <button id="close-dep" style="background:#555; width:100%;">VOLTAR</button>
         </div>
     </div>
 
@@ -272,16 +104,14 @@
         <div class="top-panel">
             <div class="header-grid">
                 <div class="money-display" id="open-history-trigger">
-                    <div style="font-size:0.5rem; color:var(--accent)">MEU SALDO (CLIQUE AQUI)</div>
+                    <div style="font-size:0.5rem; color:var(--accent)">SALDO (EXTRATO)</div>
                     <div class="money-value" id="balance">R$ 0,00</div>
                 </div>
-                <div class="ball-display">
-                    <span id="ball">--</span>
-                </div>
+                <div class="ball-display"><span id="ball">--</span></div>
             </div>
             <div class="btn-group-main">
-                <button id="draw-btn" class="btn-manual">SORTEAR um Número</button>
-                <button id="auto-btn" class="btn-auto">INICIAR (AUTO)</button>
+                <button id="draw-btn" class="btn-manual">SORTEAR</button>
+                <button id="auto-btn" class="btn-auto">INICIAR AUTO</button>
                 <button id="new-round-btn" class="btn-reset">NOVA RODADA (R$ 6,00)</button>
             </div>
             <div id="history-grid"></div>
@@ -291,204 +121,63 @@
 
         <div class="bottom-panel">
             <div class="ranking-header" id="header-ranking">
-                <h4 style="margin: 0; color: var(--accent); font-size: 0.8rem;">RANKING AO VIVO</h4>
+                <span>RANKING AO VIVO</span>
                 <button id="toggle-ranking-btn">ESCONDER</button>
             </div>
-
-            <div id="ranking-body" class="ranking-container">
-                <div id="leader-list"></div>
-            </div>
-            
+            <div id="ranking-body" class="ranking-container"><div id="leader-list"></div></div>
             <div class="action-grid">
-                <button id="open-dep" class="btn-util" style="background: #3498db;">DEPOSITAR 💸</button>
-                <button id="open-wd" class="btn-util" style="background: var(--money);">SACAR 💸</button>
-                <button id="toggle-sound" class="btn-util" style="background: #9b59b6;">SOM: ON 🔊</button>
-                <button id="help-btn" class="btn-util">AJUDA ❓</button>
-                <button id="btn-logout" class="btn-util" style="background: #333; grid-column: span 2;">BLOQUEAR 🔒</button>
+                <button id="open-dep" class="btn-util">DEPOSITAR</button>
+                <button id="btn-logout" class="btn-util">BLOQUEAR</button>
             </div>
         </div>
     </div>
 
 <script>
 (function() {
-    // Sons emulados
-    const somSorteio = new Audio('sorteio.mp3');
-    const somDinheiro = new Audio('dinheiro.mp3');
-    const somMarca = new Audio('marca.mp3');
-    const somBingo = new Audio('bingo.mp3');
-    const somLinha = new Audio('linha.mp3');
-
     let drawn = [], players = [], firstLineOut = false, gameOver = false, autoInterval = null;
-    let totalBalance = 0;
+    let totalBalance = parseFloat(localStorage.getItem('bingo_arena_balance')) || 50.00;
     let costDeducted = false;
-    let soundEnabled = true; 
-    
     let walletHistory = JSON.parse(localStorage.getItem('bingo_wallet_history') || '[]');
-
     const ROUND_COST = 6.00, LINE_PRIZE = 12.00, BINGO_PRIZE = 22.00;
-    const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
-
-    const savedPass = localStorage.getItem('bingo_vault_pass');
-    if(savedPass) {
-        document.getElementById('auth-title').innerText = "ACESSO RESTRITO";
-        document.getElementById('auth-instruction').innerText = "Insira seu PIN de 8 dígitos:";
-    }
-
-    document.getElementById('pass-input').oninput = function() {
-        this.value = this.value.replace(/[^0-9]/g, '');
-    };
-
-    function playSound(audio) {
-        if (soundEnabled) {
-            audio.currentTime = 0;
-            audio.play().catch(() => {});
-        }
-    }
 
     function saveTransaction(desc, value) {
-        const transaction = {
-            date: new Date().toLocaleString('pt-BR'),
-            desc: desc,
-            value: value
-        };
-        walletHistory.unshift(transaction);
-        if(walletHistory.length > 50) walletHistory.pop();
-        localStorage.setItem('bingo_wallet_history', JSON.stringify(walletHistory));
+        walletHistory.unshift({ date: new Date().toLocaleString(), desc, value });
+        localStorage.setItem('bingo_wallet_history', JSON.stringify(walletHistory.slice(0, 50)));
     }
 
     function showToast(text, color) {
-        const toast = document.getElementById('money-toast');
-        toast.innerText = text; toast.style.color = color;
-        toast.classList.add('toast-show');
-        setTimeout(() => toast.classList.remove('toast-show'), 3000);
+        const t = document.getElementById('money-toast');
+        t.innerText = text; t.style.color = color;
+        t.classList.add('toast-show');
+        setTimeout(() => t.classList.remove('toast-show'), 2500);
     }
 
     function updateBalanceDisplay() {
         document.getElementById('balance').innerText = `R$ ${totalBalance.toFixed(2).replace('.', ',')}`;
-        localStorage.setItem('bingo_arena_balance', totalBalance.toString());
-    }
-
-    function processPayment() {
-        if (!costDeducted && !gameOver) {
-            if (totalBalance < ROUND_COST) { 
-                alert("Saldo insuficiente! Deposite para jogar."); 
-                if(autoInterval) stopAuto();
-                return false; 
-            }
-            totalBalance -= ROUND_COST;
-            saveTransaction("Entrada Rodada", -ROUND_COST);
-            costDeducted = true;
-            updateBalanceDisplay();
-            showToast(`-R$ 6,00`, "#ffffff");
-            return true;
-        }
-        return true;
-    }
-
-    function drawBall() {
-        if(gameOver || drawn.length >= 75) {
-            if(autoInterval) stopAuto();
-            return;
-        }
-
-        if(!processPayment()) return;
-
-        playSound(somSorteio);
-        let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
-        drawn.push(b);
-
-        const ballEl = document.getElementById('ball');
-        ballEl.innerText = b;
-        ballEl.classList.remove('ball-pop');
-        void ballEl.offsetWidth; 
-        ballEl.classList.add('ball-pop');
-        
-        let h = document.createElement('div'); h.className = "hist-ball";
-        h.innerText = b; document.getElementById('history-grid').prepend(h);
-        
-        document.querySelectorAll(`[data-num="${b}"]`).forEach(c => c.classList.add('marked'));
-
-        players.forEach(p => { 
-            if(p.nums.includes(b)) {
-                p.marks++; 
-                if(p.id === 1) playSound(somMarca);
-            }
-        });
-
-        updateRanking();
-        checkWinners();
-    }
-
-    function updateRanking() {
-        let sorted = [...players].sort((a,b) => b.marks - a.marks);
-        let list = document.getElementById('leader-list'); 
-        list.innerHTML = "";
-        sorted.slice(0, 3).forEach(p => {
-            list.innerHTML += `<div class="leader-item ${p.id===1?'me':''}"><span>${p.name}</span><span>${p.marks}/25</span></div>`;
-        });
-    }
-
-    function checkWinners() {
-        players.forEach(p => {
-            if(!firstLineOut) {
-                for(let r=0; r<5; r++) {
-                    let win = true;
-                    let lineCells = [];
-                    for(let c=0; c<5; c++) { 
-                        let cell = document.getElementById(`p${p.id}-c${r*5+c}`);
-                        lineCells.push(cell);
-                        if(!cell.classList.contains('marked')) win = false;
-                    }
-                    if(win) {
-                        firstLineOut = true; 
-                        playSound(somLinha);
-                        lineCells.forEach(cell => cell.classList.add('line-win'));
-                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-
-                        if(p.id === 1) { 
-                            totalBalance += LINE_PRIZE; 
-                            saveTransaction("Prêmio Linha", LINE_PRIZE);
-                            updateBalanceDisplay(); 
-                            showToast(`LINHA! +R$ ${LINE_PRIZE}`, "#2ecc71");
-                        } else {
-                            showToast(`LINHA: ${p.name}!`, "#ffffff");
-                        }
-                    }
-                }
-            }
-            if(p.marks === 25 && !gameOver) {
-                gameOver = true; 
-                stopAuto();
-                if(p.id === 1) { 
-                    totalBalance += BINGO_PRIZE; 
-                    saveTransaction("Prêmio BINGO", BINGO_PRIZE);
-                    updateBalanceDisplay(); 
-                    playSound(somBingo);
-                    showToast(`BINGO! VOCÊ GANHOU R$ ${BINGO_PRIZE}`, "#ffd700");
-                } else {
-                    showToast(`BINGO: ${p.name}!`, "#ffffff");
-                }
-                confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            }
-        });
-    }
-
-    function stopAuto() {
-        clearInterval(autoInterval); 
-        autoInterval = null; 
-        document.getElementById('auto-btn').innerText = "INICIAR (AUTO)";
+        localStorage.setItem('bingo_arena_balance', totalBalance);
     }
 
     function initGame() {
-        const arena = document.getElementById('arena'); arena.innerHTML = ""; players = [];
-        let nomes = [...nomesComuns].sort(() => Math.random() - 0.5);
+        const arena = document.getElementById('arena');
+        arena.innerHTML = ""; players = [];
+        const nomes = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
+        
         for(let i=1; i<=10; i++) {
-            let n = []; while(n.length < 24) { let r = Math.floor(Math.random() * 75) + 1; if(!n.includes(r)) n.push(r); } n.splice(12, 0, 0);
+            let n = [];
+            while(n.length < 24) {
+                let r = Math.floor(Math.random() * 75) + 1;
+                if(!n.includes(r)) n.push(r);
+            }
+            n.splice(12, 0, 0); // Estrela central (FREE)
+            
             let p = { id: i, name: i === 1 ? "VOCÊ" : nomes[i-2], nums: n, marks: 1 };
             players.push(p);
-            let card = document.createElement('div'); card.className = `bingo-card ${i===1?'player':''}`;
+            
+            let card = document.createElement('div');
+            card.className = `bingo-card ${i===1?'player':''}`;
             card.innerHTML = `<h5 style="margin:5px 0; text-align:center;">${p.name}</h5><div class="grid" id="g-${i}"></div>`;
             arena.appendChild(card);
+            
             p.nums.forEach((num, idx) => {
                 let cell = document.createElement('div');
                 cell.className = 'cell' + (num === 0 ? ' marked free' : '');
@@ -498,131 +187,126 @@
                 document.getElementById(`g-${i}`).appendChild(cell);
             });
         }
+    }
+
+    function drawBall() {
+        if(gameOver || drawn.length >= 75) return;
+        
+        if(!costDeducted) {
+            if(totalBalance < ROUND_COST) {
+                alert("Saldo insuficiente!");
+                clearInterval(autoInterval);
+                return;
+            }
+            totalBalance -= ROUND_COST;
+            costDeducted = true;
+            saveTransaction("Entrada Rodada", -ROUND_COST);
+            updateBalanceDisplay();
+            showToast(`-R$ 6,00`, "#fff");
+        }
+
+        let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
+        drawn.push(b);
+        
+        const el = document.getElementById('ball');
+        el.innerText = b; el.classList.remove('ball-pop'); void el.offsetWidth; el.classList.add('ball-pop');
+        
+        let h = document.createElement('div'); h.className = "hist-ball";
+        h.innerText = b; document.getElementById('history-grid').prepend(h);
+
+        document.querySelectorAll(`[data-num="${b}"]`).forEach(c => c.classList.add('marked'));
+        
+        players.forEach(p => { if(p.nums.includes(b)) p.marks++; });
+        
+        checkWinners();
         updateRanking();
     }
 
+    function checkWinners() {
+        players.forEach(p => {
+            // VERIFICAÇÃO DE LINHA
+            if(!firstLineOut) {
+                for(let r=0; r<5; r++) {
+                    let hasLine = true;
+                    let lineElements = [];
+                    for(let c=0; c<5; c++) {
+                        let cell = document.getElementById(`p${p.id}-c${r*5+c}`);
+                        if(!cell.classList.contains('marked')) hasLine = false;
+                        lineElements.push(cell);
+                    }
+                    if(hasLine) {
+                        firstLineOut = true;
+                        lineElements.forEach(e => e.classList.add('line-win'));
+                        confetti({ particleCount: 50 });
+                        if(p.id === 1) {
+                            totalBalance += LINE_PRIZE;
+                            saveTransaction("Prêmio Linha", LINE_PRIZE);
+                            updateBalanceDisplay();
+                            showToast(`LINHA! +R$ ${LINE_PRIZE}`, "#2ecc71");
+                        } else {
+                            showToast(`LINHA: ${p.name}`, "#fff");
+                        }
+                    }
+                }
+            }
+            
+            // BINGO
+            if(p.marks === 25 && !gameOver) {
+                gameOver = true;
+                clearInterval(autoInterval);
+                if(p.id === 1) {
+                    totalBalance += BINGO_PRIZE;
+                    saveTransaction("Prêmio BINGO", BINGO_PRIZE);
+                    updateBalanceDisplay();
+                    showToast(`BINGO! +R$ ${BINGO_PRIZE}`, "#ffd700");
+                } else {
+                    showToast(`BINGO: ${p.name}`, "#fff");
+                }
+                confetti({ particleCount: 150, spread: 70 });
+            }
+        });
+    }
+
+    function updateRanking() {
+        let sorted = [...players].sort((a,b) => b.marks - a.marks);
+        let list = document.getElementById('leader-list');
+        list.innerHTML = "";
+        sorted.slice(0, 3).forEach(p => {
+            list.innerHTML += `<div class="leader-item ${p.id===1?'me':''}"><span>${p.name}</span><span>${p.marks}/25</span></div>`;
+        });
+    }
+
+    // Eventos
     document.getElementById('btn-unlock').onclick = () => {
         const input = document.getElementById('pass-input').value;
-        if (!savedPass) {
-            if(input.length === 8) { 
-                localStorage.setItem('bingo_vault_pass', input); 
-                login(); 
-            } else { alert("O PIN deve ter 8 números."); }
+        const saved = localStorage.getItem('bingo_vault_pass');
+        if(!saved) {
+            if(input.length === 8) { localStorage.setItem('bingo_vault_pass', input); login(); }
+            else alert("PIN deve ter 8 dígitos!");
         } else {
-            if (input === savedPass) login();
-            else alert("PIN Incorreto!");
+            if(input === saved) login(); else alert("Incorreto!");
         }
     };
 
     function login() {
-        sessionStorage.setItem('bingo_authenticated', 'true');
+        sessionStorage.setItem('auth', '1');
         document.getElementById('auth-overlay').style.display = 'none';
-        totalBalance = parseFloat(localStorage.getItem('bingo_arena_balance')) || 50.00;
         updateBalanceDisplay();
         initGame();
     }
 
     document.getElementById('draw-btn').onclick = drawBall;
-    
     document.getElementById('auto-btn').onclick = function() {
-        if (autoInterval) stopAuto();
-        else {
-            this.innerText = "PAUSAR";
-            autoInterval = setInterval(drawBall, 800);
-        }
+        if(autoInterval) { clearInterval(autoInterval); autoInterval = null; this.innerText="INICIAR AUTO"; }
+        else { autoInterval = setInterval(drawBall, 800); this.innerText="PAUSAR"; }
     };
+    document.getElementById('new-round-btn').onclick = () => { if(confirm("Nova rodada?")) location.reload(); };
+    window.addFunds = (v) => { totalBalance += v; saveTransaction("Depósito", v); updateBalanceDisplay(); document.getElementById('deposit-modal').style.display='none'; };
+    document.getElementById('open-dep').onclick = () => document.getElementById('deposit-modal').style.display='flex';
+    document.getElementById('close-dep').onclick = () => document.getElementById('deposit-modal').style.display='none';
+    document.getElementById('btn-logout').onclick = () => { sessionStorage.clear(); location.reload(); };
 
-    document.getElementById('new-round-btn').onclick = () => {
-    if (confirm("Deseja iniciar nova rodada por R$ 6,00?")) {
-        // 1. Resetar variáveis de estado do jogo
-        drawn = [];
-        firstLineOut = false;
-        gameOver = false;
-        costDeducted = false;
-
-        // 2. Limpar interface visual
-        document.getElementById('history-grid').innerHTML = "";
-        document.getElementById('ball').innerText = "--";
-        
-        // 3. Parar qualquer intervalo automático anterior antes de começar o novo
-        if (autoInterval) clearInterval(autoInterval);
-
-        // 4. Inicializar novas cartelas
-        initGame();
-
-        // 5. Iniciar sorteio automático imediatamente
-        const autoBtn = document.getElementById('auto-btn');
-        autoBtn.innerText = "PAUSAR";
-        autoInterval = setInterval(drawBall, 800);
-        
-        // Rolar para o topo para ver o sorteio se necessário
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-};
-
-    window.addFunds = (val) => {
-        totalBalance += val;
-        saveTransaction("Depósito PIX", val);
-        updateBalanceDisplay();
-        document.getElementById('deposit-modal').style.display = 'none';
-        showToast(`+R$ ${val} Adicionados!`, "#2ecc71");
-    };
-
-    document.getElementById('open-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'flex';
-    document.getElementById('close-dep').onclick = () => document.getElementById('deposit-modal').style.display = 'none';
-    document.getElementById('open-wd').onclick = () => {
-        document.getElementById('withdraw-modal').style.display = 'flex';
-        document.getElementById('wd-balance').innerText = `Saldo disponível: R$ ${totalBalance.toFixed(2)}`;
-    };
-    document.getElementById('close-wd').onclick = () => document.getElementById('withdraw-modal').style.display = 'none';
-    
-    document.getElementById('confirm-wd').onclick = () => {
-        const val = parseFloat(document.getElementById('withdraw-amount').value);
-        if(val >= 20 && totalBalance >= val) {
-            totalBalance -= val;
-            saveTransaction("Saque PIX", -val);
-            updateBalanceDisplay();
-            alert("Saque de R$ " + val + " solicitado com sucesso!");
-            document.getElementById('withdraw-modal').style.display = 'none';
-        } else { alert("Valor mínimo R$ 20 ou saldo insuficiente."); }
-    };
-
-    document.getElementById('open-history-trigger').onclick = () => {
-        const list = document.getElementById('wallet-history-list');
-        list.innerHTML = walletHistory.length === 0 ? '<p style="text-align:center">Sem movimentações.</p>' : '';
-        walletHistory.forEach(item => {
-            const isPos = item.value > 0;
-            list.innerHTML += `
-                <div class="history-item">
-                    <div>
-                        <div style="font-weight:bold">${item.desc}</div>
-                        <div style="font-size:0.7rem; color:#aaa">${item.date}</div>
-                    </div>
-                    <div class="${isPos ? 'hist-pos' : 'hist-neg'}">
-                        ${isPos ? '+' : ''}R$ ${Math.abs(item.value).toFixed(2).replace('.', ',')}
-                    </div>
-                </div>`;
-        });
-        document.getElementById('history-modal').style.display = 'flex';
-    };
-    document.getElementById('close-history').onclick = () => document.getElementById('history-modal').style.display = 'none';
-    document.getElementById('btn-logout').onclick = () => { sessionStorage.removeItem('bingo_authenticated'); location.reload(); };
-    
-    document.getElementById('help-btn').onclick = () => alert("Bingo Arena:\n1. Cada rodada custa R$ 6,00.\n2. Complete uma linha horizontal para ganhar R$ 12,00.\n3. Complete a cartela (BINGO) para ganhar R$ 22,00.\n4. O sorteio para assim que alguém fizer BINGO.");
-
-    document.getElementById('toggle-sound').onclick = function() {
-        soundEnabled = !soundEnabled;
-        this.innerText = soundEnabled ? "SOM: ON 🔊" : "SOM: OFF 🔇";
-        this.style.background = soundEnabled ? "#9b59b6" : "#666";
-    };
-
-    const rankingHeader = document.getElementById('header-ranking');
-    rankingHeader.onclick = () => {
-        const isCollapsed = document.getElementById('ranking-body').classList.toggle('ranking-collapsed');
-        document.getElementById('toggle-ranking-btn').innerText = isCollapsed ? "MOSTRAR" : "ESCONDER";
-    };
-
-    if (sessionStorage.getItem('bingo_authenticated') === 'true') login();
+    if(sessionStorage.getItem('auth')) login();
 })();
 </script>
 </body>
