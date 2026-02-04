@@ -280,8 +280,8 @@
                 </div>
             </div>
             <div class="btn-group-main">
-                <button id="draw-btn" class="btn-manual">SORTEAR um Número</button>
-                <button id="auto-btn" class="btn-auto">AUTO</button>
+                <button id="draw-btn" class="btn-manual">Sortear Manual</button>
+                <button id="auto-btn" class="btn-auto">Sortear Automático</button>
                 <button id="new-round-btn" class="btn-reset">NOVA RODADA (R$ 6,00)</button>
             </div>
             <div id="history-grid"></div>
@@ -476,7 +476,7 @@
     function stopAuto() {
         clearInterval(autoInterval); 
         autoInterval = null; 
-        document.getElementById('auto-btn').innerText = "AUTO";
+        document.getElementById('auto-btn').innerText = "Sorteio Automático";
     }
 
     function initGame() {
@@ -584,7 +584,7 @@
     document.getElementById('close-history').onclick = () => document.getElementById('history-modal').style.display = 'none';
     document.getElementById('btn-logout').onclick = () => { sessionStorage.removeItem('bingo_authenticated'); location.reload(); };
     
-    document.getElementById('help-btn').onclick = () => alert("Bingo Arena:\n1. Cada rodada custa R$ 6,00.\n2. Complete uma linha horizontal para ganhar R$ 12,00.\n3. Complete a cartela (BINGO) para ganhar R$ 22,00.\n4. O sorteio para assim que alguém fizer BINGO.");
+    document.getElementById('help-btn').onclick = () => alert("Bingo Arena:\n1. Cada rodada custa R$ 6,00.\n2. Complete uma linha horizontal para ganhar R$ 12,00.\n3. Complete a cartela (BINGO) para ganhar R$ 22,00.\n4. O sorteio para assim que alguém fizer BINGO.\n5. São 10 jogadores, você contra outros 9 jogadores.");
 
     document.getElementById('toggle-sound').onclick = function() {
         soundEnabled = !soundEnabled;
