@@ -181,6 +181,15 @@
             flex-shrink: 0;
             padding-bottom: calc(40px + env(safe-area-inset-bottom));
             z-index: 100;
+            transition: transform 0.4s ease, max-height 0.4s ease;
+            max-height: 500px;
+        }
+
+        /* Classe para esconder a barra */
+        .bottom-panel.minimized {
+            transform: translateY(calc(100% - 40px - env(safe-area-inset-bottom)));
+            max-height: 40px;
+            overflow: hidden;
         }
 
         .action-grid {
@@ -299,7 +308,7 @@
 
         <div class="bottom-panel">
             <div class="ranking-header" id="header-ranking">
-                <h4 style="margin: 0; color: var(--accent); font-size: 0.8rem;">RANKING AO VIVO</h4>
+                <h4 id="ranking-title-text" style="margin: 0; color: var(--accent); font-size: 0.8rem;">RANKING AO VIVO</h4>
                 <button id="toggle-ranking-btn">ESCONDER</button>
             </div>
             <div id="ranking-body" class="ranking-container">
@@ -310,7 +319,8 @@
                 <button id="open-wd" class="btn-util" style="background: var(--money);">SACAR 💸</button>
                 <button id="toggle-sound" class="btn-util" style="background: #9b59b6;">SOM: ON 🔊</button>
                 <button id="help-btn" class="btn-util">AJUDA ❓</button>
-                <button id="btn-logout" class="btn-util" style="background: #333; grid-column: span 2;">BLOQUEAR 🔒</button>
+                <button id="toggle-full-panel" class="btn-util" style="background: #2c3e50;">OCULTAR MENU ⬇️</button>
+                <button id="btn-logout" class="btn-util" style="background: #333; grid-column: span 1;">BLOQUEAR 🔒</button>
             </div>
         </div>
     </div>
@@ -637,10 +647,27 @@
         this.style.background = soundEnabled ? "#9b59b6" : "#666";
     };
 
+    // Lógica para o Ranking
     const rankingHeader = document.getElementById('header-ranking');
     rankingHeader.onclick = () => {
+        const panel = document.querySelector('.bottom-panel');
+        // Se a barra inteira estiver minimizada, ao clicar no header nós a expandimos
+        if (panel.classList.contains('minimized')) {
+            panel.classList.remove('minimized');
+            document.getElementById('ranking-title-text').innerText = "RANKING AO VIVO";
+            return;
+        }
+
         const isCollapsed = document.getElementById('ranking-body').classList.toggle('ranking-collapsed');
         document.getElementById('toggle-ranking-btn').innerText = isCollapsed ? "MOSTRAR" : "ESCONDER";
+    };
+
+    // NOVA FUNÇÃO: Esconder/Mostrar a barra inferior completa
+    document.getElementById('toggle-full-panel').onclick = function(e) {
+        e.stopPropagation(); // Evita disparar o clique do header-ranking
+        const panel = document.querySelector('.bottom-panel');
+        panel.classList.add('minimized');
+        document.getElementById('ranking-title-text').innerText = "MENU OCULTO (CLIQUE PARA VOLTAR)";
     };
 
     if (sessionStorage.getItem('bingo_authenticated') === 'true') login();
