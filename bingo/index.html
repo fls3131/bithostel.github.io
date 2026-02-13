@@ -232,6 +232,13 @@
             text-align: left;
             border-left: 3px solid var(--accent);
         }
+        .card-header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+            padding: 0 5px;
+        }
     </style>
 </head>
 <body>
@@ -327,7 +334,6 @@
 
 <script>
 (function() {
-    // Inicialização dos sons
     const somSorteio = new Audio('sorteio.mp3');
     const somDinheiro = new Audio('dinheiro.mp3');
     const somMarca = new Audio('marca.mp3');
@@ -336,27 +342,30 @@
 
     let audioUnlocked = false;
 
-    // Função vital para destravar o áudio em navegadores mobile/desktop
     function unlockAudio() {
         if (audioUnlocked) return;
-        
-        // Tenta tocar e pausar imediatamente todos os sons para "validar" a permissão do browser
         [somSorteio, somDinheiro, somMarca, somBingo, somLinha].forEach(audio => {
             audio.play().then(() => {
                 audio.pause();
                 audio.currentTime = 0;
             }).catch(() => {});
         });
-        
         audioUnlocked = true;
-        console.log("Audio Unlocked");
     }
 
     let drawn = [], players = [], firstLineOut = false, gameOver = false, autoInterval = null;
     let totalBalance = 0;
     let costDeducted = false;
-    let soundEnabled = true; 
     
+    let soundEnabled = localStorage.getItem('bingo_sound_enabled') !== 'false'; 
+    
+    function updateSoundButtonUI() {
+        const btn = document.getElementById('toggle-sound');
+        btn.innerText = soundEnabled ? "SOM: ON 🔊" : "SOM: OFF 🔇";
+        btn.style.background = soundEnabled ? "#9b59b6" : "#666";
+    }
+    updateSoundButtonUI();
+
     let walletHistory = JSON.parse(localStorage.getItem('bingo_wallet_history') || '[]');
     const ROUND_COST = 6.00, LINE_PRIZE = 12.00, BINGO_PRIZE = 22.00;
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
@@ -421,38 +430,35 @@
     }
 
     function drawBall() {
-        // Destrava áudio no primeiro sorteio se ainda não destravou
         unlockAudio();
-
         if(gameOver || drawn.length >= 75) {
             if(autoInterval) stopAuto();
             return;
         }
-
         if(!processPayment()) return;
-
         playSound(somSorteio);
         let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
         drawn.push(b);
-
         const ballEl = document.getElementById('ball');
         ballEl.innerText = b;
         ballEl.classList.remove('ball-pop');
         void ballEl.offsetWidth; 
         ballEl.classList.add('ball-pop');
-        
         let h = document.createElement('div'); h.className = "hist-ball";
         h.innerText = b; document.getElementById('history-grid').prepend(h);
-        
         document.querySelectorAll(`[data-num="${b}"]`).forEach(c => c.classList.add('marked'));
-
+        
+        // Atualização dos jogadores e contador visual na cartela
         players.forEach(p => { 
             if(p.nums.includes(b)) {
                 p.marks++; 
+                // Atualiza o texto de progresso na cartela específica
+                const marksDisplay = document.getElementById(`marks-p${p.id}`);
+                if(marksDisplay) marksDisplay.innerText = `${p.marks}/25`;
+                
                 if(p.id === 1) playSound(somMarca);
             }
         });
-
         updateRanking();
         checkWinners();
     }
@@ -482,7 +488,6 @@
                         playSound(somLinha);
                         lineCells.forEach(cell => cell.classList.add('line-win'));
                         confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-
                         if(p.id === 1) { 
                             totalBalance += LINE_PRIZE; 
                             saveTransaction("Prêmio Linha", LINE_PRIZE);
@@ -497,12 +502,8 @@
             if(p.marks === 25 && !gameOver) {
                 gameOver = true; 
                 stopAuto();
-                
-                // TOCAR SOM DE BINGO
                 playSound(somBingo);
-                
                 document.getElementById('new-round-btn').classList.add('btn-flash');
-
                 if(p.id === 1) { 
                     totalBalance += BINGO_PRIZE; 
                     saveTransaction("Prêmio BINGO", BINGO_PRIZE);
@@ -530,7 +531,16 @@
             let p = { id: i, name: i === 1 ? "VOCÊ" : nomes[i-2], nums: n, marks: 1 };
             players.push(p);
             let card = document.createElement('div'); card.className = `bingo-card ${i===1?'player':''}`;
-            card.innerHTML = `<h5 style="margin:5px 0; text-align:center;">${p.name}</h5><div class="grid" id="g-${i}"></div>`;
+            
+            // Layout do cabeçalho da cartela atualizado com Flexbox
+            card.innerHTML = `
+                <div class="card-header-flex">
+                    <h5 style="margin:0;">${p.name}</h5>
+                    <span id="marks-p${i}" style="font-size:0.7rem; color:var(--accent); font-weight:bold;">1/25</span>
+                </div>
+                <div class="grid" id="g-${i}"></div>
+            `;
+            
             arena.appendChild(card);
             p.nums.forEach((num, idx) => {
                 let cell = document.createElement('div');
@@ -545,7 +555,7 @@
     }
 
     document.getElementById('btn-unlock').onclick = () => {
-        unlockAudio(); // Destrava o áudio no clique do PIN
+        unlockAudio();
         const blockUntil = localStorage.getItem('bingo_pin_blocked');
         if (blockUntil && Date.now() < parseInt(blockUntil)) {
             const timeLeft = Math.ceil((parseInt(blockUntil) - Date.now()) / 1000);
@@ -643,28 +653,24 @@
     
     document.getElementById('toggle-sound').onclick = function() {
         soundEnabled = !soundEnabled;
-        this.innerText = soundEnabled ? "SOM: ON 🔊" : "SOM: OFF 🔇";
-        this.style.background = soundEnabled ? "#9b59b6" : "#666";
+        localStorage.setItem('bingo_sound_enabled', soundEnabled);
+        updateSoundButtonUI();
     };
 
-    // Lógica para o Ranking
     const rankingHeader = document.getElementById('header-ranking');
     rankingHeader.onclick = () => {
         const panel = document.querySelector('.bottom-panel');
-        // Se a barra inteira estiver minimizada, ao clicar no header nós a expandimos
         if (panel.classList.contains('minimized')) {
             panel.classList.remove('minimized');
             document.getElementById('ranking-title-text').innerText = "RANKING AO VIVO";
             return;
         }
-
         const isCollapsed = document.getElementById('ranking-body').classList.toggle('ranking-collapsed');
         document.getElementById('toggle-ranking-btn').innerText = isCollapsed ? "MOSTRAR" : "ESCONDER";
     };
 
-    // NOVA FUNÇÃO: Esconder/Mostrar a barra inferior completa
     document.getElementById('toggle-full-panel').onclick = function(e) {
-        e.stopPropagation(); // Evita disparar o clique do header-ranking
+        e.stopPropagation();
         const panel = document.querySelector('.bottom-panel');
         panel.classList.add('minimized');
         document.getElementById('ranking-title-text').innerText = "MENU OCULTO (CLIQUE PARA VOLTAR)";
