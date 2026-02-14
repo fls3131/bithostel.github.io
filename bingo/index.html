@@ -91,7 +91,7 @@
             height: 100dvh; 
         }
 
-        /* --- BARRA SUPERIOR (Reduzida 10%) --- */
+        /* --- BARRA SUPERIOR --- */
         .top-panel { 
             background: var(--card-bg); 
             padding: 3.6px; 
@@ -124,8 +124,11 @@
             justify-content: center;
             border: 1px solid var(--accent);
             overflow: hidden;
+            flex-direction: column;
+            min-height: 60px;
         }
         #ball { font-size: 1.98rem; color: var(--accent); font-weight: 900; transition: transform 0.2s; } 
+        #ball-status { font-size: 0.6rem; color: var(--win); font-weight: bold; text-transform: uppercase; }
         .ball-pop { transform: scale(1.2); }
 
         .btn-group-main { 
@@ -148,7 +151,7 @@
             background: rgba(0,0,0,0.2);
         }
 
-        /* --- CARTELAS (Reduzidas 15%) --- */
+        /* --- CARTELAS --- */
         .bingo-card { 
             background: var(--card-bg); 
             padding: 8.5px; 
@@ -185,7 +188,6 @@
             max-height: 500px;
         }
 
-        /* Classe para esconder a barra */
         .bottom-panel.minimized {
             transform: translateY(calc(100% - 40px - env(safe-area-inset-bottom)));
             max-height: 40px;
@@ -216,12 +218,12 @@
         
         #money-toast { 
             position: fixed; top: 30%; left: 50%; transform: translate(-50%, -50%); 
-            z-index: 30000; font-size: 1.5rem; font-weight: 900; pointer-events: none; 
-            opacity: 0; transition: 0.4s; text-align: center; width: 90%; 
-            background: rgba(0,0,0,0.9); padding: 20px; border-radius: 15px;
-            border: 2px solid var(--accent); box-shadow: 0 0 20px rgba(0,0,0,0.8);
+            z-index: 30000; font-size: 1.4rem; font-weight: 900; pointer-events: none; 
+            opacity: 0; transition: 0.4s; text-align: center; width: 85%; 
+            background: rgba(0,0,0,0.95); padding: 25px; border-radius: 15px;
+            border: 2px solid var(--accent); box-shadow: 0 0 30px rgba(0,0,0,1);
         }
-        .toast-show { opacity: 1 !important; transform: translate(-50%, -40%) scale(1) !important; }
+        .toast-show { opacity: 1 !important; transform: translate(-50%, -45%) scale(1) !important; }
 
         .info-box {
             background: rgba(255, 255, 255, 0.05);
@@ -231,13 +233,6 @@
             margin-bottom: 15px;
             text-align: left;
             border-left: 3px solid var(--accent);
-        }
-        .card-header-flex {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 5px;
-            padding: 0 5px;
         }
     </style>
 </head>
@@ -300,6 +295,7 @@
                     <div class="money-value" id="balance">R$ 0,00</div>
                 </div>
                 <div class="ball-display">
+                    <span id="ball-status">SORTEANDO...</span>
                     <span id="ball">--</span>
                 </div>
             </div>
@@ -327,7 +323,7 @@
                 <button id="toggle-sound" class="btn-util" style="background: #9b59b6;">SOM: ON 🔊</button>
                 <button id="help-btn" class="btn-util">AJUDA ❓</button>
                 <button id="toggle-full-panel" class="btn-util" style="background: #2c3e50;">OCULTAR MENU ⬇️</button>
-                <button id="btn-logout" class="btn-util" style="background: #333; grid-column: span 1;">BLOQUEAR 🔒</button>
+                <button id="btn-logout" class="btn-util" style="background: #333;">BLOQUEAR 🔒</button>
             </div>
         </div>
     </div>
@@ -341,24 +337,46 @@
     const somLinha = new Audio('linha.mp3');
 
     let audioUnlocked = false;
+    let drawn = [], players = [], firstLineOut = false, gameOver = false, autoInterval = null;
+    let totalBalance = 0, costDeducted = false;
+    let soundEnabled = localStorage.getItem('bingo_sound_enabled') !== 'false'; 
+    let toastTimeout = null;
 
     function unlockAudio() {
         if (audioUnlocked) return;
         [somSorteio, somDinheiro, somMarca, somBingo, somLinha].forEach(audio => {
-            audio.play().then(() => {
-                audio.pause();
-                audio.currentTime = 0;
-            }).catch(() => {});
+            audio.play().then(() => { audio.pause(); audio.currentTime = 0; }).catch(() => {});
         });
         audioUnlocked = true;
     }
 
-    let drawn = [], players = [], firstLineOut = false, gameOver = false, autoInterval = null;
-    let totalBalance = 0;
-    let costDeducted = false;
-    
-    let soundEnabled = localStorage.getItem('bingo_sound_enabled') !== 'false'; 
-    
+    // --- FUNÇÃO DE MENSAGEM CORRIGIDA (COM FILA/PRIORIDADE) ---
+    function showToast(text, color, isWinner = false) {
+        const toast = document.getElementById('money-toast');
+        
+        // Se for um ganhador, atualiza o status na bola também
+        if(isWinner) {
+            document.getElementById('ball-status').innerText = text;
+            document.getElementById('ball-status').style.color = color;
+        }
+
+        // Se já existe um toast de ganhador na tela, não deixa o de "perda de dinheiro" apagar ele
+        if(toast.classList.contains('toast-show') && !isWinner && toast.isWinnerType) return;
+
+        toast.innerText = text;
+        toast.style.color = color;
+        toast.isWinnerType = isWinner;
+        toast.classList.add('toast-show');
+
+        if(toastTimeout) clearTimeout(toastTimeout);
+        
+        // Ganhadores ficam 5 segundos, mensagens comuns 2 segundos
+        toastTimeout = setTimeout(() => {
+            toast.classList.remove('toast-show');
+            toast.isWinnerType = false;
+        }, isWinner ? 5000 : 2000);
+    }
+
     function updateSoundButtonUI() {
         const btn = document.getElementById('toggle-sound');
         btn.innerText = soundEnabled ? "SOM: ON 🔊" : "SOM: OFF 🔇";
@@ -367,44 +385,23 @@
     updateSoundButtonUI();
 
     let walletHistory = JSON.parse(localStorage.getItem('bingo_wallet_history') || '[]');
-    const ROUND_COST = 6.00, LINE_PRIZE = 12.00, BINGO_PRIZE = 22.00;
+    const ROUND_COST = 6.00, LINE_PRIZE = 14.00, BINGO_PRIZE = 24.00;
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
 
-    let pinAttempts = 0;
     const savedPass = localStorage.getItem('bingo_vault_pass');
-
     if(savedPass) {
         document.getElementById('auth-title').innerText = "ACESSO RESTRITO";
         document.getElementById('auth-instruction').innerText = "Insira seu PIN de 8 dígitos:";
     }
 
-    document.getElementById('pass-input').oninput = function() {
-        this.value = this.value.replace(/[^0-9]/g, '');
-    };
-
     function playSound(audio) {
-        if (soundEnabled) {
-            audio.currentTime = 0;
-            audio.play().catch(e => console.error("Erro ao tocar som:", e));
-        }
+        if (soundEnabled) { audio.currentTime = 0; audio.play().catch(() => {}); }
     }
 
     function saveTransaction(desc, value) {
-        const transaction = {
-            date: new Date().toLocaleString('pt-BR'),
-            desc: desc,
-            value: value
-        };
-        walletHistory.unshift(transaction);
+        walletHistory.unshift({ date: new Date().toLocaleString('pt-BR'), desc, value });
         if(walletHistory.length > 50) walletHistory.pop();
         localStorage.setItem('bingo_wallet_history', JSON.stringify(walletHistory));
-    }
-
-    function showToast(text, color) {
-        const toast = document.getElementById('money-toast');
-        toast.innerText = text; toast.style.color = color;
-        toast.classList.add('toast-show');
-        setTimeout(() => toast.classList.remove('toast-show'), 3000);
     }
 
     function updateBalanceDisplay() {
@@ -412,50 +409,50 @@
         localStorage.setItem('bingo_arena_balance', totalBalance.toString());
     }
 
-    function processPayment() {
-        if (!costDeducted && !gameOver) {
+    document.getElementById('help-btn').onclick = () => {
+        alert(
+            "📖 REGRAS BINGO ARENA PRO:\n\n" +
+            "1. Custo: R$ 6,00 por rodada.\n" +
+            "2. Linha: Ganhe R$ 14,00 (1 horizontal).\n" +
+            "3. Bingo: Ganhe R$ 24,00 (cartela cheia).\n" +
+            "4. Saque: Mínimo R$ 20,00 via PIX."
+        );
+    };
+
+    function drawBall() {
+        unlockAudio();
+        if(gameOver || drawn.length >= 75) { if(autoInterval) stopAuto(); return; }
+        
+        if (!costDeducted) {
             if (totalBalance < ROUND_COST) { 
-                alert("Saldo insuficiente! Deposite para jogar."); 
-                if(autoInterval) stopAuto();
-                return false; 
+                alert("Saldo insuficiente!"); if(autoInterval) stopAuto(); return;
             }
             totalBalance -= ROUND_COST;
             saveTransaction("Entrada Rodada", -ROUND_COST);
             costDeducted = true;
             updateBalanceDisplay();
-            showToast(`-R$ 6,00`, "#ffffff");
-            return true;
+            showToast("-R$ 6,00", "#fff");
         }
-        return true;
-    }
 
-    function drawBall() {
-        unlockAudio();
-        if(gameOver || drawn.length >= 75) {
-            if(autoInterval) stopAuto();
-            return;
-        }
-        if(!processPayment()) return;
         playSound(somSorteio);
         let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
         drawn.push(b);
+        
         const ballEl = document.getElementById('ball');
         ballEl.innerText = b;
         ballEl.classList.remove('ball-pop');
-        void ballEl.offsetWidth; 
-        ballEl.classList.add('ball-pop');
+        void ballEl.offsetWidth; ballEl.classList.add('ball-pop');
+
         let h = document.createElement('div'); h.className = "hist-ball";
         h.innerText = b; document.getElementById('history-grid').prepend(h);
+        
         document.querySelectorAll(`[data-num="${b}"]`).forEach(c => c.classList.add('marked'));
         
-        // Atualização dos jogadores e contador visual na cartela
         players.forEach(p => { 
             if(p.nums.includes(b)) {
                 p.marks++; 
-                // Atualiza o texto de progresso na cartela específica
-                const marksDisplay = document.getElementById(`marks-p${p.id}`);
-                if(marksDisplay) marksDisplay.innerText = `${p.marks}/25`;
-                
+                const countEl = document.getElementById(`count-p${p.id}`);
+                if(countEl) countEl.innerText = `(${p.marks}/25)`;
                 if(p.id === 1) playSound(somMarca);
             }
         });
@@ -465,8 +462,7 @@
 
     function updateRanking() {
         let sorted = [...players].sort((a,b) => b.marks - a.marks);
-        let list = document.getElementById('leader-list'); 
-        list.innerHTML = "";
+        let list = document.getElementById('leader-list'); list.innerHTML = "";
         sorted.slice(0, 3).forEach(p => {
             list.innerHTML += `<div class="leader-item ${p.id===1?'me':''}"><span>${p.name}</span><span>${p.marks}/25</span></div>`;
         });
@@ -474,43 +470,38 @@
 
     function checkWinners() {
         players.forEach(p => {
+            // VERIFICAÇÃO DE LINHA
             if(!firstLineOut) {
                 for(let r=0; r<5; r++) {
-                    let win = true;
-                    let lineCells = [];
+                    let win = true, lineCells = [];
                     for(let c=0; c<5; c++) { 
                         let cell = document.getElementById(`p${p.id}-c${r*5+c}`);
-                        lineCells.push(cell);
-                        if(!cell.classList.contains('marked')) win = false;
+                        lineCells.push(cell); if(!cell.classList.contains('marked')) win = false;
                     }
                     if(win) {
-                        firstLineOut = true; 
-                        playSound(somLinha);
+                        firstLineOut = true; playSound(somLinha);
                         lineCells.forEach(cell => cell.classList.add('line-win'));
-                        confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                        confetti({ particleCount: 100, origin: { y: 0.6 } });
                         if(p.id === 1) { 
-                            totalBalance += LINE_PRIZE; 
-                            saveTransaction("Prêmio Linha", LINE_PRIZE);
+                            totalBalance += LINE_PRIZE; saveTransaction("Prêmio Linha", LINE_PRIZE);
                             updateBalanceDisplay(); 
-                            showToast(`LINHA! +R$ ${LINE_PRIZE}`, "#2ecc71");
+                            showToast(`LINHA! +R$ ${LINE_PRIZE}`, "#2ecc71", true);
                         } else {
-                            showToast(`LINHA: ${p.name}!`, "#ffffff");
+                            showToast(`LINHA: ${p.name}!`, "#ffffff", true);
                         }
                     }
                 }
             }
+            // VERIFICAÇÃO DE BINGO
             if(p.marks === 25 && !gameOver) {
-                gameOver = true; 
-                stopAuto();
-                playSound(somBingo);
+                gameOver = true; stopAuto(); playSound(somBingo);
                 document.getElementById('new-round-btn').classList.add('btn-flash');
                 if(p.id === 1) { 
-                    totalBalance += BINGO_PRIZE; 
-                    saveTransaction("Prêmio BINGO", BINGO_PRIZE);
+                    totalBalance += BINGO_PRIZE; saveTransaction("Prêmio BINGO", BINGO_PRIZE);
                     updateBalanceDisplay(); 
-                    showToast(`BINGO! VOCÊ GANHOU R$ ${BINGO_PRIZE}`, "#ffd700");
+                    showToast(`BINGO! VOCÊ GANHOU R$ ${BINGO_PRIZE}`, "#ffd700", true);
                 } else {
-                    showToast(`BINGO: ${p.name}!`, "#ffffff");
+                    showToast(`BINGO: ${p.name}!`, "#ffffff", true);
                 }
                 confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
             }
@@ -518,8 +509,7 @@
     }
 
     function stopAuto() {
-        clearInterval(autoInterval); 
-        autoInterval = null; 
+        clearInterval(autoInterval); autoInterval = null; 
         document.getElementById('auto-btn').innerText = "Sorteio Automático";
     }
 
@@ -531,16 +521,12 @@
             let p = { id: i, name: i === 1 ? "VOCÊ" : nomes[i-2], nums: n, marks: 1 };
             players.push(p);
             let card = document.createElement('div'); card.className = `bingo-card ${i===1?'player':''}`;
-            
-            // Layout do cabeçalho da cartela atualizado com Flexbox
             card.innerHTML = `
-                <div class="card-header-flex">
+                <div style="display:flex; justify-content:space-between; align-items:center; padding:0 5px; margin-bottom:5px;">
                     <h5 style="margin:0;">${p.name}</h5>
-                    <span id="marks-p${i}" style="font-size:0.7rem; color:var(--accent); font-weight:bold;">1/25</span>
+                    <span id="count-p${i}" style="font-size:0.75rem; color:var(--accent); font-weight:bold;">(1/25)</span>
                 </div>
-                <div class="grid" id="g-${i}"></div>
-            `;
-            
+                <div class="grid" id="g-${i}"></div>`;
             arena.appendChild(card);
             p.nums.forEach((num, idx) => {
                 let cell = document.createElement('div');
@@ -556,27 +542,13 @@
 
     document.getElementById('btn-unlock').onclick = () => {
         unlockAudio();
-        const blockUntil = localStorage.getItem('bingo_pin_blocked');
-        if (blockUntil && Date.now() < parseInt(blockUntil)) {
-            const timeLeft = Math.ceil((parseInt(blockUntil) - Date.now()) / 1000);
-            alert(`Muitas tentativas! Aguarde ${timeLeft} segundos.`);
-            return;
-        }
         const input = document.getElementById('pass-input').value;
         if (!savedPass) {
             if(input.length === 8) { localStorage.setItem('bingo_vault_pass', input); login(); } 
             else { alert("O PIN deve ter 8 números."); }
         } else {
-            if (input === savedPass) { pinAttempts = 0; login(); } 
-            else {
-                pinAttempts++;
-                if (pinAttempts >= 3) {
-                    const blockTime = Date.now() + 60000; 
-                    localStorage.setItem('bingo_pin_blocked', blockTime.toString());
-                    pinAttempts = 0; 
-                    alert("Acesso bloqueado por 1 minuto.");
-                } else { alert(`PIN Incorreto! Tentativa ${pinAttempts} de 3.`); }
-            }
+            if (input === savedPass) { login(); } 
+            else { alert("PIN Incorreto!"); }
         }
     };
 
@@ -584,18 +556,14 @@
         sessionStorage.setItem('bingo_authenticated', 'true');
         document.getElementById('auth-overlay').style.display = 'none';
         totalBalance = parseFloat(localStorage.getItem('bingo_arena_balance')) || 50.00;
-        updateBalanceDisplay();
-        initGame();
+        updateBalanceDisplay(); initGame();
     }
 
     document.getElementById('draw-btn').onclick = drawBall;
     document.getElementById('auto-btn').onclick = function() {
         unlockAudio();
         if (autoInterval) stopAuto();
-        else {
-            this.innerText = "PAUSAR";
-            autoInterval = setInterval(drawBall, 800);
-        }
+        else { this.innerText = "PAUSAR"; autoInterval = setInterval(drawBall, 800); }
     };
 
     document.getElementById('new-round-btn').onclick = () => {
@@ -603,10 +571,8 @@
     };
 
     window.addFunds = (val) => {
-        unlockAudio();
-        totalBalance += val;
-        saveTransaction("Depósito PIX", val);
-        updateBalanceDisplay();
+        unlockAudio(); totalBalance += val;
+        saveTransaction("Depósito PIX", val); updateBalanceDisplay();
         document.getElementById('deposit-modal').style.display = 'none';
         showToast(`+R$ ${val} Adicionados!`, "#2ecc71");
     };
@@ -622,10 +588,8 @@
     document.getElementById('confirm-wd').onclick = () => {
         const val = parseFloat(document.getElementById('withdraw-amount').value);
         if(val >= 20 && totalBalance >= val) {
-            totalBalance -= val;
-            saveTransaction("Saque PIX", -val);
-            updateBalanceDisplay();
-            alert("Saque de R$ " + val + " solicitado!");
+            totalBalance -= val; saveTransaction("Saque PIX", -val);
+            updateBalanceDisplay(); alert("Saque solicitado!");
             document.getElementById('withdraw-modal').style.display = 'none';
         } else { alert("Valor mínimo R$ 20."); }
     };
@@ -657,16 +621,14 @@
         updateSoundButtonUI();
     };
 
-    const rankingHeader = document.getElementById('header-ranking');
-    rankingHeader.onclick = () => {
+    document.getElementById('header-ranking').onclick = () => {
         const panel = document.querySelector('.bottom-panel');
         if (panel.classList.contains('minimized')) {
             panel.classList.remove('minimized');
             document.getElementById('ranking-title-text').innerText = "RANKING AO VIVO";
-            return;
+        } else {
+            document.getElementById('ranking-body').classList.toggle('ranking-collapsed');
         }
-        const isCollapsed = document.getElementById('ranking-body').classList.toggle('ranking-collapsed');
-        document.getElementById('toggle-ranking-btn').innerText = isCollapsed ? "MOSTRAR" : "ESCONDER";
     };
 
     document.getElementById('toggle-full-panel').onclick = function(e) {
