@@ -350,27 +350,18 @@
         audioUnlocked = true;
     }
 
-    // --- FUNÇÃO DE MENSAGEM CORRIGIDA (COM FILA/PRIORIDADE) ---
     function showToast(text, color, isWinner = false) {
         const toast = document.getElementById('money-toast');
-        
-        // Se for um ganhador, atualiza o status na bola também
         if(isWinner) {
             document.getElementById('ball-status').innerText = text;
             document.getElementById('ball-status').style.color = color;
         }
-
-        // Se já existe um toast de ganhador na tela, não deixa o de "perda de dinheiro" apagar ele
         if(toast.classList.contains('toast-show') && !isWinner && toast.isWinnerType) return;
-
         toast.innerText = text;
         toast.style.color = color;
         toast.isWinnerType = isWinner;
         toast.classList.add('toast-show');
-
         if(toastTimeout) clearTimeout(toastTimeout);
-        
-        // Ganhadores ficam 5 segundos, mensagens comuns 2 segundos
         toastTimeout = setTimeout(() => {
             toast.classList.remove('toast-show');
             toast.isWinnerType = false;
@@ -410,44 +401,30 @@
     }
 
     document.getElementById('help-btn').onclick = () => {
-        alert(
-            "📖 REGRAS BINGO ARENA PRO:\n\n" +
-            "1. Custo: R$ 6,00 por rodada.\n" +
-            "2. Linha: Ganhe R$ 14,00 (1 horizontal).\n" +
-            "3. Bingo: Ganhe R$ 24,00 (cartela cheia).\n" +
-            "4. Saque: Mínimo R$ 20,00 via PIX."
-        );
+        alert("📖 REGRAS BINGO ARENA PRO:\n\n1. Custo: R$ 6,00 por rodada.\n2. Linha: Ganhe R$ 14,00.\n3. Bingo: Ganhe R$ 24,00.\n4. Saque: Mínimo R$ 20,00.");
     };
 
     function drawBall() {
         unlockAudio();
         if(gameOver || drawn.length >= 75) { if(autoInterval) stopAuto(); return; }
-        
         if (!costDeducted) {
-            if (totalBalance < ROUND_COST) { 
-                alert("Saldo insuficiente!"); if(autoInterval) stopAuto(); return;
-            }
+            if (totalBalance < ROUND_COST) { alert("Saldo insuficiente!"); if(autoInterval) stopAuto(); return; }
             totalBalance -= ROUND_COST;
             saveTransaction("Entrada Rodada", -ROUND_COST);
             costDeducted = true;
             updateBalanceDisplay();
             showToast("-R$ 6,00", "#fff");
         }
-
         playSound(somSorteio);
         let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
         drawn.push(b);
-        
         const ballEl = document.getElementById('ball');
         ballEl.innerText = b;
         ballEl.classList.remove('ball-pop');
         void ballEl.offsetWidth; ballEl.classList.add('ball-pop');
-
         let h = document.createElement('div'); h.className = "hist-ball";
         h.innerText = b; document.getElementById('history-grid').prepend(h);
-        
         document.querySelectorAll(`[data-num="${b}"]`).forEach(c => c.classList.add('marked'));
-        
         players.forEach(p => { 
             if(p.nums.includes(b)) {
                 p.marks++; 
@@ -470,7 +447,6 @@
 
     function checkWinners() {
         players.forEach(p => {
-            // VERIFICAÇÃO DE LINHA
             if(!firstLineOut) {
                 for(let r=0; r<5; r++) {
                     let win = true, lineCells = [];
@@ -492,7 +468,6 @@
                     }
                 }
             }
-            // VERIFICAÇÃO DE BINGO
             if(p.marks === 25 && !gameOver) {
                 gameOver = true; stopAuto(); playSound(somBingo);
                 document.getElementById('new-round-btn').classList.add('btn-flash');
@@ -521,12 +496,7 @@
             let p = { id: i, name: i === 1 ? "VOCÊ" : nomes[i-2], nums: n, marks: 1 };
             players.push(p);
             let card = document.createElement('div'); card.className = `bingo-card ${i===1?'player':''}`;
-            card.innerHTML = `
-                <div style="display:flex; justify-content:space-between; align-items:center; padding:0 5px; margin-bottom:5px;">
-                    <h5 style="margin:0;">${p.name}</h5>
-                    <span id="count-p${i}" style="font-size:0.75rem; color:var(--accent); font-weight:bold;">(1/25)</span>
-                </div>
-                <div class="grid" id="g-${i}"></div>`;
+            card.innerHTML = `<div style="display:flex; justify-content:space-between; align-items:center; padding:0 5px; margin-bottom:5px;"><h5 style="margin:0;">${p.name}</h5><span id="count-p${i}" style="font-size:0.75rem; color:var(--accent); font-weight:bold;">(1/25)</span></div><div class="grid" id="g-${i}"></div>`;
             arena.appendChild(card);
             p.nums.forEach((num, idx) => {
                 let cell = document.createElement('div');
@@ -563,7 +533,7 @@
     document.getElementById('auto-btn').onclick = function() {
         unlockAudio();
         if (autoInterval) stopAuto();
-        else { this.innerText = "PAUSAR"; autoInterval = setInterval(drawBall, 800); }
+        else { this.innerText = "PAUSAR"; autoInterval = setInterval(drawBall, 450); } // VELOCIDADE AUMENTADA AQUI
     };
 
     document.getElementById('new-round-btn').onclick = () => {
@@ -599,16 +569,7 @@
         list.innerHTML = walletHistory.length === 0 ? '<p style="text-align:center">Sem movimentações.</p>' : '';
         walletHistory.forEach(item => {
             const isPos = item.value > 0;
-            list.innerHTML += `
-                <div class="history-item">
-                    <div>
-                        <div style="font-weight:bold">${item.desc}</div>
-                        <div style="font-size:0.7rem; color:#aaa">${item.date}</div>
-                    </div>
-                    <div class="${isPos ? 'hist-pos' : 'hist-neg'}">
-                        ${isPos ? '+' : ''}R$ ${Math.abs(item.value).toFixed(2).replace('.', ',')}
-                    </div>
-                </div>`;
+            list.innerHTML += `<div class="history-item"><div><div style="font-weight:bold">${item.desc}</div><div style="font-size:0.7rem; color:#aaa">${item.date}</div></div><div class="${isPos ? 'hist-pos' : 'hist-neg'}">${isPos ? '+' : ''}R$ ${Math.abs(item.value).toFixed(2).replace('.', ',')}</div></div>`;
         });
         document.getElementById('history-modal').style.display = 'flex';
     };
