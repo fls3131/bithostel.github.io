@@ -533,11 +533,20 @@
     document.getElementById('auto-btn').onclick = function() {
         unlockAudio();
         if (autoInterval) stopAuto();
-        else { this.innerText = "PAUSAR"; autoInterval = setInterval(drawBall, 450); } // VELOCIDADE AUMENTADA AQUI
+        else { this.innerText = "PAUSAR"; autoInterval = setInterval(drawBall, 450); }
     };
 
+    // --- NOVA LÓGICA DO BOTÃO NOVA RODADA ---
     document.getElementById('new-round-btn').onclick = () => {
-        if (confirm("Deseja iniciar nova rodada por R$ 6,00?")) location.reload();
+        if (gameOver) {
+            // Se o jogo acabou, reinicia direto sem perguntar
+            location.reload();
+        } else {
+            // Se o jogo ainda estiver rolando, pergunta para evitar perda acidental de saldo
+            if (confirm("Deseja interromper e iniciar nova rodada por R$ 6,00?")) {
+                location.reload();
+            }
+        }
     };
 
     window.addFunds = (val) => {
