@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>JS WebMiner RandomX</h2>
+    <div id="stats">Hashes: 0 | Status: Desconectado</div>
+    <button onclick="startMining()">Começar</button>
+
+    <script>
+        let totalHashes = 0;
+        const worker = new Worker('worker.js');
+
+        function startMining() {
+            // Conecta a um proxy WebSocket (ex: Stratum-over-WebSocket)
+            const socket = new WebSocket('ws://seu-proxy-pool.com:8080');
+            
+            socket.onmessage = (msg) => {
+                const job = JSON.parse(msg.data);
+                worker.postMessage(job);
+            };
+
+            worker.onmessage = (e) => {
+                if(e.data.status === 'progress') {
+                    totalHashes += e.data.hashes;
+                    document.getElementById('stats').innerText = `Hashes: ${totalHashes}`;
+                }
+            };
+        }
+    </script>
+</body>
+</html>
