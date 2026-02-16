@@ -125,10 +125,27 @@
             border: 1px solid var(--accent);
             overflow: hidden;
             flex-direction: column;
-            min-height: 60px;
+            min-height: 80px; /* Aumentado levemente para caber o círculo */
+            padding: 5px;
         }
-        #ball { font-size: 1.98rem; color: var(--accent); font-weight: 900; transition: transform 0.2s; } 
-        #ball-status { font-size: 0.6rem; color: var(--win); font-weight: bold; text-transform: uppercase; }
+
+        /* --- ALTERAÇÃO SOLICITADA: BOLA COM FUNDO BRANCO E FONTE PRETA --- */
+        #ball { 
+            font-size: 1.8rem; 
+            color: #000; 
+            background: #fff;
+            font-weight: 900; 
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+            transition: transform 0.2s; 
+        } 
+
+        #ball-status { font-size: 0.55rem; color: var(--win); font-weight: bold; text-transform: uppercase; margin-bottom: 4px; }
         .ball-pop { transform: scale(1.2); }
 
         .btn-group-main { 
@@ -419,7 +436,6 @@
         let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
         drawn.push(b);
         
-        // --- ATUALIZAÇÃO DO STATUS COM NÚMERO DE PEDRAS ---
         document.getElementById('ball-status').innerText = `SORTEANDO... (${drawn.length}/75)`;
         document.getElementById('ball-status').style.color = "var(--win)";
 
