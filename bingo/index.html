@@ -418,6 +418,11 @@
         playSound(somSorteio);
         let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
         drawn.push(b);
+        
+        // --- ATUALIZAÇÃO DO STATUS COM NÚMERO DE PEDRAS ---
+        document.getElementById('ball-status').innerText = `SORTEANDO... (${drawn.length}/75)`;
+        document.getElementById('ball-status').style.color = "var(--win)";
+
         const ballEl = document.getElementById('ball');
         ballEl.innerText = b;
         ballEl.classList.remove('ball-pop');
@@ -460,6 +465,7 @@
                         confetti({ particleCount: 100, origin: { y: 0.6 } });
                         if(p.id === 1) { 
                             totalBalance += LINE_PRIZE; saveTransaction("Prêmio Linha", LINE_PRIZE);
+                            playSound(somDinheiro); 
                             updateBalanceDisplay(); 
                             showToast(`LINHA! +R$ ${LINE_PRIZE}`, "#2ecc71", true);
                         } else {
@@ -473,6 +479,7 @@
                 document.getElementById('new-round-btn').classList.add('btn-flash');
                 if(p.id === 1) { 
                     totalBalance += BINGO_PRIZE; saveTransaction("Prêmio BINGO", BINGO_PRIZE);
+                    playSound(somDinheiro); 
                     updateBalanceDisplay(); 
                     showToast(`BINGO! VOCÊ GANHOU R$ ${BINGO_PRIZE}`, "#ffd700", true);
                 } else {
@@ -536,13 +543,10 @@
         else { this.innerText = "PAUSAR"; autoInterval = setInterval(drawBall, 450); }
     };
 
-    // --- NOVA LÓGICA DO BOTÃO NOVA RODADA ---
     document.getElementById('new-round-btn').onclick = () => {
         if (gameOver) {
-            // Se o jogo acabou, reinicia direto sem perguntar
             location.reload();
         } else {
-            // Se o jogo ainda estiver rolando, pergunta para evitar perda acidental de saldo
             if (confirm("Deseja interromper e iniciar nova rodada por R$ 6,00?")) {
                 location.reload();
             }
@@ -551,7 +555,9 @@
 
     window.addFunds = (val) => {
         unlockAudio(); totalBalance += val;
-        saveTransaction("Depósito PIX", val); updateBalanceDisplay();
+        saveTransaction("Depósito PIX", val); 
+        playSound(somDinheiro); 
+        updateBalanceDisplay();
         document.getElementById('deposit-modal').style.display = 'none';
         showToast(`+R$ ${val} Adicionados!`, "#2ecc71");
     };
