@@ -125,18 +125,17 @@
             border: 1px solid var(--accent);
             overflow: hidden;
             flex-direction: column;
-            min-height: 80px; /* Aumentado levemente para caber o círculo */
+            min-height: 80px;
             padding: 5px;
         }
 
-        /* --- ALTERAÇÃO SOLICITADA: BOLA COM FUNDO BRANCO E FONTE PRETA --- */
         #ball { 
-            font-size: 1.8rem; 
+            font-size: 1.5rem; 
             color: #000; 
             background: #fff;
             font-weight: 900; 
             width: 40px;
-            height: 40px;
+            height: 33px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -359,6 +358,11 @@
     let soundEnabled = localStorage.getItem('bingo_sound_enabled') !== 'false'; 
     let toastTimeout = null;
 
+    // --- CONTROLE DE TENTATIVAS ---
+    let tentativasPin = 0;
+    let bloqueioAte = 0;
+    let timerInterval = null;
+
     function unlockAudio() {
         if (audioUnlocked) return;
         [somSorteio, somDinheiro, somMarca, somBingo, somLinha].forEach(audio => {
@@ -533,17 +537,50 @@
         updateRanking();
     }
 
-    document.getElementById('btn-unlock').onclick = () => {
+    // --- LÓGICA DE DESBLOQUEIO COM ESPERA ---
+    document.getElementById('btn-unlock').onclick = function() {
+        if (Date.now() < bloqueioAte) return; // Impede clique se estiver bloqueado
+
         unlockAudio();
         const input = document.getElementById('pass-input').value;
+        const btn = this;
+
         if (!savedPass) {
             if(input.length === 8) { localStorage.setItem('bingo_vault_pass', input); login(); } 
             else { alert("O PIN deve ter 8 números."); }
         } else {
-            if (input === savedPass) { login(); } 
-            else { alert("PIN Incorreto!"); }
+            if (input === savedPass) { 
+                tentativasPin = 0;
+                login(); 
+            } else { 
+                tentativasPin++;
+                if (tentativasPin >= 3) {
+                    bloqueioAte = Date.now() + 60000; // 1 minuto
+                    tentativasPin = 0;
+                    iniciarContagemBloqueio(btn);
+                } else {
+                    alert(`PIN Incorreto! Tentativas: ${tentativasPin}/3`);
+                }
+            }
         }
     };
+
+    function iniciarContagemBloqueio(botao) {
+        botao.disabled = true;
+        botao.style.background = "#666";
+        
+        timerInterval = setInterval(() => {
+            let faltam = Math.ceil((bloqueioAte - Date.now()) / 1000);
+            if (faltam <= 0) {
+                clearInterval(timerInterval);
+                botao.disabled = false;
+                botao.innerText = "CONFIRMAR E ENTRAR";
+                botao.style.background = "var(--primary)";
+            } else {
+                botao.innerText = `BLOQUEADO (${faltam}s)`;
+            }
+        }, 1000);
+    }
 
     function login() {
         sessionStorage.setItem('bingo_authenticated', 'true');
