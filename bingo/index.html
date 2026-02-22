@@ -318,7 +318,7 @@
             <div class="btn-group-main">
                 <button id="draw-btn" class="btn-manual">Sortear Manual</button>
                 <button id="auto-btn" class="btn-auto">Sortear Automático</button>
-                <button id="new-round-btn" class="btn-reset">NOVA RODADA (R$ 6,00)</button>
+                <button id="new-round-btn" class="btn-reset">NOVA RODADA (R$ 4,50)</button>
             </div>
             <div id="history-grid"></div>
         </div>
@@ -397,7 +397,8 @@
     updateSoundButtonUI();
 
     let walletHistory = JSON.parse(localStorage.getItem('bingo_wallet_history') || '[]');
-    const ROUND_COST = 6.00, LINE_PRIZE = 14.00, BINGO_PRIZE = 24.00;
+    // ALTERADO: Custo da rodada agora é R$ 4,50
+    const ROUND_COST = 4.50, LINE_PRIZE = 14.00, BINGO_PRIZE = 24.00;
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
 
     const savedPass = localStorage.getItem('bingo_vault_pass');
@@ -422,7 +423,7 @@
     }
 
     document.getElementById('help-btn').onclick = () => {
-        alert("📖 REGRAS BINGO ARENA PRO:\n\n1. Custo: R$ 6,00 por rodada.\n2. Linha: Ganhe R$ 14,00.\n3. Bingo: Ganhe R$ 24,00.\n4. Saque: Mínimo R$ 20,00.");
+        alert("📖 REGRAS BINGO ARENA PRO:\n\n1. Custo: R$ 4,50 por rodada.\n2. Linha: Ganhe R$ 14,00.\n3. Bingo: Ganhe R$ 24,00.\n4. Saque: Mínimo R$ 20,00.");
     };
 
     function drawBall() {
@@ -434,7 +435,7 @@
             saveTransaction("Entrada Rodada", -ROUND_COST);
             costDeducted = true;
             updateBalanceDisplay();
-            showToast("-R$ 6,00", "#fff");
+            showToast("-R$ 4,50", "#fff"); // ALTERADO
         }
         playSound(somSorteio);
         let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
@@ -641,7 +642,7 @@
         if (gameOver) {
             location.reload();
         } else {
-            if (confirm("Deseja interromper e iniciar nova rodada por R$ 6,00?")) {
+            if (confirm("Deseja interromper e iniciar nova rodada por R$ 4,50?")) { // ALTERADO
                 location.reload();
             }
         }
