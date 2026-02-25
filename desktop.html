@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seu Novo PC na Nuvem | Cloud VDI 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10b981; 
+            --dark: #0f172a;
+            --accent: #3b82f6;
+            --light: #f8fafc;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--light); color: var(--dark); line-height: 1.6; overflow-x: hidden; }
+
+        header {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            padding: 5rem 1rem 8rem;
+            text-align: center;
+        }
+
+        .header-content { max-width: 800px; margin: 0 auto; }
+        .badge-promo { background: var(--primary); color: white; padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; margin-bottom: 1rem; display: inline-block; }
+        header h1 { font-size: 2.8rem; margin-bottom: 1rem; letter-spacing: -1px; }
+
+        /* Seletor de Ciclo */
+        .cycle-selector {
+            display: flex;
+            justify-content: center;
+            background: #e2e8f0;
+            padding: 5px;
+            border-radius: 12px;
+            width: fit-content;
+            margin: -2rem auto 3rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .cycle-btn {
+            padding: 10px 20px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #64748b;
+            border-radius: 8px;
+            transition: 0.3s;
+        }
+
+        .cycle-btn.active { background: white; color: var(--dark); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+
+        /* Grid e Cards */
+        .container { max-width: 1200px; margin: 0 auto 5rem; padding: 0 1rem; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+
+        .card {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            border: 1px solid #e2e8f0;
+            transition: 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .card:hover { transform: translateY(-10px); box-shadow: 0 25px 50px -12px rgba(0,0,0,0.1); }
+        .price { font-size: 3rem; font-weight: 800; margin: 1rem 0; color: var(--dark); }
+        .price span { font-size: 1.2rem; color: #94a3b8; font-weight: 400; }
+
+        .specs { list-style: none; margin: 2rem 0; text-align: left; flex-grow: 1; }
+        .specs li { padding: 10px 0; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between; font-size: 0.95rem; }
+        .specs li span { font-weight: 700; }
+
+        .benefit-tag { color: var(--primary); font-size: 0.85rem; font-weight: 700; margin-bottom: 1rem; display: block; }
+
+        .btn {
+            background: var(--dark);
+            color: white;
+            padding: 1.2rem;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+        }
+
+        .btn:hover { background: var(--primary); }
+
+        /* Benefícios */
+        .benefits-section { background: white; padding: 4rem 1rem; text-align: center; border-radius: 30px; margin-bottom: 4rem; }
+        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem; }
+        .benefit-item h4 { color: var(--accent); margin-bottom: 0.5rem; }
+
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-content">
+        <span class="badge-promo">ECONOMIA REAL: ATÉ 80% VS PC FÍSICO</span>
+        <h1>Seu Próximo Computador está na Nuvem</h1>
+        <p>Acesse seu Windows 10, 11 ou MX Linux 25 de qualquer lugar. Sem gastos com hardware, manutenção ou energia elétrica.</p>
+    </div>
+</header>
+
+<div class="container">
+    <div class="cycle-selector">
+        <button class="cycle-btn active" onclick="showCycle('monthly', this)">Mensal</button>
+        <button class="cycle-btn" onclick="showCycle('3months', this)">3 Meses</button>
+        <button class="cycle-btn" onclick="showCycle('6months', this)">6 Meses</button>
+        <button class="cycle-btn" onclick="showCycle('yearly', this)">Anual (Melhor Preço)</button>
+    </div>
+
+    <div class="pricing-grid">
+        <div class="card">
+            <span class="benefit-tag">Economia e Mobilidade</span>
+            <h3>2GB KVM NVMe</h3>
+            <div class="price">R$ <span class="val" data-m="36" data-3m="98" data-6m="175" data-y="306">36</span></div>
+            <p class="cycle-label">por mês</p>
+            <ul class="specs">
+                <li>Processador <span>1 vCPU</span></li>
+                <li>Memória RAM <span>2 GB</span></li>
+                <li>Armazenamento <span>20 GB NVMe</span></li>
+                <li>DDoS Protection <span>10 Gbps</span></li>
+            </ul>
+            <a href="#" class="btn">Começar Agora</a>
+        </div>
+
+        <div class="card" style="border-color: var(--primary);">
+            <span class="benefit-tag" style="color: var(--accent);">Ideal para Trabalho</span>
+            <h3>4GB KVM NVMe</h3>
+            <div class="price">R$ <span class="val" data-m="73" data-3m="197" data-6m="349" data-y="612">73</span></div>
+            <p class="cycle-label">por mês</p>
+            <ul class="specs">
+                <li>Processador <span>2 vCPUs</span></li>
+                <li>Memória RAM <span>4 GB</span></li>
+                <li>Armazenamento <span>40 GB NVMe</span></li>
+                <li>DDoS Protection <span>10 Gbps</span></li>
+            </ul>
+            <a href="#" class="btn" style="background: var(--primary);">Mais Popular</a>
+        </div>
+
+        <div class="card">
+            <span class="benefit-tag">Alta Performance</span>
+            <h3>8GB KVM NVMe</h3>
+            <div class="price">R$ <span class="val" data-m="146" data-3m="393" data-6m="699" data-y="1223">146</span></div>
+            <p class="cycle-label">por mês</p>
+            <ul class="specs">
+                <li>Processador <span>4 vCPUs</span></li>
+                <li>Memória RAM <span>8 GB</span></li>
+                <li>Armazenamento <span>60 GB NVMe</span></li>
+                <li>DDoS Protection <span>10 Gbps</span></li>
+            </ul>
+            <a href="#" class="btn">Começar Agora</a>
+        </div>
+    </div>
+
+    <section class="benefits-section" style="margin-top: 4rem;">
+        <h3>Por que trocar o PC Físico pela Cloud?</h3>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <h4>Seu PC em Qualquer Lugar</h4>
+                <p>Acesse seu desktop do celular, tablet ou um notebook antigo.</p>
+            </div>
+            <div class="benefit-item">
+                <h4>MX Linux 25 Pronto</h4>
+                <p>Performance extrema com o sistema mais leve do mercado.</p>
+            </div>
+            <div class="benefit-item">
+                <h4>Hardware Imortal</h4>
+                <p>O hardware nunca envelhece. Nós cuidamos dos upgrades para você.</p>
+            </div>
+            <div class="benefit-item">
+                <h4>Economia de Energia</h4>
+                <p>Reduza sua conta de luz movendo o processamento pesado para a nuvem.</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script>
+    function showCycle(cycle, btn) {
+        // Atualiza botões
+        document.querySelectorAll('.cycle-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Atualiza preços e labels
+        const prices = document.querySelectorAll('.val');
+        const labels = document.querySelectorAll('.cycle-label');
+
+        prices.forEach(p => {
+            if(cycle === 'monthly') p.innerText = p.getAttribute('data-m');
+            if(cycle === '3months') p.innerText = p.getAttribute('data-3m');
+            if(cycle === '6months') p.innerText = p.getAttribute('data-6m');
+            if(cycle === 'yearly') p.innerText = p.getAttribute('data-y');
+        });
+
+        labels.forEach(l => {
+            if(cycle === 'monthly') l.innerText = 'por mês';
+            if(cycle === '3months') l.innerText = 'por 3 meses';
+            if(cycle === '6months') l.innerText = 'por 6 meses';
+            if(cycle === 'yearly') l.innerText = 'por um ano';
+        });
+    }
+</script>
+
+</body>
+</html>
