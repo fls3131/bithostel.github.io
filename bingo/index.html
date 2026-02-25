@@ -318,7 +318,7 @@
             <div class="btn-group-main">
                 <button id="draw-btn" class="btn-manual">Sortear Manual</button>
                 <button id="auto-btn" class="btn-auto">Sortear Automático</button>
-                <button id="new-round-btn" class="btn-reset">NOVA RODADA (R$ 6,00)</button>
+                <button id="new-round-btn" class="btn-reset">NOVA RODADA (R$ 4,50)</button>
             </div>
             <div id="history-grid"></div>
         </div>
@@ -397,7 +397,8 @@
     updateSoundButtonUI();
 
     let walletHistory = JSON.parse(localStorage.getItem('bingo_wallet_history') || '[]');
-    const ROUND_COST = 6.00, LINE_PRIZE = 14.00, BINGO_PRIZE = 24.00;
+    // ALTERADO: Custo da rodada agora é R$ 4,50
+    const ROUND_COST = 4.50, LINE_PRIZE = 14.00, BINGO_PRIZE = 24.00;
     const nomesComuns = ["JOÃO", "MARIA", "PEDRO", "ANA", "LUCAS", "CARLA", "BRUNO", "JULIA", "MARCOS", "BEATRIZ"];
 
     const savedPass = localStorage.getItem('bingo_vault_pass');
@@ -422,7 +423,7 @@
     }
 
     document.getElementById('help-btn').onclick = () => {
-        alert("📖 REGRAS BINGO ARENA PRO:\n\n1. Custo: R$ 6,00 por rodada.\n2. Linha: Ganhe R$ 14,00.\n3. Bingo: Ganhe R$ 24,00.\n4. Saque: Mínimo R$ 20,00.");
+        alert("📖 REGRAS BINGO ARENA PRO:\n\n1. Custo: R$ 4,50 por rodada.\n2. Linha: Ganhe R$ 14,00.\n3. Bingo: Ganhe R$ 24,00.\n4. Saque: Mínimo R$ 20,00.");
     };
 
     function drawBall() {
@@ -434,7 +435,7 @@
             saveTransaction("Entrada Rodada", -ROUND_COST);
             costDeducted = true;
             updateBalanceDisplay();
-            showToast("-R$ 6,00", "#fff");
+            showToast("-R$ 4,50", "#fff"); // ALTERADO
         }
         playSound(somSorteio);
         let b; do { b = Math.floor(Math.random() * 75) + 1; } while(drawn.includes(b));
@@ -470,31 +471,72 @@
         });
     }
 
+    // ========= FUNÇÃO MODIFICADA: AGORA VERIFICA LINHAS VERTICAIS =========
     function checkWinners() {
         players.forEach(p => {
-            if(!firstLineOut) {
-                for(let r=0; r<5; r++) {
-                    let win = true, lineCells = [];
-                    for(let c=0; c<5; c++) { 
-                        let cell = document.getElementById(`p${p.id}-c${r*5+c}`);
-                        lineCells.push(cell); if(!cell.classList.contains('marked')) win = false;
+            // Verifica linha (horizontal) se ainda não houve primeira linha
+            if (!firstLineOut) {
+                // Verifica linhas horizontais
+                for (let r = 0; r < 5; r++) {
+                    let win = true;
+                    let lineCells = [];
+                    for (let c = 0; c < 5; c++) {
+                        let idx = r * 5 + c;
+                        let cell = document.getElementById(`p${p.id}-c${idx}`);
+                        lineCells.push(cell);
+                        if (!cell.classList.contains('marked')) win = false;
                     }
-                    if(win) {
-                        firstLineOut = true; playSound(somLinha);
+                    if (win) {
+                        firstLineOut = true;
+                        playSound(somLinha);
                         lineCells.forEach(cell => cell.classList.add('line-win'));
                         confetti({ particleCount: 100, origin: { y: 0.6 } });
-                        if(p.id === 1) { 
-                            totalBalance += LINE_PRIZE; saveTransaction("Prêmio Linha", LINE_PRIZE);
-                            playSound(somDinheiro); 
-                            updateBalanceDisplay(); 
+                        if (p.id === 1) {
+                            totalBalance += LINE_PRIZE;
+                            saveTransaction("Prêmio Linha", LINE_PRIZE);
+                            playSound(somDinheiro);
+                            updateBalanceDisplay();
                             showToast(`LINHA! +R$ ${LINE_PRIZE}`, "#2ecc71", true);
                         } else {
                             showToast(`LINHA: ${p.name}!`, "#ffffff", true);
                         }
+                        break; // sai do loop de linhas horizontais
                     }
                 }
             }
-            if(p.marks === 25 && !gameOver) {
+
+            // Se ainda não houve linha, verifica colunas (verticais)
+            if (!firstLineOut) {
+                for (let c = 0; c < 5; c++) {
+                    let win = true;
+                    let lineCells = [];
+                    for (let r = 0; r < 5; r++) {
+                        let idx = r * 5 + c;
+                        let cell = document.getElementById(`p${p.id}-c${idx}`);
+                        lineCells.push(cell);
+                        if (!cell.classList.contains('marked')) win = false;
+                    }
+                    if (win) {
+                        firstLineOut = true;
+                        playSound(somLinha);
+                        lineCells.forEach(cell => cell.classList.add('line-win'));
+                        confetti({ particleCount: 100, origin: { y: 0.6 } });
+                        if (p.id === 1) {
+                            totalBalance += LINE_PRIZE;
+                            saveTransaction("Prêmio Linha", LINE_PRIZE);
+                            playSound(somDinheiro);
+                            updateBalanceDisplay();
+                            showToast(`LINHA! +R$ ${LINE_PRIZE}`, "#2ecc71", true);
+                        } else {
+                            showToast(`LINHA: ${p.name}!`, "#ffffff", true);
+                        }
+                        break; // sai do loop de colunas
+                    }
+                }
+            }
+
+            // Verifica BINGO (igual ao original)
+            if (p.marks === 25 && !gameOver) {
                 gameOver = true; stopAuto(); playSound(somBingo);
                 document.getElementById('new-round-btn').classList.add('btn-flash');
                 if(p.id === 1) { 
@@ -600,7 +642,7 @@
         if (gameOver) {
             location.reload();
         } else {
-            if (confirm("Deseja interromper e iniciar nova rodada por R$ 6,00?")) {
+            if (confirm("Deseja interromper e iniciar nova rodada por R$ 4,50?")) { // ALTERADO
                 location.reload();
             }
         }
