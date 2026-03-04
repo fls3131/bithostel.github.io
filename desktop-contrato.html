@@ -8,13 +8,15 @@
     <style>
         body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #334155; background: #f1f5f9; padding: 2rem 1rem; }
         .contract-container { max-width: 800px; margin: 0 auto; background: white; padding: 4rem; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #0f172a; text-transform: uppercase; font-size: 1.5rem; margin-bottom: 2rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 1rem; }
-        h2 { font-size: 1.1rem; color: #0f172a; margin-top: 1.5rem; text-transform: uppercase; }
+        h1 { text-align: center; color: #0f172a; text-transform: uppercase; font-size: 1.4rem; margin-bottom: 2rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 1rem; }
+        h2 { font-size: 1.1rem; color: #0f172a; margin-top: 1.5rem; text-transform: uppercase; border-left: 4px solid #10b981; padding-left: 10px; }
         p, li { font-size: 0.95rem; margin-bottom: 1rem; text-align: justify; }
+        strong { color: #1e293b; }
         .identificacao { background: #f8fafc; padding: 1.5rem; border: 1px solid #e2e8f0; border-radius: 4px; margin-bottom: 2rem; }
         .footer { margin-top: 3rem; text-align: center; font-size: 0.8rem; color: #94a3b8; border-top: 1px solid #e2e8f0; padding-top: 1rem; }
-        .btn-print { display: block; width: fit-content; margin: 0 auto 2rem; background: #10b981; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; cursor: pointer; border: none; }
-        @media print { .btn-print { display: none; } body { background: white; padding: 0; } .contract-container { box-shadow: none; width: 100%; } }
+        .btn-print { display: block; width: fit-content; margin: 0 auto 2rem; background: #10b981; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; cursor: pointer; border: none; transition: 0.2s; }
+        .btn-print:hover { background: #059669; transform: scale(1.02); }
+        @media print { .btn-print { display: none; } body { background: white; padding: 0; } .contract-container { box-shadow: none; width: 100%; border: none; padding: 1rem; } }
     </style>
 </head>
 <body>
@@ -25,41 +27,42 @@
         <h1>Instrumento Particular de Prestação de Serviços de Computação em Nuvem (VDI)</h1>
 
         <div class="identificacao">
-            <strong>CONTRATADA:</strong> bithostel TI, doravante denominada apenas "CONTRATADA".<br><br>
-            <strong>CONTRATANTE:</strong> Pessoa física ou jurídica qualificada no ato da adesão via canais digitais, doravante denominada apenas "CONTRATANTE".
+            <strong>CONTRATADA:</strong> BITHOSTEL TI, inscrita no CNPJ sob o nº <strong>14.406.585/0001-59</strong>, doravante denominada apenas "CONTRATADA".<br><br>
+            <strong>CONTRATANTE:</strong> Pessoa física ou jurídica devidamente qualificada no ato da adesão via canais digitais, mediante aceite eletrônico e confirmação de pagamento, doravante denominada apenas "CONTRATANTE".
         </div>
 
         <p>As partes acima identificadas têm, entre si, justo e acertado o presente Contrato de Prestação de Serviços, que se regerá pelas cláusulas abaixo:</p>
 
         <h2>CLÁUSULA PRIMEIRA - DO OBJETO</h2>
-        <p>1.1. O objeto deste contrato é a prestação de serviços de infraestrutura de Desktop Virtual (VDI) em ambiente de nuvem, conforme o plano selecionado pelo CONTRATANTE (2GB, 4GB ou 8GB KVM NVMe) no momento da contratação.</p>
-        <p>1.2. O serviço compreende o acesso remoto a uma instância virtualizada com recursos computacionais dedicados e sistema operacional pré-instalado.</p>
+        <p>1.1. O objeto deste contrato é a prestação de serviços de infraestrutura de Desktop Virtual (VDI) em ambiente de nuvem, conforme o plano selecionado (2GB, 4GB ou 8GB KVM NVMe) e ciclo de faturamento escolhido no ato da contratação.</p>
+        <p>1.2. O serviço compreende o provisionamento de recursos computacionais (vCPU, RAM e Armazenamento) para acesso remoto, com o sistema operacional selecionado pelo cliente.</p>
 
         <h2>CLÁUSULA SEGUNDA - DA DISPONIBILIDADE (SLA)</h2>
-        <p>2.1. A CONTRATADA compromete-se a envidar os melhores esforços para manter a disponibilidade dos serviços em 99,9% (noventa e nove vírgula nove por cento) do tempo mensal.</p>
-        <p>2.2. Não são computadas como interrupções as manutenções programadas informadas previamente ou falhas na conexão de internet do próprio CONTRATANTE.</p>
+        <p>2.1. A CONTRATADA compromete-se a manter a disponibilidade dos serviços em 99,9% (noventa e nove vírgula nove por cento) do tempo mensal médio.</p>
+        <p>2.2. Não serão computadas como interrupções: manutenções programadas informadas com antecedência, falhas de conexão originadas na operadora de internet do CONTRATANTE ou problemas de hardware no dispositivo de acesso do usuário.</p>
 
-        <h2>CLÁUSULA TERCEIRA - DOS DEVERES DO CONTRATANTE</h2>
-        <p>3.1. O CONTRATANTE é o único responsável pelos dados armazenados, senhas de acesso e atividades realizadas dentro do ambiente virtualizado.</p>
-        <p>3.2. É expressamente proibida a utilização do serviço para atividades ilícitas, incluindo, mas não se limitando a: ataques DDoS, envio de SPAM, hospedagem de material protegido por direitos autorais sem autorização e mineração de criptomoedas que degrade a performance do host físico.</p>
+        <h2>CLÁUSULA TERCEIRA - DOS DEVERES E USO ACEITÁVEL</h2>
+        <p>3.1. O CONTRATANTE é o único responsável pelos dados armazenados, backups, gestão de senhas e atividades realizadas no ambiente virtualizado.</p>
+        <p>3.2. É terminantemente proibido o uso da infraestrutura para: ataques cibernéticos (DDoS, Brute Force), envio de SPAM, hospedagem de material ilícito, mineração de criptomoedas sem autorização prévia ou qualquer prática que comprometa a estabilidade do host físico. O descumprimento resultará em suspensão imediata sem direito a reembolso.</p>
 
-        <h2>CLÁUSULA QUARTA - DO PAGAMENTO E RENOVAÇÃO</h2>
-        <p>4.1. O CONTRATANTE pagará à CONTRATADA o valor correspondente ao ciclo escolhido (Mensal, Trimestral, Semestral ou Anual).</p>
-        <p>4.2. A liberação do serviço ocorrerá após a confirmação do pagamento. O inadimplemento superior a 3 (três) dias após o vencimento poderá acarretar na suspensão do serviço, e o atraso superior a 7 (sete) dias poderá resultar na exclusão definitiva dos dados por falta de renovação da instância.</p>
+        <h2>CLÁUSULA QUARTA - PAGAMENTO E POLÍTICA DE DADOS</h2>
+        <p>4.1. A prestação do serviço é pré-paga. A liberação ocorre após a compensação do pagamento.</p>
+        <p>4.2. <strong>Inadimplemento:</strong> O atraso superior a 3 dias acarreta a suspensão do acesso. O atraso superior a 7 dias resultará na <strong>exclusão definitiva</strong> da instância virtual e de todos os dados nela contidos, visando a liberação de recursos técnicos do Datacenter.</p>
 
-        <h2>CLÁUSULA QUINTA - DA PRIVACIDADE E LGPD</h2>
-        <p>5.1. A CONTRATADA atua em conformidade com a Lei Geral de Proteção de Dados (Lei 13.709/2018), coletando apenas os dados necessários para faturamento e suporte técnico.</p>
-        <p>5.2. A CONTRATADA não acessa o conteúdo interno do VDI do CONTRATANTE, garantindo total privacidade sobre os arquivos e softwares ali instalados.</p>
+        <h2>CLÁUSULA QUINTA - PRIVACIDADE E LGPD</h2>
+        <p>5.1. A CONTRATADA atua conforme a Lei Geral de Proteção de Dados (Lei 13.709/2018). Os dados do CONTRATANTE são utilizados estritamente para faturamento e suporte.</p>
+        <p>5.2. A CONTRATADA garante o sigilo sobre o conteúdo processado no VDI, não realizando monitoramento ou acesso aos arquivos internos do CONTRATANTE, exceto por ordem judicial específica.</p>
 
         <h2>CLÁUSULA SEXTA - DA RESCISÃO</h2>
-        <p>6.1. O CONTRATANTE pode rescindir o serviço a qualquer momento, sem multa, mediante interrupção de novos pagamentos. O acesso permanecerá ativo até o fim do período já pago.</p>
+        <p>6.1. O contrato pode ser rescindido pelo CONTRATANTE a qualquer momento através do cancelamento da renovação, sem aplicação de multa. O acesso será mantido até o término do período já quitado.</p>
 
         <h2>CLÁUSULA SÉTIMA - DO FORO</h2>
-        <p>7.1. Para dirimir quaisquer controvérsias oriundas deste contrato, as partes elegem o foro da comarca da CONTRATADA.</p>
+        <p>7.1. Fica eleito o foro da comarca da sede da CONTRATADA para dirimir quaisquer questões oriundas deste contrato.</p>
 
         <div class="footer">
-            <p>Este contrato é aceito eletronicamente no momento da contratação e pagamento do serviço.</p>
-            <p>Atualizado em: 03 de Março de 2026.</p>
+            <p><strong>Aceite Eletrônico:</strong> Este documento tem validade jurídica plena conforme MP nº 2.200-2/2001, sendo formalizado no momento do pagamento.</p>
+            <p>BITHOSTEL TI - CNPJ 14.406.585/0001-59</p>
+            <p>Última atualização: 04 de Março de 2026.</p>
         </div>
     </div>
 
