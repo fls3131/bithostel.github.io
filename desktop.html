@@ -38,7 +38,7 @@
             padding: 6px;
             border-radius: 16px;
             width: fit-content;
-            margin: -2.5rem auto 3.5rem;
+            margin: 0 auto 3.5rem;
             position: relative;
             z-index: 10;
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
@@ -100,7 +100,6 @@
 
         .btn:hover { background: var(--primary); transform: scale(1.02); }
 
-        /* WhatsApp Flutuante */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -122,9 +121,10 @@
         }
 
         /* Seção de Diferenciais */
-        .benefits-section { background: white; padding: 5rem 2rem; text-align: center; border-radius: 40px; margin-top: 5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        .benefits-section { background: white; padding: 5rem 2rem; text-align: center; border-radius: 40px; margin-top: -4rem; position: relative; z-index: 5; box-shadow: 0 4px 20px -5px rgba(0,0,0,0.1); margin-bottom: 4rem; }
         .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 3rem; margin-top: 3.5rem; }
         .benefit-item h4 { color: var(--dark); font-size: 1.2rem; margin-bottom: 0.8rem; font-weight: 700; }
+        .benefit-item p { font-size: 0.95rem; color: #64748b; }
         .icon-box { background: #f0fdf4; width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--primary); font-weight: bold; }
 
         /* Footer e Políticas */
@@ -151,6 +151,33 @@
 </header>
 
 <div class="container">
+    
+    <section class="benefits-section">
+        <h2 style="font-size: 2.2rem; letter-spacing: -1px;">Por que o PC Cloud é a escolha inteligente?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-item">
+                <div class="icon-box">🚀</div>
+                <h4>antiX Linux Nativo</h4>
+                <p>O sistema operacional mais rápido do mundo agora disponível via VDI para voar em qualquer conexão.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="icon-box">📱</div>
+                <h4>Acesso Universal</h4>
+                <p>Transforme seu smartphone em um PC completo. Basta conectar um teclado e mouse.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="icon-box">🛡️</div>
+                <h4>Segurança Militar</h4>
+                <p>Proteção DDoS de 10 Gbps inclusa e isolamento total de dados via KVM.</p>
+            </div>
+            <div class="benefit-item">
+                <div class="icon-box">💰</div>
+                <h4>Custo Zero de Luz</h4>
+                <p>O consumo elétrico é por nossa conta. Economize até R$ 50/mês na sua conta de energia residencial.</p>
+            </div>
+        </div>
+    </section>
+
     <div class="cycle-selector">
         <button class="cycle-btn active" onclick="showCycle('monthly', this)">Mensal</button>
         <button class="cycle-btn" onclick="showCycle('3months', this)">3 Meses</button>
@@ -211,32 +238,6 @@
             <a href="https://wa.me/5513997853113?text=Olá! Tenho interesse no plano VIP de 8GB KVM." class="btn">Contratar VIP</a>
         </div>
     </div>
-
-    <section class="benefits-section">
-        <h2 style="font-size: 2.2rem; letter-spacing: -1px;">Por que o PC Cloud é a escolha inteligente?</h2>
-        <div class="benefits-grid">
-            <div class="benefit-item">
-                <div class="icon-box">🚀</div>
-                <h4>antiX Linux Nativo</h4>
-                <p>O sistema operacional mais rápido do mundo agora disponível via VDI para voar em qualquer conexão.</p>
-            </div>
-            <div class="benefit-item">
-                <div class="icon-box">📱</div>
-                <h4>Acesso Universal</h4>
-                <p>Transforme seu smartphone em um PC completo. Basta conectar um teclado e mouse.</p>
-            </div>
-            <div class="benefit-item">
-                <div class="icon-box">🛡️</div>
-                <h4>Segurança Militar</h4>
-                <p>Proteção DDoS de 10 Gbps inclusa e isolamento total de dados via KVM.</p>
-            </div>
-            <div class="benefit-item">
-                <div class="icon-box">💰</div>
-                <h4>Custo Zero de Luz</h4>
-                <p>O consumo elétrico é por nossa conta. Economize até R$ 50/mês na sua conta de energia residencial.</p>
-            </div>
-        </div>
-    </section>
 </div>
 
 <footer>
@@ -255,8 +256,9 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <p>© 2026 bithostel TI - Tecnologia de Acesso Remoto. Todos os direitos reservados.</p>
-        <p style="font-size: 0.7rem; margin-top: 10px; opacity: 0.6;">As imagens e logos são para fins ilustrativos. Windows é uma marca registrada da Microsoft Corporation.</p>
+        <p>© 2026 bithostel TI - Soluções em TI. Todos os direitos reservados.</p>
+        <p style="font-size: 0.7rem; margin-top: 10px; opacity: 0.6;">Windows é uma marca registrada da Microsoft Corporation.</p>
+        <p style="font-size: 0.7rem; margin-top: 10px; opacity: 0.6;">Linux é uma marca registrada de Linus Torvalds.</p>
     </div>
 </footer>
 
