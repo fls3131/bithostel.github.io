@@ -3,66 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contrato de Prestação de Serviços | bithostel TI</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <title>Contrato de Prestação de Serviços | BITHOSTEL TI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #334155; background: #f1f5f9; padding: 2rem 1rem; }
-        .contract-container { max-width: 800px; margin: 0 auto; background: white; padding: 4rem; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #0f172a; text-transform: uppercase; font-size: 1.4rem; margin-bottom: 2rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 1rem; }
-        h2 { font-size: 1.1rem; color: #0f172a; margin-top: 1.5rem; text-transform: uppercase; border-left: 4px solid #10b981; padding-left: 10px; }
-        p, li { font-size: 0.95rem; margin-bottom: 1rem; text-align: justify; }
-        strong { color: #1e293b; }
-        .identificacao { background: #f8fafc; padding: 1.5rem; border: 1px solid #e2e8f0; border-radius: 4px; margin-bottom: 2rem; }
-        .footer { margin-top: 3rem; text-align: center; font-size: 0.8rem; color: #94a3b8; border-top: 1px solid #e2e8f0; padding-top: 1rem; }
-        .btn-print { display: block; width: fit-content; margin: 0 auto 2rem; background: #10b981; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; cursor: pointer; border: none; transition: 0.2s; }
-        .btn-print:hover { background: #059669; transform: scale(1.02); }
-        @media print { .btn-print { display: none; } body { background: white; padding: 0; } .contract-container { box-shadow: none; width: 100%; border: none; padding: 1rem; } }
+        /* Paleta de Alto Contraste */
+        :root {
+            --bg-page: #0f172a; /* Azul quase preto */
+            --bg-paper: #ffffff;
+            --text-main: #000000;
+            --text-muted: #475569;
+            --accent: #059669; /* Verde esmeralda forte */
+            --border: #cbd5e1;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.6; 
+            color: var(--text-main); 
+            background: var(--bg-page); 
+            padding: 3rem 1rem; 
+        }
+
+        .contract-container { 
+            max-width: 850px; 
+            margin: 0 auto; 
+            background: var(--bg-paper); 
+            padding: 5rem; 
+            border-radius: 4px; 
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        /* Marca d'água sutil no topo */
+        .contract-container::before {
+            content: "DOCUMENTO OFICIAL";
+            position: absolute;
+            top: 20px;
+            right: 50px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: 2px;
+            opacity: 0.5;
+        }
+
+        h1 { 
+            text-align: center; 
+            color: #000; 
+            text-transform: uppercase; 
+            font-size: 1.6rem; 
+            margin-bottom: 2.5rem; 
+            border-bottom: 3px solid #000; 
+            padding-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        h2 { 
+            font-size: 1.1rem; 
+            color: #000; 
+            margin-top: 2.5rem; 
+            margin-bottom: 1rem;
+            text-transform: uppercase; 
+            background: #f1f5f9;
+            padding: 8px 12px;
+            border-left: 6px solid var(--accent);
+            font-weight: 700;
+        }
+
+        p, li { 
+            font-size: 1rem; 
+            margin-bottom: 1.2rem; 
+            text-align: justify; 
+            color: #1a1a1a;
+        }
+
+        strong { font-weight: 700; color: #000; }
+
+        .identificacao { 
+            background: #ffffff; 
+            padding: 1.5rem; 
+            border: 2px solid #000; 
+            margin-bottom: 2.5rem; 
+        }
+
+        .important-box {
+            border: 2px dashed #ef4444;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            background: #fef2f2;
+        }
+
+        .footer { 
+            margin-top: 4rem; 
+            text-align: center; 
+            font-size: 0.85rem; 
+            color: var(--text-muted); 
+            border-top: 2px solid var(--border); 
+            padding-top: 2rem; 
+        }
+
+        .btn-print { 
+            display: block; 
+            width: fit-content; 
+            margin: 0 auto 3rem; 
+            background: var(--accent); 
+            color: white; 
+            padding: 15px 30px; 
+            border-radius: 50px; 
+            text-decoration: none; 
+            font-weight: 800; 
+            cursor: pointer; 
+            border: none; 
+            transition: all 0.3s;
+            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn-print:hover { 
+            background: #047857; 
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Ajustes para Impressão */
+        @media print { 
+            body { background: white; padding: 0; }
+            .btn-print { display: none; } 
+            .contract-container { 
+                box-shadow: none; 
+                width: 100%; 
+                max-width: 100%;
+                padding: 0; 
+                margin: 0;
+            } 
+            h2 { background: #eee !important; -webkit-print-color-adjust: exact; }
+        }
     </style>
 </head>
 <body>
 
-    <button class="btn-print" onclick="window.print()">Imprimir Contrato / Salvar PDF</button>
+    <button class="btn-print" onclick="window.print()">📥 BAIXAR CONTRATO EM PDF</button>
 
     <div class="contract-container">
-        <h1>Instrumento Particular de Prestação de Serviços de Computação em Nuvem (VDI)</h1>
+        <h1>Instrumento Particular de Prestação de Serviços de Computação em Nuvem</h1>
 
         <div class="identificacao">
-            <strong>CONTRATADA:</strong> BITHOSTEL TI, inscrita no CNPJ sob o nº <strong>14.406.585/0001-59</strong>, doravante denominada apenas "CONTRATADA".<br><br>
-            <strong>CONTRATANTE:</strong> Pessoa física ou jurídica devidamente qualificada no ato da adesão via canais digitais, mediante aceite eletrônico e confirmação de pagamento, doravante denominada apenas "CONTRATANTE".
+            <strong>CONTRATADA:</strong> BITHOSTEL TI, pessoa jurídica de direito privado, inscrita no CNPJ sob o nº <strong>14.406.585/0001-59</strong>, doravante denominada "CONTRATADA".<br><br>
+            <strong>CONTRATANTE:</strong> Pessoa física ou jurídica qualificada eletronicamente no ato da adesão via plataforma digital, mediante aceite destes termos e confirmação de pagamento, doravante denominada "CONTRATANTE".
         </div>
 
-        <p>As partes acima identificadas têm, entre si, justo e acertado o presente Contrato de Prestação de Serviços, que se regerá pelas cláusulas abaixo:</p>
+        <p>As partes acima identificadas celebram o presente Contrato de Prestação de Serviços, regido pelas cláusulas e condições abaixo estipuladas:</p>
 
-        <h2>CLÁUSULA PRIMEIRA - DO OBJETO</h2>
-        <p>1.1. O objeto deste contrato é a prestação de serviços de infraestrutura de Desktop Virtual (VDI) em ambiente de nuvem, conforme o plano selecionado (2GB, 4GB ou 8GB KVM NVMe) e ciclo de faturamento escolhido no ato da contratação.</p>
-        <p>1.2. O serviço compreende o provisionamento de recursos computacionais (vCPU, RAM e Armazenamento) para acesso remoto, com o sistema operacional selecionado pelo cliente.</p>
+        <h2>CLÁUSULA 01 - DO OBJETO</h2>
+        <p>1.1. O presente contrato tem por objeto a prestação de serviços de infraestrutura de <strong>Desktop Virtual (VDI)</strong>, operando em ambiente de nuvem, conforme o plano técnico selecionado (2GB, 4GB ou 8GB KVM NVMe) pelo CONTRATANTE.</p>
+        <p>1.2. O serviço consiste na disponibilização de recursos dedicados de processamento, memória e armazenamento para acesso remoto via protocolos de rede seguros.</p>
 
-        <h2>CLÁUSULA SEGUNDA - DA DISPONIBILIDADE (SLA)</h2>
-        <p>2.1. A CONTRATADA compromete-se a manter a disponibilidade dos serviços em 99,9% (noventa e nove vírgula nove por cento) do tempo mensal médio.</p>
-        <p>2.2. Não serão computadas como interrupções: manutenções programadas informadas com antecedência, falhas de conexão originadas na operadora de internet do CONTRATANTE ou problemas de hardware no dispositivo de acesso do usuário.</p>
+        <h2>CLÁUSULA 02 - NÍVEL DE SERVIÇO (SLA)</h2>
+        <p>2.1. A CONTRATADA garante um índice de disponibilidade (Uptime) de <strong>99,9%</strong> ao mês.</p>
+        <p>2.2. Excluem-se da garantia de SLA: manutenções preventivas (comunicadas com 24h de antecedência), falhas na conexão de internet do usuário ou problemas técnicos no hardware local utilizado pelo CONTRATANTE para o acesso.</p>
 
-        <h2>CLÁUSULA TERCEIRA - DOS DEVERES E USO ACEITÁVEL</h2>
-        <p>3.1. O CONTRATANTE é o único responsável pelos dados armazenados, backups, gestão de senhas e atividades realizadas no ambiente virtualizado.</p>
-        <p>3.2. É terminantemente proibido o uso da infraestrutura para: ataques cibernéticos (DDoS, Brute Force), envio de SPAM, hospedagem de material ilícito, mineração de criptomoedas sem autorização prévia ou qualquer prática que comprometa a estabilidade do host físico. O descumprimento resultará em suspensão imediata sem direito a reembolso.</p>
+        <h2>CLÁUSULA 03 - RESPONSABILIDADES DO USUÁRIO</h2>
+        <p>3.1. O CONTRATANTE detém responsabilidade total e exclusiva sobre o conteúdo armazenado, gestão de backups de segurança e sigilo das credenciais de acesso.</p>
+        <p>3.2. <strong>USO PROIBIDO:</strong> É terminantemente vedado o uso da infraestrutura para práticas ilícitas como ataques cibernéticos, envio de SPAM, mineração de criptoativos não autorizada ou qualquer ação que degrade a rede. A infração desta cláusula gera <strong>rescisão imediata por justa causa</strong>.</p>
 
-        <h2>CLÁUSULA QUARTA - PAGAMENTO E POLÍTICA DE DADOS</h2>
-        <p>4.1. A prestação do serviço é pré-paga. A liberação ocorre após a compensação do pagamento.</p>
-        <p>4.2. <strong>Inadimplemento:</strong> O atraso superior a 3 dias acarreta a suspensão do acesso. O atraso superior a 7 dias resultará na <strong>exclusão definitiva</strong> da instância virtual e de todos os dados nela contidos, visando a liberação de recursos técnicos do Datacenter.</p>
+        <h2>CLÁUSULA 04 - PAGAMENTO E POLÍTICA DE RETENÇÃO</h2>
+        <p>4.1. O serviço opera sob regime <strong>pré-pago</strong>. A continuidade do acesso depende da quitação do ciclo subsequente.</p>
+        
+        <div class="important-box">
+            <strong>ALERTA DE SEGURANÇA DE DADOS:</strong><br>
+            4.2. O inadimplemento superior a <strong>03 (três) dias</strong> suspende o acesso ao serviço. Após <strong>07 (sete) dias</strong> de atraso, a CONTRATADA realizará a <strong>exclusão irreversível</strong> da instância virtual e de todos os dados nela contidos para reciclagem de hardware.
+        </div>
 
-        <h2>CLÁUSULA QUINTA - PRIVACIDADE E LGPD</h2>
-        <p>5.1. A CONTRATADA atua conforme a Lei Geral de Proteção de Dados (Lei 13.709/2018). Os dados do CONTRATANTE são utilizados estritamente para faturamento e suporte.</p>
-        <p>5.2. A CONTRATADA garante o sigilo sobre o conteúdo processado no VDI, não realizando monitoramento ou acesso aos arquivos internos do CONTRATANTE, exceto por ordem judicial específica.</p>
+        <h2>CLÁUSULA 05 - PRIVACIDADE (LGPD)</h2>
+        <p>5.1. A CONTRATADA processa dados em estrita observância à Lei 13.709/2018. Não há acesso, monitoramento ou tratamento do conteúdo interno armazenado pelo CONTRATANTE no Desktop Virtual.</p>
 
-        <h2>CLÁUSULA SEXTA - DA RESCISÃO</h2>
-        <p>6.1. O contrato pode ser rescindido pelo CONTRATANTE a qualquer momento através do cancelamento da renovação, sem aplicação de multa. O acesso será mantido até o término do período já quitado.</p>
+        <h2>CLÁUSULA 06 - RESCISÃO</h2>
+        <p>6.1. O CONTRATANTE pode rescindir o serviço a qualquer momento cessando os pagamentos. Não haverá aplicação de multa ou fidelidade compulsória.</p>
 
-        <h2>CLÁUSULA SÉTIMA - DO FORO</h2>
-        <p>7.1. Fica eleito o foro da comarca da sede da CONTRATADA para dirimir quaisquer questões oriundas deste contrato.</p>
+        <h2>CLÁUSULA 07 - DO FORO</h2>
+        <p>7.1. Fica eleito o Foro da Comarca da sede da CONTRATADA para dirimir controvérsias oriundas deste instrumento.</p>
 
         <div class="footer">
-            <p><strong>Aceite Eletrônico:</strong> Este documento tem validade jurídica plena conforme MP nº 2.200-2/2001, sendo formalizado no momento do pagamento.</p>
-            <p>BITHOSTEL TI - CNPJ 14.406.585/0001-59</p>
-            <p>Última atualização: 04 de Março de 2026.</p>
+            <p><strong>VALIDADE JURÍDICA:</strong> Este contrato é assinado eletronicamente mediante a confirmação do pagamento, possuindo plena eficácia jurídica conforme Medida Provisória nº 2.200-2/2001.</p>
+            <p><strong>BITHOSTEL TI | CNPJ: 14.406.585/0001-59</strong></p>
+            <p>Data de atualização: 04 de Março de 2026</p>
         </div>
     </div>
 
