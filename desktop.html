@@ -100,7 +100,7 @@
 
         .btn:hover { background: var(--primary); transform: scale(1.02); }
 
-        /* Botão WhatsApp Flutuante */
+        /* WhatsApp Flutuante */
         .whatsapp-float {
             position: fixed;
             bottom: 30px;
@@ -121,17 +121,18 @@
             transition: 0.3s;
         }
 
-        .whatsapp-float:hover {
-            transform: scale(1.1);
-            background-color: #128C7E;
-        }
-
         /* Seção de Diferenciais */
         .benefits-section { background: white; padding: 5rem 2rem; text-align: center; border-radius: 40px; margin-top: 5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
         .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 3rem; margin-top: 3.5rem; }
         .benefit-item h4 { color: var(--dark); font-size: 1.2rem; margin-bottom: 0.8rem; font-weight: 700; }
-        .benefit-item p { font-size: 0.95rem; color: #64748b; }
         .icon-box { background: #f0fdf4; width: 50px; height: 50px; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: var(--primary); font-weight: bold; }
+
+        /* Footer e Políticas */
+        footer { background: #0f172a; color: #94a3b8; padding: 4rem 1rem 2rem; margin-top: 5rem; font-size: 0.85rem; }
+        .footer-grid { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; }
+        .footer-section h5 { color: white; margin-bottom: 1.2rem; font-size: 1rem; }
+        .footer-section p { margin-bottom: 0.8rem; line-height: 1.5; }
+        .footer-bottom { max-width: 1200px; margin: 3rem auto 0; padding-top: 2rem; border-top: 1px solid #1e293b; text-align: center; }
 
     </style>
 </head>
@@ -238,14 +239,33 @@
     </section>
 </div>
 
+<footer>
+    <div class="footer-grid">
+        <div class="footer-section">
+            <h5>Termos de Uso</h5>
+            <p>Ao contratar nossos serviços, o usuário concorda com a disponibilidade de uptime de 99.9%. O suporte é realizado via WhatsApp em horário comercial. Cancelamentos podem ser feitos a qualquer momento, com interrupção do acesso ao fim do ciclo pago.</p>
+        </div>
+        <div class="footer-section">
+            <h5>Política de Privacidade (LGPD)</h5>
+            <p>Seus dados (nome e contato) são utilizados exclusivamente para faturamento e suporte. Não compartilhamos informações com terceiros. Você tem direito ao acesso e exclusão de seus dados conforme a Lei 13.709/2018.</p>
+        </div>
+        <div class="footer-section">
+            <h5>Utilização Aceitável</h5>
+            <p>É proibido o uso de nossos VDIs para atividades ilegais (hacking, spam, phishing), mineração de criptomoedas sem autorização ou qualquer prática que degrade a rede. O descumprimento implica em suspensão imediata sem reembolso.</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2026 bithostel TI - Tecnologia de Acesso Remoto. Todos os direitos reservados.</p>
+        <p style="font-size: 0.7rem; margin-top: 10px; opacity: 0.6;">As imagens e logos são para fins ilustrativos. Windows é uma marca registrada da Microsoft Corporation.</p>
+    </div>
+</footer>
+
 <script>
     function showCycle(cycle, btn) {
         document.querySelectorAll('.cycle-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
         const prices = document.querySelectorAll('.val');
         const labels = document.querySelectorAll('.cycle-label');
-
         prices.forEach(p => {
             p.style.opacity = '0';
             setTimeout(() => {
@@ -256,7 +276,6 @@
                 p.style.opacity = '1';
             }, 150);
         });
-
         labels.forEach(l => {
             if(cycle === 'monthly') l.innerText = 'por mês';
             if(cycle === '3months') l.innerText = 'pagamento trimestral';
@@ -265,6 +284,5 @@
         });
     }
 </script>
-    
 </body>
 </html>
