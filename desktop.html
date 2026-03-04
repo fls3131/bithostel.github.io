@@ -11,7 +11,8 @@
             --dark: #0f172a;
             --accent: #3b82f6;
             --light: #f8fafc;
-            --highlight: #f59e0b; /* Cor para destaque de valor/preço */
+            --highlight: #f59e0b;
+            --whatsapp: #25d366;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -74,7 +75,6 @@
 
         .card:hover { transform: translateY(-15px); border-color: var(--primary); box-shadow: 0 30px 60px -12px rgba(16, 185, 129, 0.15); }
         
-        /* Destaque do Preço */
         .price-container { margin: 1.5rem 0; }
         .currency { font-size: 1.2rem; vertical-align: super; font-weight: 600; color: var(--primary); }
         .price { font-size: 4rem; font-weight: 800; color: var(--dark); letter-spacing: -2px; }
@@ -100,6 +100,32 @@
 
         .btn:hover { background: var(--primary); transform: scale(1.02); }
 
+        /* Botão WhatsApp Flutuante */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--whatsapp);
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #128C7E;
+        }
+
         /* Seção de Diferenciais */
         .benefits-section { background: white; padding: 5rem 2rem; text-align: center; border-radius: 40px; margin-top: 5rem; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
         .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 3rem; margin-top: 3.5rem; }
@@ -110,6 +136,10 @@
     </style>
 </head>
 <body>
+
+<a href="https://wa.me/5513997853113?text=Olá! Gostaria de tirar algumas dúvidas sobre o Cloud VDI." class="whatsapp-float" target="_blank">
+    <svg width="35" height="35" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.588-5.946 0-6.556 5.332-11.888 11.888-11.888 3.176 0 6.161 1.237 8.404 3.48s3.481 5.229 3.481 8.406c0 6.556-5.332 11.888-11.888 11.888-2.01 0-3.987-.509-5.741-1.472l-6.143 1.613zm5.889-3.287.348.21c1.474.882 3.183 1.348 4.915 1.348 5.393 0 9.778-4.385 9.778-9.778 0-2.612-1.017-5.067-2.863-6.913s-4.302-2.863-6.913-2.863c-5.392 0-9.777 4.385-9.777 9.778 0 1.884.538 3.717 1.558 5.323l.229.36-.965 3.525 3.61-.947zm11.236-6.427c-.298-.149-1.763-.87-2.031-.968-.268-.099-.463-.149-.658.149-.195.298-.754.947-.925 1.145-.17.199-.341.223-.639.074-.298-.149-1.26-.464-2.399-1.48-.886-.791-1.484-1.767-1.658-2.066-.174-.299-.018-.46.131-.609.134-.134.298-.348.447-.521.15-.173.199-.298.298-.497.099-.198.05-.372-.025-.521-.075-.149-.659-1.591-.901-2.174-.236-.57-.475-.493-.658-.503-.17-.008-.365-.01-.56-.01s-.511.074-.779.372c-.268.299-1.023.999-1.023 2.435 0 1.437 1.047 2.825 1.194 3.024.146.198 2.061 3.148 4.993 4.415.698.301 1.243.481 1.667.615.701.223 1.339.192 1.843.117.562-.083 1.763-.72 2.012-1.414.248-.695.248-1.291.174-1.414-.075-.124-.268-.198-.566-.348z"/></svg>
+</a>
 
 <header>
     <div class="header-content">
@@ -142,7 +172,7 @@
                 <li>Sistemas <span>antiX / MX / Win</span></li>
                 <li>Armazenamento <span>20 GB NVMe</span></li>
             </ul>
-            <a href="#" class="btn">Contratar Plano</a>
+            <a href="https://wa.me/5513997853113?text=Olá! Quero contratar o plano de 2GB KVM." class="btn">Contratar Plano</a>
         </div>
 
         <div class="card" style="border: 2px solid var(--primary);">
@@ -160,7 +190,7 @@
                 <li>Sistemas <span>Todos Liberados</span></li>
                 <li>Armazenamento <span>40 GB NVMe</span></li>
             </ul>
-            <a href="#" class="btn" style="background: var(--primary);">Assinar Agora</a>
+            <a href="https://wa.me/5513997853113?text=Olá! Quero o plano Mais Escolhido de 4GB KVM." class="btn" style="background: var(--primary);">Assinar Agora</a>
         </div>
 
         <div class="card">
@@ -177,7 +207,7 @@
                 <li>Sistemas <span>Todos Liberados</span></li>
                 <li>Armazenamento <span>60 GB NVMe</span></li>
             </ul>
-            <a href="#" class="btn">Contratar VIP</a>
+            <a href="https://wa.me/5513997853113?text=Olá! Tenho interesse no plano VIP de 8GB KVM." class="btn">Contratar VIP</a>
         </div>
     </div>
 
