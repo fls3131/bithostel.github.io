@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Apps - Store</title>
+    
+    <script>
+        (function() {
+            const senhaCorreta = "210987652"; // Altere sua senha aqui
+            let tentativa = prompt("Digite a senha para acessar a Central de Apps:");
+            
+            if (tentativa !== senhaCorreta) {
+                alert("Senha incorreta! Acesso negado.");
+                window.location.href = "https://www.google.com"; 
+                document.write("<style>body { display:none !important; }</style>");
+            }
+        })();
+    </script>
+
+    <style>
+        :root {
+            --bg-main: #0f1015;
+            --bg-navbar: #16171e;
+            --bg-card: #1c1d26;
+            --accent-color: #00f076;
+            --accent-hover: #00c862;
+            --text-main: #f5f6f9;
+            --text-muted: #8a8f9f;
+            --border-color: #282a36;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            padding-bottom: 60px;
+            overflow-x: hidden;
+        }
+
+        /* BARRA DE NAVEGAÇÃO HEDER */
+        .navbar {
+            background-color: var(--bg-navbar);
+            border-bottom: 1px solid var(--border-color);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .navbar-brand span {
+            color: var(--accent-color);
+        }
+
+        .search-bar {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            color: var(--text-main);
+            width: 250px;
+            font-size: 0.9rem;
+        }
+
+        /* HERO HEADER */
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background: radial-gradient(circle at top, rgba(0,240,118,0.15) 0%, rgba(15,16,21,0) 70%);
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* CONTAINER PRINCIPAL */
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 25px;
+        }
+
+        /* GRID RESPONSIVO */
+        .app-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        /* REESTRUTURAÇÃO DO CARD */
+        .app-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(0, 240, 118, 0.4);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 240, 118, 0.1);
+        }
+
+        .app-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Ícone Customizado */
+        .app-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .app-card:hover .app-icon {
+            transform: scale(1.05) rotate(5deg);
+            background: rgba(0, 240, 118, 0.05);
+            border-color: var(--accent-color);
+        }
+
+        .app-details {
+            width: 100%;
+        }
+
+        .app-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: var(--text-main);
+        }
+
+        /* Badge de Categoria */
+        .app-category {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            background-color: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            border-radius: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        /* BOTÃO PREMIUM DE DOWNLOAD */
+        .btn-download {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: var(--accent-color);
+            color: #0b0c10;
+            text-align: center;
+            padding: 14px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-download:hover {
+            background-color: var(--accent-hover);
+            box-shadow: 0 4px 12px rgba(0, 240, 118, 0.3);
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            .search-bar {
+                display: none; /* Oculta busca no celular para limpar espaço */
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .app-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            .app-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="navbar-brand">
+            🤖 Droid<span>Store</span>
+        </div>
+        <input type="text" class="search-bar" placeholder="Buscar aplicativo...">
+    </nav>
+
+    <header class="hero">
+        <h1>Central de Aplicativos</h1>
+        <p>Sua biblioteca particular de arquivos APK. Seguro, direto e otimizado para qualquer dispositivo.</p>
+    </header>
+
+    <div class="container">
+        <div class="app-grid">
+
+            <div class="app-card">
+                <div class="app-info">
+                    <div class="app-icon">🌐</div>
+                    <div class="app-details">
+                        <div class="app-title" title="cdnp2p.apk">cdnp2p</div>
+                        <span class="app-category">Rede / P2P</span>
+                    </div>
+                </div>
+                <a href="https://mega.nz/file/c7JVEDAS#o5UFb4GKXyLclDDUAzzP_WaJFtAKLbA0RGHydRmbIZY" class="btn-download" download>Baixar APK</a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-info">
+                    <div class="app-icon">📺</div>
+                    <div class="app-details">
+                        <div class="app-title" title="QoSIPTV.apk">QoSIPTV</div>
+                        <span class="app-category">Streaming / IPTV</span>
+                    </div>
+                </div>
+                <a href="https://mega.nz/file/4vBWgK6B#jjqhgbIQfXImbVkT_2cnpqbcSUK1NvR09tm52d_8zH0" class="btn-download" download>Baixar APK</a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-info">
+                    <div class="app-icon">📺</div>
+                    <div class="app-details">
+                        <div class="app-title" title="IPTV Pro v9.1.15 (Patched).apk">IPTV Pro Premium</div>
+                        <span class="app-category">Streaming / Filmes</span>
+                    </div>
+                </div>
+                <a href="https://mega.nz/file/cyJWwIZa#7pJaGon87OyBnton53LOK-F2n0C4eDQ80tC7e0d4_j0" class="btn-download" download>Baixar APK</a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-info">
+                    <div class="app-icon">🎮</div>
+                    <div class="app-details">
+                        <div class="app-title" title="1420_lazerplay1.0.01.apk">LazerPlay (1.0.01)</div>
+                        <span class="app-category">Jogos</span>
+                    </div>
+                </div>
+                <a href="https://mega.nz/file/xigzwJDY#x4mSPV94xHSlA8kfHki6lohCdBkUOkVsmMt1xxxc3uE" class="btn-download" download>Baixar APK</a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-info">
+                    <div class="app-icon">🔮</div>
+                    <div class="app-details">
+                        <div class="app-title" title="MATRIX.apk">MATRIX</div>
+                        <span class="app-category">Utilitários</span>
+                    </div>
+                </div>
+                <a href="https://mega.nz/file/lzwQ1YhA#Ou8IaXZSe9dnKY81S9-I3Mn4q441sJsV56p0ZBHqwbY" class="btn-download" download>Baixar APK</a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-info">
+                    <div class="app-icon">🎬</div>
+                    <div class="app-details">
+                        <div class="app-title" title="9Xtream.apk">9Xtream</div>
+                        <span class="app-category">Streaming</span>
+                    </div>
+                </div>
+                <a href="https://mega.nz/file/RiIGWYCB#EqJ6kAW7yYuFw8MXzbG95myADyMRov_g4OFfR-LAN4E" class="btn-download" download>Baixar APK</a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-info">
+                    <div class="app-icon">❤️</div>
+                    <div class="app-details">
+                        <div class="app-title" title="com.liskovsoft.smarttubetv.beta.apk">SmartTube TV Beta</div>
+                        <span class="app-category">Android TV</span>
+                    </div>
+                </div>
+                <a href="https://mega.nz/file/t6wWSLIb#jOtFasbPEoE6KaJ7IlJ53WiS_uRk1o9iGjYS6FXWP3E" class="btn-download" download>Baixar APK</a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-info">
+                    <div class="app-icon">📱</div>
+                    <div class="app-details">
+                        <div class="app-title" title="ibo.apk">IBO Player</div>
+                        <span class="app-category">Player Vídeo</span>
+                    </div>
+                </div>
+                <a href="https://mega.nz/file/QigDWKjY#_kOb4UkXKULWXWxJvs4Cn1SupDcLAcbMXy_FSGAidgY" class="btn-download" download>Baixar APK</a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-info">
+                    <div class="app-icon">⚡</div>
+                    <div class="app-details">
+                        <div class="app-title" title="DNS Changer_1326-1r_APKPure.apk">DNS Changer</div>
+                        <span class="app-category">Ferramentas</span>
+                    </div>
+                </div>
+                <a href="https://mega.nz/file/s7wwXQRS#fK6dQU4tLsN0CcKmjpYVeEjdvfjU3c9H8_Onzeic4UQ" class="btn-download" download>Baixar APK</a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-info">
+                    <div class="app-icon">🏠</div>
+                    <div class="app-details">
+                        <div class="app-title" title="TV Launcher - Smart TV BOX_V5.2.6_APKPure.apk">TV Launcher Box</div>
+                        <span class="app-category">Personalização</span>
+                    </div>
+                </div>
+                <a href="https://mega.nz/file/suxzjKST#koQ0pfJAr7frj6BjWC-_uON5b2D11o5psrnZPwhS2e0" class="btn-download" download>Baixar APK</a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-info">
+                    <div class="app-icon">🚀</div>
+                    <div class="app-details">
+                        <div class="app-title" title="Alice_Launcher.apk">Alice Launcher</div>
+                        <span class="app-category">Launcher</span>
+                    </div>
+                </div>
+                <a href="https://mega.nz/file/A2pF1AQZ#qWhHa-vs8FlsTM4TjWOD5GMzdLFYYNba30XzTzApJJc" class="btn-download" download>Baixar APK</a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-info">
+                    <div class="app-icon">⚙️</div>
+                    <div class="app-details">
+                        <div class="app-title" title="Advanced Task Manager_6.4.5.238_APKPure.apk">Advanced Task Manager</div>
+                        <span class="app-category">Sistema</span>
+                    </div>
+                </div>
+                <a href="https://mega.nz/file/QjxmUKIY#16qfeQXWto9s2h47ry_MFM6G5vXx4RUhs6dv_U_shu4" class="btn-download" download>Baixar APK</a>
+            </div>
+
+            <div class="app-card">
+                <div class="app-info">
+                    <div class="app-icon">🤖</div>
+                    <div class="app-details">
+                        <div class="app-title" title="PLAYTECH_v8 para ANDROID U.apk">PLAYTECH v8</div>
+                        <span class="app-category">Android U</span>
+                    </div>
+                </div>
+                <a href="https://mega.nz/file/ZipWhTLT#xLnlL7L8bZTx1eYtbh94qcQWpTZO6xjZc97gvj2ciUA" class="btn-download" download>Baixar APK</a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
