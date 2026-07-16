@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fila com Chat e Encerramento</title>
+    <style>
+        :root {
+            --primary: #4a90e2; --admin-bg: #f8f9fa; --danger: #e74c3c; --success: #2ecc71;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background: #eef2f7; display: flex; justify-content: center; padding: 20px; }
+        .card { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 8px 20px rgba(0,0,0,0.1); width: 100%; max-width: 450px; }
+        
+        .status-box { background: var(--primary); color: white; padding: 20px; border-radius: 10px; text-align: center; margin-bottom: 20px; }
+        .count-val { font-size: 3rem; font-weight: bold; display: block; }
+
+        input { width: calc(100% - 24px); padding: 12px; margin-bottom: 10px; border: 2px solid #ddd; border-radius: 8px; }
+        button { width: 100%; padding: 12px; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; transition: 0.3s; }
+        .btn-add { background: var(--success); color: white; }
+
+        /* Área de Chat Individual */
+        #chatContainer { 
+            display: none; margin-top: 20px; border: 1px solid #ddd; border-radius: 10px; overflow: hidden; background: #fff;
+        }
+        .chat-header { background: #333; color: white; padding: 10px; font-size: 0.9rem; text-align: center; display: flex; justify-content: space-between; align-items: center; }
+        .chat-messages { height: 180px; overflow-y: auto; padding: 10px; display: flex; flex-direction: column; gap: 8px; background: #fdfdfd; border-bottom: 1px solid #eee; }
+        
+        .msg { padding: 8px 12px; border-radius: 12px; font-size: 0.85rem; max-width: 75%; line-height: 1.4; position: relative; }
+        .msg.admin { background: #dcf8c6; align-self: flex-end; border-bottom-right-radius: 2px; }
+        .msg.user { background: #eee; align-self: flex-start; border-bottom-left-radius: 2px; }
+        
+        .chat-input-row { display: flex; }
+        .chat-input-row input { margin: 0; border: none; border-radius: 0; flex: 1; padding: 10px; }
+        .chat-input-row button { width: auto; border-radius: 0; background: var(--primary); color: white; padding: 0 20px; }
+
+        /* Admin */
+        #adminPanel { display: none; margin-top: 20px; border-top: 2px solid #eee; padding-top: 15px; }
+        .admin-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; margin-top: 10px; margin-bottom: 15px; }
+        .admin-table td { padding: 8px; border-bottom: 1px solid #eee; }
+        
+        .btn-call { background: var(--primary); color: white; margin-bottom: 5px; }
+        .btn-finish { background: var(--danger); color: white; margin-top: 5px; }
+        
+        .login-trigger { display: block; text-align: center; margin-top: 20px; color: #bdc3c7; font-size: 0.7rem; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2 id="mainTitle">Fila de Espera</h2>
+    
+    <div class="status-box">
+        <span id="labelAguardando">Aguardando agora:</span>
+        <span id="displayCount" class="count-val">0</span>
+        <div id="servingNow" style="font-weight: bold; margin-top: 10px;">Livre</div>
+    </div>
+
+    <div id="chatContainer">
+        <div class="chat-header">
+            <span id="chatTargetName">Atendimento</span>
+            <span style="font-size: 0.6rem; opacity: 0.7;">Online</span>
+        </div>
+        <div class="chat-messages" id="chatContent"></div>
+        <div class="chat-input-row">
+            <input type="text" id="chatMsgInput" placeholder="Sua mensagem...">
+            <button onclick="sendChatMessage()">➤</button>
+        </div>
+    </div>
+
+    <div id="clientInputArea">
+        <input type="text" id="nameInput" placeholder="Seu nome completo...">
+        <button class="btn-add" onclick="addToQueue()">Entrar na Fila</button>
+    </div>
+
+    <div id="adminPanel">
+        <strong style="font-size: 0.8rem; color: #7f8c8d;">CONTROLES ADMIN</strong>
+        <button class="btn-call" onclick="callNext()">Chamar Próximo</button>
+        <button class="btn-finish" id="btnFinish" onclick="finishService()" style="display:none">Encerrar Atendimento Atual</button>
+        
+        <table class="admin-table">
+            <thead>
+                <tr style="text-align: left; color: #999; font-size: 0.7rem;">
+                    <th>POS</th><th>NOME</th>
+                </tr>
+            </thead>
+            <tbody id="adminQueueList"></tbody>
+        </table>
+        
+        <button onclick="logout()" style="background:none; color:gray; font-size:0.7rem;">Sair do Admin</button>
+    </div>
+
+    <span id="loginBtn" class="login-trigger" onclick="handleLogin()">Acesso Administrativo</span>
+</div>
+
+<script>
+    let queue = [];
+    let currentCustomer = null;
+    let isAdmin = false;
+    const HASH_AUTH = "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4"; // Senha: 1234
+
+    // Sincronização em tempo real entre abas
+    window.addEventListener('storage', (e) => {
+        if (e.key === 'data_queue' || e.key === 'data_current') {
+            loadState();
+        }
+    });
+
+    window.onload = loadState;
+
+    function loadState() {
+        const q = localStorage.getItem('data_queue');
+        const c = localStorage.getItem('data_current');
+        queue = q ? JSON.parse(q) : [];
+        currentCustomer = c ? JSON.parse(c) : null;
+        render();
+    }
+
+    function sync() {
+        localStorage.setItem('data_queue', JSON.stringify(queue));
+        localStorage.setItem('data_current', JSON.stringify(currentCustomer));
+        render();
+    }
+
+    function render() {
+        // Atualiza contador
+        document.getElementById('displayCount').innerText = queue.length;
+        
+        const servingDiv = document.getElementById('servingNow');
+        const chatBox = document.getElementById('chatContainer');
+        const finishBtn = document.getElementById('btnFinish');
+        
+        if (currentCustomer) {
+            servingDiv.innerHTML = `Atendendo: <span style="color:#fff">${currentCustomer.name}</span>`;
+            chatBox.style.display = 'block';
+            if(isAdmin) finishBtn.style.display = 'block';
+            renderMessages();
+        } else {
+            servingDiv.innerText = "Livre";
+            chatBox.style.display = 'none';
+            finishBtn.style.display = 'none';
+        }
+
+        // Lista do Admin
+        const list = document.getElementById('adminQueueList');
+        list.innerHTML = "";
+        queue.forEach((user, i) => {
+            list.innerHTML += `<tr><td>${i+1}º</td><td>${user.name}</td></tr>`;
+        });
+    }
+
+    function addToQueue() {
+        const input = document.getElementById('nameInput');
+        const name = input.value.trim();
+        if (!name) return alert("Por favor, insira o seu nome.");
+        
+        queue.push({ id: Date.now(), name: name, messages: [] });
+        input.value = "";
+        sync();
+    }
+
+    function callNext() {
+        if (queue.length === 0) return alert("Não há ninguém na fila.");
+        if (currentCustomer && !confirm("Já existe um atendimento em curso. Deseja encerrá-lo e chamar o próximo?")) return;
+        
+        currentCustomer = queue.shift();
+        sync();
+    }
+
+    // NOVA FUNÇÃO: ENCERRAR ATENDIMENTO
+    function finishService() {
+        if (!currentCustomer) return;
+        if (confirm(`Encerrar o atendimento de ${currentCustomer.name}?`)) {
+            currentCustomer = null;
+            sync();
+        }
+    }
+
+    function renderMessages() {
+        const container = document.getElementById('chatContent');
+        container.innerHTML = "";
+        (currentCustomer.messages || []).forEach(m => {
+            const div = document.createElement('div');
+            div.className = `msg ${m.sender}`;
+            div.innerText = m.text;
+            container.appendChild(div);
+        });
+        container.scrollTop = container.scrollHeight;
+    }
+
+    function sendChatMessage() {
+        const input = document.getElementById('chatMsgInput');
+        const text = input.value.trim();
+        if (!text || !currentCustomer) return;
+
+        currentCustomer.messages.push({
+            sender: isAdmin ? 'admin' : 'user',
+            text: text
+        });
+        
+        input.value = "";
+        sync();
+    }
+
+    // Atalhos de teclado
+    document.getElementById('chatMsgInput').onkeypress = (e) => { if(e.key === 'Enter') sendChatMessage(); };
+
+    async function handleLogin() {
+        const pass = prompt("Senha Admin:");
+        if (!pass) return;
+        const utf8 = new TextEncoder().encode(pass);
+        const hashBuffer = await crypto.subtle.digest('SHA-256', utf8);
+        const hash = Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+
+        if (hash === HASH_AUTH) {
+            isAdmin = true;
+            document.getElementById('adminPanel').style.display = 'block';
+            document.getElementById('loginBtn').style.display = 'none';
+            document.getElementById('clientInputArea').style.display = 'none';
+            document.getElementById('mainTitle').innerText = "Painel Atendente";
+            render();
+        } else {
+            alert("Senha incorreta.");
+        }
+    }
+
+    function logout() {
+        isAdmin = false;
+        location.reload();
+    }
+</script>
+</body>
+</html>
