@@ -267,6 +267,66 @@
             margin-top: 1rem;
         }
 
+        /* Estilos da Seção de Doações */
+        .donation-section {
+            background: linear-gradient(to bottom right, #ffffff, #f0f9ff);
+            border: 1px solid #bae6fd;
+        }
+
+        .donation-box {
+            background: #ffffff;
+            border: 1px dashed #0284c7;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 1rem;
+        }
+
+        .pix-key-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            background: #f1f5f9;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 450px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .pix-key {
+            font-family: monospace;
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--secondary);
+            word-break: break-all;
+        }
+
+        .btn-copy {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1.2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .btn-copy:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-copy.copied {
+            background-color: var(--accent);
+        }
+
         footer {
             text-align: center;
             padding: 2rem 1.5rem;
@@ -277,6 +337,8 @@
         @media (max-width: 600px) {
             header h1 { font-size: 1.8rem; }
             section { padding: 1.25rem; }
+            .pix-key-wrapper { flex-direction: column; }
+            .btn-copy { width: 100%; }
         }
     </style>
 </head>
@@ -326,7 +388,7 @@
                 <h3 style="color: #7f1d1d; font-size: 1.1rem; margin-bottom: 0.5rem;">Benefícios da Troca do PIN:</h3>
                 <ul style="padding-left: 1.25rem; color: #450a0a;">
                     <li style="margin-bottom: 0.5rem;"><strong>Bloqueio de Uso Indevido:</strong> Se o seu celular for roubado ou furtado, o criminoso não poderá colocar o seu chip em outro aparelho para acessar sua linha. Sem a nova senha pessoal, o SIM card permanecerá inacessível.</li>
-                    <li><strong>Proteção de Dados Sensíveis:</strong> Impede que terceiros recebam ligações ou SMS com **códigos de validação bancária**, autenticação em duas etapas (SMS de redes sociais e e-mails) e acesso a dados móveis.</li>
+                    <li><strong>Proteção de Dados Sensíveis:</strong> Impede que terceiros recebam ligações ou SMS com <strong>códigos de validação bancária</strong>, autenticação em duas etapas (SMS de redes sociais e e-mails) e acesso a dados móveis.</li>
                 </ul>
             </div>
 
@@ -414,6 +476,25 @@
             </div>
         </section>
 
+        <!-- Seção de Doações Voluntárias -->
+        <section class="donation-section">
+            <h2>💙 Apoie o Projeto</h2>
+            <p>
+                O aplicativo <strong>PIN</strong> é oferecido gratuitamente e sem exibição de anúncios. O recebimento de doações possui **caráter estritamente voluntário** e tem como objetivo apoiar a manutenção contínua, atualizações do projeto e custos de servidores.
+            </p>
+            <p style="margin-top: 0.5rem; font-size: 0.95rem; color: var(--text-light);">
+                Se esta ferramenta ajudou você a proteger sua linha móvel e você deseja apoiar o desenvolvimento independente, considere fazer uma contribuição de qualquer valor via Pix.
+            </p>
+
+            <div class="donation-box">
+                <span style="font-size: 0.9rem; font-weight: 600; color: #0369a1;">Chave Pix (E-mail):</span>
+                <div class="pix-key-wrapper">
+                    <span class="pix-key" id="pixKey">suporte@bithostel.com.br</span>
+                    <button class="btn-copy" id="copyBtn" onclick="copyPixKey()">Copiar Chave Pix</button>
+                </div>
+            </div>
+        </section>
+
         <!-- Como Instalar -->
         <section style="text-align: center;">
             <h2>Instalar no seu Android</h2>
@@ -433,6 +514,26 @@
     <footer>
         <p>&copy; Aplicativo PIN — Facilitador de Segurança para SIM Card</p>
     </footer>
+
+    <!-- Script de Cópia da Chave Pix -->
+    <script>
+        function copyPixKey() {
+            const pixKeyText = document.getElementById('pixKey').innerText;
+            const copyBtn = document.getElementById('copyBtn');
+
+            navigator.clipboard.writeText(pixKeyText).then(() => {
+                copyBtn.innerText = 'Copiado! ✓';
+                copyBtn.classList.add('copied');
+
+                setTimeout(() => {
+                    copyBtn.innerText = 'Copiar Chave Pix';
+                    copyBtn.classList.remove('copied');
+                }, 3000);
+            }).catch(err => {
+                console.error('Erro ao copiar: ', err);
+            });
+        }
+    </script>
 
 </body>
 </html>
