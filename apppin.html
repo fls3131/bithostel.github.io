@@ -8,12 +8,16 @@
         :root {
             --primary: #2563eb;
             --primary-dark: #1d4ed8;
+            --accent: #22c55e;
+            --accent-dark: #16a34a;
+            --danger: #dc2626;
+            --warning-bg: #fffbebfb;
+            --warning-border: #fef08a;
             --secondary: #0f172a;
             --bg-light: #f8fafc;
             --card-bg: #ffffff;
             --text: #334155;
             --text-light: #64748b;
-            --success: #16a34a;
             --radius: 12px;
         }
 
@@ -33,7 +37,7 @@
         header {
             background: linear-gradient(135deg, var(--secondary), var(--primary-dark));
             color: white;
-            padding: 4rem 1.5rem;
+            padding: 4rem 1.5rem 5rem;
             text-align: center;
         }
 
@@ -62,12 +66,41 @@
             font-size: 1.125rem;
             color: #cbd5e1;
             max-width: 600px;
-            margin: 0 auto;
+            margin: 0 auto 2rem;
+        }
+
+        /* Botão de Download Principal */
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            background-color: var(--accent);
+            color: white;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 700;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            box-shadow: 0 10px 15px -3px rgba(34, 197, 94, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .btn-download:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 15px 20px -3px rgba(34, 197, 94, 0.4);
+        }
+
+        .btn-download svg {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
         }
 
         main {
             max-width: 1000px;
-            margin: -2rem auto 3rem;
+            margin: -2.5rem auto 3rem;
             padding: 0 1.5rem;
         }
 
@@ -125,6 +158,29 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+        }
+
+        /* Alerta de Segurança */
+        .alert-section {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+        }
+
+        .alert-section h2 {
+            color: #991b1b;
+        }
+
+        .warning-box {
+            background: #fffbebfb;
+            border-left: 4px solid #f59e0b;
+            padding: 1.25rem;
+            border-radius: 4px;
+            margin-top: 1.5rem;
+        }
+
+        .warning-box h4 {
+            color: #92400e;
+            margin-bottom: 0.5rem;
         }
 
         /* Tabela de PINs */
@@ -230,7 +286,14 @@
         <div class="header-content">
             <span class="app-badge">Ferramenta Android</span>
             <h1>Aplicativo PIN</h1>
-            <p>Troque o código PIN 1 do seu chip de forma simples, rápida e 100% segura, sem navegar por menus complicados.</p>
+            <p>Troque o código PIN 1 do seu chip de forma simples, rápida e 100% segura, protegendo sua linha móvel contra fraudes.</p>
+            
+            <a href="/pin.apk" class="btn-download" download="pin.apk">
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/>
+                </svg>
+                Baixar PIN.apk
+            </a>
         </div>
     </header>
 
@@ -254,6 +317,30 @@
             </div>
         </div>
 
+        <!-- Alerta de Segurança Crucial -->
+        <section class="alert-section">
+            <h2>⚠️ Por que a Alteração do PIN é Crítica?</h2>
+            <p>A principal recomendação de segurança para qualquer usuário de celular é <strong>alterar o código PIN padrão do chip para uma senha pessoal</strong>. Os códigos originais de fábrica são de conhecimento público, tornando o seu chip vulnerável a golpes como <strong>clonagem e SIM Swap</strong>.</p>
+
+            <div style="margin-top: 1.5rem;">
+                <h3 style="color: #7f1d1d; font-size: 1.1rem; margin-bottom: 0.5rem;">Benefícios da Troca do PIN:</h3>
+                <ul style="padding-left: 1.25rem; color: #450a0a;">
+                    <li style="margin-bottom: 0.5rem;"><strong>Bloqueio de Uso Indevido:</strong> Se o seu celular for roubado ou furtado, o criminoso não poderá colocar o seu chip em outro aparelho para acessar sua linha. Sem a nova senha pessoal, o SIM card permanecerá inacessível.</li>
+                    <li><strong>Proteção de Dados Sensíveis:</strong> Impede que terceiros recebam ligações ou SMS com **códigos de validação bancária**, autenticação em duas etapas (SMS de redes sociais e e-mails) e acesso a dados móveis.</li>
+                </ul>
+            </div>
+
+            <!-- Cuidados Críticos / PUK -->
+            <div class="warning-box">
+                <h4>🛑 Cuidados Críticos na Troca do PIN</h4>
+                <ul style="padding-left: 1.25rem; color: #78350f; font-size: 0.95rem;">
+                    <li style="margin-bottom: 0.5rem;"><strong>Risco de Bloqueio do Chip:</strong> Se você errar o código PIN 3 vezes seguidas, o chip será bloqueado automaticamente e exigirá o código <strong>PUK</strong>.</li>
+                    <li style="margin-bottom: 0.5rem;"><strong>Atenção ao PUK:</strong> O PUK é uma chave mestra de 8 dígitos presente na embalagem plástica do seu chip. Há um limite de <strong>10 tentativas</strong> para inserir o PUK correto. Se errar todas as 10 vezes, <strong>o chip será queimado/inutilizado permanentemente</strong>, exigindo a compra e emissão de uma nova via na operadora.</li>
+                    <li><strong>Recuperação de Senha:</strong> Se você esquecer a nova senha do PIN, entre em contato imediatamente com a central de atendimento da sua operadora para obter o código PUK após validar a sua identidade.</li>
+                </ul>
+            </div>
+        </section>
+
         <!-- Como Funciona -->
         <section>
             <h2>Como Funciona a Alteração</h2>
@@ -265,7 +352,7 @@
 
             <ol class="steps-list">
                 <li>
-                    <strong>Preenchimento do Formụlário:</strong> Você digita a senha atual e a nova senha (de 4 a 8 dígitos) na interface do aplicativo.
+                    <strong>Preenchimento do Formulário:</strong> Você digita a senha atual e a nova senha (de 4 a 8 dígitos) na interface do aplicativo.
                 </li>
                 <li>
                     <strong>Envio para o Discador:</strong> O app gera o código MMI e abre o aplicativo de Telefone nativo com o número pronto.
@@ -279,7 +366,7 @@
         <!-- Tabela de PINs Padrão -->
         <section>
             <h2>PINs Padrão no Brasil</h2>
-            <p>Se você nunca alterou o PIN do seu chip desde que o comprou, ele provavelmente utiliza a senha de fábrica da operadora:</p>
+            <p>Se você nunca alterou o PIN do seu chip desde que o comprou, ele provavelmente utiliza a senha de fábrica da sua operadora:</p>
             
             <table class="pin-table">
                 <thead>
@@ -325,6 +412,21 @@
                     <strong>100% Offline e Privado:</strong> O aplicativo não possui permissão de acesso à Internet. Nenhuma informação ou senha sai do seu dispositivo.
                 </div>
             </div>
+        </section>
+
+        <!-- Como Instalar -->
+        <section style="text-align: center;">
+            <h2>Instalar no seu Android</h2>
+            <p style="margin-bottom: 1.5rem;">Clique no botão abaixo para baixar o instalador diretamente no seu celular.</p>
+            <a href="/pin.apk" class="btn-download" download="pin.apk">
+                <svg viewBox="0 0 24 24">
+                    <path d="M5 20h14v-2H5v2zM19 9h-4V3H9v6H5l7 7 7-7z"/>
+                </svg>
+                Baixar arquivo PIN.apk
+            </a>
+            <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 1rem;">
+                *Lembre-se de permitir a instalação de "fontes desconhecidas" no seu navegador Android para concluir a instalação.
+            </p>
         </section>
     </main>
 
