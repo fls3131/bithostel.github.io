@@ -19,6 +19,21 @@
             line-height: 1.6;
             scroll-behavior: smooth;
         }
+        
+        /* Canvas Matrix Overlay */
+        #matrix-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0.12;
+        }
+        
+  
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -568,6 +583,9 @@
     </style>
 </head>
 <body>
+    <!-- Canvas Matrix Background -->
+    <canvas id="matrix-canvas"></canvas>
+    
     <header>
         <div class="container">
             <img src="logo.png" alt="Logo bithostel TI"><br>
@@ -757,7 +775,7 @@
                     <div class="quick-service-price">
                         <i class="fa-solid fa-tag"></i> Apenas R$ 1.199,00
                     </div>
-                    <a href="https://wa.me/5513997853113?text=Olá! Gostaria de contratar o plano Website .br em 48 Horas." class="btn" style="margin-top: 20px; background-color: #28a745;"><i class="fa-brands fa-whatsapp"></i> Contratar Agora</a>
+                    <a href="https://wa.me/5513996922779?text=Olá! Gostaria de contratar o plano Website .br em 48 Horas." class="btn" style="margin-top: 20px; background-color: #28a745;"><i class="fa-brands fa-whatsapp"></i> Contratar Agora</a>
                 </div>
             </div>
         </section>
@@ -850,7 +868,7 @@
                             <li><i class="fa-solid fa-check"></i> Integração WhatsApp</li>
                             <li><i class="fa-solid fa-check"></i> Suporte Prioritário</li>
                         </ul>
-                        <a href="https://wa.me/5513997853113?text=Olá! Gostaria de contratar o Plano Express 48h." class="btn" style="background-color: #28a745;"><i class="fa-brands fa-whatsapp"></i> CONTRATAR AGORA</a>
+                        <a href="https://wa.me/5513996922779?text=Olá! Gostaria de contratar o Plano Express 48h." class="btn" style="background-color: #28a745;"><i class="fa-brands fa-whatsapp"></i> CONTRATAR AGORA</a>
                     </div>
                     <div class="price-card" id="plans-rescue">
                         <h3><i class="fa-solid fa-life-ring"></i> Plano Resgate (Domínio/Website)</h3>
@@ -861,7 +879,7 @@
                             <li><i class="fa-solid fa-check"></i> Transferência de Propriedade</li>
                             <li><i class="fa-solid fa-check"></i> Migração de Conteúdo</li>
                         </ul>
-                        <a href="https://wa.me/5513997853113?text=Olá! Preciso de ajuda com o serviço de Resgate de Domínio/Website." class="btn"><i class="fa-brands fa-whatsapp"></i> RESGATAR</a>
+                        <a href="https://wa.me/5513996922779?text=Olá! Preciso de ajuda com o serviço de Resgate de Domínio/Website." class="btn"><i class="fa-brands fa-whatsapp"></i> RESGATAR</a>
                     </div>
                     <div class="price-card">
                         <h3><i class="fa-solid fa-cloud"></i> Hospedagem Básica</h3>
@@ -873,7 +891,7 @@
                             <li><i class="fa-solid fa-check"></i> 5 Contas de E-mail</li>
                             <li><i class="fa-solid fa-check"></i> Certificado SSL Grátis</li>
                         </ul>
-                        <a href="https://wa.me/5513997853113?text=Olá! Gostaria de saber mais sobre Hospedagem Básica." class="btn"><i class="fa-brands fa-whatsapp"></i> Fale Conosco</a>
+                        <a href="https://wa.me/5513996922779?text=Olá! Gostaria de saber mais sobre Hospedagem Básica." class="btn"><i class="fa-brands fa-whatsapp"></i> Fale Conosco</a>
                     </div>
                     <div class="price-card">
                         <h3><i class="fa-solid fa-rocket"></i> Hospedagem Avançada (EXCLUSIVO)</h3>
@@ -908,7 +926,7 @@
                         <input type="text" name="query" placeholder="SeuDominio.com.br" style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; flex: 1; max-width: 350px; font-size: 1em;">
                         <button type="submit" class="btn-main-action" style="background-color: #28a745; margin: 0;"><i class="fa-solid fa-magnifying-glass"></i> Verificar Domínio</button>
                     </form>
-                    <a href="https://wa.me/5513997853113?text=Olá! Preciso de ajuda para registrar meu domínio." class="btn" style="margin-top: 15px;"><i class="fa-brands fa-whatsapp"></i> Fale Conosco para Registro</a>
+                    <a href="https://wa.me/5513996922779?text=Olá! Preciso de ajuda para registrar meu domínio." class="btn" style="margin-top: 15px;"><i class="fa-brands fa-whatsapp"></i> Fale Conosco para Registro</a>
                 </div>
             </div>
         </section>
@@ -977,6 +995,60 @@
         </div>
     </footer>
     <script>
+       // MATRIX EFFECT SCRIPT
+        const matrixCanvas = document.getElementById('matrix-canvas');
+        const ctx = matrixCanvas.getContext('2d');
+        
+        function resizeMatrixCanvas() {
+            matrixCanvas.width = window.innerWidth;
+            matrixCanvas.height = window.innerHeight;
+        }
+        
+        resizeMatrixCanvas();
+        
+        const matrixChars = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン 0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const chars = matrixChars.split('');
+        
+        const fontSize = 14;
+        let columns = Math.floor(matrixCanvas.width / fontSize);
+        let drops = [];
+        
+        function initDrops() {
+            columns = Math.floor(matrixCanvas.width / fontSize);
+            drops = [];
+            for (let i = 0; i < columns; i++) {
+                drops[i] = Math.random() * -100;
+            }
+        }
+        
+        initDrops();
+        
+        window.addEventListener('resize', () => {
+            resizeMatrixCanvas();
+            initDrops();
+        });
+        
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.04)';
+            ctx.fillRect(0, 0, matrixCanvas.width, matrixCanvas.height);
+            
+            ctx.fillStyle = '#00FF41';
+            ctx.font = fontSize + 'px monospace';
+            
+            for (let i = 0; i < drops.length; i++) {
+                const char = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(char, i * fontSize, drops[i] * fontSize);
+                
+                if (drops[i] * fontSize > matrixCanvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+        
+        setInterval(drawMatrix, 50);
+        
+        // Função original do menu
         document.addEventListener('DOMContentLoaded', function() {
             const menuToggle = document.querySelector('.menu-toggle');
             const mainNav = document.getElementById('main-nav');
