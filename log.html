@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LogiTrans - Soluções em Logística e Transporte</title>
+    <style>
+        /* CSS Reset & Variáveis */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #0a2540;
+            --accent: #ff6b00;
+            --light-bg: #f4f6f8;
+            --text-dark: #333333;
+            --text-light: #ffffff;
+        }
+
+        body {
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Cabeçalho / Navegação */
+        header {
+            background-color: var(--primary);
+            color: var(--text-light);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section com Rastreamento */
+        .hero {
+            background: linear-gradient(rgba(10, 37, 64, 0.85), rgba(10, 37, 64, 0.85)), 
+                        url('https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            color: var(--text-light);
+            padding: 5rem 5%;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Caixa de Rastreamento */
+        .tracking-box {
+            background: #ffffff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            gap: 10px;
+        }
+
+        .tracking-box input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .tracking-box button {
+            background-color: var(--accent);
+            color: var(--text-light);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .tracking-box button:hover {
+            background-color: #e05d00;
+        }
+
+        /* Serviços */
+        .services {
+            padding: 4rem 5%;
+            background-color: var(--light-bg);
+            text-align: center;
+        }
+
+        .services h2 {
+            margin-bottom: 2.5rem;
+            color: var(--primary);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--primary);
+            color: var(--text-light);
+            text-align: center;
+            padding: 2rem 5%;
+            margin-top: auto;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .tracking-box {
+                flex-direction: column;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <a href="#" class="logo">Logi<span>Trans</span></a>
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#sobre">Sobre Nós</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Seção Hero com Rastreio -->
+        <section id="home" class="hero">
+            <h1>Transporte Rápido, Seguro e Eficiente</h1>
+            <p>Conectando sua empresa a mercados locais e globais.</p>
+
+            <form class="tracking-box" onsubmit="alert('Buscando pedido...'); return false;">
+                <input type="text" placeholder="Digite seu código de rastreio (ex: LT123456BR)" required>
+                <button type="submit">Rastrear Carga</button>
+            </form>
+        </section>
+
+        <!-- Seção de Serviços -->
+        <section id="servicos" class="services">
+            <h2>Nossas Soluções Logísticas</h2>
+            
+            <div class="service-grid">
+                <article class="service-card">
+                    <h3>Transporte Rodoviário</h3>
+                    <p>Frota moderna para entregas expressas ou consolidadas em todo o país.</p>
+                </article>
+
+                <article class="service-card">
+                    <h3>Logística Aérea</h3>
+                    <p>Agilidade máxima para cargas de alto valor ou prazos críticos.</p>
+                </article>
+
+                <article class="service-card">
+                    <h3>Armazenagem & WMS</h3>
+                    <p>Gestão de estoque inteligente e centros de distribuição estratégicos.</p>
+                </article>
+
+                <article class="service-card">
+                    <h3>Frete Marítimo</h3>
+                    <p>Soluções completas para importação e exportação de contêineres.</p>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 LogiTrans Logística. Todos os direitos reservados.</p>
+    </footer>
+
+</body>
+</html>

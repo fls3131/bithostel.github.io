@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizzaria Bella Napoli - Pizza Artesanal no Forno a Lenha</title>
+    <style>
+        /* CSS Reset & Variáveis */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-red: #c0392b;
+            --accent-gold: #f39c12;
+            --dark-bg: #1c1c1c;
+            --light-bg: #fdfbf7;
+            --text-dark: #2c3e50;
+            --text-light: #ffffff;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Cabeçalho / Navegação */
+        header {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-light);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary-red);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+        }
+
+        nav a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--accent-gold);
+        }
+
+        .btn-pedir {
+            background-color: var(--primary-red);
+            color: var(--text-light);
+            padding: 0.5rem 1.2rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .btn-pedir:hover {
+            background-color: #a93226;
+            color: var(--text-light);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+            color: var(--text-light);
+            padding: 6rem 5% 4rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--accent-gold);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Cardápio (Menu) */
+        .menu-section {
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .menu-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-red);
+        }
+
+        .menu-section p.subtitle {
+            margin-bottom: 3rem;
+            color: #666;
+        }
+
+        .pizza-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .pizza-card {
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pizza-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .pizza-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .pizza-info {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .pizza-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-bg);
+        }
+
+        .pizza-info p {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .pizza-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .price {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--primary-red);
+        }
+
+        .add-btn {
+            background-color: var(--accent-gold);
+            color: var(--dark-bg);
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .add-btn:hover {
+            background-color: #e08e0b;
+        }
+
+        /* Seção de Contato/Pedido Rápido */
+        .order-section {
+            background-color: var(--dark-bg);
+            color: var(--text-light);
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .order-container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .order-container h2 {
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        .order-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .order-form input, 
+        .order-form select, 
+        .order-form textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border-radius: 6px;
+            border: 1px solid #444;
+            background: #2b2b2b;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .order-form button {
+            background-color: var(--primary-red);
+            color: var(--text-light);
+            border: none;
+            padding: 1rem;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .order-form button:hover {
+            background-color: #a93226;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: #111;
+            color: #aaa;
+            text-align: center;
+            padding: 2rem 5%;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho -->
+    <header>
+        <a href="#" class="logo">Bella<span>Napoli</span></a>
+        <nav>
+            <ul>
+                <li><a href="#home">Início</a></li>
+                <li><a href="#cardapio">Cardápio</a></li>
+                <li><a href="#pedir" class="btn-pedir">Fazer Pedido</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Banner Principal -->
+        <section id="home" class="hero">
+            <h1>A Autêntica Pizza Italiana</h1>
+            <p>Massa de fermentação natural, molho artesanal e ingredientes selecionados assados no forno a lenha.</p>
+        </section>
+
+        <!-- Cardápio em Destaque -->
+        <section id="cardapio" class="menu-section">
+            <h2>Nossas Pizzas Especiais</h2>
+            <p class="subtitle">Escolha a sua favorita e receba quentinha em casa</p>
+
+            <div class="pizza-grid">
+                <!-- Pizza 1 -->
+                <article class="pizza-card">
+                    <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=500&q=80" alt="Pizza Margherita" class="pizza-img">
+                    <div class="pizza-info">
+                        <h3>Margherita Classica</h3>
+                        <p>Molho de tomate artesanal, muçarela fior di latte, manjericão fresco e azeite extra virgem.</p>
+                        <div class="pizza-bottom">
+                            <span class="price">R$ 52,00</span>
+                            <button class="add-btn">Pedir</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Pizza 2 -->
+                <article class="pizza-card">
+                    <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=500&q=80" alt="Pizza Pepperoni" class="pizza-img">
+                    <div class="pizza-info">
+                        <h3>Pepperoni Premium</h3>
+                        <p>Molho de tomate, muçarela especial, generosas fatias de pepperoni e orégano silvestre.</p>
+                        <div class="pizza-bottom">
+                            <span class="price">R$ 58,00</span>
+                            <button class="add-btn">Pedir</button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Pizza 3 -->
+                <article class="pizza-card">
+                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=500&q=80" alt="Pizza Quatro Queijos" class="pizza-img">
+                    <div class="pizza-info">
+                        <h3>Quattro Formaggi</h3>
+                        <p>Combinação perfeita de muçarela, gorgonzola, parmesão curado e catupiry original.</p>
+                        <div class="pizza-bottom">
+                            <span class="price">R$ 64,00</span>
+                            <button class="add-btn">Pedir</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Formulário de Pedido/Reserva -->
+        <section id="pedir" class="order-section">
+            <div class="order-container">
+                <h2>Peça Seu Delivery</h2>
+                <p>Preencha os dados abaixo e entraremos em contato para confirmar seu pedido.</p>
+
+                <form class="order-form" onsubmit="alert('Pedido enviado com sucesso!'); return false;">
+                    <input type="text" placeholder="Seu Nome Completo" required>
+                    <input type="tel" placeholder="Telefone / WhatsApp" required>
+                    <select required>
+                        <option value="" disabled selected>Selecione a Pizza</option>
+                        <option value="margherita">Margherita Classica - R$ 52,00</option>
+                        <option value="pepperoni">Pepperoni Premium - R$ 58,00</option>
+                        <option value="4queijos">Quattro Formaggi - R$ 64,00</option>
+                    </select>
+                    <textarea rows="3" placeholder="Endereço de Entrega ou Observações (ex: sem cebola)"></textarea>
+                    <button type="submit">Confirmar Pedido</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2026 Pizzaria Bella Napoli. Todos os direitos reservados.</p>
+        <p>Atendimento: Terça a Domingo, das 18h às 23h30</p>
+    </footer>
+
+</body>
+</html>
