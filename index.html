@@ -3,34 +3,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Em Manutenção</title>
+    <title>bithostel TI - Sobre Nós</title>
+    <!-- Fonte Google Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Ícones Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            color: #333;
+        :root {
+            --primary: #0066cc;
+            --primary-dark: #004b99;
+            --accent: #00d2ff;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --white: #ffffff;
         }
-        .container {
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Header / Navbar */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 1.2rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span {
+            color: var(--accent);
+        }
+
+        nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--white);
+            padding: 4rem 1.5rem;
             text-align: center;
         }
-        h1 {
+
+        .hero h1 {
             font-size: 2.5rem;
             margin-bottom: 1rem;
         }
-        p {
+
+        .hero p {
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Conteúdo Principal */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .about-text h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.2rem;
+            color: var(--text-dark);
+            font-size: 1.05rem;
+        }
+
+        .badge-year {
+            display: inline-block;
+            background-color: #e0f2fe;
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Serviços Grid */
+        .services-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 2.5rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .service-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .service-card h3 {
+            margin-bottom: 0.5rem;
             font-size: 1.2rem;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* Seção de Contato */
+        .contact-section {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-top: 0.2rem;
+        }
+
+        .contact-item h4 {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .contact-item a, .contact-item p {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        .contact-item a:hover {
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--text-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 1.5rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .contact-section { padding: 1.5rem; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Estamos em Manutenção</h1>
-        <p>Desculpe pelo transtorno. Voltaremos em breve!</p>
-    </div>
+
+    <!-- Cabeçalho -->
+    <header>
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-server"></i> bithostel <span>TI</span>
+            </a>
+            <nav>
+                <a href="#sobre">Sobre Nós</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Banner Principal -->
+    <section class="hero">
+        <h1>Soluções em TI End-to-End</h1>
+        <p>Da infraestrutura de rede ao suporte final e presença digital. Desde 2011 transformando a tecnologia do seu negócio.</p>
+    </section>
+
+    <!-- Conteúdo Principal -->
+    <main class="container" id="sobre">
+        <article class="about-grid">
+            <div class="about-text">
+                <span class="badge-year"><i class="fa-solid fa-location-dot"></i> Santos, Brasil • Desde 2011</span>
+                <h2>Nossa Trajetória</h2>
+                <p>A <strong>bithostel TI</strong> construiu uma sólida trajetória no mercado de tecnologia da informação, expandindo constantemente seu portfólio de serviços para oferecer respostas precisas às necessidades de cada cliente.</p>
+                <p>Desde o nosso início, nos especializamos em soluções <strong>Open Source</strong>, oferecendo alta expertise em ecossistemas Linux para desktops e servidores, além de consultoria estratégica em segurança digital. Ao longo dos anos, ampliamos nossa atuação incorporando assistência técnica especializada para computadores e dispositivos Android, além de comercialização e implementação de softwares antivírus de ponta.</p>
+                <p>Com uma visão completa para a presença digital dos nossos clientes, também nos consolidamos no <strong>desenvolvimento de websites</strong> — criando desde portfólios e sites institucionais até blogs e plataformas complexas de e-commerce.</p>
+            </div>
+        </article>
+
+        <!-- Serviços em Destaque -->
+        <h2 class="services-title">Nossa Expertise</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <i class="fa-brands fa-linux"></i>
+                <h3>Open Source & Linux</h3>
+                <p>Especialistas em implementação, gerenciamento e suporte para servidores e desktops baseados em Linux.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-network-wired"></i>
+                <h3>Redes & Infraestrutura</h3>
+                <p>Provisionamento e gestão de firewalls, roteadores, switches e VPNs para garantir máxima segurança e estabilidade.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>Segurança Digital</h3>
+                <p>Consultoria em segurança corporativa, implementação de antivírus e proteção de dados críticos.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-code"></i>
+                <h3>Desenvolvimento Web</h3>
+                <p>Criação de sites institucionais, portfólios, blogs e plataformas e-commerce totalmente personalizadas.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-microchip"></i>
+                <h3>Assistência Técnica</h3>
+                <p>Manutenção preventiva e corretiva especializada para computadores e smartphones Android.</p>
+            </div>
+            <div class="service-card">
+                <i class="fa-solid fa-headset"></i>
+                <h3>Suporte ao Usuário</h3>
+                <p>Atendimento abrangente e contínuo para garantir o fluxo de trabalho sem interrupções na sua empresa.</p>
+            </div>
+        </div>
+
+        <!-- Seção de Contato -->
+        <section class="contact-section">
+            <h2 style="color: var(--primary); margin-bottom: 0.5rem;">Fale Conosco</h2>
+            <p style="color: var(--text-muted);">Estamos prontos para atender a infraestrutura e as demandas digitais da sua empresa.</p>
+            
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    <div>
+                        <h4>WhatsApp / Telefone</h4>
+                        <a href="https://wa.me/5513996922779" target="_blank">(13) 99692-2779</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fa-regular fa-envelope"></i>
+                    <div>
+                        <h4>E-mail</h4>
+                        <a href="mailto:hostmaster@bithostel.com.br">hostmaster@bithostel.com.br</a>
+                    </div>
+                </div>
+
+                <div class="contact-item">
+                    <i class="fa-solid fa-map-pin"></i>
+                    <div>
+                        <h4>Endereço</h4>
+                        <p>Rua Frei Francisco Sampaio, 283/44<br>Santos - SP</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer>
+        <p>&copy; 2011 - 2026 bithostel TI. Todos os direitos reservados.</p>
+    </footer>
+
 </body>
 </html>
