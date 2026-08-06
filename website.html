@@ -959,7 +959,7 @@
                 <div style="text-align: center; margin-top: 40px; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);">
                     <h3 style="color: #007bff; font-size: 1.4em; margin-bottom: 10px;"><i class="fa-solid fa-file-contract"></i> Documento Legal</h3>
                     <p style="margin-bottom: 15px;">Proregido pelas cláusulas e condições estipuladas:<br><strong>CONTRATANTE:</strong> Pessoa física ou jurídica qualificada eletronicamente no ato da adesão via plataforma digital, mediante aceite destes termos e confirmação de pagamento, doravante denominada "CONTRATANTE".</p>
-                    <a href="Contrato_Prestacao_Servicos_BITHOSTEL_TI_Atualizado.pdf" class="btn-main-action" data-open-contract-modal style="background-color: #007bff; font-size: 1.1em; margin: 0;">
+                    <a href="Contrato_Prestacao_Servicos_BITHOSTEL_TI_Atualizado.pdf" class="btn-main-action" data-open-document-modal data-document-file="Contrato_Prestacao_Servicos_BITHOSTEL_TI_Atualizado.pdf" data-document-title="Contrato de Prestação de Serviços" style="background-color: #007bff; font-size: 1.1em; margin: 0;">
                         <i class="fa-solid fa-file-pdf"></i> Ver Contrato de Prestação de Serviços (PDF)
                     </a>
                     <p style="margin-top:10px;font-size:0.95em;color:#555;">Documento disponível para consulta. O aceite eletrônico e a confirmação de pagamento formalizam a adesão conforme os termos previstos.</p>
@@ -1038,7 +1038,7 @@
                 <div class="version-item" id="faq-contract">
                     <h3><i class="fa-solid fa-question"></i> Onde posso ver o contrato?</h3>
                     <ul>
-                        <li><i class="fa-solid fa-circle-info"></i> Nosso contrato de prestação de serviços está disponível em PDF e pode ser acessado <a href="Contrato_Prestacao_Servicos_BITHOSTEL_TI_Atualizado.pdf" target="_blank" style="color: #007bff; text-decoration: underline;">clicando aqui</a> ou no rodapé do site.</li>
+                        <li><i class="fa-solid fa-circle-info"></i> Nosso contrato de prestação de serviços está disponível em PDF e pode ser acessado <a href="Contrato_Prestacao_Servicos_BITHOSTEL_TI_Atualizado.pdf" data-open-document-modal data-document-file="Contrato_Prestacao_Servicos_BITHOSTEL_TI_Atualizado.pdf" data-document-title="Contrato de Prestação de Serviços" style="color: #007bff; text-decoration: underline;">clicando aqui</a> ou no rodapé do site.</li>
                     </ul>
                 </div>
                 <div class="version-item" id="faq-maintenance">
@@ -1074,7 +1074,7 @@
     <button id="back-to-top" title="Voltar ao Topo">&#x2191;</button>
     <footer>
         <div class="container">
-            <p>&copy; 2026 bithostel TI - 14.406.585/0001-59 Todos os direitos reservados. | <a href="politica_de_privacidade_bithostel.pdf" target="_blank">Política de Privacidade</a> | <a href="#">Termos de Uso</a> | <a href="Contrato_Prestacao_Servicos_BITHOSTEL_TI_Atualizado.pdf" target="_blank"><i class="fa-solid fa-file-contract"></i> Contrato de Prestação de Serviços</a></p>
+            <p>&copy; 2026 bithostel TI - 14.406.585/0001-59 Todos os direitos reservados. | <a href="politica_de_privacidade_bithostel.pdf" data-open-document-modal data-document-file="politica_de_privacidade_bithostel.pdf" data-document-title="Política de Privacidade">Política de Privacidade</a> | <a href="#">Termos de Uso</a> | <a href="Contrato_Prestacao_Servicos_BITHOSTEL_TI_Atualizado.pdf" data-open-document-modal data-document-file="Contrato_Prestacao_Servicos_BITHOSTEL_TI_Atualizado.pdf" data-document-title="Contrato de Prestação de Serviços"><i class="fa-solid fa-file-contract"></i> Contrato de Prestação de Serviços</a></p>
         </div>
     </footer>
     <script>
@@ -1192,9 +1192,13 @@
 
             const contractModalOverlay = document.getElementById('contract-modal-overlay');
             const contractModalClose = document.querySelector('.contract-modal-close');
+            const contractModalTitle = document.querySelector('.contract-modal-title');
+            const contractModalFrame = document.querySelector('.contract-modal-frame');
 
-            function openContractModal() {
-                if (contractModalOverlay) {
+            function openContractModal(file, title) {
+                if (contractModalOverlay && contractModalTitle && contractModalFrame) {
+                    contractModalFrame.src = file;
+                    contractModalTitle.textContent = title;
                     contractModalOverlay.classList.add('active');
                     document.body.style.overflow = 'hidden';
                 }
@@ -1207,10 +1211,14 @@
                 }
             }
 
-            document.querySelectorAll('a[href="Contrato_Prestacao_Servicos_BITHOSTEL_TI_Atualizado.pdf"]').forEach(link => {
+            document.querySelectorAll('a[data-open-document-modal]').forEach(link => {
                 link.addEventListener('click', function(e) {
                     e.preventDefault();
-                    openContractModal();
+                    const file = this.getAttribute('data-document-file');
+                    const title = this.getAttribute('data-document-title');
+                    if (file && title) {
+                        openContractModal(file, title);
+                    }
                 });
             });
 
