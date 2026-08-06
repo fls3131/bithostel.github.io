@@ -488,6 +488,54 @@
         footer a:hover {
             text-decoration: underline;
         }
+        .contract-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            z-index: 2000;
+        }
+        .contract-modal-overlay.active {
+            display: flex;
+        }
+        .contract-modal {
+            width: min(95vw, 1100px);
+            height: min(90vh, 900px);
+            background: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+        }
+        .contract-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: #f7f9fc;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .contract-modal-title {
+            font-weight: 700;
+            color: #007bff;
+        }
+        .contract-modal-close {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #555;
+        }
+        .contract-modal-frame {
+            flex: 1;
+            width: 100%;
+            border: 0;
+            background: #fff;
+        }
         /* Responsividade */
         @media (max-width: 768px) {
             header h1 {
@@ -911,7 +959,7 @@
                 <div style="text-align: center; margin-top: 40px; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.08);">
                     <h3 style="color: #007bff; font-size: 1.4em; margin-bottom: 10px;"><i class="fa-solid fa-file-contract"></i> Documento Legal</h3>
                     <p style="margin-bottom: 15px;">Proregido pelas cláusulas e condições estipuladas:<br><strong>CONTRATANTE:</strong> Pessoa física ou jurídica qualificada eletronicamente no ato da adesão via plataforma digital, mediante aceite destes termos e confirmação de pagamento, doravante denominada "CONTRATANTE".</p>
-                    <a href="Contrato_Prestacao_Servicos_BITHOSTEL_TI_Atualizado.pdf" target="_blank" class="btn-main-action" style="background-color: #007bff; font-size: 1.1em; margin: 0;">
+                    <a href="Contrato_Prestacao_Servicos_BITHOSTEL_TI_Atualizado.pdf" class="btn-main-action" data-open-contract-modal style="background-color: #007bff; font-size: 1.1em; margin: 0;">
                         <i class="fa-solid fa-file-pdf"></i> Ver Contrato de Prestação de Serviços (PDF)
                     </a>
                     <p style="margin-top:10px;font-size:0.95em;color:#555;">Documento disponível para consulta. O aceite eletrônico e a confirmação de pagamento formalizam a adesão conforme os termos previstos.</p>
@@ -1014,6 +1062,15 @@
             </div>
         </section>
     </main>
+    <div class="contract-modal-overlay" id="contract-modal-overlay" role="dialog" aria-modal="true" aria-label="Contrato de Prestação de Serviços">
+        <div class="contract-modal">
+            <div class="contract-modal-header">
+                <span class="contract-modal-title">Contrato de Prestação de Serviços</span>
+                <button class="contract-modal-close" aria-label="Fechar modal">×</button>
+            </div>
+            <iframe class="contract-modal-frame" src="Contrato_Prestacao_Servicos_BITHOSTEL_TI_Atualizado.pdf"></iframe>
+        </div>
+    </div>
     <button id="back-to-top" title="Voltar ao Topo">&#x2191;</button>
     <footer>
         <div class="container">
@@ -1131,6 +1188,48 @@
                     top: 0,
                     behavior: 'smooth'
                 });
+            });
+
+            const contractModalOverlay = document.getElementById('contract-modal-overlay');
+            const contractModalClose = document.querySelector('.contract-modal-close');
+
+            function openContractModal() {
+                if (contractModalOverlay) {
+                    contractModalOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            function closeContractModal() {
+                if (contractModalOverlay) {
+                    contractModalOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+
+            document.querySelectorAll('a[href="Contrato_Prestacao_Servicos_BITHOSTEL_TI_Atualizado.pdf"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openContractModal();
+                });
+            });
+
+            if (contractModalClose) {
+                contractModalClose.addEventListener('click', closeContractModal);
+            }
+
+            if (contractModalOverlay) {
+                contractModalOverlay.addEventListener('click', function(e) {
+                    if (e.target === contractModalOverlay) {
+                        closeContractModal();
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && contractModalOverlay && contractModalOverlay.classList.contains('active')) {
+                    closeContractModal();
+                }
             });
         });
     </script>
