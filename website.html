@@ -536,6 +536,50 @@
             border: 0;
             background: #fff;
         }
+        .example-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+        }
+        .example-modal-overlay.active {
+            display: flex;
+        }
+        .example-modal {
+            width: 100vw;
+            height: 100vh;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .example-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .example-modal-title {
+            font-weight: 700;
+            color: #007bff;
+        }
+        .example-modal-close {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #555;
+        }
+        .example-modal-frame {
+            width: 100%;
+            height: calc(100vh - 56px);
+            border: 0;
+            background: #fff;
+        }
         /* Responsividade */
         @media (max-width: 768px) {
             header h1 {
@@ -975,17 +1019,17 @@
                     <div class="feature-item">
                         <h3><i class="fa-solid fa-truck-fast"></i> Exemplo: Logística</h3>
                         <p>Website institucional para empresa de transporte e logística com formulário de cotação e rastreamento.</p>
-                        <a href="log.html" class="btn" style="margin-top:10px;" target="_blank" rel="noopener noreferrer">Ver exemplo: Logística</a>
+                        <a href="log.html" class="btn" style="margin-top:10px;" data-open-example-modal data-example-file="log.html" data-example-title="Exemplo: Logística">Ver exemplo: Logística</a>
                     </div>
                     <div class="feature-item">
                         <h3><i class="fa-solid fa-pizza-slice"></i> Exemplo: Pizzaria</h3>
                         <p>Catálogo e cardápio online com integração para pedidos via WhatsApp.</p>
-                        <a href="pizza.html" class="btn" style="margin-top:10px;" target="_blank" rel="noopener noreferrer">Ver exemplo: Pizzaria</a>
+                        <a href="pizza.html" class="btn" style="margin-top:10px;" data-open-example-modal data-example-file="pizza.html" data-example-title="Exemplo: Pizzaria">Ver exemplo: Pizzaria</a>
                     </div>
                     <div class="feature-item">
                         <h3><i class="fa-solid fa-truck-moving"></i> Exemplo: Entrega</h3>
                         <p>Página de entrega com foco em eficiência, rastreamento de pedidos e comunicação direta com cliente.</p>
-                        <a href="entregas.html" class="btn" style="margin-top:10px;" target="_blank" rel="noopener noreferrer">Ver exemplo: Entrega</a>
+                        <a href="entregas.html" class="btn" style="margin-top:10px;" data-open-example-modal data-example-file="entregas.html" data-example-title="Exemplo: Entrega">Ver exemplo: Entrega</a>
                     </div>
                 </div>
             </div>
@@ -1069,6 +1113,16 @@
                 <button class="contract-modal-close" aria-label="Fechar modal">×</button>
             </div>
             <iframe class="contract-modal-frame" src="Contrato_Prestacao_Servicos_BITHOSTEL_TI_Atualizado.pdf"></iframe>
+        </div>
+    </div>
+
+    <div class="example-modal-overlay" id="example-modal-overlay" role="dialog" aria-modal="true" aria-label="Exemplo de página">
+        <div class="example-modal">
+            <div class="example-modal-header">
+                <span class="example-modal-title">Exemplo</span>
+                <button class="example-modal-close" aria-label="Fechar exemplo">×</button>
+            </div>
+            <iframe class="example-modal-frame" src=""></iframe>
         </div>
     </div>
     <button id="back-to-top" title="Voltar ao Topo">&#x2191;</button>
@@ -1194,6 +1248,10 @@
             const contractModalClose = document.querySelector('.contract-modal-close');
             const contractModalTitle = document.querySelector('.contract-modal-title');
             const contractModalFrame = document.querySelector('.contract-modal-frame');
+            const exampleModalOverlay = document.getElementById('example-modal-overlay');
+            const exampleModalClose = document.querySelector('.example-modal-close');
+            const exampleModalTitle = document.querySelector('.example-modal-title');
+            const exampleModalFrame = document.querySelector('.example-modal-frame');
 
             function openContractModal(file, title) {
                 if (contractModalOverlay && contractModalTitle && contractModalFrame) {
@@ -1207,6 +1265,24 @@
             function closeContractModal() {
                 if (contractModalOverlay) {
                     contractModalOverlay.classList.remove('active');
+                    contractModalFrame.src = '';
+                    document.body.style.overflow = '';
+                }
+            }
+
+            function openExampleModal(file, title) {
+                if (exampleModalOverlay && exampleModalTitle && exampleModalFrame) {
+                    exampleModalFrame.src = file;
+                    exampleModalTitle.textContent = title;
+                    exampleModalOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            function closeExampleModal() {
+                if (exampleModalOverlay) {
+                    exampleModalOverlay.classList.remove('active');
+                    exampleModalFrame.src = '';
                     document.body.style.overflow = '';
                 }
             }
@@ -1222,8 +1298,23 @@
                 });
             });
 
+            document.querySelectorAll('a[data-open-example-modal]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const file = this.getAttribute('data-example-file');
+                    const title = this.getAttribute('data-example-title');
+                    if (file && title) {
+                        openExampleModal(file, title);
+                    }
+                });
+            });
+
             if (contractModalClose) {
                 contractModalClose.addEventListener('click', closeContractModal);
+            }
+
+            if (exampleModalClose) {
+                exampleModalClose.addEventListener('click', closeExampleModal);
             }
 
             if (contractModalOverlay) {
@@ -1234,9 +1325,21 @@
                 });
             }
 
+            if (exampleModalOverlay) {
+                exampleModalOverlay.addEventListener('click', function(e) {
+                    if (e.target === exampleModalOverlay) {
+                        closeExampleModal();
+                    }
+                });
+            }
+
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && contractModalOverlay && contractModalOverlay.classList.contains('active')) {
-                    closeContractModal();
+                if (e.key === 'Escape') {
+                    if (contractModalOverlay && contractModalOverlay.classList.contains('active')) {
+                        closeContractModal();
+                    } else if (exampleModalOverlay && exampleModalOverlay.classList.contains('active')) {
+                        closeExampleModal();
+                    }
                 }
             });
         });
