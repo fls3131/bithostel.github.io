@@ -289,6 +289,51 @@
                 font-size: 0.95rem;
             }
         }
+
+        .example-modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+        }
+        .example-modal-overlay.active {
+            display: flex;
+        }
+        .example-modal {
+            width: 100vw;
+            height: 100vh;
+            background: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+        .example-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .example-modal-title {
+            font-weight: 700;
+            color: #007bff;
+        }
+        .example-modal-close {
+            background: none;
+            border: none;
+            font-size: 1.6rem;
+            cursor: pointer;
+            color: #555;
+        }
+        .example-modal-frame {
+            width: 100%;
+            height: calc(100vh - 56px);
+            border: 0;
+            background: #fff;
+        }
     </style>
 </head>
 <body>
@@ -301,8 +346,8 @@
             </a>
             <nav>
                 <a href="#sobre">Sobre Nós</a>
-                <a href="website.html">Desenvolvimento de Website</a>
-                <a href="desktop.html"># PC na Nuvem</a>
+                <a href="#" data-open-example-modal data-example-file="website.html" data-example-title="Website Bithostel">Desenvolvimento de Website</a>
+                <a href="#" data-open-example-modal data-example-file="desktop.html" data-example-title="PC na Nuvem"># PC na Nuvem</a>
             </nav>
         </div>
     </header>
@@ -397,6 +442,71 @@
         <i class="fa-brands fa-whatsapp"></i>
         <span>13 99692-2779</span>
     </a>
+
+    <div class="example-modal-overlay" id="example-modal-overlay" role="dialog" aria-modal="true" aria-label="Visualização do Website">
+        <div class="example-modal">
+            <div class="example-modal-header">
+                <span class="example-modal-title">Website</span>
+                <button class="example-modal-close" aria-label="Fechar modal">×</button>
+            </div>
+            <iframe class="example-modal-frame" src="" title="Visualização do website"></iframe>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const exampleModalOverlay = document.getElementById('example-modal-overlay');
+            const exampleModalClose = document.querySelector('.example-modal-close');
+            const exampleModalTitle = document.querySelector('.example-modal-title');
+            const exampleModalFrame = document.querySelector('.example-modal-frame');
+
+            function openExampleModal(file, title) {
+                if (exampleModalOverlay && exampleModalTitle && exampleModalFrame) {
+                    exampleModalFrame.src = file;
+                    exampleModalTitle.textContent = title;
+                    exampleModalOverlay.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            }
+
+            function closeExampleModal() {
+                if (exampleModalOverlay) {
+                    exampleModalOverlay.classList.remove('active');
+                    exampleModalFrame.src = '';
+                    document.body.style.overflow = '';
+                }
+            }
+
+            document.querySelectorAll('a[data-open-example-modal]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const file = this.getAttribute('data-example-file');
+                    const title = this.getAttribute('data-example-title') || 'Website';
+                    if (file) {
+                        openExampleModal(file, title);
+                    }
+                });
+            });
+
+            if (exampleModalClose) {
+                exampleModalClose.addEventListener('click', closeExampleModal);
+            }
+
+            if (exampleModalOverlay) {
+                exampleModalOverlay.addEventListener('click', function(e) {
+                    if (e.target === exampleModalOverlay) {
+                        closeExampleModal();
+                    }
+                });
+            }
+
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && exampleModalOverlay.classList.contains('active')) {
+                    closeExampleModal();
+                }
+            });
+        });
+    </script>
     
     <!-- Rodapé -->
     <footer>
