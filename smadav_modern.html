@@ -31,6 +31,7 @@
         }
 
         header {
+            position: relative;
             background-color: var(--dark-bg);
             color: white;
             padding: 60px 20px;
@@ -257,6 +258,34 @@
         footer a:hover {
             text-decoration: underline;
         }
+
+        .video-layer {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: min(340px, calc(100% - 40px));
+            max-width: 340px;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.95);
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.25);
+            border: 1px solid rgba(148, 163, 184, 0.15);
+            z-index: 2;
+        }
+        .video-layer video {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #000;
+        }
+        .video-label {
+            padding: 10px 12px;
+            font-size: 0.92rem;
+            color: #0f172a;
+            background: rgba(255,255,255,0.95);
+            text-align: center;
+            border-top: 1px solid rgba(15, 23, 42, 0.08);
+        }
     </style>
 </head>
 <body>
@@ -267,6 +296,10 @@
         <div class="cta-group">
             <a href="#precos" class="btn btn-primary">Adquirir Licença Pro</a>
             <a href="smadav2026rev1582.exe" class="btn btn-secondary" target="_blank" rel="noopener">Baixar Versão Grátis</a>
+        </div>
+        <div class="video-layer">
+            <video src="smadavsetup.mp4" controls muted playsinline preload="metadata"></video>
+            <div class="video-label">Vídeo Smadav Setup</div>
         </div>
     </header>
 
