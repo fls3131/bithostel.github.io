@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smadav Pro - Proteção Antivírus Complementar</title>
+    <style>
+        :root {
+            --primary-color: #0d9488;
+            --primary-hover: #0f766e;
+            --accent-color: #10b981;
+            --dark-bg: #0f172a;
+            --card-bg: #ffffff;
+            --text-color: #334155;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --border-color: #e2e8f0;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-light);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background-color: var(--dark-bg);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom: 4px solid var(--accent-color);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto 30px auto;
+        }
+
+        .cta-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #059669;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid #475569;
+        }
+
+        .btn-secondary:hover {
+            background-color: #1e293b;
+            border-color: #64748b;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 50px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--dark-bg);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: var(--text-light);
+        }
+
+        /* Grid de Recursos */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+        }
+
+        .feature-card .icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: var(--dark-bg);
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Seção de Preços */
+        .pricing-section {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            margin-bottom: 60px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--bg-light);
+            color: var(--dark-bg);
+            font-weight: 600;
+        }
+
+        tr:hover {
+            background-color: #f1f5f9;
+        }
+
+        .price {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .buy-box {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        /* Passos */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        .step-card {
+            background: var(--bg-light);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .step-number {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .step-card h4 {
+            margin-bottom: 8px;
+            color: var(--dark-bg);
+        }
+
+        /* Garantia */
+        .notice-box {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 40px;
+        }
+
+        .notice-box h4 {
+            color: #166534;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .notice-box p {
+            color: #15803d;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            background-color: var(--dark-bg);
+            color: #94a3b8;
+            text-align: center;
+            padding: 30px 20px;
+            font-size: 0.9rem;
+            border-top: 1px solid #1e293b;
+        }
+
+        footer a {
+            color: #cbd5e1;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Eleve a segurança do seu PC com o Smadav Pro</h1>
+        <p>Sua segunda camada de proteção em tempo real. O complemento ideal para o Windows Defender e mídias USB.</p>
+        <div class="cta-group">
+            <a href="#precos" class="btn btn-primary">Adquirir Licença Pro</a>
+            <a href="https://www.smadav.net" class="btn btn-secondary" target="_blank" rel="noopener">Baixar Versão Grátis</a>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Seção Recursos -->
+        <section>
+            <div class="section-title">
+                <h2>Por que escolher o Smadav Pro?</h2>
+                <p>Especializado em proteção contra infecções por USB, mídias externas e ameaças locais.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <span class="icon">⚡</span>
+                    <h3>Sem Anúncios na Inicialização</h3>
+                    <p>Diga adeus aos pop-ups informativos e mensagens de oferta toda vez que ligar o computador.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🛡️</span>
+                    <h3>Proteção Avançada</h3>
+                    <p>Acesso total às configurações do escudo Anti-Ransomware e opções adicionais de proteção.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🎨</span>
+                    <h3>Personalização Visual</h3>
+                    <p>Altere a cor do tema da interface para combinar perfeitamente com o seu estilo visual.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">📂</span>
+                    <h3>Lista de Exceções</h3>
+                    <p>Defina arquivos, pastas e chaves do registro confiáveis para ignorar durante os escaneamentos.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🔐</span>
+                    <h3>Senha de Administrador</h3>
+                    <p>Restrinja o acesso a configurações, quarentena e ferramentas avançadas para usuários comuns.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="icon">🏢</span>
+                    <h3>Uso Empresarial</h3>
+                    <p>Licença corporativa necessária para uso em empresas, ONGs e órgãos públicos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Preços -->
+        <section id="precos" class="pricing-section">
+            <div class="section-title">
+                <h2>Planos e Preços em Reais (BRL)</h2>
+                <p>Valores locais em R$ já com impostos e margem de revenda inclusos</p>
+            </div>
+
+            <h3 style="margin-bottom: 15px; color: var(--dark-bg);">Planos Pessoais e Pequenos Times</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Licença / Dispositivos</th>
+                            <th>Plano 1 Ano</th>
+                            <th>Plano 2 Anos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1 Computador</td>
+                            <td class="price">R$ 42,90</td>
+                            <td class="price">R$ 82,50</td>
+                        </tr>
+                        <tr>
+                            <td>2 Computadores</td>
+                            <td class="price">R$ 64,90</td>
+                            <td class="price">R$ 110,00</td>
+                        </tr>
+                        <tr>
+                            <td>3 Computadores</td>
+                            <td class="price">R$ 86,90</td>
+                            <td class="price">R$ 165,00</td>
+                        </tr>
+                        <tr>
+                            <td>5 Computadores</td>
+                            <td class="price">R$ 143,00</td>
+                            <td class="price">R$ 275,00</td>
+                        </tr>
+                        <tr>
+                            <td>10 Computadores</td>
+                            <td class="price">R$ 280,50</td>
+                            <td class="price">R$ 550,00</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3 style="margin-bottom: 15px; color: var(--dark-bg);">Planos Corporativos (Volume)</h3>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Quantidade</th>
+                            <th>1 Ano</th>
+                            <th>2 Anos</th>
+                            <th>3 Anos</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>20 Computadores</td>
+                            <td class="price">R$ 550,00</td>
+                            <td class="price">R$ 1.056,00</td>
+                            <td class="price">R$ 1.386,00</td>
+                        </tr>
+                        <tr>
+                            <td>50 Computadores</td>
+                            <td class="price">R$ 1.375,00</td>
+                            <td class="price">R$ 2.530,00</td>
+                            <td class="price">R$ 3.465,00</td>
+                        </tr>
+                        <tr>
+                            <td>100 Computadores</td>
+                            <td class="price">R$ 2.750,00</td>
+                            <td class="price">R$ 4.840,00</td>
+                            <td>—</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="buy-box">
+                <a href="https://bithostelti.lojavirtualnuvem.com.br/produtos/protecao-smadav-pro-01-ano/" class="btn btn-primary" target="_blank" rel="noopener">Ir para a Página de Pagamento Seguro</a>
+            </div>
+        </section>
+
+        <!-- Como funciona -->
+        <section>
+            <div class="section-title">
+                <h2>Como Funciona a Compra</h2>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">Passo 1</div>
+                    <h4>Escolha e Pague</h4>
+                    <p>Selecione seu plano e finalize o pagamento via PIX, cartão de crédito ou boleto.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">Passo 2</div>
+                    <h4>Envie a Confirmação</h4>
+                    <p>Envie os dados da compra para <strong>team@konfirmasi.com</strong> ou WhatsApp: <strong>+62 812-5074-4300</strong>.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">Passo 3</div>
+                    <h4>Receba sua Chave</h4>
+                    <p>Sua licença Pro será enviada diretamente para o seu e-mail no prazo de 1 a 5 dias úteis.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Garantia -->
+        <div class="notice-box">
+            <h4>🛡️ Garantia de Reembolso e Informações</h4>
+            <p><strong>Garantia de 1 Dia:</strong> Você pode solicitar 100% do seu reembolso no primeiro dia de uso caso não fique satisfeito. O Smadav atua como uma proteção complementar (segunda camada) e deve ser usado em conjunto com um antivírus principal como o Windows Defender.</p>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>© 2009–2026 Smadav Antivirus. Todos os direitos reservados.</p>
+        <p>Suporte e contato: <a href="mailto:team@konfirmasi.com">team@konfirmasi.com</a></p>
+    </footer>
+
+</body>
+</html>
