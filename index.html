@@ -236,13 +236,73 @@
 
         /* Footer */
         footer {
-            background-color: var(--text-dark);
-            color: var(--white);
-            text-align: center;
-            padding: 2rem 1.5rem;
+            background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
+            color: #d1d5db;
+            text-align: left;
+            padding: 3rem 1.5rem;
             margin-top: 4rem;
-            font-size: 0.9rem;
-            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        footer .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+        }
+
+        footer .footer-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 22px;
+            box-shadow: 0 18px 40px rgba(15, 23, 42, 0.18);
+        }
+
+        footer .footer-card h5 {
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+            color: #7dd3fc;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        footer .footer-card p {
+            color: #cbd5e1;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 0.75rem;
+        }
+
+        footer .footer-card p:last-child {
+            margin-bottom: 0;
+        }
+
+        footer .footer-bottom {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 12px;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 18px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        footer .footer-bottom p {
+            margin: 0;
+            color: #94a3b8;
+        }
+
+        footer a {
+            color: #7dd3fc;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
 
         .whatsapp-float {
@@ -515,15 +575,27 @@
     
     <!-- Rodapé -->
     <footer>
-        <div class="container">
-            <h5>Termos de Uso</h5>
-            <p>Ao contratar nossos serviços, o usuário concorda com a disponibilidade de uptime de 99.9%. O suporte é realizado via WhatsApp em horário comercial. Cancelamentos podem ser feitos a qualquer momento, com interrupção do acesso ao fim do ciclo pago.</p>
-            <h5>Política de Privacidade (LGPD)</h5>
-            <p>Seus dados (nome e contato) são utilizados exclusivamente para faturamento e suporte. Não compartilhamos informações com terceiros. Você tem direito ao acesso e exclusão de seus dados conforme a Lei 13.709/2018.</p>
-            <h5>Utilização Aceitável</h5>
-            <p>É proibido o uso de nossos VDIs para atividades ilegais (hacking, spam, phishing), mineração de criptomoedas sem autorização ou qualquer prática que degrade a rede. O descumprimento implica em suspensão imediata sem reembolso.<br>Sinalização de ilegalidades: hostmaster@bithostel.com.br</p>
-            <h5>Contrato</h5>
-            <p>Instrumento Particular de Prestação de Serviços de Computação em Nuvem (VDI) <a href="https://bithostel.com.br/desktop-contrato.html" target="_blank" rel="noopener noreferrer">Visualizar Contrato</a></p><br>
+        <div class="footer-grid container">
+            <div class="footer-card">
+                <h5>Termos de Uso</h5>
+                <p>Ao contratar nossos serviços, o usuário concorda com a disponibilidade de uptime de 99.9%. O suporte é realizado via WhatsApp em horário comercial. Cancelamentos podem ser feitos a qualquer momento, com interrupção do acesso ao fim do ciclo pago.</p>
+            </div>
+            <div class="footer-card">
+                <h5>Política de Privacidade (LGPD)</h5>
+                <p>Seus dados (nome e contato) são utilizados exclusivamente para faturamento e suporte. Não compartilhamos informações com terceiros. Você tem direito ao acesso e exclusão de seus dados conforme a Lei 13.709/2018.</p>
+            </div>
+            <div class="footer-card">
+                <h5>Utilização Aceitável</h5>
+                <p>É proibido o uso de nossos VDIs para atividades ilegais (hacking, spam, phishing), mineração de criptomoedas sem autorização ou qualquer prática que degrade a rede. O descumprimento implica em suspensão imediata sem reembolso.</p>
+                <p><strong>Sinalização de ilegalidades:</strong> hostmaster@bithostel.com.br</p>
+            </div>
+            <div class="footer-card">
+                <h5>Contrato</h5>
+                <p>Instrumento Particular de Prestação de Serviços de Computação em Nuvem (VDI)</p>
+                <p><a href="https://bithostel.com.br/desktop-contrato.html" target="_blank" rel="noopener noreferrer">Visualizar Contrato</a></p>
+            </div>
+        </div>
+        <div class="footer-bottom container">
             <p>&copy; 2011 - 2026 bithostel TI - cnpj 14.406.585/0001-59. Todos os direitos reservados.</p>
             <p><a href="politica_de_privacidade_bithostel.pdf" target="_blank">Política de Privacidade</a> | <a href="Contrato_Prestacao_Servicos_BITHOSTEL_TI_Atualizado.pdf" target="_blank"><i class="fa-solid fa-file-contract"></i> Contrato de Prestação de Serviços</a></p>
         </div>
