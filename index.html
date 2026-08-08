@@ -89,6 +89,26 @@
             background: #eef6ff;
         }
 
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.75rem;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 0.35rem 0.5rem;
+            border-radius: 8px;
+        }
+
+        .menu-toggle:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        nav.active {
+            display: flex;
+        }
+
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--primary-dark), var(--primary));
@@ -340,13 +360,26 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+            .menu-toggle {
+                display: block;
+            }
             nav {
                 width: 100%;
                 gap: 0.35rem;
+                display: none;
+                flex-direction: column;
+                align-items: stretch;
+                margin-top: 0.75rem;
+            }
+            nav.active {
+                display: flex;
             }
             nav a {
-                padding: 0.6rem 0.8rem;
+                display: block;
+                width: 100%;
+                padding: 0.85rem 0.95rem;
                 font-size: 0.95rem;
+                border-radius: 0.75rem;
             }
         }
 
@@ -408,6 +441,7 @@
             <a href="#" class="logo">
                 <img src="logo.png" class="fa-solid fa-server"></img> 
             </a>
+            <button class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">&#9776;</button>
             <nav>
                 <a href="#sobre">Sobre Nós</a>
                 <a href="#" data-open-example-modal data-example-file="website.html" data-example-title="Website Bithostel">Desenvolvimento de Website</a>
@@ -525,6 +559,25 @@
             const exampleModalClose = document.querySelector('.example-modal-close');
             const exampleModalTitle = document.querySelector('.example-modal-title');
             const exampleModalFrame = document.querySelector('.example-modal-frame');
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('nav');
+
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', function() {
+                    const expanded = this.getAttribute('aria-expanded') === 'true';
+                    this.setAttribute('aria-expanded', String(!expanded));
+                    navMenu.classList.toggle('active');
+                });
+
+                navMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', function() {
+                        if (navMenu.classList.contains('active')) {
+                            navMenu.classList.remove('active');
+                            menuToggle.setAttribute('aria-expanded', 'false');
+                        }
+                    });
+                });
+            }
 
             function openExampleModal(file, title) {
                 if (exampleModalOverlay && exampleModalTitle && exampleModalFrame) {
@@ -576,7 +629,12 @@
     
     <!-- Rodapé -->
     <footer>
+        <div align="center">
+            <script type="text/javascript" src="https://www.free-counters.org/count/k26h"></script><br>
+ <a href='https://www.pferdeversicherung.at/'>Pferde Versicherungsvergleich</a> <script type='text/javascript' src='https://whomania.com/ctr?id=1f411ff86a707783fc8416d723d762f12fc9bb60'></script>
+        </div>
         <div class="footer-grid container">
+            
             <div class="footer-card">
                 <h5>Termos de Uso</h5>
                 <p>Ao contratar nossos serviços, o usuário concorda com a disponibilidade de uptime de 99.9%. O suporte é realizado via WhatsApp em horário comercial. Cancelamentos podem ser feitos a qualquer momento, com interrupção do acesso ao fim do ciclo pago.</p>
