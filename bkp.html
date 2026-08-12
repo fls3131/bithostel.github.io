@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Backup na nuvem e soluções de recuperação de dados com 
-proteção para arquivos importantes e continuidade de negócios.">
+    <meta name="description" content="Backup na nuvem e soluções de recuperação de dados com proteção para arquivos importantes e continuidade 
+de negócios.">
     <title>Backup na Nuvem | Recuperação de Dados e Proteção</title>
     <style>
         * {
@@ -23,6 +23,8 @@ proteção para arquivos importantes e continuidade de negócios.">
             --light: #f8fafc;
             --white: #ffffff;
             --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
         }
         
         body {
@@ -105,12 +107,9 @@ proteção para arquivos importantes e continuidade de negócios.">
             right: 0;
             bottom: 0;
             background-image: 
-                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.3) 0%, transparent 
-50%),
-                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.3) 0%, transparent 
-50%),
-                radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.2) 0%, transparent 
-50%);
+                radial-gradient(circle at 20% 30%, rgba(99, 102, 241, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.2) 0%, transparent 50%);
             animation: float 15s ease-in-out infinite;
         }
         
@@ -386,6 +385,35 @@ proteção para arquivos importantes e continuidade de negócios.">
             margin: 10px 0 25px;
         }
         
+        .pricing-includes {
+            list-style: none;
+            margin: 20px 0;
+            padding-top: 20px;
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .pricing-card.featured .pricing-includes {
+            border-top-color: rgba(255,255,255,0.1);
+        }
+        
+        .pricing-includes li {
+            padding: 6px 0;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .pricing-includes li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: 800;
+        }
+        
+        .pricing-card.featured .pricing-includes li::before {
+            color: var(--accent);
+        }
+        
         .pricing-btn {
             display: block;
             width: 100%;
@@ -486,6 +514,192 @@ proteção para arquivos importantes e continuidade de negócios.">
             font-size: 0.95em;
         }
         
+        /* NOVA SEÇÃO: TREINAMENTO E SUPORTE */
+        .support-section {
+            padding: 100px 0;
+            background: var(--light);
+            position: relative;
+        }
+        
+        .support-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .support-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            transition: all 0.3s;
+        }
+        
+        .support-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+        
+        .support-header {
+            padding: 35px 30px 25px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .support-header.emergency {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+        }
+        
+        .support-header.training {
+            background: linear-gradient(135deg, var(--success), #059669);
+        }
+        
+        .support-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+        
+        .support-icon-big {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
+        .support-header h3 {
+            font-size: 1.5em;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+        
+        .support-header p {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+        
+        .support-body {
+            padding: 30px;
+        }
+        
+        .support-list {
+            list-style: none;
+        }
+        
+        .support-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            color: var(--gray);
+            font-size: 0.95em;
+        }
+        
+        .support-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .support-list li .check {
+            color: var(--success);
+            font-weight: 800;
+            font-size: 1.1em;
+            flex-shrink: 0;
+        }
+        
+        .support-card.emergency .support-list li .check {
+            color: var(--danger);
+        }
+        
+        .support-card.training .support-list li .check {
+            color: var(--success);
+        }
+        
+        .support-highlight {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(139, 92, 246, 0.08));
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 20px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .support-card.emergency .support-highlight {
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(220, 38, 38, 0.08));
+            border-left-color: var(--danger);
+        }
+        
+        .support-card.training .support-highlight {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(5, 150, 105, 0.08));
+            border-left-color: var(--success);
+        }
+        
+        .support-highlight strong {
+            display: block;
+            color: var(--dark);
+            margin-bottom: 5px;
+            font-size: 1em;
+        }
+        
+        .support-highlight p {
+            color: var(--gray);
+            font-size: 0.9em;
+        }
+        
+        /* PROCESSO */
+        .process-section {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+            position: relative;
+        }
+        
+        .process-step {
+            text-align: center;
+            position: relative;
+        }
+        
+        .process-number {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            font-weight: 800;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .process-step h4 {
+            color: var(--dark);
+            font-size: 1.15em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .process-step p {
+            color: var(--gray);
+            font-size: 0.95em;
+        }
+        
         /* CTA */
         .cta-section {
             padding: 100px 0;
@@ -503,10 +717,8 @@ proteção para arquivos importantes e continuidade de negócios.">
             right: 0;
             bottom: 0;
             background-image: 
-                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.3) 0%, transparent 
-40%),
-                radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.3) 0%, transparent 
-40%);
+                radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.3) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.3) 0%, transparent 40%);
         }
         
         .cta-content {
@@ -530,6 +742,16 @@ proteção para arquivos importantes e continuidade de negócios.">
             margin-bottom: 12px;
         }
         
+        .cta-content .highlight-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            padding: 20px 25px;
+            border-radius: 12px;
+            margin: 25px 0;
+            font-size: 1em;
+        }
+        
         .cta-button {
             display: inline-flex;
             align-items: center;
@@ -541,7 +763,7 @@ proteção para arquivos importantes e continuidade de negócios.">
             text-decoration: none;
             font-weight: 700;
             font-size: 1.1em;
-            margin-top: 35px;
+            margin-top: 20px;
             transition: all 0.3s;
         }
         
@@ -636,12 +858,16 @@ proteção para arquivos importantes e continuidade de negócios.">
                 transform: translateY(-10px);
             }
             
-            .features-grid {
+            .features-grid, .support-grid {
                 grid-template-columns: 1fr;
             }
             
             .pricing-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .process-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .hero-stats {
@@ -662,6 +888,12 @@ proteção para arquivos importantes e continuidade de negócios.">
             }
         }
         
+        @media (max-width: 480px) {
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
         /* SCROLL ANIMATIONS */
         .fade-in {
             opacity: 0;
@@ -679,8 +911,8 @@ proteção para arquivos importantes e continuidade de negócios.">
     <meta name="theme-color" content="#6366f1">
     <link rel="canonical" href="https://bithostel.github.io/bkp.html">
     <meta property="og:title" content="Backup na Nuvem | Recuperação de Dados e Proteção">
-    <meta property="og:description" content="Backup na nuvem e soluções de recuperação de 
-dados com proteção para arquivos importantes e continuidade de negócios.">
+    <meta property="og:description" content="Backup na nuvem e soluções de recuperação de dados com proteção para arquivos importantes e 
+continuidade de negócios.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://bithostel.github.io/bkp.html">
     <meta property="og:site_name" content="Bithostel TI">
@@ -690,20 +922,20 @@ dados com proteção para arquivos importantes e continuidade de negócios.">
     <nav class="navbar">
         <div class="container nav-content">
             <div class="logo">⚡ Bithostel TI</div>
-            <a href="https://bithostelti.lojavirtualnuvem.com.br/discos-na-cloud/" 
-target="_blank" rel="noopener noreferrer" class="nav-cta">Contratar</a>
+            <a href="https://bithostelti.lojavirtualnuvem.com.br/discos-na-cloud/" target="_blank" rel="noopener noreferrer" 
+class="nav-cta">Contratar</a>
         </div>
     </nav>
 
     <section class="hero">
         <div class="hero-content">
-            <span class="hero-badge">🛡️ Proteção 24/7 para seus dados</span>
+            <span class="hero-badge">🛡️ Proteção 24/7 com Suporte Humanizado</span>
             <h1>Backup Automático na <span class="gradient">Nuvem</span></h1>
             <p>Duplicati + Google Drive • Lite | Básico | Padrão | Premium</p>
-            <p>Disponível para Windows e Linux</p>
+            <p>Instalação + Treinamento + Suporte Emergencial Remoto</p>
             <div class="hero-buttons">
                 <a href="#pricing" class="btn-primary">Ver Planos ↓</a>
-                <a href="#features" class="btn-secondary">Saiba Mais</a>
+                <a href="#suporte" class="btn-secondary">Como Funciona</a>
             </div>
             <div class="hero-stats">
                 <div class="stat">
@@ -716,7 +948,7 @@ target="_blank" rel="noopener noreferrer" class="nav-cta">Contratar</a>
                 </div>
                 <div class="stat">
                     <div class="stat-number">24/7</div>
-                    <div class="stat-label">Automação</div>
+                    <div class="stat-label">Suporte</div>
                 </div>
             </div>
         </div>
@@ -727,8 +959,7 @@ target="_blank" rel="noopener noreferrer" class="nav-cta">Contratar</a>
             <div class="section-header">
                 <span class="section-tag">Preços</span>
                 <h2 class="section-title">Escolha o plano ideal</h2>
-                <p class="section-subtitle">Pagamento único por instalação. Sem mensalidades, 
-sem surpresas. Instalamos, configuramos e deixamos tudo funcionando automaticamente, a instalação dos progamas e ciclos de backup com fácil restauração.</p>
+                <p class="section-subtitle">Pagamento único por instalação. Inclui configuração, treinamento. <p>
             </div>
             
             <div class="pricing-grid">
@@ -737,14 +968,19 @@ sem surpresas. Instalamos, configuramos e deixamos tudo funcionando automaticame
                     <p class="subtitle">Ideal para uso individual</p>
                     <div class="price-box">
                         <span class="price-old">R$ 189,90</span>
-                        <div class="price-current">R$ 149<span style="font-size: 
-0.5em;">,35</span></div>
+                        <div class="price-current">R$ 149<span style="font-size: 0.5em;">,35</span></div>
                         <span class="price-period">pagamento único</span>
                     </div>
                     <span class="discount-badge">💰 10% OFF no Pix</span>
                     <p class="installments">ou 3x de R$ 49,78 sem juros</p>
-                    <a href="https://bithostelti.lojavirtualnuvem.com.br/discos-na-cloud/" 
-target="_blank" rel="noopener noreferrer" class="pricing-btn">Contratar Agora</a>
+                    <ul class="pricing-includes">
+                        <li>Instalação completa do Duplicati</li>
+                        <li>Configuração no Google Drive</li>
+                        <li>Treinamento de uso</li>
+                        <li>Suporte emergencial remoto</li>
+                    </ul>
+                    <a href="https://bithostelti.lojavirtualnuvem.com.br/discos-na-cloud/" target="_blank" rel="noopener noreferrer" 
+class="pricing-btn">Contratar Agora</a>
                 </div>
                 
                 <div class="pricing-card featured">
@@ -752,14 +988,20 @@ target="_blank" rel="noopener noreferrer" class="pricing-btn">Contratar Agora</a
                     <h3>Plano Corporativo</h3>
                     <p class="subtitle">Para empresas e equipes</p>
                     <div class="price-box">
-                        <div class="price-current featured-color">R$ 449<span 
-style="font-size: 0.5em;">,90</span></div>
+                        <div class="price-current featured-color">R$ 449<span style="font-size: 0.5em;">,90</span></div>
                         <span class="price-period">pagamento único</span>
                     </div>
                     <span class="discount-badge">💰 10% OFF no Pix</span>
                     <p class="installments">ou 11x de R$ 40,90 sem juros</p>
-                    <a href="https://bithostelti.lojavirtualnuvem.com.br/discos-na-cloud/" 
-target="_blank" rel="noopener noreferrer" class="pricing-btn">Contratar Agora</a>
+                    <ul class="pricing-includes">
+                        <li>Instalação completa do Duplicati</li>
+                        <li>Configuração no Google Drive</li>
+                        <li>Treinamento para a equipe</li>
+                        <li>Suporte emergencial prioritário</li>
+                        <li>Assistência em restaurações</li>
+                    </ul>
+                    <a href="https://bithostelti.lojavirtualnuvem.com.br/discos-na-cloud/" target="_blank" rel="noopener noreferrer" 
+class="pricing-btn">Contratar Agora</a>
                 </div>
             </div>
         </div>
@@ -770,51 +1012,140 @@ target="_blank" rel="noopener noreferrer" class="pricing-btn">Contratar Agora</a
             <div class="section-header">
                 <span class="section-tag">Recursos</span>
                 <h2 class="section-title">Por que nos escolher?</h2>
-                <p class="section-subtitle">Soluções completas de backup com tecnologia de 
-ponta</p>
+                <p class="section-subtitle">Soluções completas de backup com tecnologia de ponta</p>
             </div>
             
             <div class="features-grid">
                 <div class="feature-item">
                     <div class="feature-icon">☁️</div>
                     <h3>Backup Automático</h3>
-                    <p>Backup automático na nuvem com criptografia, protegendo seus arquivos 
-contra perdas inesperadas.</p>
+                    <p>Backup automático na nuvem com criptografia, protegendo seus arquivos contra perdas inesperadas.</p>
                 </div>
                 
                 <div class="feature-item">
                     <div class="feature-icon">🔄</div>
                     <h3>Compatibilidade Total</h3>
-                    <p>Compatibilidade completa com Google Drive, garantindo fácil acesso e 
-restauração dos seus arquivos.</p>
+                    <p>Compatibilidade completa com Google Drive, garantindo fácil acesso e restauração dos seus arquivos.</p>
                 </div>
                 
                 <div class="feature-item">
                     <div class="feature-icon">🖥️</div>
                     <h3>Windows e Linux</h3>
-                    <p>Suporte nativo para instalações em Windows e Linux, perfeito para 
-ambientes híbridos e empresariais.</p>
+                    <p>Suporte nativo para instalações em Windows e Linux, perfeito para ambientes híbridos e empresariais.</p>
                 </div>
                 
                 <div class="feature-item">
                     <div class="feature-icon">⚙️</div>
                     <h3>Personalização</h3>
-                    <p>Solução personalizada conforme seu plano de armazenamento e 
-necessidades específicas do seu negócio.</p>
+                    <p>Solução personalizada conforme seu plano de armazenamento e necessidades específicas do seu negócio.</p>
                 </div>
                 
                 <div class="feature-item">
-                    <div class="feature-icon">🎯</div>
-                    <h3>Suporte Especializado</h3>
-                    <p>Instalação rápida e suporte técnico para deixar tudo funcionando 
-perfeitamente.</p>
+                    <div class="feature-icon">🎓</div>
+                    <h3>Treinamento Incluso</h3>
+                    <p>Ensinamos você ou sua equipe a operar o sistema de backup de forma autônoma e segura.</p>
                 </div>
                 
                 <div class="feature-item">
-                    <div class="feature-icon">🛠️</div>
-                    <h3>Instalação Remota</h3>
-                    <p>Configuração e implementação de Sistema de Backup Automático com 
-Duplicati e Google Drive.</p>
+                    <div class="feature-icon">🚨</div>
+                    <h3>Suporte Emergencial</h3>
+                    <p>Em situações de emergência, prestamos auxílio remoto em restaurações e necessidades urgentes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOVA SEÇÃO: TREINAMENTO E SUPORTE EMERGENCIAL -->
+    <section class="support-section" id="suporte">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Acompanhamento Completo</span>
+                <h2 class="section-title">Treinamento e Suporte Emergencial</h2>
+                <p class="section-subtitle">Não deixamos você sozinho. Oferecemos treinamento completo e suporte remoto em situações de 
+emergência.</p>
+            </div>
+            
+            <div class="support-grid">
+                <div class="support-card training">
+                    <div class="support-header training">
+                        <span class="support-icon-big">🎓</span>
+                        <h3>Treinamento Personalizado</h3>
+                        <p>Aprenda a usar o sistema de backup com confiança</p>
+                    </div>
+                    <div class="support-body">
+                        <ul class="support-list">
+                            <li><span class="check">✓</span> Sessão de treinamento remoto individual ou em equipe</li>
+                            <li><span class="check">✓</span> Como configurar novos backups e pastas</li>
+                            <li><span class="check">✓</span> Agendamento de ciclos automáticos de backup</li>
+                            <li><span class="check">✓</span> Como restaurar arquivos específicos</li>
+                            <li><span class="check">✓</span> Monitoramento e verificação dos backups</li>
+                            <li><span class="check">✓</span> Solução de dúvidas e boas práticas</li>
+                        </ul>
+                        <div class="support-highlight">
+                            <strong>👨‍🏫 Aulas práticas via acesso remoto</strong>
+                            <p>Você aprende fazendo, com acompanhamento ao vivo do nosso time técnico.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="support-card emergency">
+                    <div class="support-header emergency">
+                        <span class="support-icon-big">🚨</span>
+                        <h3>Suporte Emergencial Remoto</h3>
+                        <p>Atendimento rápido quando você mais precisa</p>
+                    </div>
+                    <div class="support-body">
+                        <ul class="support-list">
+                            <li><span class="check">✓</span> Auxílio remoto em possíveis restaurações de dados</li>
+                            <li><span class="check">✓</span> Atendimento emergencial em casos de perda de arquivos</li>
+                            <li><span class="check">✓</span> Recuperação completa do sistema em situações críticas</li>
+                            <li><span class="check">✓</span> Diagnóstico e solução de problemas no backup</li>
+                            <li><span class="check">✓</span> Verificação de integridade dos dados armazenados</li>
+                            <li><span class="check">✓</span> Acompanhamento até a resolução total do problema</li>
+                        </ul>
+                        <div class="support-highlight">
+                            <strong>⚡ Resposta rápida e eficiente</strong>
+                            <p>Em emergências, nossa equipe entra em ação remotamente para minimizar o impacto e restaurar tudo o quanto 
+antes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOVA SEÇÃO: COMO FUNCIONA O PROCESSO -->
+    <section class="process-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Processo</span>
+                <h2 class="section-title">Como funciona?</h2>
+                <p class="section-subtitle">Da instalação ao suporte contínuo, cuidamos de tudo para você</p>
+            </div>
+            
+            <div class="process-grid">
+                <div class="process-step">
+                    <div class="process-number">1</div>
+                    <h4>Instalação Remota</h4>
+                    <p>Configuramos o Duplicati e integramos ao Google Drive de forma totalmente remota.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-number">2</div>
+                    <h4>Configuração</h4>
+                    <p>Personalizamos os ciclos de backup conforme suas necessidades e rotina.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-number">3</div>
+                    <h4>Treinamento</h4>
+                    <p>Ensinamos você a operar o sistema, restaurar arquivos e gerenciar backups.</p>
+                </div>
+                
+                <div class="process-step">
+                    <div class="process-number">4</div>
+                    <h4>Suporte Contínuo</h4>
+                    <p>Estamos disponíveis remotamente para emergências, dúvidas e auxílios em restaurações.</p>
                 </div>
             </div>
         </div>
@@ -824,12 +1155,14 @@ Duplicati e Google Drive.</p>
         <div class="container">
             <div class="cta-content">
                 <h2>Não arrisque perder informações importantes!</h2>
-                <p>Aproveite a praticidade e a segurança de um backup moderno, acessível e 
-totalmente automatizado.</p>
-                <p>Transforme a gestão dos seus dados com tecnologia na nuvem e tranquilidade 
-total!</p>
-                <a href="https://bithostelti.lojavirtualnuvem.com.br/discos-na-cloud/" 
-class="cta-button" target="_blank" rel="noopener noreferrer">
+                <p>Aproveite a praticidade e a segurança de um backup moderno, acessível e totalmente automatizado.</p>
+                <p>Com <strong>treinamento incluso</strong> e <strong>suporte emergencial remoto</strong> para restaurações.</p>
+                <div class="highlight-box">
+                    🎓 <strong>Treinamento completo</strong> para usar o sistema com autonomia<br>
+                    🚨 <strong>Suporte emergencial</strong> remoto em casos de necessidade
+                </div>
+                <a href="https://bithostelti.lojavirtualnuvem.com.br/discos-na-cloud/" class="cta-button" target="_blank" rel="noopener 
+noreferrer">
                     Contratar Agora <span class="cta-arrow">→</span>
                 </a>
             </div>
@@ -846,8 +1179,8 @@ class="cta-button" target="_blank" rel="noopener noreferrer">
                 <div class="footer-links">
                     <a href="#pricing">Planos</a>
                     <a href="#features">Recursos</a>
-                    <a href="https://bithostelti.lojavirtualnuvem.com.br/discos-na-cloud/" 
-target="_blank" rel="noopener noreferrer">Loja</a>
+                    <a href="#suporte">Suporte</a>
+                    <a href="https://bithostelti.lojavirtualnuvem.com.br/discos-na-cloud/" target="_blank" rel="noopener noreferrer">Loja</a>
                 </div>
             </div>
         </div>
@@ -879,8 +1212,7 @@ target="_blank" rel="noopener noreferrer">Loja</a>
             });
         }, observerOptions);
         
-        document.querySelectorAll('.pricing-card, .feature-item, .section-header').forEach(el 
-=> {
+        document.querySelectorAll('.pricing-card, .feature-item, .support-card, .process-step, .section-header').forEach(el => {
             el.classList.add('fade-in');
             observer.observe(el);
         });
