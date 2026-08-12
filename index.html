@@ -90,6 +90,62 @@
             background: #eef6ff;
         }
 
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown-toggle {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.7rem 0.95rem;
+            border-radius: 999px;
+            transition: all 0.3s ease;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+        }
+
+        .nav-dropdown-toggle:hover,
+        .nav-dropdown.active .nav-dropdown-toggle {
+            color: var(--primary);
+            background: #eef6ff;
+        }
+
+        .nav-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 0.4rem);
+            right: 0;
+            min-width: 200px;
+            display: none;
+            background: #fff;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 12px 28px rgba(15, 23, 42, 0.12);
+            padding: 0.5rem;
+            z-index: 20;
+        }
+
+        .nav-dropdown.active .nav-dropdown-menu {
+            display: block;
+        }
+
+        .nav-dropdown-menu a {
+            display: block;
+            white-space: nowrap;
+            border-radius: 10px;
+            padding: 0.75rem 0.8rem;
+        }
+
+        .nav-dropdown-menu a:hover {
+            background: #eef6ff;
+            color: var(--primary);
+        }
+
         .menu-toggle {
             display: none;
             background: none;
@@ -460,7 +516,16 @@
                 <a href="#" data-open-example-modal data-example-file="smadav_modern.html" data-example-title="Antivírus Smadav">Antivírus</a>
                 <a href="#" data-open-example-modal data-example-file="bkp.html" data-example-title="Backup na Cloud">Backup</a>
                 <a href="https://bithostelti.lojavirtualnuvem.com.br" target="_blank" rel="noopener noreferrer">Loja</a>
-                <a href="https://bithostelti.lojavirtualnuvem.com.br/account/login/" target="_blank" rel="noopener noreferrer">Login/Clientes</a>
+
+                <div class="nav-dropdown">
+                    <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+                       Login/Cliente <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="nav-dropdown-menu" role="menu" aria-label="Menu de clientes">
+                        <a href="https://bithostelti.lojavirtualnuvem.com.br/account/login/" target="_blank" rel="noopener noreferrer">Login</a>
+                        <a href="https://bithostelti.lojavirtualnuvem.com.br/account/register" target="_blank" rel="noopener noreferrer">Registrar</a>
+                    </div>
+                </div>
             </nav>
         </div>
     </header>
@@ -575,6 +640,8 @@
             const exampleModalFrame = document.querySelector('.example-modal-frame');
             const menuToggle = document.querySelector('.menu-toggle');
             const navMenu = document.querySelector('nav');
+            const navDropdown = document.querySelector('.nav-dropdown');
+            const navDropdownToggle = document.querySelector('.nav-dropdown-toggle');
 
             if (menuToggle && navMenu) {
                 menuToggle.addEventListener('click', function() {
@@ -590,6 +657,20 @@
                             menuToggle.setAttribute('aria-expanded', 'false');
                         }
                     });
+                });
+            }
+
+            if (navDropdown && navDropdownToggle) {
+                navDropdownToggle.addEventListener('click', function() {
+                    const expanded = navDropdown.classList.toggle('active');
+                    this.setAttribute('aria-expanded', String(expanded));
+                });
+
+                document.addEventListener('click', function(event) {
+                    if (!navDropdown.contains(event.target)) {
+                        navDropdown.classList.remove('active');
+                        navDropdownToggle.setAttribute('aria-expanded', 'false');
+                    }
                 });
             }
 
