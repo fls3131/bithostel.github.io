@@ -121,7 +121,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         .nav-dropdown-menu {
             position: absolute;
             top: calc(100% + 0.4rem);
-            right: 0;
+            left: 0;
+            right: auto;
             min-width: 200px;
             display: none;
             background: #fff;
@@ -141,6 +142,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
             white-space: nowrap;
             border-radius: 10px;
             padding: 0.75rem 0.8rem;
+            color: var(--text-dark);
+            text-decoration: none;
         }
 
         .nav-dropdown-menu a:hover {
@@ -708,7 +711,15 @@ técnico, segurança digital, backup em nuvem, sites e antivírus para empresas 
             <button class="menu-toggle" aria-label="Abrir menu" 
 aria-expanded="false">&#9776;</button>
             <nav>
-                <a href="#sobre">Sobre Nós</a>
+                <div class="nav-dropdown">
+                    <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-haspopup="true">
+                       Bithostel <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="nav-dropdown-menu" role="menu" aria-label="Menu da Bithostel">
+                        <a href="#sobre">Sobre</a>
+                        <a href="#parceiros">Parcerias</a>
+                    </div>
+                </div>
                 <a href="#" data-open-example-modal data-example-file="website.html" 
 data-example-title="Website Bithostel">Websites</a>
                 <a href="#" data-open-example-modal data-example-file="desktop.html" 
@@ -807,7 +818,7 @@ interrupções na sua empresa.</p>
         </div>
 
         <!-- ===== PARCEIROS E TECNOLOGIAS ===== -->
-        <section class="partners-section" aria-label="Nossos parceiros e tecnologias">
+        <section class="partners-section" id="parceiros" aria-label="Nossos parceiros e tecnologias">
             <h2 class="partners-title">Parceiros & Tecnologias</h2>
             <p class="partners-subtitle">Trabalhamos com plataformas e ecossistemas Open 
 Source e de e-commerce reconhecidos internacionalmente.</p>
