@@ -278,6 +278,55 @@ de negócios.">
             max-width: 800px;
             margin: 0 auto;
         }
+
+        .storage-section {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .storage-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+        }
+
+        .storage-card {
+            padding: 28px;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            background: #f8fafc;
+        }
+
+        .storage-card h3 {
+            color: var(--dark);
+            margin-bottom: 14px;
+            font-size: 1.15em;
+        }
+
+        .storage-card ul {
+            list-style: none;
+            color: var(--gray);
+        }
+
+        .storage-card li {
+            padding: 5px 0 5px 20px;
+            position: relative;
+        }
+
+        .storage-card li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: 800;
+        }
+
+        .storage-note {
+            color: var(--gray);
+            text-align: center;
+            margin-top: 28px;
+            font-size: 0.95em;
+        }
         
         .pricing-card {
             background: white;
@@ -931,7 +980,7 @@ class="nav-cta">Contratar</a>
         <div class="hero-content">
             <span class="hero-badge">🛡️ Proteção 24/7 com Suporte Humanizado</span>
             <h1>Backup Automático na <span class="gradient">Nuvem</span></h1>
-            <p>Duplicati + Google Drive • Lite | Básico | Padrão | Premium</p>
+            <p>Duplicati + múltiplos destinos • Lite | Básico | Padrão | Premium</p>
             <p>Instalação + Treinamento + Suporte Emergencial Remoto</p>
             <div class="hero-buttons">
                 <a href="#pricing" class="btn-primary">Ver Planos ↓</a>
@@ -966,7 +1015,7 @@ class="nav-cta">Contratar</a>
                 <div class="process-step">
                     <div class="process-number">1</div>
                     <h4>Instalação Remota</h4>
-                    <p>Configuramos o Duplicati e integramos ao Google Drive de forma totalmente remota.</p>
+                    <p>Configuramos o Duplicati e integramos ao destino de armazenamento escolhido de forma totalmente remota.</p>
                 </div>
                 
                 <div class="process-step">
@@ -987,6 +1036,62 @@ class="nav-cta">Contratar</a>
                     <p>Estamos disponíveis remotamente para emergências, dúvidas e auxílios em restaurações.</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <section class="storage-section" id="armazenamento">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Destinos compatíveis</span>
+                <h2 class="section-title">Escolha onde guardar seus backups</h2>
+                <p class="section-subtitle">O Duplicati permite enviar cópias criptografadas para armazenamento local, rede, servidores e diversos provedores de nuvem.</p>
+            </div>
+
+            <div class="storage-grid">
+                <article class="storage-card">
+                    <h3>Local e rede</h3>
+                    <ul>
+                        <li>Pasta local e disco externo</li>
+                        <li>Unidade de rede SMB/CIFS</li>
+                        <li>NAS e compartilhamento de rede</li>
+                        <li>Servidor SSH/SFTP</li>
+                    </ul>
+                </article>
+
+                <article class="storage-card">
+                    <h3>Servidores e protocolos</h3>
+                    <ul>
+                        <li>FTP e FTPS</li>
+                        <li>WebDAV e HTTPS</li>
+                        <li>Rclone</li>
+                        <li>OpenStack Object Storage</li>
+                    </ul>
+                </article>
+
+                <article class="storage-card">
+                    <h3>Nuvem</h3>
+                    <ul>
+                        <li>Google Drive</li>
+                        <li>Microsoft OneDrive</li>
+                        <li>Dropbox, Box e MEGA</li>
+                        <li>Jottacloud e pCloud</li>
+                        <li>Storj, Tardigrade e Tencent COS</li>
+                    </ul>
+                </article>
+
+                <article class="storage-card">
+                    <h3>Compatível com S3</h3>
+                    <ul>
+                        <li>Amazon S3</li>
+                        <li>Backblaze B2</li>
+                        <li>Azure Blob Storage</li>
+                        <li>Google Cloud Storage</li>
+                        <li>Wasabi e outros S3 compatíveis</li>
+                        <li>Rackspace Cloud Files</li>
+                    </ul>
+                </article>
+            </div>
+            <p class="storage-note">A disponibilidade pode variar conforme a versão do Duplicati e o provedor escolhido. Configuramos o destino mais adequado ao seu volume, orçamento e política de retenção.</p>
         </div>
     </section>
 
@@ -1011,7 +1116,7 @@ class="nav-cta">Contratar</a>
                     <p class="installments">ou 3x de R$ 49,78 sem juros</p>
                     <ul class="pricing-includes">
                         <li>Instalação completa do Duplicati</li>
-                        <li>Configuração no Google Drive</li>
+                        <li>Configuração no destino escolhido</li>
                         <li>Treinamento de uso</li>
                         <li>Suporte emergencial remoto</li>
                     </ul>
@@ -1031,7 +1136,7 @@ class="pricing-btn">Contratar Agora</a>
                     <p class="installments">ou 11x de R$ 40,90 sem juros</p>
                     <ul class="pricing-includes">
                         <li>Instalação completa do Duplicati</li>
-                        <li>Configuração no Google Drive</li>
+                        <li>Configuração no destino escolhido</li>
                         <li>Treinamento para a equipe</li>
                         <li>Suporte emergencial prioritário</li>
                         <li>Assistência em restaurações</li>
@@ -1061,7 +1166,7 @@ class="pricing-btn">Contratar Agora</a>
                 <div class="feature-item">
                     <div class="feature-icon">🔄</div>
                     <h3>Compatibilidade Total</h3>
-                    <p>Compatibilidade completa com Google Drive, garantindo fácil acesso e restauração dos seus arquivos.</p>
+                    <p>Compatibilidade com armazenamento local, rede, Google Drive, OneDrive, Amazon S3, Backblaze B2 e outros destinos.</p>
                 </div>
                 
                 <div class="feature-item">
