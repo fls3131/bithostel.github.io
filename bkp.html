@@ -327,6 +327,45 @@ de negócios.">
             margin-top: 28px;
             font-size: 0.95em;
         }
+
+        .study-section {
+            padding: 100px 0;
+            background: var(--light);
+        }
+
+        .study-card {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 35px;
+            text-align: center;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+
+        .study-card p {
+            color: var(--gray);
+            margin-bottom: 24px;
+        }
+
+        .study-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 24px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .study-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
         
         .pricing-card {
             background: white;
@@ -1255,6 +1294,23 @@ antes.</p>
         </div>
     </section>
 
+    <section class="study-section" id="materiais">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-tag">Material de estudos</span>
+                <h2 class="section-title">Aprenda mais sobre o Duplicati</h2>
+                <p class="section-subtitle">Consulte nossa apostila para entender a configuração e o uso do seu sistema de backup.</p>
+            </div>
+
+            <div class="study-card">
+                <p>Material de apoio para acompanhar o treinamento e consultar sempre que precisar.</p>
+                <a class="study-link" href="apostila_duplicati_bithostel_ti.pdf" target="_blank" rel="noopener noreferrer">
+                    📘 Abrir apostila do Duplicati
+                </a>
+            </div>
+        </div>
+    </section>
+
     <section class="cta-section">
         <div class="container">
             <div class="cta-content">
@@ -1284,6 +1340,7 @@ noreferrer">
                     <a href="#pricing">Planos</a>
                     <a href="#features">Recursos</a>
                     <a href="#suporte">Suporte</a>
+                    <a href="#materiais">Material de estudos</a>
                     <a href="https://bithostelti.lojavirtualnuvem.com.br/discos-na-cloud/" target="_blank" rel="noopener noreferrer">Loja</a>
                 </div>
             </div>
