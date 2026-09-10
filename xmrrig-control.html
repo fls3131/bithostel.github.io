@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="XMRig Control v1.2.0 — painel de mineração RandomX no pool MoneroOcean com GUI, monitoramento em tempo real e doações visíveis. Desenvolvido e distribuído por bithostel.com.br">
+  <title>XMRig Control v1.2.0 — Minerador RandomX + GUI (MoneroOcean)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #090d10;
+      --surface: #121b22;
+      --surface-hover: #17232e;
+      --border: #1f303c;
+      --border-accent: #28473a;
+      --accent: #10b981;
+      --accent-glow: rgba(16, 185, 129, 0.15);
+      --accent-light: #34d399;
+      --text: #e2e8f0;
+      --muted: #8899a6;
+      --warn-bg: rgba(245, 158, 11, 0.08);
+      --warn-border: rgba(245, 158, 11, 0.3);
+      --warn-text: #fbbf24;
+      --radius: 16px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 1000px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.07) 0%, rgba(0,0,0,0) 70%);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    header {
+      padding: 80px 24px 60px;
+      text-align: center;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    header h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    header p.sub {
+      color: var(--muted);
+      font-size: 1.15rem;
+      max-width: 680px;
+      margin: 0 auto 20px;
+    }
+
+    .dev-credit {
+      font-size: 0.95rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .dev-credit a {
+      color: var(--accent-light);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .dev-credit a:hover {
+      text-decoration: underline;
+    }
+
+    .badges {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 6px 14px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--accent-light);
+    }
+
+    .badge.version {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: var(--border-accent);
+      font-weight: 700;
+    }
+
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 24px 80px;
+    }
+
+    h2.section-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 56px 0 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1px solid var(--border);
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .card:hover {
+      border-color: var(--border-accent);
+      transform: translateY(-2px);
+    }
+
+    .card h3 {
+      color: #fff;
+      margin-bottom: 14px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card ul {
+      list-style: none;
+    }
+
+    .card li {
+      color: var(--muted);
+      font-size: 0.93rem;
+      margin-bottom: 10px;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .card li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px;
+      height: 6px;
+      background: var(--accent);
+      border-radius: 50%;
+    }
+
+    .download {
+      background: linear-gradient(145deg, var(--surface), #15222b);
+      border: 1px solid var(--border-accent);
+      border-radius: 20px;
+      padding: 48px 32px;
+      text-align: center;
+      margin: 40px 0;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    }
+
+    .download h2 {
+      color: #fff;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .download p {
+      color: var(--muted);
+      margin-bottom: 28px;
+      font-size: 1.05rem;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #061c14;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px var(--accent-glow);
+    }
+
+    .btn:hover {
+      background: var(--accent-light);
+      transform: translateY(-1px);
+    }
+
+    .btn.ghost {
+      background: transparent;
+      color: var(--accent-light);
+      border: 1px solid var(--border-accent);
+      box-shadow: none;
+    }
+
+    .btn.ghost:hover {
+      background: rgba(16, 185, 129, 0.08);
+      border-color: var(--accent);
+    }
+
+    .table-container {
+      background: rgba(0,0,0,0.2);
+      border-radius: 12px;
+      overflow-x: auto;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      color: var(--muted);
+      font-weight: 600;
+      background: rgba(0,0,0,0.1);
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    td code, code {
+      font-family: 'JetBrains Mono', monospace;
+      background: #05080a;
+      padding: 3px 8px;
+      border-radius: 6px;
+      color: var(--accent-light);
+      font-size: 0.85em;
+      border: 1px solid var(--border);
+    }
+
+    .install-hint {
+      margin-top: 20px;
+      font-size: 0.92rem;
+      color: var(--muted);
+    }
+
+    .warning {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+      border-radius: var(--radius);
+      padding: 22px 26px;
+      margin: 40px 0;
+      font-size: 0.95rem;
+      color: #e2e8f0;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .warning strong {
+      color: var(--warn-text);
+    }
+
+    .about-text {
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin-bottom: 32px;
+      line-height: 1.8;
+    }
+
+    .about-text a {
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+
+    .about-text a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    footer a {
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      header h1 { font-size: 2.3rem; }
+      header { padding: 48px 16px 32px; }
+      .download { padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>XMRig <span>Control</span></h1>
+    <p class="sub">Painel de mineração RandomX no pool MoneroOcean — GUI nativa Linux, métricas em tempo real e transparência total nas doações.</p>
+    <div class="dev-credit">
+      Desenvolvido e distribuído por <a href="https://bithostel.com.br" target="_blank" rel="noopener">bithostel.com.br</a>
+    </div>
+    <div class="badges">
+      <span class="badge version">Versão 1.2.0</span>
+      <span class="badge">Algoritmo: RandomX (rx/0)</span>
+      <span class="badge">Pool: MoneroOcean</span>
+      <span class="badge">XMRig 6.26.0</span>
+      <span class="badge">Licença: GPL v3</span>
+    </div>
+  </header>
+
+  <main>
+    <!-- DOWNLOAD -->
+    <section class="download" id="download">
+      <h2>Baixe o XMRig Control v1.2.0</h2>
+      <p>Pacote completo: binário otimizado RandomX (x86_64) + GUI moderna + instalador universal Linux.</p>
+      
+      <div class="btn-group">
+        <a class="btn" href="xmrig-control-linux-x86_64.tar.gz" download>⬇ Baixar v1.2.0 para Linux (x86_64)</a>
+        <a class="btn ghost" href="xmrig-control-linux-x86_64.tar.gz.sha256" download>Checksum SHA256</a>
+      </div>
+
+      <div class="table-container">
+        <table>
+          <tr>
+            <th>Arquivo</th>
+            <th>Conteúdo</th>
+            <th>Requisitos</th>
+          </tr>
+          <tr>
+            <td><code>xmrig-control-linux-x86_64.tar.gz</code></td>
+            <td><code>xmrig</code>, <code>xmrig_gui.py</code>, <code>install-linux.sh</code>, <code>LICENSE</code>, <code>README.md</code></td>
+            <td>Linux x86_64 · python3 + tkinter · 2+ GB RAM</td>
+          </tr>
+        </table>
+      </div>
+
+      <p class="install-hint">
+        <strong>Instalação rápida:</strong> <code>tar xzf xmrig-control-linux-x86_64.tar.gz && sudo ./install-linux.sh</code> (ou use <code>--user</code> para instalar sem root).
+      </p>
+    </section>
+
+    <!-- SOBRE -->
+    <h2 class="section-title">Sobre o programa</h2>
+    <p class="about-text">
+      O <strong>XMRig Control v1.2.0</strong> une a robustez do minerador XMRig (RandomX) a uma interface gráfica nativa desenvolvida para Linux. Conectado ao pool multi-moeda <a href="https://moneroocean.stream/">MoneroOcean</a>, ele exibe em um único painel a velocidade de hash, shares, consumo de CPU, doações e histórico detalhado de sessões.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <h3>⚡ Mineração</h3>
+        <ul>
+          <li>Algoritmo fixo RandomX (rx/0) otimizado para CPU</li>
+          <li>Pool MoneroOcean com ajuste dinâmico</li>
+          <li>Autoconfiguração de threads inteligente</li>
+          <li>Controle de início e parada direto pela GUI</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>📊 Monitoramento</h3>
+        <ul>
+          <li>Velocidade instantânea e média (60s)</li>
+          <li>Controle de shares aceitas e rejeitadas</li>
+          <li>Monitoramento de CPU (sistema + processo)</li>
+          <li>API local integrada e log ao vivo</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>💎 Transparência</h3>
+        <ul>
+          <li>Percentual ajustável de doação (<code>--donate-level</code>)</li>
+          <li>Painel com métrica de tempo e % da sessão</li>
+          <li>Registro persistente de ciclos doados</li>
+          <li>Identificação clara de jobs de doação no log</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>🐧 Integração Linux</h3>
+        <ul>
+          <li>Instalador universal (DEB/RPM/Arch/etc.)</li>
+          <li>Atalho automatizado no menu de aplicativos</li>
+          <li>Compatível com múltiplos WMs/Desktops</li>
+          <li>Rotina de desinstalação limpa</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- DOACAO -->
+    <div class="warning">
+      <div style="font-size: 1.3rem;">⚠️</div>
+      <div>
+        <strong>Sobre a doação:</strong> Por padrão, entre <strong>1% e 5%</strong> da capacidade de mineração é destinada ao desenvolvedor (cerca de 1 minuto em ciclos de 100 minutos) para a carteira <code>88axy8H9...VPiFQYC2qizizquMH91rdw8MP</code>. Essa atividade é totalmente visível no painel em tempo real e identificada no log como <em>"DEV DONATE"</em>.
+      </div>
+    </div>
+
+    <!-- COMO USAR -->
+    <h2 class="section-title">Como usar em 3 passos</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>1 · Instale</h3>
+        <p style="color: var(--muted); font-size: 0.93rem;">Descompacte o tar.gz e execute o instalador. Ele valida dependências (python3, tkinter, curl, openssl), checa o binário e cria o atalho no menu.</p>
+      </div>
+      <div class="card">
+        <h3>2 · Configure</h3>
+        <p style="color: var(--muted); font-size: 0.93rem;">Insira sua carteira Monero, selecione a porta ideal do MoneroOcean para sua dificuldade e defina as threads. Suas preferências são salvas automaticamente.</p>
+      </div>
+      <div class="card">
+        <h3>3 · Minere</h3>
+        <p style="color: var(--muted); font-size: 0.93rem;">Clique em iniciar e acompanhe shares, hash rate e doações com total clareza, além de conferir os ganhos consolidados no dashboard web do MoneroOcean.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    XMRig Control v1.2.0 · Desenvolvido e distribuído por <a href="https://bithostel.com.br" target="_blank" rel="noopener">bithostel.com.br</a> · Licença <a href="https://www.gnu.org/licenses/gpl-3.0.html">GPL v3</a> · Pool <a href="https://moneroocean.stream/">MoneroOcean</a>
+  2014 desenvolvido por <a href="http://bithostel.com.br/">BitHostel</a></footer>
+
+</body>
+</html>
