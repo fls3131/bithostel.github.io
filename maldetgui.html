@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Malware Detect - Maldet & WebGUI</title>
+    <style>
+        :root {
+            --primary-color: #0f172a;
+            --accent-color: #3b82f6;
+            --gui-color: #10b981;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-color: #334155;
+            --border-color: #e2e8f0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        .logo-area h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .logo-area span {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Destaque especial para a WebGUI */
+        .card-gui {
+            border-top: 5px solid var(--gui-color);
+            background: linear-gradient(to bottom, #ffffff, #f0fdf4);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 8px;
+            margin-top: 0;
+        }
+
+        .gui-title {
+            color: var(--gui-color) !important;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        ul {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .lang-section {
+            margin-bottom: 25px;
+        }
+
+        .lang-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .lang-title {
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+        }
+
+        .gui-badge {
+            background-color: var(--gui-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+
+        /* Simulação visual do painel WebGUI */
+        .mockup-gui {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-top: 15px;
+        }
+        .mockup-header {
+            color: #38bdf8;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background: var(--primary-color);
+            color: #ffffff;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo-area">
+                <h1>Linux Malware Detect</h1>
+                <span>Maldet <span class="gui-badge">WebGUI Ready</span></span>
+            </div>
+            <div class="actions" aria-label="Ferramentas e Idioma">
+                <span title="Idioma">🌐</span>
+                <span title="Atualizar">🔄</span>
+                <span title="Configurações">⚙️</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main>
+            <!-- Descrição Geral -->
+            <div class="card">
+                <h2>Sobre o Maldet / About Maldet</h2>
+                
+                <div class="lang-section">
+                    <div class="lang-title">Português (Brasil)</div>
+                    <p>Uma camada prática de detecção de malware para servidores Linux, com varredura nativa, quarentena, monitoramento em tempo real e uma poderosa <strong>WebGUI</strong>.</p>
+                    <p>O Maldet analisa arquivos em busca de assinaturas conhecidas e indicadores de comprometimento. Você pode iniciar scans completos ou recentes, acompanhar o progresso, revisar detalhes das infecções e restaurar arquivos da quarentena de forma totalmente visual.</p>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 20px 0;">
+
+                <div class="lang-section">
+                    <div class="lang-title">English</div>
+                    <p>A practical malware detection layer for Linux servers, with native scanning, quarantine, real-time monitoring, and a powerful <strong>WebGUI</strong>.</p>
+                    <p>Maldet scans files for known signatures and indicators of compromise. You can start full or recent scans, follow progress, review infection details, and restore quarantined files visually.</p>
+                </div>
+            </div>
+
+            <!-- DESTAQUE ESPECIAL: WebGUI -->
+            <div class="card card-gui">
+                <h2 class="gui-title">
+                    <span>🖥️ WebGUI - Painel de Controle Visual</span>
+                </h2>
+
+                <div class="lang-section">
+                    <div class="lang-title">Português (Brasil)</div>
+                    <p>Gerencie a segurança do seu servidor sem precisar depender exclusivamente da linha de comando. A <strong>WebGUI</strong> traz uma interface gráfica web intuitiva para o Maldet, permitindo monitorar ameaças, iniciar varreduras sob demanda, gerenciar a quarentena e visualizar relatórios detalhados com poucos cliques.</p>
+                </div>
+
+                <div class="lang-section">
+                    <div class="lang-title">English</div>
+                    <p>Manage your server's security without relying solely on the command line. The <strong>WebGUI</strong> provides an intuitive web graphical interface for Maldet, allowing you to monitor threats, trigger on-demand scans, manage quarantine, and view detailed reports with just a few clicks.</p>
+                </div>
+
+                <!-- Simulação visual de como seria a WebGUI -->
+                <div class="mockup-gui">
+                    <div class="mockup-header">[ Maldet WebGUI Dashboard v1.6 ]</div>
+                    <div>&gt; Status do Servidor: <span style="color: #4ade80;">Protegido / Secure</span></div>
+                    <div>&gt; Último Scan: Completo (0 ameaças ativas)</div>
+                    <div>&gt; Quarentena: 2 arquivos isolados</div>
+                    <div>&gt; Monitoramento Inotify: Ativo (Por usuário)</div>
+                </div>
+            </div>
+
+            <!-- Recursos Gerais -->
+            <div class="card">
+                <h2>Recursos / Key Features</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <div class="lang-title">Português (Brasil)</div>
+                        <ul>
+                            <li><strong>WebGUI integrada</strong> para gestão visual</li>
+                            <li>Engine nativo do Maldet</li>
+                            <li>Quarentena e detalhes por arquivo</li>
+                            <li>Monitoramento inotify por usuário</li>
+                            <li>Alertas, relatórios e assinaturas atualizáveis</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="lang-title">English</div>
+                        <ul>
+                            <li><strong>Integrated WebGUI</strong> for visual management</li>
+                            <li>Maldet native engine</li>
+                            <li>Quarantine with per-file details</li>
+                            <li>Per-user inotify monitoring</li>
+                            <li>Alerts, reports & updatable signatures</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer / Uso Responsável -->
+        <footer>
+            <p><strong>Uso responsável / Responsible use:</strong><br>
+            Use o Maldet em sistemas que você administra e mantenha as assinaturas atualizadas. <br>
+            <em>Use Maldet on systems you administer and keep signatures up to date.</em></p>
+        </footer>
+    </div>
+
+</body>
+</html>
